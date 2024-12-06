@@ -6,15 +6,16 @@ import java.awt.event.*;
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener
 {
 	//private 	Controleur 	ctrl 	;
+	private 	TestCreerQuestion ctrl;
 	private 	JTextField 		nbPoints, tpsReponses;
 	private  	Choice 			choixRessource, choixNotion;
 	private 	ButtonGroup		btnGroup;
 	private 	JRadioButton	btnChoixUnique, btnChoixMult, btnAsso, btnElim;
 	private		JButton 		btnCreer;	
 
-	public PanelCreerQuestion (/*Controleur ctrl*/)
+	public PanelCreerQuestion (/*Controleur ctrl*/ TestCreerQuestion ctrl)
 	{
-		//this.ctrl=ctrl;
+		this.ctrl = ctrl;
 		this.setLayout (new GridLayout(7,4));
 
 		//Initialisation
@@ -23,15 +24,15 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 		this.choixRessource	 = new Choice();
 		this.choixRessource	.add("");
-		this.choixRessource	.add("choix 1");
-		this.choixRessource	.add("choix 2");
-		this.choixRessource	.add("choix 3");
+
+		for (String s : this.ctrl.getChoixRessources())
+			this.choixRessource	.add(s);
 
 		this.choixNotion	 = new Choice();
 		this.choixNotion	.add("");
-		this.choixNotion	.add("choix 1");
-		this.choixNotion	.add("choix 2");
-		this.choixNotion	.add("choix 3");
+
+		for (String s : this.ctrl.getChoixNotion())
+			this.choixNotion.add(s);
 
 		this.btnChoixUnique = new JRadioButton ("Choix Unique"	);
 		this.btnChoixMult 	= new JRadioButton ("Choix Multiple");
