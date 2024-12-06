@@ -24,7 +24,6 @@ public class QCMBuilder
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
-				
 			}
 			scanner.close();
 		} 
