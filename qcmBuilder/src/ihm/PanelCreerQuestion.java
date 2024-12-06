@@ -29,10 +29,12 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.choixRessource	.add(s);
 
 		this.choixNotion	 = new Choice();
+		this.choixNotion.setEnabled(false);
+		/* 
 		this.choixNotion	.add("");
 
 		for (String s : this.ctrl.getChoixNotion())
-			this.choixNotion.add(s);
+			this.choixNotion.add(s);*/
 
 		this.btnChoixUnique = new JRadioButton ("Choix Unique"	);
 		this.btnChoixMult 	= new JRadioButton ("Choix Multiple");
@@ -126,5 +128,17 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	public void itemStateChanged(ItemEvent e)
 	{
 		System.out.println(	e.paramString());
+
+		if (e.getSource().equals(this.choixRessource))
+		{
+			this.choixNotion.setEnabled(true);
+			
+			this.choixNotion.	removeAll();
+			this.choixNotion	.add("");
+
+			for (String s : this.ctrl.getChoixNotion(this.choixRessource.getSelectedItem()))
+				this.choixNotion.add(s);
+		}
+		
 	}
 }
