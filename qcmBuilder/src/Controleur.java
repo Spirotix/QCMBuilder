@@ -1,6 +1,13 @@
+import metier.QCMBuilder;
+
 public class Controleur
  {
-    public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+    QCMBuilder qcmBuilder;
+    // Mettre la frame du questionnaire
+
+    public Controleur() {
+        qcmBuilder = new QCMBuilder();
+
+        
     }
 }
