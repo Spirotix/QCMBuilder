@@ -3,17 +3,17 @@ package metier;
 public class Notion 
 {
 	private String nom;
-	private Notion notion;
+	private Ressource ressource;
 
-	public Notion(String nom, Notion notion) 
+	public Notion(String nom, Ressource ressource) 
 	{
 		this.nom = nom;
-		this.notion = notion;
+		this.ressource = ressource;
 	}
 
 	public String getNom   () { return nom;    }
-	public Notion getNotion() { return notion; }
+	public Ressource getRessource() { return ressource; }
 
 	public void setNom   (String nom)    { this.nom    = nom;   }
-	public void setNotion(Notion notion) { this.notion = notion;}
+	public void setRessource(Ressource ressource) { this.ressource = ressource;}
 }
