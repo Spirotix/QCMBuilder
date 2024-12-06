@@ -1,6 +1,9 @@
 public class Controleur
  {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        // Création de la fenêtre principale
+        FenetrePrincipale fenetre = new FenetrePrincipale();
+        // Création du contrôleur
+        Controleur controleur = new Controleur(fenetre);
     }
 }
