@@ -1,7 +1,10 @@
 package metier;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ressource
 {
@@ -11,8 +14,28 @@ public class Ressource
 	public Ressource(String nom)
 	{
 		this.nom = nom;
-		this.notions = new ArrayList<>();
+		this.notions = lireNotions();
 	}
+
+	private List<Notion> lireNotions() 
+	{
+		List<Notion> notions = new ArrayList<>();
+		try 
+		{
+			Scanner scanner = new Scanner(new File("METTRE NOM"));
+			while (scanner.hasNextLine()) 
+			{
+				String line = scanner.nextLine();
+				
+			}
+			scanner.close();
+		} 
+		catch (FileNotFoundException e) { e.printStackTrace(); }
+
+		return notions;
+	}
+
+
 
 	public String getNom() { return nom; }
 	public List<Notion> getNotions() { return notions; }

@@ -1,7 +1,10 @@
 package metier;
 
-import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Notion 
 {
@@ -13,7 +16,25 @@ public class Notion
 	{
 		this.nom = nom;
 		this.ressource = ressource;
-		this.questions = new ArrayList<>();
+		this.questions = lireQuestions();
+	}
+
+	private List<Question> lireQuestions() 
+	{
+		List<Question> questions = new ArrayList<>();
+		try 
+		{
+			Scanner scanner = new Scanner(new File("METTRE NOM"));
+			while (scanner.hasNextLine()) 
+			{
+				String line = scanner.nextLine();
+				
+			}
+			scanner.close();
+		} 
+		catch (FileNotFoundException e) { e.printStackTrace(); }
+
+		return questions;
 	}
 
 	public String         getNom      () { return nom;       }
