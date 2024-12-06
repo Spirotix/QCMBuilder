@@ -20,7 +20,7 @@ public class QCMBuilder
 		List<Ressource> ressources = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("METTRE NOM"));
+			Scanner scanner = new Scanner(new File("../data/questions.data"));
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
