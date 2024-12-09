@@ -88,10 +88,12 @@ public class QCMBuilder
 	public void genererQuestionnaire()
 	{
 		try {
-			File index = new File("../output/index.html");
-			if (!index.exists()) {
-				index.createNewFile();
-			}
+
+			// Create directories
+			new File("../questionnaire/css").mkdirs();
+			new File("../questionnaire/images").mkdirs();
+			new File("../questionnaire/pages").mkdirs();
+			new File("../questionnaire/script").mkdirs();
 
 			String sIndex = "<!DOCTYPE html>" + //
 							"<html lang=\"fr\">" + //
@@ -130,11 +132,60 @@ public class QCMBuilder
 							"</body>" + //
 							"</html>";
 
-			PrintWriter writer = new PrintWriter(index);
+			PrintWriter writer = new PrintWriter("../questionnaire/index.html");
 			writer.println(sIndex);
+
 			
+
+			// Create and write to CSS files
+			PrintWriter cssWriter = new PrintWriter("../questionnaire/css/styles.css");
+			cssWriter.println("/* TODO */");
+			cssWriter.close();
+
+			// Create and write to image files
+			new File("../questionnaire/images/cheval1.jpg").createNewFile();
+			new File("../questionnaire/images/cheval.jpg").createNewFile();
+			new File("../questionnaire/images/drapeau_france.png").createNewFile();
+
+			// Create and write to HTML files
+			PrintWriter question1Writer = new PrintWriter("../questionnaire/pages/question1.html");
+			question1Writer.println("<!-- TODO -->");
+			question1Writer.close();
+
+			PrintWriter question2Writer = new PrintWriter("../questionnaire/pages/question2.html");
+			question2Writer.println("<!-- TODO -->");
+			question2Writer.close();
+
+			PrintWriter question3Writer = new PrintWriter("../questionnaire/pages/question3.html");
+			question3Writer.println("<!-- TODO -->");
+			question3Writer.close();
+
+			PrintWriter question4Writer = new PrintWriter("../questionnaire/pages/question4.html");
+			question4Writer.println("<!-- TODO -->");
+			question4Writer.close();
+
+			// Create and write to script files
+			PrintWriter globalJsWriter = new PrintWriter("../questionnaire/script/global.js");
+			globalJsWriter.println("// TODO");
+			globalJsWriter.close();
+
+			PrintWriter indexJsWriter = new PrintWriter("../questionnaire/script/index.js");
+			indexJsWriter.println("// TODO");
+			indexJsWriter.close();
+
+			PrintWriter popupJsWriter = new PrintWriter("../questionnaire/script/popup.js");
+			popupJsWriter.println("// TODO");
+			popupJsWriter.close();
+
+			writer.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void main(String[] args) {
+		QCMBuilder qcmBuilder = new QCMBuilder();
+		qcmBuilder.genererQuestionnaire();
 	}
 }
