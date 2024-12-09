@@ -4,6 +4,7 @@ import java.util.List;
 
 public abstract class Question 
 {
+	protected int           id;
 	protected String        text;
 	protected int           timer;
 	protected int           nbPoint;

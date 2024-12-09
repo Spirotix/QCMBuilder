@@ -22,10 +22,15 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("METTRE NOM"));
+			Scanner scanner = new Scanner(new File("../data/notions.rtf"));
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
+				String[] parts = line.split(";");
+				String nom = parts[0];
+
+				Notion notion = new Notion(nom, this);
+				notions.add(notion);
 				
 			}
 			scanner.close();
