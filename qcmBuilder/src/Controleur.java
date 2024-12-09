@@ -1,13 +1,14 @@
 import metier.QCMBuilder;
 
 public class Controleur
- {
-    QCMBuilder qcmBuilder;
-    // Mettre la frame du questionnaire
+{
+	QCMBuilder qcmBuilder;
+	// Mettre la frame du questionnaire
 
-    public Controleur() {
-        qcmBuilder = new QCMBuilder();
+	public Controleur() 
+	{
+		qcmBuilder = new QCMBuilder();
 
-        
-    }
+		
+	}
 }

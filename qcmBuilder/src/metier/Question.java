@@ -14,6 +14,18 @@ public abstract class Question
 	protected Notion        notions;
 	
 	
+	
+	public Question(String text, int timer, int nbPoint, int nbIndiceUtilisé, List<Reponse> lstReponses, int difficulte,
+	                Notion notions)
+	{
+		this.text = text;
+		this.timer = timer;
+		this.nbPoint = nbPoint;
+		this.nbIndiceUtilisé = nbIndiceUtilisé;
+		this.lstReponses = lstReponses;
+		this.difficulte = difficulte;
+		this.notions = notions;
+	}
 	public String        getText()           { return this.text;            }
 	public int           getTimer()          { return this.timer;           }
 	public int           getNbPoint()        { return this.nbPoint;         }

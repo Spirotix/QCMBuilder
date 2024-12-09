@@ -20,6 +20,7 @@ public class QCMBuilder
 		List<Ressource> ressources = new ArrayList<>();
 		try 
 		{
+<<<<<<< HEAD
 			Scanner scanner = new Scanner(new File("../data/ressources.csv"));
 			while (scanner.hasNextLine()) 
 			{
@@ -29,6 +30,13 @@ public class QCMBuilder
 
 				Ressource ressource = new Ressource(nom);
 				ressources.add(ressource);
+=======
+			Scanner scanner = new Scanner(new File("../data/questions.data"));
+			if( scanner.hasNextLine()){	scanner.nextLine();	}
+			while (scanner.hasNextLine()) 
+			{
+				String line = scanner.nextLine();
+>>>>>>> refs/remotes/origin/main
 			}
 			scanner.close();
 		} 
