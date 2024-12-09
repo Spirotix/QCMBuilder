@@ -13,10 +13,12 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private		JButton 		btnCreer;	
 	private 	JRadioButton 	btnTF, btnF, btnM, btnD ; 
 	private 	JLabel			msgErrNbPts, msgErrTpsRep, msgErrRess,msgErrNiv,msgErrNot, msgChoixType ;
+	private 	FrameCreerQuestion fr;
 
-	public PanelCreerQuestion (/*Controleur ctrl*/ TestCreerQuestion ctrl)
+	public PanelCreerQuestion (/*Controleur ctrl*/ TestCreerQuestion ctrl, FrameCreerQuestion fr)
 	{
 		this.ctrl = ctrl;
+		this.fr=fr;
 		this.setLayout (new GridLayout(11,1));
 
 		//chargement des images
@@ -240,7 +242,11 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 				this.msgErrNiv.setText("");
 
 			if (peutCreer)
+			{
 				this.creer();
+				this.fr.dispose();
+			}
+				
 		}
 
 		if (this.btnTF.isSelected() && !this.choixNotion.getSelectedItem().equals("")&& !this.choixRessource.getSelectedItem().equals("				"))

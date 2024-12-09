@@ -5,20 +5,20 @@ import java.util.*;
 
 public class PanelReponse extends JPanel implements ActionListener
 {
-	private PanelCreerQuestion 	panelQ;
+	private PanelCreerQCMRepUnique 	panelQ;
 	private ArrayList<JPanel>	reponsesPossibles;
 	private JButton				corbeille;
 	private JTextField			contenu	;
 	private JCheckBox			validation ; 
 
-	public PanelReponse (PanelCreerQuestion panelQ)
+	public PanelReponse (PanelCreerQCMRepUnique panelQ)
 	{
 		this.panelQ = panelQ;
 		this.setLayout(new GridLayout(1,3));
 
 		//Initialisation
-		this.corbeille = new JButton("corbeille");
-		this.contenu = new JTextField ();
+		this.corbeille = new JButton(new ImageIcon("img/poubelle.PNG"));
+		this.contenu 	= new JTextField ();
 		this.validation = new JCheckBox();
 
 		//Insertion
@@ -37,7 +37,10 @@ public class PanelReponse extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println(	e.paramString());
+		if (e.getSource().equals(this.corbeille))
+		{
+			this.panelQ.supprimer(this);
+		}
 	}
 
 	
