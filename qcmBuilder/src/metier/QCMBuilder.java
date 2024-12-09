@@ -95,45 +95,54 @@ public class QCMBuilder
 			new File("../questionnaire/pages").mkdirs();
 			new File("../questionnaire/script").mkdirs();
 
-			String sIndex = "<!DOCTYPE html>" + //
-							"<html lang=\"fr\">" + //
-							"<head>" + //
-							"<meta charset=\"UTF-8\">" + //
-							"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" + //
-							"<link rel=\"stylesheet\" href=\"index.css\">" + //
-							"<title>Accueil Questionnaire</title>" + //
-							"</head>" + //
-							"<body>" + //
-							"" + //
-							"<h1 class=\"evaluation-title\">Titre du questionnaire</h1>" + //
-							"" + //
-							"<div class=\"informations\">" + //
-							"<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">20h</span></p>" + //
-							"" + //
-							"<p class=\"resource\">Ressources concernée : <span class=\"resource-data\">r1.01</span></p>" + //
-							"" + //
-							"<p class=\"notions-title\">Notion abordées :</p>" + //
-							"<ul class=\"notions-list\">" + //
-							"<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 1</span></li>" + //
-							"<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 2</span></li>" + //
-							"<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 3</span></li>" + //
-							"</ul>" + //
-							"" + //
-							"<p class=\"questions-count\">Nombre de questions : <span class=\"questions-count-data\">10</span></p>" + //
-							"<ul class=\"difficulty-list\">" + //
-							"<li class=\"difficulty-item very-easy\">Très facile : <span class=\"difficulty-item-data\">0</span></li>" + //
-							"<li class=\"difficulty-item easy\">     Facile :      <span class=\"difficulty-item-data\">3</span></li>" + //
-							"<li class=\"difficulty-item medium\">   Moyenne :     <span class=\"difficulty-item-data\">4</span></li>" + //
-							"<li class=\"difficulty-item hard\">     Difficile :   <span class=\"difficulty-item-data\">3</span></li>" + //
-							"</ul>" + //
-							"<button type=\"button\" class=\"start-button\">Commencer</button>" + //
-							"</div>" + //
-							"<script src=\"script/index.js\"></script>" + //
-							"</body>" + //
-							"</html>";
+			String sIndex = "<!DOCTYPE html>\n" + //
+								"<html lang=\"fr\">\n" + //
+								"<head>\n" + //
+								"\t<meta charset=\"UTF-8\">\n" + //
+								"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" + //
+								"\t<link rel=\"stylesheet\" href=\"styles.css\">\n" + //
+								"\t<title>Accueil Questionnaire</title>\n" + //
+								"</head>\n" + //
+								"<body>\n" + //
+								"\t\n" + //
+								"\t<h1 class=\"evaluation-title\">Titre du questionnaire</h1>\n" + //
+								"\n" + //
+								"\t<div class=\"informations\">\n" + //
+								"\t\t<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">20h</span></p>\n" + //
+								"\n" + //
+								"\t\t<p class=\"resource\">Ressources concernée : <span class=\"resource-data\">r1.01</span></p>\n" + //
+								"\n" + //
+								"\t\t<p class=\"notions-title\">Notion abordées :</p>\n" + //
+								"\t\t<ul class=\"notions-list\">\n" + //
+								"\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 1</span></li>\n" + //
+								"\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 2</span></li>\n" + //
+								"\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 3</span></li>\n" + //
+								"\t\t</ul>\n" + //
+								"\n" + //
+								"\t\t<p class=\"questions-count\">Nombre de questions : <span class=\"questions-count-data\">10</span></p>\n" + //
+								"\t\t<ul class=\"difficulty-list\">\n" + //
+								"\t\t\t<li class=\"difficulty-item very-easy\">Très facile : <span class=\"difficulty-item-data\">0</span></li>\n" + //
+								"\t\t\t<li class=\"difficulty-item easy\">     Facile :      <span class=\"difficulty-item-data\">3</span></li>\n" + //
+								"\t\t\t<li class=\"difficulty-item medium\">   Moyenne :     <span class=\"difficulty-item-data\">4</span></li>\n" + //
+								"\t\t\t<li class=\"difficulty-item hard\">     Difficile :   <span class=\"difficulty-item-data\">3</span></li>\n" + //
+								"\t\t</ul>\n" + //
+								"\t\t<button type=\"button\" class=\"start-button\">Commencer</button>\n" + //
+								"\t</div>\n" + //
+								"\t<script src=\"script/index.js\"></script>\n" + //
+								"</body>\n" + //
+								"</html>";
 
-			PrintWriter writer = new PrintWriter("../questionnaire/index.html");
-			writer.println(sIndex);
+			PrintWriter indexWriter = new PrintWriter("../questionnaire/index.html");
+			indexWriter.println(sIndex);
+			indexWriter.close();
+
+			PrintWriter finIndex = new PrintWriter("../questionnaire/index.css");
+			finIndex.println("/* TODO */");
+			finIndex.close();
+
+			PrintWriter stylesCss = new PrintWriter("../questionnaire/styles.css");
+			stylesCss.println("/* TODO */");
+			stylesCss.close();
 
 			
 
@@ -149,19 +158,19 @@ public class QCMBuilder
 
 			// Create and write to HTML files
 			PrintWriter question1Writer = new PrintWriter("../questionnaire/pages/question1.html");
-			question1Writer.println("<!-- TODO -->");
+			question1Writer.println("<!-- TODO -->\n");
 			question1Writer.close();
 
 			PrintWriter question2Writer = new PrintWriter("../questionnaire/pages/question2.html");
-			question2Writer.println("<!-- TODO -->");
+			question2Writer.println("<!-- TODO -->\n");
 			question2Writer.close();
 
 			PrintWriter question3Writer = new PrintWriter("../questionnaire/pages/question3.html");
-			question3Writer.println("<!-- TODO -->");
+			question3Writer.println("<!-- TODO -->\n");
 			question3Writer.close();
 
 			PrintWriter question4Writer = new PrintWriter("../questionnaire/pages/question4.html");
-			question4Writer.println("<!-- TODO -->");
+			question4Writer.println("<!-- TODO -->\n");
 			question4Writer.close();
 
 			// Create and write to script files
@@ -177,7 +186,7 @@ public class QCMBuilder
 			popupJsWriter.println("// TODO");
 			popupJsWriter.close();
 
-			writer.close();
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
