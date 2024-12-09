@@ -1,13 +1,16 @@
 package metier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Association extends Question
 {
 
-	Reponse[][] tabCouple;
-	public Association(Notion notion, String text, int timer, double nbPoint, int difficulte, Reponse[][] tabCouple)
+	List<Couple> lstCouple;
+	public Association(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Couple> lstCouple)
 	{
 		super(notion, text, timer, nbPoint, difficulte);
-		this.tabCouple = new Reponse[tabCouple.length][2];
-		this.tabCouple = tabCouple;
+		this.lstCouple = new ArrayList<>();
+		this.lstCouple = lstCouple;
 	}
 }

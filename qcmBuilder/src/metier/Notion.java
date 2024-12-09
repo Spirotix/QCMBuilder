@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 public class Notion 
 {
-	private String    nom;
+	private String    nom      ;
 	private Ressource ressource;
 	List<Question>    questions;
-	Reponse[][]       tabReponses;
+	List<Couple>      couples  ;
 
 	public Notion(String nom, Ressource ressource)
 	{
@@ -45,20 +45,46 @@ public class Notion
 				
 				scanner.nextLine();
 				line       = scanner.nextLine();
+
 				List<Reponse> lstReponse;
 				lstReponse = new ArrayList<>();
 
+				List<Couple> lstCouple;
+				lstCouple = new ArrayList<>();
+
 				if ( type.equals("Association"))
 				{
-					scanner.
-					tabReponses = new Reponse[][];
+					
 					while (!line.contains("{Niveau}"))
 					{
+						Reponse premier;
+						Reponse second ;
 
-					}
+						if (line.substring(line.indexOf("} ") + 1, line.indexOf(":") - 1).equals("[null]"))
+						{
+							premier = null;
+						}
+						premier = new Reponse("Vrai",
+								              line.substring(line.indexOf("} ") + 1, line.indexOf(":")),
+								              0);
+						
+						if ( line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1).equals("[null]"))
+						{
+							second = null;
+						}
+						else
+						{
+							second = new Reponse("Vrai",
+									line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1), 0);
+						}
+						
+						lstCouple.add(new Couple(premier, second));
+						line = scanner.nextLine();
+					}	
 				}
 				else
 				{
+
 					while (!line.contains("{Niveau}"))
 					{
 						lstReponse.add(new Reponse(line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
@@ -99,7 +125,7 @@ public class Notion
 
 					case "Association" ->
 					{
-						Question question = new Association(this, text, temps, nbPoint, niveau, tabCouple);
+						Question question = new Association(this, text, temps, nbPoint, niveau, lstCouple);
 						questions.add(question);
 					}
 
