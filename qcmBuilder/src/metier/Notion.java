@@ -24,7 +24,7 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("METTRE NOM"));
+			Scanner scanner = new Scanner(new File("../data/questions.csv"));
 			if( scanner.hasNextLine()){	scanner.nextLine();	}
 			while (scanner.hasNextLine()) 
 			{
@@ -40,13 +40,51 @@ public class Notion
 					int nbIndiceUtilisé = Integer.parseInt(parts[5]);
 					int difficulte = Integer.parseInt(parts[6]);
 
+					String text="";
+
+					try {
+
+						Scanner scannerText = new Scanner(new File("../data/question/"+id+".txt"));
+						if( scannerText.hasNextLine()){	scannerText.nextLine();	}
+						while (scannerText.hasNextLine()) 
+						{
+							text += scannerText.nextLine();
+						}
+						
+					} catch (FileNotFoundException e) { System.err.println("Fichier de question introuvable");
+					}
+
+					
+
 					
 
 					switch (type) {
 						
 						case "QRM" -> {
-							Question question = new ChoixMultiple(id, text, timer, nbPoint, nbIndiceUtilisé, difficulte, this);
+							Question question = new ChoixMultiple(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
 							questions.add(question);
+						}
+
+						case "QCU" -> {
+							Question question = new ChoixUnique(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
+							questions.add(question);
+						}
+
+						case "Association" -> {
+							Question question = new Association(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
+							questions.add(question);
+						}
+
+						case "Elimination" -> {
+							Question question = new Elimination(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
+							questions.add(question);
+						}
+
+						questions.add(question);
+						}
+
+						default -> {
+							System.out.println("Type de question inconnu");
 						}
 						
 
@@ -58,7 +96,7 @@ public class Notion
 					
 				}
 
-				;
+				
 				
 			}
 			scanner.close();

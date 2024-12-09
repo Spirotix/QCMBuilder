@@ -4,28 +4,30 @@ import java.util.List;
 
 public abstract class Question 
 {
+	protected Notion        notions;
 	protected int           id;
 	protected String        text;
 	protected int           timer;
 	protected int           nbPoint;
 	protected int           nbIndiceUtilisé;
-	protected List<Reponse> lstReponses;
 	protected int           difficulte;
-	protected Notion        notions;
+	protected List<Reponse> lstReponses;
 	
 	
 	
-	public Question(String text, int timer, int nbPoint, int nbIndiceUtilisé, List<Reponse> lstReponses, int difficulte,
-	                Notion notions)
+	public Question(Notion notion, int id, String text, int timer, int nbPoint, int nbIndiceUtilisé, int difficulte)
 	{
+		this.notions = notion;
+		this.id = id;
 		this.text = text;
 		this.timer = timer;
 		this.nbPoint = nbPoint;
 		this.nbIndiceUtilisé = nbIndiceUtilisé;
-		this.lstReponses = lstReponses;
 		this.difficulte = difficulte;
-		this.notions = notions;
+		this.lstReponses = lireReponses();
 	}
+
+	protected abstract List<Reponse> lireReponses();
 	public String        getText()           { return this.text;            }
 	public int           getTimer()          { return this.timer;           }
 	public int           getNbPoint()        { return this.nbPoint;         }
