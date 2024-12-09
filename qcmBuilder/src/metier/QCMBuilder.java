@@ -21,6 +21,7 @@ public class QCMBuilder
 		try 
 		{
 			Scanner scanner = new Scanner(new File("../data/questions.data"));
+			if( scanner.hasNextLine()){	scanner.nextLine();	}
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
