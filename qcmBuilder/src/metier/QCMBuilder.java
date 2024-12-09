@@ -28,7 +28,9 @@ public class QCMBuilder
 				String   nomRessource = parts[0];
 
 				Ressource ressource = new Ressource(nomRessource);
-				ressources.add(ressource);
+
+				if ( ! ressources.contains(ressource) )
+					ressources.add(ressource);
 			}
 			scanner.close();
 		} 
