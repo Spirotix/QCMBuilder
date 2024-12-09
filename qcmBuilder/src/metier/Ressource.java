@@ -22,12 +22,8 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-<<<<<<< HEAD
 			Scanner scanner = new Scanner(new File("../data/notions.rtf"));
-=======
-			Scanner scanner = new Scanner(new File("METTRE NOM"));
 			if( scanner.hasNextLine()){	scanner.nextLine();	}
->>>>>>> refs/remotes/origin/main
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
