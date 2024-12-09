@@ -8,9 +8,10 @@ import java.util.Scanner;
 
 public class Notion 
 {
-	private String    nom;
+	private String    nom      ;
 	private Ressource ressource;
 	List<Question>    questions;
+	List<Couple>      couples  ;
 
 	public Notion(String nom, Ressource ressource)
 	{
@@ -38,22 +39,64 @@ public class Notion
 
 				line           = scanner.nextLine();
 				double nbPoint = Double.parseDouble(line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
+
+				line = scanner.nextLine();
+				String type = line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 				
 				scanner.nextLine();
 				line       = scanner.nextLine();
+
 				List<Reponse> lstReponse;
 				lstReponse = new ArrayList<>();
 
-				while ( !line.contains("{Niveau}"))
+				List<Couple> lstCouple;
+				lstCouple = new ArrayList<>();
+
+				if ( type.equals("Association"))
 				{
-					lstReponse.add( new Reponse(line.substring( line.indexOf("} ") + 1, line.indexOf(".")), line.substring(line.indexOf(".") + 1, line.indexOf("|")) , Double.parseDouble(line.substring(line.indexOf("|") + 1, line.indexOf("\\par") - 1))));
-					line=scanner.nextLine();
+					
+					while (!line.contains("{Niveau}"))
+					{
+						Reponse premier;
+						Reponse second ;
+
+						if (line.substring(line.indexOf("} ") + 1, line.indexOf(":") - 1).equals("[null]"))
+						{
+							premier = null;
+						}
+						premier = new Reponse("Vrai",
+								              line.substring(line.indexOf("} ") + 1, line.indexOf(":")),
+								              0);
+						
+						if ( line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1).equals("[null]"))
+						{
+							second = null;
+						}
+						else
+						{
+							second = new Reponse("Vrai",
+									line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1), 0);
+						}
+						
+						lstCouple.add(new Couple(premier, second));
+						line = scanner.nextLine();
+					}	
 				}
+				else
+				{
+
+					while (!line.contains("{Niveau}"))
+					{
+						lstReponse.add(new Reponse(line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
+								line.substring(line.indexOf(".") + 1, line.indexOf("|")),
+								Double.parseDouble(line.substring(line.indexOf("|") + 1, line.indexOf("\\par") - 1))));
+						line = scanner.nextLine();
+					}
+				}
+				
 				
 				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
-				line=scanner.nextLine();
-				String type    = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
 				line=scanner.nextLine();
 				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
@@ -82,7 +125,7 @@ public class Notion
 
 					case "Association" ->
 					{
-						Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse);
+						Question question = new Association(this, text, temps, nbPoint, niveau, lstCouple);
 						questions.add(question);
 					}
 
