@@ -65,13 +65,11 @@ public class Notion
 					case "F"  -> { niveau = 2; }
 					case "M"  -> { niveau = 3; }
 					case "D"  -> { niveau = 4; }
-					default   -> { niveau = 0; }
-				}
-
-				if ( niveau == 0 )
-				{
-					scanner.close();
-					throw new IllegalArgumentException("Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
+					default   ->
+					{
+						scanner.close();
+						throw new IllegalArgumentException("Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
+					}
 				}
 
 				switch (type)
