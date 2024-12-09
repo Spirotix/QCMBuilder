@@ -15,7 +15,7 @@ public abstract class Question
 	
 	
 	
-	public Question(Notion notion, int id, String text, int timer, int nbPoint, int nbIndiceUtilisé, int difficulte)
+	public Question(Notion notion, int id, String text, int timer, int nbPoint, int nbIndiceUtilisé, int difficulte, List<Reponse> lstReponse)
 	{
 		this.notions = notion;
 		this.id = id;
@@ -24,10 +24,9 @@ public abstract class Question
 		this.nbPoint = nbPoint;
 		this.nbIndiceUtilisé = nbIndiceUtilisé;
 		this.difficulte = difficulte;
-		this.lstReponses = lireReponses();
+		this.lstReponses = lstReponse;
 	}
 
-	protected abstract List<Reponse> lireReponses();
 	public String        getText()           { return this.text;            }
 	public int           getTimer()          { return this.timer;           }
 	public int           getNbPoint()        { return this.nbPoint;         }
