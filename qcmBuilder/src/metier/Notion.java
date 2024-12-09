@@ -66,9 +66,10 @@ public class Notion
 						}
 						else
 						{
-							premier = new Reponse("Vrai",
-						                      line.substring(line.indexOf("} ") + 1, line.indexOf(":")),
-						                      0);
+							premier = new Reponse(
+							                      "Vrai",
+							                      line.substring(line.indexOf("} ") + 1, line.indexOf(":"))
+							                     );
 						}
 
 						if ( line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1).equals("[null]"))
@@ -77,8 +78,10 @@ public class Notion
 						}
 						else
 						{
-							second = new Reponse("Vrai",
-							line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1), 0);
+							second = new Reponse(
+							                     "Vrai",
+							                     line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1)
+							                    );
 						}
 
 						lstCouple.add(new Couple(premier, second));
