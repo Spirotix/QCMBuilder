@@ -20,14 +20,14 @@ public class QCMBuilder
 		List<Ressource> ressources = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/ressources.csv"));
+			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
 			while (scanner.hasNextLine()) 
 			{
-				String line = scanner.nextLine();
-				String[] parts = line.split(";");
-				String nom = parts[0];
+				String   line         = scanner.nextLine();
+				String[] parts        = line.split(";");
+				String   nomRessource = parts[0];
 
-				Ressource ressource = new Ressource(nom);
+				Ressource ressource = new Ressource(nomRessource);
 				ressources.add(ressource);
 			}
 			scanner.close();

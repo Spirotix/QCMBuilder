@@ -28,6 +28,8 @@ public class QCM extends Question
 		} 
 		catch (FileNotFoundException e) { e.printStackTrace(); }
 
+		return null;
+
 	}
 
 	

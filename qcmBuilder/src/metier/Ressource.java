@@ -22,17 +22,22 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("METTRE NOM"));
-			if( scanner.hasNextLine()){	scanner.nextLine();	}
-			while (scanner.hasNextLine()) 
-			{
-				String line = scanner.nextLine();
-				String[] parts = line.split(";");
-				String nom = parts[0];
+			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
 
-				Notion notion = new Notion(nom, this);
-				notions.add(notion);
-				
+			if( scanner.hasNextLine()) scanner.nextLine();
+
+			while (scanner.hasNextLine())
+			{
+				String   line         = scanner.nextLine();
+				String[] parts        = line.split(";");
+				String   nomRessource = parts[0];
+				String   nomNotion    = parts[1];
+
+				if ( nomRessource.equals(this.nom) )
+				{
+					Notion notion = new Notion(nomNotion, this);
+					notions.add(notion);
+				}
 			}
 			scanner.close();
 		} 
@@ -70,6 +75,17 @@ public class Ressource
 			return false;
 		notions.remove(notion);
 		return true;
+	}
+
+	public Notion rechercherNotion(String nom)
+	{
+		Notion notionTrouvée = null;
+		for (Notion notion : notions)
+		{
+			if (notion.getNom().equals(nom))
+				notionTrouvée = notion;
+		}
+		return notionTrouvée;
 	}
 
 	
