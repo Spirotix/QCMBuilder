@@ -12,9 +12,9 @@ public class Notion
 	private Ressource ressource;
 	List<Question>    questions;
 
-	public Notion(String nom, Ressource ressource) 
+	public Notion(String nom, Ressource ressource)
 	{
-		this.nom = nom;
+		this.nom       = nom;
 		this.ressource = ressource;
 		this.questions = lireQuestions();
 	}
@@ -31,16 +31,16 @@ public class Notion
 				String line = scanner.nextLine();
 				while ( !line.contains("Question"))
 				{
-					line=scanner.nextLine();
+					line = scanner.nextLine();
 				}
 				
 				String text = line.substring(0, line.indexOf("\\par"));
 
-				line=scanner.nextLine();
+				line           = scanner.nextLine();
 				double nbPoint = Double.parseDouble(line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
 				
 				scanner.nextLine();
-				line=scanner.nextLine();
+				line       = scanner.nextLine();
 				List<Reponse> lstReponse;
 				lstReponse = new ArrayList<>();
 
@@ -53,10 +53,10 @@ public class Notion
 				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
 				line=scanner.nextLine();
-				String type = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
+				String type    = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
 				line=scanner.nextLine();
-				int temps = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
+				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
 
 				int niveau;
 				switch(sNiveau)
@@ -104,7 +104,7 @@ public class Notion
 		{
 			e.printStackTrace();
 		}
-		
+
 		return questions;
 	}
 
