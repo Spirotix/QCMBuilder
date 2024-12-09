@@ -25,7 +25,7 @@ public abstract class Question
 
 	public String        getText()           { return this.text;            }
 	public int           getTimer()          { return this.timer;           }
-	public int           getNbPoint()        { return this.nbPoint;         }
+	public double        getNbPoint()        { return this.nbPoint;         }
 	public int           getNbIndiceUtilisé(){ return this.nbIndiceUtilisé; }
 	public List<Reponse> getLstReponses()    { return this.lstReponses;     }
 	public int           getDifficulte()     { return this.difficulte;      }
