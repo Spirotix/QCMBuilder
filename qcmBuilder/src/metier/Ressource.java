@@ -23,9 +23,15 @@ public class Ressource
 		try 
 		{
 			Scanner scanner = new Scanner(new File("METTRE NOM"));
+			if( scanner.hasNextLine()){	scanner.nextLine();	}
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
+				String[] parts = line.split(";");
+				String nom = parts[0];
+
+				Notion notion = new Notion(nom, this);
+				notions.add(notion);
 				
 			}
 			scanner.close();

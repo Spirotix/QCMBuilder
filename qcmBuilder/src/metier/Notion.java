@@ -25,9 +25,40 @@ public class Notion
 		try 
 		{
 			Scanner scanner = new Scanner(new File("METTRE NOM"));
+			if( scanner.hasNextLine()){	scanner.nextLine();	}
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
+				String[] parts = line.split(";");
+
+				if (parts[0].equals(nom));
+				{
+					String type = parts[1];
+					int    id = Integer.parseInt(parts[2]);
+					int timer = Integer.parseInt(parts[3]);
+					int nbPoint = Integer.parseInt(parts[4]);
+					int nbIndiceUtilisé = Integer.parseInt(parts[5]);
+					int difficulte = Integer.parseInt(parts[6]);
+
+					
+
+					switch (type) {
+						
+						case "QRM" -> {
+							Question question = new ChoixMultiple(id, text, timer, nbPoint, nbIndiceUtilisé, difficulte, this);
+							questions.add(question);
+						}
+						
+
+
+					}
+
+
+
+					
+				}
+
+				;
 				
 			}
 			scanner.close();
@@ -72,5 +103,5 @@ public class Notion
 		questions.remove(question);
 		return true;
 	}
-
+	
 }
