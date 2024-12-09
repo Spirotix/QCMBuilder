@@ -50,7 +50,7 @@ public class Notion
 					line=scanner.nextLine();
 				}
 				
-				String niveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
+				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
 				line=scanner.nextLine();
 				String type = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
@@ -58,37 +58,53 @@ public class Notion
 				line=scanner.nextLine();
 				int temps = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
 
+				int niveau;
+				switch(sNiveau)
+				{
+					case "TF" -> { niveau = 1; }
+					case "F"  -> { niveau = 2; }
+					case "M"  -> { niveau = 3; }
+					case "D"  -> { niveau = 4; }
+				}
 
-					switch (type) {
-						
-						case "QCM" -> {
-							Question question = new QCM(this, text, temps, nbPoint, difficulte);
-							questions.add(question);
-						}
+				switch (type) 
+				{
+					
+					case "QCM" -> 
+					{
+						Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse);
+						questions.add(question);
+					}
 
-						case "Association" -> {
-							Question question = new Association(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
-							questions.add(question);
-						}
+					case "Association" -> 
+					{
+						Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse);
+						questions.add(question);
+					}
 
-						case "Elimination" -> {
-							Question question = new Elimination(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
-							questions.add(question);
-						}
+					case "Elimination" -> 
+					{
+						Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse);
+						questions.add(question);
+					}
 
 					default -> 
 					{
 						System.out.println("Type de question inconnu");
-						}
 					}
 				}
 			}
 			scanner.close();
-		} 
-		catch (FileNotFoundException e) { e.printStackTrace(); }
 
+
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
 		return questions;
-	}
+	} 
 
 	public String         getNom      () { return nom;       }
 	public Ressource      getRessource() { return ressource; }

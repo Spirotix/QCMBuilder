@@ -5,18 +5,16 @@ import java.util.List;
 public abstract class Question 
 {
 	protected Notion        notions;
-	protected int           id;
 	protected String        text;
 	protected int           timer;
-	protected int           nbPoint;
+	protected double        nbPoint;
 	protected int           nbIndiceUtilisé;
 	protected int           difficulte;
 	protected List<Reponse> lstReponses;
 
-	public Question(Notion notion, int id, String text, int timer, int nbPoint, int difficulte, List<Reponse> lstReponse)
+	public Question(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponse)
 	{
 		this.notions = notion;
-		this.id = id;
 		this.text = text;
 		this.timer = timer;
 		this.nbPoint = nbPoint;
