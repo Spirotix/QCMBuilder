@@ -33,26 +33,13 @@ public class Notion
 
 				if (parts[0].equals(nom));
 				{
-					String type = parts[1];
-					int    id = Integer.parseInt(parts[2]);
-					int timer = Integer.parseInt(parts[3]);
-					int nbPoint = Integer.parseInt(parts[4]);
-					int nbIndiceUtilisé = Integer.parseInt(parts[5]);
-					int difficulte = Integer.parseInt(parts[6]);
-
-					String text="";
-
-					try {
-
-						Scanner scannerText = new Scanner(new File("../data/question/"+id+".txt"));
-						if( scannerText.hasNextLine()){	scannerText.nextLine();	}
-						while (scannerText.hasNextLine()) 
-						{
-							text += scannerText.nextLine();
-						}
-						
-					} catch (FileNotFoundException e) { System.err.println("Fichier de question introuvable");
-					}
+					String type            = parts[1];
+					int    id              = Integer.parseInt(parts[2]);
+					String text            = parts[3];
+					int    timer           = Integer.parseInt(parts[4]);
+					int    nbPoint         = Integer.parseInt(parts[5]);
+					int    nbIndiceUtilisé = Integer.parseInt(parts[6]);
+					int    difficulte      = Integer.parseInt(parts[7]);
 
 
 					switch (type) {
