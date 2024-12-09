@@ -10,7 +10,7 @@ public class ChoixMultiple extends Question
 {
 	List<Reponse> lstBonneReponses;
 
-	public ChoixMultiple(int id, String text, int timer, int nbPoint, int nbIndiceUtilisé, List<Reponse> lstReponses, int difficulte, Notion notions, List<Reponse> lstBonneReponses)
+	public ChoixMultiple(int id, String text, int timer, int nbPoint, int nbIndiceUtilisé, List<Reponse> lstReponses, int difficulte, Notion notions)
 	{
 		super(text, timer, nbPoint, nbIndiceUtilisé, lstReponses, difficulte, notions);
 		this.lstBonneReponses = lireReponses();

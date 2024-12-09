@@ -24,12 +24,7 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try 
 		{
-<<<<<<< HEAD
 			Scanner scanner = new Scanner(new File("questions.rtf"));
-=======
-			Scanner scanner = new Scanner(new File("METTRE NOM"));
-			if( scanner.hasNextLine()){	scanner.nextLine();	}
->>>>>>> refs/remotes/origin/main
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
@@ -38,32 +33,21 @@ public class Notion
 				if (parts[0].equals(nom));
 				{
 					String type = parts[1];
-					String id = parts[2];
-					String text = parts[3];
-					String timer = parts[4];
-					String nbPoint = parts[5];
-					String nbIndiceUtilisé = parts[6];
-					String difficulte = parts[7];
+					int    id = Integer.parseInt(parts[2]);
+					int timer = Integer.parseInt(parts[3]);
+					int nbPoint = Integer.parseInt(parts[4]);
+					int nbIndiceUtilisé = Integer.parseInt(parts[5]);
+					int difficulte = Integer.parseInt(parts[6]);
+
+					
 
 					switch (type) {
-						case -> {
-							Question question = new ChoixUnique(id, text, timer, nbPoint, nbIndiceUtilisé, difficulte, this);
-							questions.add(question);
-						}
-
-						case -> {
+						
+						case "QRM" -> {
 							Question question = new ChoixMultiple(id, text, timer, nbPoint, nbIndiceUtilisé, difficulte, this);
 							questions.add(question);
 						}
-
-						case -> {
-							Question question = new Associatif(id, text, timer, nbPoint, nbIndiceUtilisé, difficulte, this);
-							questions.add(question);
-						}
-
-						case -> {
-							Question question = new Elimination(id, text, timer, nbPoint, nbIndiceUtilisé, difficulte, this);
-							questions.add(question);
+						
 
 
 					}
