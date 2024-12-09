@@ -14,13 +14,13 @@ public class Reponse
 		this.pointPerdu = nbPointPerdu;
 	}
 
-	public String  getText()                     { return text;                  }
-	public void    setText(String text)          { this.text = text;             }
+	public String  getText()                        { return text;                  }
+	public void    setText(String text)             { this.text = text;             }
 
-	public boolean isEstVrai()                   { return estVrai;               }
-	public void    setEstVrai(boolean estVrai)   { this.estVrai = estVrai;       }
+	public boolean estVrai()                        { return estVrai;               }
+	public void    setEstVrai(boolean estVrai)      { this.estVrai = estVrai;       }
 	
-	public double     getPointPerdu()               { return pointPerdu;            }
+	public double  getPointPerdu()                  { return pointPerdu;            }
 	public void    setPointPerdu(double pointPerdu) { this.pointPerdu = pointPerdu; }
 }
 

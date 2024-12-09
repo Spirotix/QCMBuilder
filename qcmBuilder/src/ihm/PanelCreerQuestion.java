@@ -289,8 +289,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		{
 			this.choixNotion.setEnabled(true);
 			
-			this.choixNotion.	removeAll();
-			this.choixNotion	.add("");
+			this.choixNotion.removeAll() ;
+			this.choixNotion.add("");
 
 			for (String s : this.ctrl.getChoixNotion(this.choixRessource.getSelectedItem()))
 				this.choixNotion.add(s);
