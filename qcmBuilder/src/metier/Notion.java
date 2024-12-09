@@ -24,7 +24,7 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/questions.csv"));
+			Scanner scanner = new Scanner(new File("../data/questions/"));
 			if( scanner.hasNextLine()){	scanner.nextLine();	}
 			while (scanner.hasNextLine()) 
 			{
