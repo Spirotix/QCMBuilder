@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Notion 
+public class Notion
 {
-	private String    nom      ;
-	private Ressource ressource;
-	List<Question>    questions;
-	List<Couple>      couples  ;
+	private String         nom      ;
+	private Ressource      ressource;
+	private List<Question> questions;
+	private List<Couple>   couples  ;
 
 	public Notion(String nom, Ressource ressource)
 	{
@@ -50,7 +50,7 @@ public class Notion
 				lstReponse = new ArrayList<>();
 
 				List<Couple> lstCouple;
-				lstCouple = new ArrayList<>();
+				lstCouple  = new ArrayList<>();
 
 				if ( type.equals("Association"))
 				{
@@ -64,10 +64,13 @@ public class Notion
 						{
 							premier = null;
 						}
-						premier = new Reponse("Vrai",
-								              line.substring(line.indexOf("} ") + 1, line.indexOf(":")),
-								              0);
-						
+						else
+						{
+							premier = new Reponse("Vrai",
+						                      line.substring(line.indexOf("} ") + 1, line.indexOf(":")),
+						                      0);
+						}
+
 						if ( line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1).equals("[null]"))
 						{
 							second = null;
@@ -75,12 +78,12 @@ public class Notion
 						else
 						{
 							second = new Reponse("Vrai",
-									line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1), 0);
+							line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1), 0);
 						}
-						
+
 						lstCouple.add(new Couple(premier, second));
 						line = scanner.nextLine();
-					}	
+					}
 				}
 				else
 				{
@@ -93,10 +96,8 @@ public class Notion
 						line = scanner.nextLine();
 					}
 				}
-				
-				
-				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
+				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
 				line=scanner.nextLine();
 				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
