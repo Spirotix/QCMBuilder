@@ -5,16 +5,8 @@ import java.util.List;
 public class Association extends Question
 {
 
-	public Association(Notion notion, int id, String text, int timer, int nbPoint, int nbIndiceUtilisé, int difficulte)
+	public Association(Notion notion, String text, int timer, int nbPoint, int nbIndiceUtilisé, int difficulte)
 	{
-		super(notion, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
+		super(notion, text, timer, nbPoint, difficulte);
 	}
-
-	@Override
-	protected List<Reponse> lireReponses()
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }
