@@ -24,22 +24,36 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/questions/"));
-			if( scanner.hasNextLine()){	scanner.nextLine();	}
+			Scanner scanner = new Scanner(new File("../data/questions/" + this.ressource + "_" + this.nom));
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
-				String[] parts = line.split(";");
-
-				if (parts[0].equals(nom));
+				while ( !line.contains("Question"))
 				{
-					String type            = parts[1];
-					int    id              = Integer.parseInt(parts[2]);
-					String text            = parts[3];
-					int    timer           = Integer.parseInt(parts[4]);
-					int    nbPoint         = Integer.parseInt(parts[5]);
-					int    nbIndiceUtilisé = Integer.parseInt(parts[6]);
-					int    difficulte      = Integer.parseInt(parts[7]);
+					line=scanner.nextLine();
+				}
+				
+				String text = line.substring(0, line.indexOf("\\par"));
+
+				scanner.nextLine();
+				line=scanner.nextLine();
+				
+				List<Reponse> lstReponse;
+				lstReponse = new ArrayList<>();
+
+				while ( !line.contains("{Niveau}"))
+				{
+					lstReponse.add( new Reponse(line.substring( line.indexOf("} ") + 1, line.indexOf(".")), line.substring(line.indexOf(".") + 1, line.indexOf("|")) , Double.parseDouble(line.substring(line.indexOf("|") + 1, line.indexOf("\\par") - 1))));
+				}
+				
+
+				String type            = parts[1];
+				int    id              = Integer.parseInt(parts[2]);
+				String text            = parts[3];
+				int    timer           = Integer.parseInt(parts[4]);
+				int    nbPoint         = Integer.parseInt(parts[5]);
+				int    nbIndiceUtilisé = Integer.parseInt(parts[6]);
+				int    difficulte      = Integer.parseInt(parts[7]);
 
 
 					switch (type) {
