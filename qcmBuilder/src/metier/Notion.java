@@ -65,38 +65,42 @@ public class Notion
 					case "F"  -> { niveau = 2; }
 					case "M"  -> { niveau = 3; }
 					case "D"  -> { niveau = 4; }
+					default   -> { niveau = 0; }
 				}
 
-				switch (type) 
+				if ( niveau == 0 )
 				{
-					
-					case "QCM" -> 
+					scanner.close();
+					throw new IllegalArgumentException("Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
+				}
+
+				switch (type)
+				{
+					case "QCM" ->
 					{
 						Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse);
 						questions.add(question);
 					}
 
-					case "Association" -> 
+					case "Association" ->
 					{
 						Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse);
 						questions.add(question);
 					}
 
-					case "Elimination" -> 
+					case "Elimination" ->
 					{
 						Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse);
 						questions.add(question);
 					}
 
-					default -> 
+					default ->
 					{
 						System.out.println("Type de question inconnu");
 					}
 				}
 			}
 			scanner.close();
-
-
 		}
 		catch (FileNotFoundException e)
 		{
@@ -104,7 +108,7 @@ public class Notion
 		}
 		
 		return questions;
-	} 
+	}
 
 	public String         getNom      () { return nom;       }
 	public Ressource      getRessource() { return ressource; }
@@ -126,8 +130,10 @@ public class Notion
 	{
 		if (question == null)
 			return false;
+
 		if (questions.contains(question))
 			return false;
+
 		questions.add(question);
 		return true;
 	}
@@ -136,8 +142,10 @@ public class Notion
 	{
 		if (question == null)
 			return false;
+
 		if (!questions.contains(question))
 			return false;
+
 		questions.remove(question);
 		return true;
 	}
@@ -145,12 +153,13 @@ public class Notion
 	public Question rechercherQuestion (String text)
 	{
 		Question questionTrouvée = null;
+
 		for (Question question : questions)
 		{
 			if (question.getText().equals(text))
 				questionTrouvée = question;
 		}
+
 		return questionTrouvée;
 	}
-	
 }
