@@ -1,4 +1,4 @@
-package metier;
+package src.metier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -79,13 +79,13 @@ public class Ressource
 
 	public Notion rechercherNotion(String nom)
 	{
-		Notion notionTrouvée = null;
+		Notion notionTrouvee = null;
 		for (Notion notion : notions)
 		{
 			if (notion.getNom().equals(nom))
-				notionTrouvée = notion;
+				notionTrouvee = notion;
 		}
-		return notionTrouvée;
+		return notionTrouvee;
 	}
 
 	

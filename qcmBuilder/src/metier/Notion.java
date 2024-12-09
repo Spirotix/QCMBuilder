@@ -1,4 +1,4 @@
-package metier;
+package src.metier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -193,14 +193,14 @@ public class Notion
 
 	public Question rechercherQuestion (String text)
 	{
-		Question questionTrouvée = null;
+		Question questionTrouvee = null;
 
 		for (Question question : questions)
 		{
 			if (question.getText().equals(text))
-				questionTrouvée = question;
+				questionTrouvee = question;
 		}
 
-		return questionTrouvée;
+		return questionTrouvee;
 	}
 }
