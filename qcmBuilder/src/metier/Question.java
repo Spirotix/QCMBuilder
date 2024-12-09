@@ -15,19 +15,11 @@ public abstract class Question
 		this.timer       = timer;
 		this.nbPoint     = nbPoint;
 		this.difficulte  = difficulte;
-		this.lstReponses = lstReponse;
 	}
-
-	public String        getText()            { return this.text;            }
-	public int           getTimer()           { return this.timer;           }
-	public double        getNbPoint()         { return this.nbPoint;         }
-	public int           getNbIndiceUtilisé() { return this.nbIndiceUtilisé; }
-	public int           getDifficulte()      { return this.difficulte;      }
-	public Notion        getNotions()         { return this.notions;         }
+	
 	public String        getText()        { return this.text;        }
 	public int           getTimer()       { return this.timer;       }
 	public double        getNbPoint()     { return this.nbPoint;     }
-	public List<Reponse> getLstReponses() { return this.lstReponses; }
 	public int           getDifficulte()  { return this.difficulte;  }
 	public Notion        getNotions()     { return this.notions;     }
 
@@ -35,6 +27,5 @@ public abstract class Question
 	public void setTimer       (int timer                ) { this.timer       = timer;       }
 	public void setNbPoint     (int nbPoint              ) { this.nbPoint     = nbPoint;     }
 	public void setDifficulte  (int difficulte           ) { this.difficulte  = difficulte;  }
-	public void setLstReponses (List<Reponse> lstReponses) { this.lstReponses = lstReponses; }
 	public void setNotions     (Notion notions           ) { this.notions     = notions;     }
 }
