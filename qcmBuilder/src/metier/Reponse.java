@@ -23,5 +23,3 @@ public class Reponse
 	public double     getPointPerdu()               { return pointPerdu;            }
 	public void    setPointPerdu(double pointPerdu) { this.pointPerdu = pointPerdu; }
 }
-
-
