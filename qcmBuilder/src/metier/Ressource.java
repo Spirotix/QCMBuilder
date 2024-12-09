@@ -22,7 +22,7 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/notions.rtf"));
+			Scanner scanner = new Scanner(new File("METTRE NOM"));
 			if( scanner.hasNextLine()){	scanner.nextLine();	}
 			while (scanner.hasNextLine()) 
 			{
