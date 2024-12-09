@@ -13,8 +13,6 @@ public abstract class Question
 	protected int           difficulte;
 	protected List<Reponse> lstReponses;
 	
-	
-	
 	public Question(Notion notion, int id, String text, int timer, int nbPoint, int nbIndiceUtilisé, int difficulte, List<Reponse> lstReponse)
 	{
 		this.notions = notion;
@@ -35,6 +33,12 @@ public abstract class Question
 	public int           getDifficulte()     { return this.difficulte;      }
 	public Notion        getNotions()        { return this.notions;         }
 
-	
+	public void setText           (String text              ) { this.text = text;                       }
+	public void setTimer          (int timer                ) { this.timer = timer;                     }
+	public void setNbPoint        (int nbPoint              ) { this.nbPoint = nbPoint;                 }
+	public void setNbIndiceUtilisé(int nbIndiceUtilisé      ) { this.nbIndiceUtilisé = nbIndiceUtilisé; }
+	public void setDifficulte     (int difficulte           ) { this.difficulte = difficulte;           }
+	public void setLstReponses    (List<Reponse> lstReponses) { this.lstReponses = lstReponses;         }
+	public void setNotions        (Notion notions           ) { this.notions = notions;                 }
 }
 

@@ -121,5 +121,16 @@ public class Notion
 		questions.remove(question);
 		return true;
 	}
+
+	public Question rechercherQuestion (String text)
+	{
+		Question questionTrouvée = null;
+		for (Question question : questions)
+		{
+			if (question.getText().equals(text))
+				questionTrouvée = question;
+		}
+		return questionTrouvée;
+	}
 	
 }

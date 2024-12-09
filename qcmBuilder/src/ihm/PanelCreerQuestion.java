@@ -1,5 +1,3 @@
-
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -10,15 +8,22 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private 	TestCreerQuestion ctrl;
 	private 	JTextField 		nbPoints, tpsReponses;
 	private  	Choice 			choixRessource, choixNotion;
-	private 	ButtonGroup		btnGroup;
+	private 	ButtonGroup		btnGroup, btnGroupImg;
 	private 	JRadioButton	btnChoixUnique, btnChoixMult, btnAsso, btnElim;
 	private		JButton 		btnCreer;	
+	private 	JRadioButton 	btnTF, btnF, btnM, btnD ; 
 	private 	JLabel			msgErrNbPts, msgErrTpsRep, msgErrRess,msgErrNiv,msgErrNot, msgChoixType ;
 
 	public PanelCreerQuestion (/*Controleur ctrl*/ TestCreerQuestion ctrl)
 	{
 		this.ctrl = ctrl;
-		this.setLayout (new GridLayout(9,1));
+		this.setLayout (new GridLayout(11,1));
+
+		//chargement des images
+		ImageIcon TresFacile = new ImageIcon("img/TF3.PNG");
+		ImageIcon Facile 	 = new ImageIcon("img/F3.PNG" );
+		ImageIcon Moyen 	 = new ImageIcon("img/M3.PNG" );
+		ImageIcon Difficile  = new ImageIcon("img/D3.PNG" );
 
 		//Initialisation
 		this.nbPoints    = new JTextField();
@@ -33,12 +38,19 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.choixNotion	 = new Choice();
 		this.choixNotion	.add("				");
 
-		//this.choixNotion.setEnabled(false);
-		/* 
-		this.choixNotion	.add("");
+		this.choixNotion.setEnabled(false);
 
-		for (String s : this.ctrl.getChoixNotion())
-			this.choixNotion.add(s);*/
+		this.btnGroupImg = new ButtonGroup();
+
+		this.btnTF 		 = new JRadioButton (TresFacile	);
+		this.btnF 		 = new JRadioButton (Facile		);
+		this.btnM 		 = new JRadioButton (Moyen		);
+		this.btnD 		 = new JRadioButton (Difficile	);
+
+		this.btnGroupImg.add(this.btnTF);
+		this.btnGroupImg.add(this.btnF );
+		this.btnGroupImg.add(this.btnM );
+		this.btnGroupImg.add(this.btnD );
 
 		this.btnChoixUnique = new JRadioButton ("Choix Unique"	);
 		this.btnChoixMult 	= new JRadioButton ("Choix Multiple");
@@ -64,6 +76,11 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		//ActionListener / itemListener
 		this.nbPoints   	.addActionListener(this);
 		this.tpsReponses	.addActionListener(this);
+
+		this.btnTF 			.addActionListener(this);
+		this.btnF 			.addActionListener(this);
+		this.btnM 			.addActionListener(this);
+		this.btnD 			.addActionListener(this);
 
 		this.btnChoixUnique	.addActionListener(this);
 		this.btnChoixMult	.addActionListener(this);
@@ -114,18 +131,26 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		ligne4.add(new JLabel("Niveau"		));
 		this.add(ligne4);
 
-		//Troisieme ligne 
-		JPanel ligneerr2 = new JPanel(new FlowLayout(FlowLayout.LEFT,50,0));
-		ligneerr2.add(this.msgErrNot );
-		ligneerr2.add(this.msgErrNiv);
-		this.add(ligne3);
-
-
 		//Quatrieme ligne 
 		JPanel ligne5 = new JPanel(new FlowLayout(FlowLayout.LEFT,50,0));
-		ligne5.add(this.choixRessource);
-		ligne5.add(this.choixNotion	);
+		JPanel ligne5Img = new JPanel();
+
+		ligne5		.add(this.choixRessource);
+		ligne5		.add(this.choixNotion	);
+		ligne5Img	.add(this.btnTF			);
+		ligne5Img	.add(this.btnF			);
+		ligne5Img	.add(this.btnM			);
+		ligne5Img	.add(this.btnD			);
+		ligne5.add(ligne5Img);
 		this.add(ligne5);
+
+		//Troisieme ligne 
+		JPanel ligneerr2 = new JPanel(new FlowLayout(FlowLayout.LEFT,50,0));
+		ligneerr2.add(this.msgErrRess );
+		ligneerr2.add(this.msgErrNot  );
+		ligneerr2.add(this.msgErrNiv  );
+		this.add(ligneerr2);
+
 
 		//Cinquième ligne 
 		JPanel ligne6 = new JPanel(new FlowLayout(FlowLayout.LEFT,60,0));
@@ -141,6 +166,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		ligne7.add(this.btnElim);
 		this.add(ligne7);
 
+		JPanel ligneerr3 = new JPanel(new FlowLayout(FlowLayout.LEFT,50,0));
+		ligneerr3.add(this.msgChoixType );
+		this.add(ligneerr3);
+
 		//Septième ligne 
 		this.add(temp3);
 		
@@ -153,6 +182,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	{
 		boolean peutCreer=true;
 
+		System.out.println(	e.paramString());
 		if (e.getSource().equals(this.btnCreer))
 		{
 			if (this.nbPoints.getText().equals(""))
@@ -172,9 +202,81 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			}
 			else 
 				this.msgErrTpsRep.setText("");
+			
+			if (this.choixRessource.getSelectedItem().equals("				"))
+			{
+				this.msgErrRess.setForeground(Color.RED);
+				this.msgErrRess.setText("Vous devez choisir une ressource");
+				peutCreer=false;
+			}
+			else 
+				this.msgErrRess.setText("");
+			
+			if (this.choixNotion.getSelectedItem().equals(""))
+			{
+				this.msgErrNot.setForeground(Color.RED);
+				this.msgErrNot.setText("Vous devez choisir une notion");
+				peutCreer=false;
+			}
+			else 
+				this.msgErrNot.setText("");
+			
+			if (!(this.btnChoixUnique.isSelected() || this.btnChoixMult.isSelected() || this.btnAsso.isSelected() || this.btnElim.isSelected()))
+			{
+				this.msgChoixType.setForeground(Color.RED);
+				this.msgChoixType.setText("Vous devez choisir un type");
+				peutCreer=false;
+			}
+			else 
+				this.msgChoixType.setText("");
+			
+			if (!(this.btnTF.isSelected() || this.btnF.isSelected() || this.btnM.isSelected() || this.btnD.isSelected()))
+			{
+				this.msgErrNiv.setForeground(Color.RED);
+				this.msgErrNiv.setText("Vous devez choisir un niveau de difficulté");
+				peutCreer=false;
+			}
+			else 
+				this.msgErrNiv.setText("");
 
 			if (peutCreer)
 				System.out.println("Peut creer");
+		}
+
+		if (this.btnTF.isSelected())
+		{
+			this.btnTF.setIcon(new ImageIcon("img/TF1.PNG"));
+			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.msgErrNiv.setText("");
+		}
+
+		else if (this.btnF.isSelected())
+		{
+			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("img/F1.PNG" ));
+			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.msgErrNiv.setText("");
+		}
+
+		else if (this.btnM.isSelected())
+			{
+			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("img/M1.PNG" ));
+			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.msgErrNiv.setText("");
+		}
+
+		else if (this.btnD.isSelected())
+		{
+			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("img/D1.PNG" ));
+			this.msgErrNiv.setText("");
 		}
 		
 	}
@@ -183,7 +285,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	{
 		System.out.println(	e.paramString());
 
-		if (e.getSource().equals(this.choixRessource))
+		if (e.getSource().equals(this.choixRessource) && !this.choixRessource.getSelectedItem().equals("				"))
 		{
 			this.choixNotion.setEnabled(true);
 			
@@ -192,6 +294,14 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 			for (String s : this.ctrl.getChoixNotion(this.choixRessource.getSelectedItem()))
 				this.choixNotion.add(s);
+		}
+
+		if (e.getSource().equals(this.choixNotion) && !this.choixRessource.getSelectedItem().equals(""))
+		{
+			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
 		}
 		
 	}
