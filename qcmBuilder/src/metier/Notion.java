@@ -56,8 +56,6 @@ public class Notion
 
 					
 
-					
-
 					switch (type) {
 						
 						case "QCM" -> {
@@ -75,18 +73,11 @@ public class Notion
 							questions.add(question);
 						}
 
-						questions.add(question);
-						}
-
 						default -> {
 							System.out.println("Type de question inconnu");
 						}
 						
-
-
 					}
-
-
 
 					
 				}
