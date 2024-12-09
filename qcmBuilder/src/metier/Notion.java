@@ -12,62 +12,98 @@ public class Notion
 	private Ressource ressource;
 	List<Question>    questions;
 
-	public Notion(String nom, Ressource ressource) 
+	public Notion(String nom, Ressource ressource)
 	{
-		this.nom = nom;
+		this.nom       = nom;
 		this.ressource = ressource;
 		this.questions = lireQuestions();
 	}
 
 	private List<Question> lireQuestions() 
 	{
+
 		List<Question> questions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/questions.csv"));
-			if( scanner.hasNextLine()){	scanner.nextLine();	}
+			Scanner scanner = new Scanner(new File("../data/questions/" + this.ressource + "_" + this.nom));
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
-				String[] parts = line.split(";");
-
-				if (parts[0].equals(nom));
+				while ( !line.contains("Question"))
 				{
-					String type            = parts[1];
-					int    id              = Integer.parseInt(parts[2]);
-					String text            = parts[3];
-					int    timer           = Integer.parseInt(parts[4]);
-					int    nbPoint         = Integer.parseInt(parts[5]);
-					int    nbIndiceUtilisé = Integer.parseInt(parts[6]);
-					int    difficulte      = Integer.parseInt(parts[7]);
+					line = scanner.nextLine();
+				}
+				
+				String text = line.substring(0, line.indexOf("\\par"));
 
+				line           = scanner.nextLine();
+				double nbPoint = Double.parseDouble(line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
+				
+				scanner.nextLine();
+				line       = scanner.nextLine();
+				List<Reponse> lstReponse;
+				lstReponse = new ArrayList<>();
 
-					switch (type) {
-						
-						case "QCM" -> {
-							Question question = new QCM(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
-							questions.add(question);
-						}
+				while ( !line.contains("{Niveau}"))
+				{
+					lstReponse.add( new Reponse(line.substring( line.indexOf("} ") + 1, line.indexOf(".")), line.substring(line.indexOf(".") + 1, line.indexOf("|")) , Double.parseDouble(line.substring(line.indexOf("|") + 1, line.indexOf("\\par") - 1))));
+					line=scanner.nextLine();
+				}
+				
+				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
-						case "Association" -> {
-							Question question = new Association(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
-							questions.add(question);
-						}
+				line=scanner.nextLine();
+				String type    = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
-						case "Elimination" -> {
-							Question question = new Elimination(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
-							questions.add(question);
-						}
+				line=scanner.nextLine();
+				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
 
-						default -> {
-							System.out.println("Type de question inconnu");
-						}
+				int niveau;
+				switch(sNiveau)
+				{
+					case "TF" -> { niveau = 1; }
+					case "F"  -> { niveau = 2; }
+					case "M"  -> { niveau = 3; }
+					case "D"  -> { niveau = 4; }
+					default   ->
+					{
+						scanner.close();
+						throw new IllegalArgumentException("Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
+					}
+				}
+
+				switch (type)
+				{
+					case "QCM" ->
+					{
+						Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse);
+						questions.add(question);
+					}
+
+					case "Association" ->
+					{
+						Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse);
+						questions.add(question);
+					}
+
+					case "Elimination" ->
+					{
+						Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse);
+						questions.add(question);
+					}
+
+					default ->
+					{
+						System.out.println("Type de question inconnu");
 					}
 				}
 			}
 			scanner.close();
-		} 
-		catch (FileNotFoundException e) { e.printStackTrace(); }
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 
 		return questions;
 	}
@@ -92,8 +128,10 @@ public class Notion
 	{
 		if (question == null)
 			return false;
+
 		if (questions.contains(question))
 			return false;
+
 		questions.add(question);
 		return true;
 	}
@@ -102,8 +140,10 @@ public class Notion
 	{
 		if (question == null)
 			return false;
+
 		if (!questions.contains(question))
 			return false;
+
 		questions.remove(question);
 		return true;
 	}
@@ -111,12 +151,13 @@ public class Notion
 	public Question rechercherQuestion (String text)
 	{
 		Question questionTrouvée = null;
+
 		for (Question question : questions)
 		{
 			if (question.getText().equals(text))
 				questionTrouvée = question;
 		}
+
 		return questionTrouvée;
 	}
-	
 }
