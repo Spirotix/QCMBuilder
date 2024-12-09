@@ -21,6 +21,7 @@ public class Notion
 
 	private List<Question> lireQuestions() 
 	{
+
 		List<Question> questions = new ArrayList<>();
 		try 
 		{
@@ -35,31 +36,33 @@ public class Notion
 				
 				String text = line.substring(0, line.indexOf("\\par"));
 
+				line=scanner.nextLine();
+				double nbPoint = Double.parseDouble(line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
+				
 				scanner.nextLine();
 				line=scanner.nextLine();
-				
 				List<Reponse> lstReponse;
 				lstReponse = new ArrayList<>();
 
 				while ( !line.contains("{Niveau}"))
 				{
 					lstReponse.add( new Reponse(line.substring( line.indexOf("} ") + 1, line.indexOf(".")), line.substring(line.indexOf(".") + 1, line.indexOf("|")) , Double.parseDouble(line.substring(line.indexOf("|") + 1, line.indexOf("\\par") - 1))));
+					line=scanner.nextLine();
 				}
 				
+				String niveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
-				String type            = parts[1];
-				int    id              = Integer.parseInt(parts[2]);
-				String text            = parts[3];
-				int    timer           = Integer.parseInt(parts[4]);
-				int    nbPoint         = Integer.parseInt(parts[5]);
-				int    nbIndiceUtilisé = Integer.parseInt(parts[6]);
-				int    difficulte      = Integer.parseInt(parts[7]);
+				line=scanner.nextLine();
+				String type = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
+
+				line=scanner.nextLine();
+				int temps = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
 
 
 					switch (type) {
 						
 						case "QCM" -> {
-							Question question = new QCM(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
+							Question question = new QCM(this, text, temps, nbPoint, difficulte);
 							questions.add(question);
 						}
 
