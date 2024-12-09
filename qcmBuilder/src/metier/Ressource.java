@@ -78,5 +78,16 @@ public class Ressource
 		return true;
 	}
 
+	public Notion rechercherNotion(String nom)
+	{
+		Notion notionTrouvée = null;
+		for (Notion notion : notions)
+		{
+			if (notion.getNom().equals(nom))
+				notionTrouvée = notion;
+		}
+		return notionTrouvée;
+	}
+
 	
 }
