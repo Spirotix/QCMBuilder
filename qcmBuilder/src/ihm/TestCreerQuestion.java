@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-import java.util.*;
->>>>>>> refs/remotes/origin/main
 
 public class TestCreerQuestion 
 {
