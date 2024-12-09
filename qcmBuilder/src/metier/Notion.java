@@ -60,13 +60,8 @@ public class Notion
 
 					switch (type) {
 						
-						case "QRM" -> {
-							Question question = new ChoixMultiple(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
-							questions.add(question);
-						}
-
-						case "QCU" -> {
-							Question question = new ChoixUnique(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
+						case "QCM" -> {
+							Question question = new QCM(this, id, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
 							questions.add(question);
 						}
 

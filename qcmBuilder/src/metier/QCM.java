@@ -1,6 +1,6 @@
 package metier;
 
-public class ChoixUnique extends Question
+public class QCM extends Question
 {
 	private Reponse reponse;
 
