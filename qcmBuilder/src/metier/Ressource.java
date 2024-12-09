@@ -23,6 +23,7 @@ public class Ressource
 		try 
 		{
 			Scanner scanner = new Scanner(new File("../data/notions.rtf"));
+			if( scanner.hasNextLine()){	scanner.nextLine();	}
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
