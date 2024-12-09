@@ -230,18 +230,6 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			else 
 				this.msgChoixType.setText("");
 			
-			if (this.btnTF.isSelected())
-				this.btnTF.setIcon(new ImageIcon("img/TF1.PNG"));
-
-			if (this.btnF.isSelected())
-				this.btnF.setIcon(new ImageIcon("img/T1.PNG"  ));
-
-			if (this.btnM.isSelected())
-				this.btnM.setIcon(new ImageIcon("img/M1.PNG"  ));
-
-			if (this.btnD.isSelected())
-				this.btnD.setIcon(new ImageIcon("img/D1.PNG"  ));
-
 			if (!(this.btnTF.isSelected() || this.btnF.isSelected() || this.btnM.isSelected() || this.btnD.isSelected()))
 			{
 				this.msgErrNiv.setForeground(Color.RED);
@@ -253,6 +241,42 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 			if (peutCreer)
 				System.out.println("Peut creer");
+		}
+
+		if (this.btnTF.isSelected())
+		{
+			this.btnTF.setIcon(new ImageIcon("img/TF1.PNG"));
+			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.msgErrNiv.setText("");
+		}
+
+		else if (this.btnF.isSelected())
+		{
+			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("img/F1.PNG" ));
+			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.msgErrNiv.setText("");
+		}
+
+		else if (this.btnM.isSelected())
+			{
+			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("img/M1.PNG" ));
+			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.msgErrNiv.setText("");
+		}
+
+		else if (this.btnD.isSelected())
+		{
+			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("img/D1.PNG" ));
+			this.msgErrNiv.setText("");
 		}
 		
 	}
