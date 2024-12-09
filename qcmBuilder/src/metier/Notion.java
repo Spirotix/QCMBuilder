@@ -54,7 +54,6 @@ public class Notion
 					} catch (FileNotFoundException e) { System.err.println("Fichier de question introuvable");
 					}
 
-					
 
 					switch (type) {
 						
@@ -76,14 +75,8 @@ public class Notion
 						default -> {
 							System.out.println("Type de question inconnu");
 						}
-						
 					}
-
-					
 				}
-
-				
-				
 			}
 			scanner.close();
 		} 
