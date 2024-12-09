@@ -1,16 +1,19 @@
 package metier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class QCM extends Question
 {
-	boolean estQCU;
-
-	public QCM(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponse)
+	boolean       estQCU;
+	List<Reponse> lstReponses;
+	public QCM(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses)
 	{
-		super(notion, text, timer, nbPoint, difficulte, lstReponse);
-		this.estQCU = this.estUnique();
+		super(notion, text, timer, nbPoint, difficulte);
+		this.lstReponses = new ArrayList<>();
+		this.lstReponses = lstReponses;
+		this.estQCU      = this.estUnique();
 	}
 
 	public boolean estUnique()
@@ -25,4 +28,7 @@ public class QCM extends Question
 		if ( nbReponseVrai > 1){return false;}
 		return true;
 	}
+
+	public void setLstReponses     (List<Reponse> lstReponses) { this.lstReponses     = lstReponses;     }
+	public List<Reponse> getlstReponses(){ return lstReponses; }
 }

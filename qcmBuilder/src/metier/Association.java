@@ -1,12 +1,13 @@
 package metier;
 
-import java.util.List;
-
 public class Association extends Question
 {
 
-	public Association(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponse)
+	Reponse[][] tabCouple;
+	public Association(Notion notion, String text, int timer, double nbPoint, int difficulte, Reponse[][] tabCouple)
 	{
-		super(notion, text, timer, nbPoint, difficulte, lstReponse);
+		super(notion, text, timer, nbPoint, difficulte);
+		this.tabCouple = new Reponse[tabCouple.length][2];
+		this.tabCouple = tabCouple;
 	}
 }

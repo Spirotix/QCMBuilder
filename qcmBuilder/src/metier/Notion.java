@@ -11,6 +11,7 @@ public class Notion
 	private String    nom;
 	private Ressource ressource;
 	List<Question>    questions;
+	Reponse[][]       tabReponses;
 
 	public Notion(String nom, Ressource ressource)
 	{
@@ -38,22 +39,38 @@ public class Notion
 
 				line           = scanner.nextLine();
 				double nbPoint = Double.parseDouble(line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
+
+				line = scanner.nextLine();
+				String type = line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 				
 				scanner.nextLine();
 				line       = scanner.nextLine();
 				List<Reponse> lstReponse;
 				lstReponse = new ArrayList<>();
 
-				while ( !line.contains("{Niveau}"))
+				if ( type.equals("Association"))
 				{
-					lstReponse.add( new Reponse(line.substring( line.indexOf("} ") + 1, line.indexOf(".")), line.substring(line.indexOf(".") + 1, line.indexOf("|")) , Double.parseDouble(line.substring(line.indexOf("|") + 1, line.indexOf("\\par") - 1))));
-					line=scanner.nextLine();
+					scanner.
+					tabReponses = new Reponse[][];
+					while (!line.contains("{Niveau}"))
+					{
+
+					}
 				}
+				else
+				{
+					while (!line.contains("{Niveau}"))
+					{
+						lstReponse.add(new Reponse(line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
+								line.substring(line.indexOf(".") + 1, line.indexOf("|")),
+								Double.parseDouble(line.substring(line.indexOf("|") + 1, line.indexOf("\\par") - 1))));
+						line = scanner.nextLine();
+					}
+				}
+				
 				
 				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
-				line=scanner.nextLine();
-				String type    = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
 
 				line=scanner.nextLine();
 				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
@@ -82,7 +99,7 @@ public class Notion
 
 					case "Association" ->
 					{
-						Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse);
+						Question question = new Association(this, text, temps, nbPoint, niveau, tabCouple);
 						questions.add(question);
 					}
 
