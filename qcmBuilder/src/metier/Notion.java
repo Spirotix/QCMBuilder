@@ -76,8 +76,9 @@ public class Notion
 							questions.add(question);
 						}
 
-						default -> {
-							System.out.println("Type de question inconnu");
+					default -> 
+					{
+						System.out.println("Type de question inconnu");
 						}
 					}
 				}
