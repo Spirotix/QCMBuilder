@@ -26,8 +26,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		ImageIcon Difficile  = new ImageIcon("img/D3.PNG" );
 
 		//Initialisation
-		this.nbPoints    = new JTextField();
-		this.tpsReponses = new JTextField();
+		this.nbPoints    = new JTextField("5");
+		this.tpsReponses = new JTextField("10");
 
 		this.choixRessource	 = new Choice();
 		this.choixRessource	.add("				");
@@ -182,7 +182,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	{
 		boolean peutCreer=true;
 
-		System.out.println(	e.paramString());
+		//System.out.println(	e.paramString());
 		if (e.getSource().equals(this.btnCreer))
 		{
 			if (this.nbPoints.getText().equals(""))
@@ -240,10 +240,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 				this.msgErrNiv.setText("");
 
 			if (peutCreer)
-				System.out.println("Peut creer");
+				this.creer();
 		}
 
-		if (this.btnTF.isSelected())
+		if (this.btnTF.isSelected() && !this.choixNotion.getSelectedItem().equals("")&& !this.choixRessource.getSelectedItem().equals("				"))
 		{
 			this.btnTF.setIcon(new ImageIcon("img/TF1.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
@@ -252,7 +252,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.msgErrNiv.setText("");
 		}
 
-		else if (this.btnF.isSelected())
+		else if (this.btnF.isSelected() && !this.choixNotion.getSelectedItem().equals("") && !this.choixRessource.getSelectedItem().equals("				"))
 		{
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F1.PNG" ));
@@ -261,7 +261,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.msgErrNiv.setText("");
 		}
 
-		else if (this.btnM.isSelected())
+		else if (this.btnM.isSelected() && !this.choixNotion.getSelectedItem().equals("")&& !this.choixRessource.getSelectedItem().equals("				"))
 			{
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
@@ -270,7 +270,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.msgErrNiv.setText("");
 		}
 
-		else if (this.btnD.isSelected())
+		else if (this.btnD.isSelected() && !this.choixNotion.getSelectedItem().equals("")&& !this.choixRessource.getSelectedItem().equals("				"))
 		{
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
@@ -283,7 +283,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 	public void itemStateChanged(ItemEvent e)
 	{
-		System.out.println(	e.paramString());
+		//System.out.println(	e.paramString());
 
 		if (e.getSource().equals(this.choixRessource) && !this.choixRessource.getSelectedItem().equals("				"))
 		{
@@ -298,11 +298,17 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 		if (e.getSource().equals(this.choixNotion) && !this.choixRessource.getSelectedItem().equals(""))
 		{
+			this.btnGroupImg.clearSelection();
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
 			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
 			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
 		}
 		
+	}
+
+	public void creer()
+	{
+		new FrameCreerQCMRepUnique(this);
 	}
 }
