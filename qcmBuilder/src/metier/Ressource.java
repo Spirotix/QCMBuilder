@@ -24,8 +24,7 @@ public class Ressource
 		{
 			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
 
-			if( scanner.hasNextLine())
-				scanner.nextLine();
+			if( scanner.hasNextLine()) scanner.nextLine();
 
 			while (scanner.hasNextLine())
 			{
