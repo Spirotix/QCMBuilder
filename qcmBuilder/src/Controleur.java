@@ -46,6 +46,12 @@ public class Controleur
 		return qcmBuilder.supprimerRessource(qcmBuilder.rechercherRessource(nom));
 	}
 
+	public boolean modifierRessource(String nom, String newNom)
+	{
+		Ressource r = qcmBuilder.rechercherRessource(nom);
+		return r.setNom(newNom);
+	}
+
 	public boolean ajouterNotion(String nomRessource, String nomNotion)
 	{
 		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
@@ -56,6 +62,12 @@ public class Controleur
 	{
 		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
 		return r.supprimerNotion(r.rechercherNotion(nomNotion));
+	}
+
+	public boolean modifierNotion(String nomRessource, String nomNotion, String newNom)
+	{
+		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
+		return n.setNom(newNom);
 	}
 
 	public boolean ajouterQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint, int nbIndiceUtilisé, int difficulte)
@@ -85,5 +97,16 @@ public class Controleur
 	{
 		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
 		return n.supprimerQuestion(n.rechercherQuestion(text));
+	}
+
+	public boolean modifierQuestion(String nomRessource, String nomNotion, String text, String newText, int newTimer, int newNbPoint, int newNbIndiceUtilisé, int newDifficulte)
+	{
+		Question q = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion).rechercherQuestion(text);
+		q.setText(newText);
+		q.setTimer(newTimer);
+		q.setNbPoint(newNbPoint);
+		q.setNbIndiceUtilisé(newNbIndiceUtilisé);
+		q.setDifficulte(newDifficulte);
+		return true;
 	}
 }
