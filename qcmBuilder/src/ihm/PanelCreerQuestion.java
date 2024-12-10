@@ -2,13 +2,15 @@ package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 import java.util.*;
+import javax.swing.*;
+import src.Controleur;
+
+import src.Controleur;
 
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener
 {
-	//private 	Controleur 	ctrl 	;
-	private 	TestCreerQuestion ctrl;
+	private 	Controleur 	ctrl;
 	private 	JTextField 		nbPoints, tpsReponses;
 	private  	Choice 			choixRessource, choixNotion;
 	private 	ButtonGroup		btnGroup, btnGroupImg;
@@ -28,7 +30,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private 	int 		difficulteQuestion ;
 	private 	String 		explicationQuestion;
 
-	public PanelCreerQuestion (/*Controleur ctrl*/ TestCreerQuestion ctrl, FrameCreerQuestion fr)
+	public PanelCreerQuestion (Controleur ctrl, FrameCreerQuestion fr)
 	{
 		this.ctrl = ctrl;
 		this.fr=fr;
@@ -366,8 +368,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.typeQuestion="QCM";
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion=explication;
-		//creerQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint/*/, int nbIndiceUtilise*/, ArrayList<String> lstReponse, int difficulte)
-		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion,lstReponses, this.difficulteQuestion);
+		//creerQuestion(String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<String> lstReponse, int difficulte)
+		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
 	}
 
 }
