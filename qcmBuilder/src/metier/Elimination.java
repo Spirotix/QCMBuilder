@@ -9,9 +9,10 @@ public class Elimination extends Question
 	private double        nbPointPerdu;
 	private List<Reponse> lstReponses;
 
-	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses )
+	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses,
+			String explication)
 	{
-		super(notion, text, timer, nbPoint, difficulte);
+		super(notion, text, timer, nbPoint, difficulte, explication);
 
 		this.lstReponses = new ArrayList<>();
 		this.lstReponses = lstReponses;
