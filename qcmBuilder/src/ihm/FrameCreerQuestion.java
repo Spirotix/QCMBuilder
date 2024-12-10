@@ -3,14 +3,14 @@ package src.ihm;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import src.*;
 
 public class FrameCreerQuestion extends JFrame
 {
-	//private Controleur 		ctrl 	;
-	private TestCreerQuestion ctrl;
+	private Controleur 		ctrl 	;
 	private PanelCreerQuestion 	panelQ;
 
-	public FrameCreerQuestion (/*Controleur ctrl*/TestCreerQuestion ctrl)
+	public FrameCreerQuestion (Controleur ctrl)
 	{
 		this.ctrl=ctrl;
 

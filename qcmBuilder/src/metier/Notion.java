@@ -26,7 +26,7 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/questions/" + this.ressource + "_" + this.nom));
+			Scanner scanner = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom));
 			while (scanner.hasNextLine()) 
 			{
 				String line = scanner.nextLine();
@@ -55,7 +55,7 @@ public class Notion
 				if ( type.equals("Association"))
 				{
 					
-					while (!line.contains("{Niveau}"))
+					while (!line.contains("{\\b Fin}"))
 					{
 						Reponse premier;
 						Reponse second ;

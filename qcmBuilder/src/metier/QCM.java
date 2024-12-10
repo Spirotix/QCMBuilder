@@ -8,6 +8,7 @@ public class QCM extends Question
 {
 	boolean       estQCU;
 	List<Reponse> lstReponses;
+
 	public QCM(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses, String explication)
 	{
 		super(notion, text, timer, nbPoint, difficulte, explication);

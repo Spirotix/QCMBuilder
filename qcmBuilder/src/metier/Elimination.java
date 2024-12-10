@@ -9,8 +9,7 @@ public class Elimination extends Question
 	private double        nbPointPerdu;
 	private List<Reponse> lstReponses;
 
-	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses,
-			String explication)
+	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses, String explication)
 	{
 		super(notion, text, timer, nbPoint, difficulte, explication);
 
