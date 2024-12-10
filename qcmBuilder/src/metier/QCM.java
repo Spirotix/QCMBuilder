@@ -6,13 +6,13 @@ import java.util.List;
 
 public class QCM extends Question
 {
-	boolean       estQCU;
-	List<Reponse> lstReponses;
+	private boolean       estQCU;
+	private List<Reponse> lstReponses;
 
 	public QCM(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses, String explication)
 	{
 		super(notion, text, timer, nbPoint, difficulte, explication);
-		this.lstReponses = new ArrayList<>();
+
 		this.lstReponses = lstReponses;
 		this.estQCU      = this.estUnique();
 	}
@@ -30,6 +30,7 @@ public class QCM extends Question
 		return true;
 	}
 
-	public void setLstReponses     (List<Reponse> lstReponses) { this.lstReponses     = lstReponses;     }
+	public void setLstReponses (List<Reponse> lstReponses) { this.lstReponses = lstReponses; }
+
 	public List<Reponse> getlstReponses(){ return lstReponses; }
 }

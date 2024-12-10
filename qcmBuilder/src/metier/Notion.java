@@ -20,21 +20,22 @@ public class Notion
 		this.questions = lireQuestions();
 	}
 
-	private List<Question> lireQuestions() 
+	private List<Question> lireQuestions()
 	{
 
 		List<Question> questions = new ArrayList<>();
-		try 
+		try
 		{
 			Scanner scanner = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom));
-			while (scanner.hasNextLine()) 
+			while (scanner.hasNextLine())
 			{
 				String line = scanner.nextLine();
 				while ( !line.contains("Question"))
 				{
 					line = scanner.nextLine();
 				}
-				
+
+				line = scanner.nextLine();
 				String text = line.substring(0, line.indexOf("\\par"));
 
 				line           = scanner.nextLine();
@@ -42,9 +43,29 @@ public class Notion
 
 				line = scanner.nextLine();
 				String type = line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
-				
+
+				line = scanner.nextLine();
+				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
+
+				line = scanner.nextLine();
+				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
+
+				int niveau;
+				switch(sNiveau)
+				{
+					case "TF" -> { niveau = 1; }
+					case "F"  -> { niveau = 2; }
+					case "M"  -> { niveau = 3; }
+					case "D"  -> { niveau = 4; }
+					default   ->
+					{
+						scanner.close();
+						throw new IllegalArgumentException("Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
+					}
+				}
+
 				scanner.nextLine();
-				line       = scanner.nextLine();
+				line = scanner.nextLine();
 
 				List<Reponse> lstReponse;
 				lstReponse = new ArrayList<>();
@@ -60,7 +81,7 @@ public class Notion
 						Reponse premier;
 						Reponse second ;
 
-						if (line.substring(line.indexOf("} ") + 1, line.indexOf(":") - 1).equals("[null]"))
+						if (line.substring(line.indexOf("} ") + 1, line.indexOf("::") - 1).equals("[null]"))
 						{
 							premier = null;
 						}
@@ -68,11 +89,11 @@ public class Notion
 						{
 							premier = new Reponse(
 							                      "Vrai",
-							                      line.substring(line.indexOf("} ") + 1, line.indexOf(":"))
+							                      line.substring(line.indexOf("} ") + 1, line.indexOf("::"))
 							                     );
 						}
 
-						if ( line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1).equals("[null]"))
+						if ( line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1).equals("[null]"))
 						{
 							second = null;
 						}
@@ -80,7 +101,7 @@ public class Notion
 						{
 							second = new Reponse(
 							                     "Vrai",
-							                     line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1)
+							                     line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1)
 							                    );
 						}
 
@@ -90,7 +111,7 @@ public class Notion
 				}
 				if ( type.equals("Elimination"))
 				{
-					while (!line.contains("{Niveau}"))
+					while (!line.contains("{\\b Fin}"))
 					{
 						lstReponse.add(new Reponse(
 						                           line.substring(line.indexOf("} ") + 1, line.indexOf("|")),
@@ -102,30 +123,11 @@ public class Notion
 				if (type.equals("QCM"))
 				{
 
-					while (!line.contains("{Niveau}"))
+					while (!line.contains("{\\b Fin}"))
 					{
 						lstReponse.add(new Reponse(line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
 								line.substring(line.indexOf(".") + 1, line.indexOf("|"))));
 						line = scanner.nextLine();
-					}
-				}
-
-				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
-
-				line=scanner.nextLine();
-				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
-
-				int niveau;
-				switch(sNiveau)
-				{
-					case "TF" -> { niveau = 1; }
-					case "F"  -> { niveau = 2; }
-					case "M"  -> { niveau = 3; }
-					case "D"  -> { niveau = 4; }
-					default   ->
-					{
-						scanner.close();
-						throw new IllegalArgumentException("Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
 					}
 				}
 
