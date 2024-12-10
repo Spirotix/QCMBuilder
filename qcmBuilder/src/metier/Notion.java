@@ -66,9 +66,10 @@ public class Notion
 						}
 						else
 						{
-							premier = new Reponse("Vrai",
-						                      line.substring(line.indexOf("} ") + 1, line.indexOf(":")),
-						                      0);
+							premier = new Reponse(
+							                      "Vrai",
+							                      line.substring(line.indexOf("} ") + 1, line.indexOf(":"))
+							                     );
 						}
 
 						if ( line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1).equals("[null]"))
@@ -77,22 +78,34 @@ public class Notion
 						}
 						else
 						{
-							second = new Reponse("Vrai",
-							line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1), 0);
+							second = new Reponse(
+							                     "Vrai",
+							                     line.substring(line.indexOf(":") + 1, line.indexOf("\\par") - 1)
+							                    );
 						}
 
 						lstCouple.add(new Couple(premier, second));
 						line = scanner.nextLine();
 					}
 				}
-				else
+				if ( type.equals("Elimination"))
+				{
+					while (!line.contains("{Niveau}"))
+					{
+						lstReponse.add(new Reponse(
+						                           line.substring(line.indexOf("} ") + 1, line.indexOf("|")),
+						                           line.substring(line.indexOf("|") + 1, line.indexOf("||"))
+						                          ));
+						line = scanner.nextLine();
+					}
+				}
+				if (type.equals("QCM"))
 				{
 
 					while (!line.contains("{Niveau}"))
 					{
 						lstReponse.add(new Reponse(line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
-								line.substring(line.indexOf(".") + 1, line.indexOf("|")),
-								Double.parseDouble(line.substring(line.indexOf("|") + 1, line.indexOf("\\par") - 1))));
+								line.substring(line.indexOf(".") + 1, line.indexOf("|"))));
 						line = scanner.nextLine();
 					}
 				}
@@ -120,19 +133,19 @@ public class Notion
 				{
 					case "QCM" ->
 					{
-						Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse);
+						Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
 						questions.add(question);
 					}
 
 					case "Association" ->
 					{
-						Question question = new Association(this, text, temps, nbPoint, niveau, lstCouple);
+						Question question = new Association(this, text, temps, nbPoint, niveau, lstCouple, "");
 						questions.add(question);
 					}
 
 					case "Elimination" ->
 					{
-						Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse);
+						Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
 						questions.add(question);
 					}
 
