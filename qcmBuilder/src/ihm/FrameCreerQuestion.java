@@ -14,7 +14,7 @@ public class FrameCreerQuestion extends JFrame
 
 		
 		this.setTitle   ("Creation de question");
-		this.setSize    ( 500,550  );
+		this.setSize    ( 500,600  );
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);

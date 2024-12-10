@@ -72,9 +72,19 @@ public class PanelReponseGaucheAsso extends JPanel implements ActionListener
 			for (PanelReponseDroiteAsso pl : this.lstLiaison)
 				System.out.println(this.nom+" liste " + pl.getNom());
 		}
+
+		this.panelQ.getPanelDeBase().getPaintComponent().repaint();
 	}
 
-	
+	public void supprimerLiaison (PanelReponseDroiteAsso pd)
+	{
+		for (PanelReponseDroiteAsso prd: this.lstLiaison)
+			if (prd.equals(pd))
+				this.lstLiaison.remove (pd);
+	}
+
+	public ArrayList<PanelReponseDroiteAsso> getListe() {return this.lstLiaison;}
+	public JButton getBoutton() {return this.lier;}
 
 	public String getString()
 	{

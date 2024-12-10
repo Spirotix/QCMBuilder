@@ -9,11 +9,10 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 {
 	private PanelCreerQuestion panelQ;
 	private ArrayList<PanelReponseAsso> reponsesPossibles;
-	private ArrayList<PanelReponseGaucheAsso> reponsesPossiblesGauche;
-	private ArrayList<PanelReponseDroiteAsso>  reponsesPossiblesDroite;
+
 	private JTextArea question;
 	private JButton ajouterQ, explication, enreg;
-	private JPanel panelReponses; 
+	private PaintComponentAsso panelReponses; 
 	private String txtExplication;
 	
 
@@ -21,9 +20,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	{
 		this.panelQ = panelQ;
 
-		
-		this.reponsesPossiblesGauche = new ArrayList<PanelReponseGaucheAsso>();
-		this.reponsesPossiblesDroite = new ArrayList<PanelReponseDroiteAsso>();
+
 
 		this.reponsesPossibles =  new ArrayList<PanelReponseAsso>();
 		this.reponsesPossibles.add(new PanelReponseAsso(this));
@@ -44,11 +41,11 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 
 		this.add(panelQuestion, BorderLayout.NORTH);
 
-		panelReponses = new JPanel();
-		panelReponses.setLayout(new BoxLayout(panelReponses, BoxLayout.Y_AXIS));
+		this.panelReponses = new PaintComponentAsso(this);
+		this.panelReponses.setLayout(new BoxLayout(this.panelReponses, BoxLayout.Y_AXIS));
 		mettreAJourReponses(); 
 
-		JScrollPane scrollPaneReponses = new JScrollPane(panelReponses);
+		JScrollPane scrollPaneReponses = new JScrollPane(this.panelReponses);
 		scrollPaneReponses.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		this.add(scrollPaneReponses, BorderLayout.CENTER);
 
@@ -70,26 +67,25 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		this.enreg.addActionListener(this);
 	}
 
-	public void addReponseGauche(PanelReponseGaucheAsso p)
-	{
-		this.reponsesPossiblesGauche.add(p);
-	}
-
-	public void addReponseDroite(PanelReponseDroiteAsso p)
-	{
-		this.reponsesPossiblesDroite.add(p);
-	}
+	
 
 
 	private void mettreAJourReponses() 
 	{
-		panelReponses.removeAll();
+		this.panelReponses.removeAll();
 		for (PanelReponseAsso p : this.reponsesPossibles) 
-			panelReponses.add(p);
+			this.panelReponses.add(p);
 		
-		panelReponses.revalidate();
-		panelReponses.repaint();
+		this.panelReponses.revalidate();
+		this.panelReponses.repaint();
 	}
+
+	public ArrayList<PanelReponseAsso> getLstReponses() 
+	{
+		return this.reponsesPossibles;
+	}
+
+	public PaintComponentAsso getPaintComponent() {return this.panelReponses;}
 
 	public void supprimer(PanelReponseAsso p)
 	{
@@ -100,6 +96,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	
 	public void actionPerformed(ActionEvent e) 
 	{
+		
 		if (e.getSource() == this.ajouterQ) 
 		{
 			this.reponsesPossibles.add(new PanelReponseAsso(this));
