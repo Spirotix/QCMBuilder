@@ -55,7 +55,7 @@ public class Notion
 				if ( type.equals("Association"))
 				{
 					
-					while (!line.contains("{Niveau}"))
+					while (!line.contains("{\\b Fin}"))
 					{
 						Reponse premier;
 						Reponse second ;
