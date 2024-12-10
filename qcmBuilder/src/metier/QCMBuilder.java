@@ -106,8 +106,8 @@ public class QCMBuilder
 			for (String sReponse : sLstReponses)
 			{
 				String[] parts = sReponse.split("_");
-				//Reponse reponse = new Reponse(parts[1], parts[0]);
-				//lstReponses.add(reponse);
+				Reponse reponse = new Reponse(parts[1], parts[0], 0);
+				lstReponses.add(reponse);
 			}
 
 			notion.ajouterQuestion(new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication));
