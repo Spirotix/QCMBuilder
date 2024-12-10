@@ -17,12 +17,12 @@ public class QCMBuilder
 		this.ressources = lireRessources();
 	}
 
-	private List<Ressource> lireRessources() 
+	private List<Ressource> lireRessources()
 	{
 		List<Ressource> ressources = new ArrayList<>();
-		try 
+		try
 		{
-			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
+			Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
 			while (scanner.hasNextLine()) 
 			{
 				String   line         = scanner.nextLine();
@@ -31,7 +31,13 @@ public class QCMBuilder
 
 				Ressource ressource = new Ressource(nomRessource);
 
-				if ( ! ressources.contains(ressource) )
+				for (Ressource r : ressources)
+				{
+					if (r.getNom().equals(nomRessource))
+						ressource = r;
+				}
+
+				if (!ressources.contains(ressource))
 					ressources.add(ressource);
 			}
 			scanner.close();
@@ -85,7 +91,7 @@ public class QCMBuilder
 		return true;
 	}
 
-	public void genererQuestionnaire()
+	public void genererQuestionnaire(String nomRessource, String nomNotion)
 	{
 		try {
 
@@ -195,6 +201,6 @@ public class QCMBuilder
 
 	public static void main(String[] args) {
 		QCMBuilder qcmBuilder = new QCMBuilder();
-		qcmBuilder.genererQuestionnaire();
+		qcmBuilder.genererQuestionnaire("Bases de données", "SQL");
 	}
 }

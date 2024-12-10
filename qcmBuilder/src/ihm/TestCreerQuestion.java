@@ -1,4 +1,4 @@
-//package src.ihm;
+package src.ihm;
 
 import java.util.*;
 
@@ -6,7 +6,7 @@ public class TestCreerQuestion
 {
 	public TestCreerQuestion ()
 	{
-		new FrameCreerQuestion(this);
+		//new FrameCreerQuestion(this);
 	}
 
 	public static void main (String[] a)

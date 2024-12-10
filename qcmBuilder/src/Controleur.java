@@ -1,15 +1,17 @@
 package src;
-import  src.metier.*;
 import  java.util.ArrayList;
+import  src.metier.*;
+import  src.ihm.*;
 
 public class Controleur
 {
 	QCMBuilder qcmBuilder;
-	// Mettre la frame du questionnaire
+	
 
 	public Controleur() 
 	{
 		qcmBuilder = new QCMBuilder();
+		new FrameCreerQuestion(this);
 	}
 
 	public ArrayList<String> getChoixNotion(String s)
@@ -17,6 +19,7 @@ public class Controleur
 		ArrayList<String> notions = new ArrayList<>();
 
 		Ressource r = qcmBuilder.rechercherRessource(s);
+		System.out.println(r.getNom());
 		for (Notion n : r.getNotions())
 		{
 			notions.add(n.getNom());
@@ -35,7 +38,7 @@ public class Controleur
 		return ressources;
 	}
 
-	public boolean ajouterRessource(String nom)
+	/*public boolean ajouterRessource(String nom)
 	{
 		return qcmBuilder.ajouterRessource(new Ressource(nom));
 	}
@@ -67,47 +70,32 @@ public class Controleur
 	{
 		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
 		return n.setNom(newNom);
-	}
+	}*/
 
-	public boolean ajouterQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint, int nbIndiceUtilise, int difficulte)
+	public boolean creerQuestion(String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<String> lstReponse, int difficulte)
 	{
 		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
-		Question q = null;
+		Question q;
 
-
-		switch (type) {
-			case "QCM" -> {
-				q = new QCM(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
-			}
-
-			case "Association" -> {
-				q = new Association(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
-			}
-
-			case "Elimination" -> {
-				q = new Elimination(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
-			}
-		}
-
-		return n.ajouterQuestion(q);
+		
+		qcmBuilder.creerQuestion(n, text, timer, nbPoint, difficulte, new ArrayList<>(), explication, lstReponse);
+			
+		//q = new Association(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
+		
+		//q = new Elimination(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
+			
+		//mettre cette ligne dans QCM builder je pense
+		//return n.ajouterQuestion(q);
 	}
 
-	public boolean supprimerQuestion(String nomRessource, String nomNotion, String text)
+
+	public void genererQuestionnaire(String nomRessource, String nomNotion)
 	{
-		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
-		return n.supprimerQuestion(n.rechercherQuestion(text));
+		qcmBuilder.genererQuestionnaire(nomRessource, nomNotion);
 	}
 
-	public boolean modifierQuestion(String nomRessource, String nomNotion, String text, String newText, int newTimer, int newNbPoint, int newNbIndiceUtilise, int newDifficulte)
-	{
-		Question q = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion).rechercherQuestion(text);
-		q.setText(newText);
-		q.setTimer(newTimer);
-		q.setNbPoint(newNbPoint);
-		q.setNbIndiceUtilise(newNbIndiceUtilise);
-		q.setDifficulte(newDifficulte);
-		return true;
+	public static void main(String[] args) {
+		new Controleur();
 	}
 
-	public void genererQuestionnaire()
 }

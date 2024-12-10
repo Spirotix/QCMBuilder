@@ -1,4 +1,4 @@
-//package src.ihm;
+package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -94,7 +94,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 
 			this.panelQ.creer(this.txtExplication, this.question.getText(), lstReponses);
 		}
-			
+		
 		
 		if (e.getSource().equals(this.explication))
 			new FrameExplication(this);
