@@ -151,8 +151,8 @@ public class Notion
 
 					case "Elimination" ->
 					{
-						Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
-						questions.add(question);
+						//Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
+						//questions.add(question);
 					}
 
 					default ->
