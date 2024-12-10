@@ -1,16 +1,14 @@
-package src.ihm;
+//package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import src.Controleur;
-
-import src.Controleur;
+//import src.Controleur;
 
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener
 {
-	private 	Controleur 	ctrl;
+	private 	TestCreerQuestion 	ctrl;
 	private 	JTextField 		nbPoints, tpsReponses;
 	private  	Choice 			choixRessource, choixNotion;
 	private 	ButtonGroup		btnGroup, btnGroupImg;
@@ -30,7 +28,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private 	int 		difficulteQuestion ;
 	private 	String 		explicationQuestion;
 
-	public PanelCreerQuestion (Controleur ctrl, FrameCreerQuestion fr)
+	public PanelCreerQuestion (TestCreerQuestion ctrl, FrameCreerQuestion fr)
 	{
 		this.ctrl = ctrl;
 		this.fr=fr;

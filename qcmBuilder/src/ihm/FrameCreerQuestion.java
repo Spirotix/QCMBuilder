@@ -1,14 +1,14 @@
-package src.ihm;
+//package src.ihm;
 
 import javax.swing.*;
-import src.Controleur;
+//import src.Controleur;
 
 public class FrameCreerQuestion extends JFrame
 {
-	private Controleur 		ctrl 	;
+	private TestCreerQuestion 		ctrl 	;
 	private PanelCreerQuestion 	panelQ;
 
-	public FrameCreerQuestion (Controleur ctrl)
+	public FrameCreerQuestion (TestCreerQuestion ctrl)
 	{
 		this.ctrl=ctrl;
 
