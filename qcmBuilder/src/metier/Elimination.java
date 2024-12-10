@@ -13,7 +13,6 @@ public class Elimination extends Question
 	{
 		super(notion, text, timer, nbPoint, difficulte, explication);
 
-		this.lstReponses = new ArrayList<>();
 		this.lstReponses = lstReponses;
 
 		this.nbIndiceUtilise = 0;
