@@ -92,8 +92,10 @@ public class Notion
 				{
 					while (!line.contains("{Niveau}"))
 					{
-						lstReponse.add(new Reponse(line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
-								line.substring(line.indexOf(".") + 1, line.indexOf("|"))));
+						lstReponse.add(new Reponse(
+						                           line.substring(line.indexOf("} ") + 1, line.indexOf("|")),
+						                           line.substring(line.indexOf("|") + 1, line.indexOf("||"))
+						                          ));
 						line = scanner.nextLine();
 					}
 				}
