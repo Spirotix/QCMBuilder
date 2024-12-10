@@ -1,5 +1,7 @@
 package src;
 import  java.util.ArrayList;
+import java.util.List;
+
 import  src.metier.*;
 import  src.ihm.*;
 
@@ -72,13 +74,9 @@ public class Controleur
 		return n.setNom(newNom);
 	}*/
 
-	public boolean creerQuestion(String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<String> lstReponse, int difficulte)
+	public void creerQuestion(String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, List<String> lstReponse, int difficulte)
 	{
-		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
-		Question q;
-
-		
-		qcmBuilder.creerQuestion(n, text, timer, nbPoint, difficulte, new ArrayList<>(), explication, lstReponse);
+		qcmBuilder.creerQuestion(type, nomRessource, nomNotion, text, timer, nbPoint, difficulte,  lstReponse, explication);
 			
 		//q = new Association(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
 		

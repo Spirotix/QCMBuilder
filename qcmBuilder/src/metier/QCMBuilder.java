@@ -90,6 +90,31 @@ public class QCMBuilder
 		ressource.setNom(nouveauNom);
 		return true;
 	}
+	
+	public boolean creerQuestion(String type, String nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, List<String> sLstReponses, String explication)
+	{
+
+		Notion notion = rechercherRessource(nomRessource).rechercherNotion(nomNotion);
+		
+		if ( type.equals("Elimination") )
+			//notion.ajouterQuestion(new Elimination());
+
+		if ( type.equals("QCM") )
+		{
+			List<Reponse> lstReponses = new ArrayList<>();
+			for (String sReponse : sLstReponses)
+			{
+				String[] parts = sReponse.split("_");
+				Reponse reponse = new Reponse(parts[1], parts[0]);
+				lstReponses.add(reponse);
+			}
+
+			notion.ajouterQuestion(new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication));
+			return true;
+		}
+
+		return false;
+	}
 
 	public void genererQuestionnaire(String nomRessource, String nomNotion)
 	{
