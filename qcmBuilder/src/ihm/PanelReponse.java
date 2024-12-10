@@ -45,6 +45,7 @@ public class PanelReponse extends JPanel implements ActionListener
 		}
 	}
 
+
 	
 
 	public String getString()
