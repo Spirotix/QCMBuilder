@@ -9,16 +9,23 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 {
 	private PanelCreerQuestion panelQ;
 	private ArrayList<PanelReponseAsso> reponsesPossibles;
+	private ArrayList<PanelReponseGaucheAsso> reponsesPossiblesGauche;
+	private ArrayList<PanelReponseDroiteAsso>  reponsesPossiblesDroite;
 	private JTextArea question;
 	private JButton ajouterQ, explication, enreg;
 	private JPanel panelReponses; 
 	private String txtExplication;
+	
 
 	public PanelCreerQuestionAsso(PanelCreerQuestion panelQ) 
 	{
 		this.panelQ = panelQ;
 
-		this.reponsesPossibles = new ArrayList<>();
+		
+		this.reponsesPossiblesGauche = new ArrayList<PanelReponseGaucheAsso>();
+		this.reponsesPossiblesDroite = new ArrayList<PanelReponseDroiteAsso>();
+
+		this.reponsesPossibles =  new ArrayList<PanelReponseAsso>();
 		this.reponsesPossibles.add(new PanelReponseAsso(this));
 		this.reponsesPossibles.add(new PanelReponseAsso(this));
 
@@ -63,6 +70,17 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		this.enreg.addActionListener(this);
 	}
 
+	public void addReponseGauche(PanelReponseGaucheAsso p)
+	{
+		this.reponsesPossiblesGauche.add(p);
+	}
+
+	public void addReponseDroite(PanelReponseDroiteAsso p)
+	{
+		this.reponsesPossiblesDroite.add(p);
+	}
+
+
 	private void mettreAJourReponses() 
 	{
 		panelReponses.removeAll();
@@ -79,6 +97,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		this.mettreAJourReponses();
 	}
 
+	
 	public void actionPerformed(ActionEvent e) 
 	{
 		if (e.getSource() == this.ajouterQ) 
