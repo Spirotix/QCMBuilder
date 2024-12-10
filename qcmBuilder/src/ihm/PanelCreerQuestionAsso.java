@@ -1,4 +1,4 @@
-//package src.ihm;
+package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -52,13 +52,13 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		JPanel panelBoutons = new JPanel();
 
 		this.ajouterQ 	 = new JButton(new ImageIcon("img/ajouter.PNG"	));
-		this.explication = new JButton(new ImageIcon("img/modifier.PNG"	));
-		this.enreg 		 = new JButton("Enregistrer"		);
+		this.explication = new JButton(new ImageIcon("img/modifier.PNG"));
+		this.enreg 		 = new JButton("Enregistrer"                        );
 
 
 		panelBoutons.add(this.ajouterQ	 );
 		panelBoutons.add(this.explication);
-		panelBoutons.add(this.enreg		 );
+		panelBoutons.add(this.enreg      );
 
 		this.add(panelBoutons, BorderLayout.SOUTH);
 
@@ -117,6 +117,6 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		
 	}
 
-	public void   setTxtExplication  (String expli)	{this.txtExplication=expli	;}
-	public String getTextExplication (			  )	{return this.txtExplication	;}
+	public void   setTxtExplication  (String expli) {this.txtExplication=expli  ;}
+	public String getTextExplication (            ) {return this.txtExplication ;}
 }

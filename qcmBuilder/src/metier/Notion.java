@@ -22,7 +22,6 @@ public class Notion
 
 	private List<Question> lireQuestions()
 	{
-
 		List<Question> questions = new ArrayList<>();
 		try
 		{
@@ -75,7 +74,6 @@ public class Notion
 
 				if ( type.equals("Association"))
 				{
-					
 					while (!line.contains("{\\b Fin}"))
 					{
 						Reponse premier;
@@ -89,7 +87,8 @@ public class Notion
 						{
 							premier = new Reponse(
 							                      "Vrai",
-							                      line.substring(line.indexOf("} ") + 1, line.indexOf("::"))
+							                      line.substring(line.indexOf("} ") + 1, line.indexOf("::")),
+							                      0
 							                     );
 						}
 
@@ -101,7 +100,8 @@ public class Notion
 						{
 							second = new Reponse(
 							                     "Vrai",
-							                     line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1)
+							                     line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1),
+							                     0
 							                    );
 						}
 
@@ -115,7 +115,8 @@ public class Notion
 					{
 						lstReponse.add(new Reponse(
 						                           line.substring(line.indexOf("} ") + 1, line.indexOf("|")),
-						                           line.substring(line.indexOf("|") + 1, line.indexOf("||"))
+						                           line.substring(line.indexOf("|") + 1, line.indexOf("||")),
+						                           0
 						                          ));
 						line = scanner.nextLine();
 					}
@@ -125,8 +126,11 @@ public class Notion
 
 					while (!line.contains("{\\b Fin}"))
 					{
-						lstReponse.add(new Reponse(line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
-								line.substring(line.indexOf(".") + 1, line.indexOf("|"))));
+						lstReponse.add(new Reponse(
+						                           line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
+						                           line.substring(line.indexOf(".")  + 1, line.indexOf("|")),
+						                           0
+						                          ));
 						line = scanner.nextLine();
 					}
 				}

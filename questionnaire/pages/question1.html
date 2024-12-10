@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/styles.css">
+	<title>Accueil Questionnaire</title>
+</head>
+<body value="1">
+	<div class="container question-multiple">
+		<div class="informations">
+			<p class="question-number">Question numéro : <span class="question-number-data">1</span></p>
+			<p class="notion">Notion : <span class="notion-data">Notion 1</span></p>
+			<p class="difficulty">Difficulté : <span class="difficulty-data">Facile</span></p>
+			<p class="estimated-time">Temps estimé : <span class="estimated-time-data">30sec</span></p>
+		</div>
+
+		<!-- barre de progression des questions -->
+		<div class="progress-bar" data-total="4" data-current="1">
+			<div class="progress-bar-fill"></div>
+		</div>
+
+		<!-- Pas tous le temps -->
+		<div class="countdown">
+			<p class="countdown-title">Temps restant :</p>
+			<p class="countdown-data">50000</p>
+		</div>
+
+		<!-- Image pour la question -->
+		<img src="../images/drapeau_france.png" alt="rgpd" class="question-image">
+
+		<button type="button" class="complementary-file-button">Voir le fichier complémentaire</button>
+
+		<div class="question">
+			<p class="question-text">Quels sont les couleurs du drapeau français ?</p>
+			<div class="answers">
+				<div class="answer">
+					<input type="checkbox" name="answer" id="answer1" value="answer3">
+					<label for="answer1">Rouge</label>
+				</div>
+				<div class="answer">
+					<input type="checkbox" name="answer" id="answer2" value="answer5">
+					<label for="answer2">Jaune</label>
+				</div>
+				<div class="answer">
+					<input type="checkbox" name="answer" id="answer3" value="answer1">
+					<label for="answer3">Bleu</label>
+				</div>
+				<div class="answer">
+					<input type="checkbox" name="answer" id="answer4" value="answer4">
+					<label for="answer4">Vert</label>
+				</div>
+				<div class="answer">
+					<input type="checkbox" name="answer" id="answer5" value="answer2">
+					<label for="answer5">Blanc</label>
+				</div>
+			</div>
+		</div>
+
+		<!-- Attention si l'évaluation est chronométrée il ne peut pas revenir en arrière et
+			il peut choisir de ne pas répondre à certaines d'entre elles -->
+		<div class="nav">
+			<button type="button" class="nav-button previous-button">Précédent</button>
+			<button type="button" class="nav-button validate-button">Valider</button>
+			<button type="button" class="nav-button feedback-button">Feedback</button>
+			<button type="button" class="nav-button next-button">Suivant</button>
+		</div>
+	</div>
+	<!-- PopUp pour le feedback -->
+	<div class="popup">
+		<div class="popup-content">
+			<button type="button" class="close-button">Fermer</button>
+			<p class="feedback-title">Réponse</p>
+			<p class="feedback-text">Et oui ! Le drapeau français est BLEU BLANC et ROUGE.</p>
+		</div>
+	</div>
+
+	<script src="../script/popup.js"></script>
+	<script src="../script/index.js"></script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const progressBars = document.querySelectorAll(".progress-bar");
+
+			progressBars.forEach(progressBar => {
+				const total = parseInt(progressBar.dataset.total, 10);
+				const current = parseInt(progressBar.dataset.current, 10);
+				const progressFill = progressBar.querySelector(".progress-bar-fill");
+
+				if (total && current >= 0) {
+				const widthPercentage = (current / total) * 100;
+				progressFill.style.width = `${widthPercentage}%`;
+				}
+			});
+		});
+	</script>
+</body>
+</html>
