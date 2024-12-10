@@ -1,4 +1,4 @@
-package src.ihm;
+//package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -86,11 +86,19 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 			this.reponsesPossibles.add(new PanelReponse(this));
 			mettreAJourReponses();
 		} 
-		else if (e.getSource() == this.enreg) 
-			System.out.println("Question enregistrée : " + this.question.getText());
+		if (e.getSource() == this.enreg) 
+		{
+			ArrayList<String> lstReponses = new ArrayList<String>();
+			for (PanelReponse p : this.reponsesPossibles)
+				lstReponses.add(p.getString());
+
+			this.panelQ.creer(this.txtExplication, this.question.getText(), lstReponses);
+		}
+			
 		
 		if (e.getSource().equals(this.explication))
 			new FrameExplication(this);
+		
 	}
 
 	public void   setTxtExplication  (String expli)	{this.txtExplication=expli	;}

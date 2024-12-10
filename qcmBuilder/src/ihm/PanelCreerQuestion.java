@@ -1,8 +1,9 @@
-package src.ihm;
+//package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.*;
 
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener
 {
@@ -16,6 +17,16 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private 	JRadioButton 	btnTF, btnF, btnM, btnD ; 
 	private 	JLabel			msgErrNbPts, msgErrTpsRep, msgErrRess,msgErrNiv,msgErrNot, msgChoixType ;
 	private 	FrameCreerQuestion fr;
+
+	//Ressources finale
+	private		String		typeQuestion;
+	private 	String		ressourceQuestion;
+	private 	String 		notionQuestion;
+	private 	String 		textQuestion;
+	private 	int 		tempsQuestion;
+	private 	int 		nbPointQuestion;
+	private 	int 		difficulteQuestion ;
+	private 	String 		explicationQuestion;
 
 	public PanelCreerQuestion (/*Controleur ctrl*/ TestCreerQuestion ctrl, FrameCreerQuestion fr)
 	{
@@ -196,7 +207,21 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 				peutCreer=false;
 			}
 			else 
-				this.msgErrNbPts.setText("");
+			{
+				try 
+				{
+					this.nbPointQuestion = Integer.parseInt(this.nbPoints.getText());
+					this.msgErrNbPts.setText("");
+
+				}
+				catch(Exception ex) 
+				{
+					System.out.println("Entrez un entier");
+					this.msgErrNbPts.setForeground(Color.RED);
+					this.msgErrNbPts.setText("Vous devez rentrer un entier pour le nombre de points");
+					peutCreer=false;
+				}
+			}
 
 			if (this.tpsReponses.getText().equals(""))
 			{
@@ -205,7 +230,21 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 				peutCreer=false;
 			}
 			else 
-				this.msgErrTpsRep.setText("");
+			{
+				try 
+				{
+					this.tempsQuestion = Integer.parseInt(this.tpsReponses.getText());
+					this.msgErrTpsRep.setText("");
+
+				}
+				catch(Exception ex) 
+				{
+					System.out.println("Entrez un entier");
+					this.msgErrTpsRep.setForeground(Color.RED);
+					this.msgErrTpsRep.setText("Vous devez rentrer un entier pour le temps des réponses");
+					peutCreer=false;
+				}
+			}
 			
 			if (this.choixRessource.getSelectedItem().equals("				"))
 			{
@@ -245,7 +284,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 			if (peutCreer)
 			{
-				this.creer();
+				new FrameCreerQCMRepUnique(this);
 				this.fr.dispose();
 			}
 				
@@ -257,6 +296,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
 			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
 			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.difficulteQuestion = 1;
 			this.msgErrNiv.setText("");
 		}
 
@@ -266,6 +306,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.btnF .setIcon(new ImageIcon("img/F1.PNG" ));
 			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
 			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.difficulteQuestion = 2;
 			this.msgErrNiv.setText("");
 		}
 
@@ -275,6 +316,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
 			this.btnM .setIcon(new ImageIcon("img/M1.PNG" ));
 			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.difficulteQuestion = 3;
 			this.msgErrNiv.setText("");
 		}
 
@@ -284,6 +326,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
 			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
 			this.btnD .setIcon(new ImageIcon("img/D1.PNG" ));
+			this.difficulteQuestion = 4;
 			this.msgErrNiv.setText("");
 		}
 		
@@ -300,12 +343,15 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.choixNotion.removeAll() ;
 			this.choixNotion.add("");
 
+			this.ressourceQuestion = this.choixRessource.getSelectedItem();
+
 			for (String s : this.ctrl.getChoixNotion(this.choixRessource.getSelectedItem()))
 				this.choixNotion.add(s);
 		}
 
 		if (e.getSource().equals(this.choixNotion) && !this.choixRessource.getSelectedItem().equals(""))
 		{
+			this.notionQuestion=this.choixRessource.getSelectedItem();
 			this.btnGroupImg.clearSelection();
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
@@ -315,8 +361,13 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		
 	}
 
-	public void creer()
+	public void creer(String explication, String intituleQuestion, ArrayList<String> lstReponses) // penser a ajouter explication
 	{
-		new FrameCreerQCMRepUnique(this);
+		this.typeQuestion="QCM";
+		this.textQuestion = intituleQuestion;
+		this.explicationQuestion=explication;
+		//creerQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint/*/, int nbIndiceUtilise*/, ArrayList<String> lstReponse, int difficulte)
+		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion,lstReponses, this.difficulteQuestion);
 	}
+
 }

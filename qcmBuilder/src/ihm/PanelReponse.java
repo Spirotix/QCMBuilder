@@ -1,4 +1,4 @@
-package src.ihm;
+//package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -47,8 +47,16 @@ public class PanelReponse extends JPanel implements ActionListener
 
 	
 
-	public void creer()
+	public String getString()
 	{
+		String str = "";
+
+		str+=this.contenu.getText();
+		if (this.validation.isSelected())
+			str+="_OUI";
+		else 
+			str+="_NON";
 		
+		return str;
 	}
 }
