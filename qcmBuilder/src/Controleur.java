@@ -1,15 +1,17 @@
 package src;
-import  src.metier.*;
 import  java.util.ArrayList;
+import  src.metier.*;
+import  src.ihm.*;
 
 public class Controleur
 {
 	QCMBuilder qcmBuilder;
-	// Mettre la frame du questionnaire
+	
 
 	public Controleur() 
 	{
 		qcmBuilder = new QCMBuilder();
+		new FrameCreerQuestion(this);
 	}
 
 	public ArrayList<String> getChoixNotion(String s)
@@ -17,6 +19,7 @@ public class Controleur
 		ArrayList<String> notions = new ArrayList<>();
 
 		Ressource r = qcmBuilder.rechercherRessource(s);
+		System.out.println(r.getNom());
 		for (Notion n : r.getNotions())
 		{
 			notions.add(n.getNom());
@@ -35,7 +38,7 @@ public class Controleur
 		return ressources;
 	}
 
-	public boolean ajouterRessource(String nom)
+	/*public boolean ajouterRessource(String nom)
 	{
 		return qcmBuilder.ajouterRessource(new Ressource(nom));
 	}
@@ -67,9 +70,9 @@ public class Controleur
 	{
 		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
 		return n.setNom(newNom);
-	}
+	}*/
 
-	public boolean ajouterQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint, int nbIndiceUtilise, int difficulte)
+	/*public boolean ajouterQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint, int nbIndiceUtilise, int difficulte)
 	{
 		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
 		Question q = null;
@@ -90,28 +93,21 @@ public class Controleur
 		}
 
 		return n.ajouterQuestion(q);
+	}*/
+
+	public void creerQuestion(String s1, String s2, String s3, String s4, String s5, int i1, int i2, ArrayList<String> lst, int i3)
+	{
+		
 	}
 
-	public boolean supprimerQuestion(String nomRessource, String nomNotion, String text)
-	{
-		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
-		return n.supprimerQuestion(n.rechercherQuestion(text));
-	}
-
-	public boolean modifierQuestion(String nomRessource, String nomNotion, String text, String newText, int newTimer, int newNbPoint, int newNbIndiceUtilise, int newDifficulte)
-	{
-		Question q = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion).rechercherQuestion(text);
-		q.setText(newText);
-		q.setTimer(newTimer);
-		q.setNbPoint(newNbPoint);
-		q.setNbIndiceUtilise(newNbIndiceUtilise);
-		q.setDifficulte(newDifficulte);
-		return true;
-	}
 
 	public void genererQuestionnaire(String nomRessource, String nomNotion)
 	{
 		qcmBuilder.genererQuestionnaire(nomRessource, nomNotion);
+	}
+
+	public static void main(String[] args) {
+		new Controleur();
 	}
 
 }
