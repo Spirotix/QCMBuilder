@@ -69,27 +69,20 @@ public class Controleur
 		return n.setNom(newNom);
 	}
 
-	public boolean ajouterQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint, int nbIndiceUtilise, int difficulte)
+	public boolean creerQuestion(String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<String> lstReponse, int difficulte)
 	{
 		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
-		Question q = null;
+		Question q;
 
-
-		switch (type) {
-			case "QCM" -> {
-				q = new QCM(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
-			}
-
-			case "Association" -> {
-				q = new Association(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
-			}
-
-			case "Elimination" -> {
-				q = new Elimination(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
-			}
-		}
-
-		return n.ajouterQuestion(q);
+		
+		qcmBuilder.creerQuestion(n, text, timer, nbPoint, difficulte, new ArrayList<>(), explication, lstReponse);
+			
+		//q = new Association(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
+		
+		//q = new Elimination(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
+			
+		//mettre cette ligne dans QCM builder je pense
+		//return n.ajouterQuestion(q);
 	}
 
 	public boolean supprimerQuestion(String nomRessource, String nomNotion, String text)
