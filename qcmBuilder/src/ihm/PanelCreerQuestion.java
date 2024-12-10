@@ -1,33 +1,35 @@
-package src.ihm;
+//package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-import src.Controleur;
+//import src.Controleur;
 
-public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener {
-	private Controleur ctrl;
-	private JTextField nbPoints, tpsReponses;
-	private Choice choixRessource, choixNotion;
-	private ButtonGroup btnGroup, btnGroupImg;
-	private JRadioButton btnChoixUnique, btnChoixMult, btnAsso, btnElim;
-	private JButton btnCreer;
-	private JRadioButton btnTF, btnF, btnM, btnD;
-	private JLabel msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrNot, msgChoixType;
-	private FrameCreerQuestion fr;
+public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener
+{
+	private 	TestCreerQuestion 	ctrl;
+	private 	JTextField 		nbPoints, tpsReponses;
+	private  	Choice 			choixRessource, choixNotion;
+	private 	ButtonGroup		btnGroup, btnGroupImg;
+	private 	JRadioButton	btnChoixUnique, btnChoixMult, btnAsso, btnElim;
+	private		JButton 		btnCreer;	
+	private 	JRadioButton 	btnTF, btnF, btnM, btnD ; 
+	private 	JLabel			msgErrNbPts, msgErrTpsRep, msgErrRess,msgErrNiv,msgErrNot, msgChoixType ;
+	private 	FrameCreerQuestion fr;
 
-	// Ressources finale
-	private String typeQuestion;
-	private String ressourceQuestion;
-	private String notionQuestion;
-	private String textQuestion;
-	private int tempsQuestion;
-	private int nbPointQuestion;
-	private int difficulteQuestion;
-	private String explicationQuestion;
+	//Ressources finale
+	private		String		typeQuestion;
+	private 	String		ressourceQuestion;
+	private 	String 		notionQuestion;
+	private 	String 		textQuestion;
+	private 	int 		tempsQuestion;
+	private 	int 		nbPointQuestion;
+	private 	int 		difficulteQuestion ;
+	private 	String 		explicationQuestion;
 
-	public PanelCreerQuestion(Controleur ctrl, FrameCreerQuestion fr) {
+	public PanelCreerQuestion (TestCreerQuestion ctrl, FrameCreerQuestion fr)
+	{
 		this.ctrl = ctrl;
 		this.fr = fr;
 		this.setLayout(new GridLayout(11, 1));

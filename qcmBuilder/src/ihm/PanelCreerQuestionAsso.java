@@ -9,16 +9,23 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 {
 	private PanelCreerQuestion panelQ;
 	private ArrayList<PanelReponseAsso> reponsesPossibles;
+	private ArrayList<PanelReponseGaucheAsso> reponsesPossiblesGauche;
+	private ArrayList<PanelReponseDroiteAsso>  reponsesPossiblesDroite;
 	private JTextArea question;
 	private JButton ajouterQ, explication, enreg;
 	private JPanel panelReponses; 
 	private String txtExplication;
+	
 
 	public PanelCreerQuestionAsso(PanelCreerQuestion panelQ) 
 	{
 		this.panelQ = panelQ;
 
-		this.reponsesPossibles = new ArrayList<>();
+		
+		this.reponsesPossiblesGauche = new ArrayList<PanelReponseGaucheAsso>();
+		this.reponsesPossiblesDroite = new ArrayList<PanelReponseDroiteAsso>();
+
+		this.reponsesPossibles =  new ArrayList<PanelReponseAsso>();
 		this.reponsesPossibles.add(new PanelReponseAsso(this));
 		this.reponsesPossibles.add(new PanelReponseAsso(this));
 
@@ -48,13 +55,13 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		JPanel panelBoutons = new JPanel();
 
 		this.ajouterQ 	 = new JButton(new ImageIcon("img/ajouter.PNG"	));
-		this.explication = new JButton(new ImageIcon("img/modifier.PNG"	));
-		this.enreg 		 = new JButton("Enregistrer"		);
+		this.explication = new JButton(new ImageIcon("img/modifier.PNG"));
+		this.enreg 		 = new JButton("Enregistrer"                        );
 
 
 		panelBoutons.add(this.ajouterQ	 );
 		panelBoutons.add(this.explication);
-		panelBoutons.add(this.enreg		 );
+		panelBoutons.add(this.enreg      );
 
 		this.add(panelBoutons, BorderLayout.SOUTH);
 
@@ -62,6 +69,17 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		this.explication.addActionListener(this);
 		this.enreg.addActionListener(this);
 	}
+
+	public void addReponseGauche(PanelReponseGaucheAsso p)
+	{
+		this.reponsesPossiblesGauche.add(p);
+	}
+
+	public void addReponseDroite(PanelReponseDroiteAsso p)
+	{
+		this.reponsesPossiblesDroite.add(p);
+	}
+
 
 	private void mettreAJourReponses() 
 	{
@@ -79,6 +97,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		this.mettreAJourReponses();
 	}
 
+	
 	public void actionPerformed(ActionEvent e) 
 	{
 		if (e.getSource() == this.ajouterQ) 
@@ -101,6 +120,6 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		
 	}
 
-	public void   setTxtExplication  (String expli)	{this.txtExplication=expli	;}
-	public String getTextExplication (			  )	{return this.txtExplication	;}
+	public void   setTxtExplication  (String expli) {this.txtExplication=expli  ;}
+	public String getTextExplication (            ) {return this.txtExplication ;}
 }
