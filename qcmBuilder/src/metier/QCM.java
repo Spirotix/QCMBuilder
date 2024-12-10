@@ -1,4 +1,4 @@
-package metier;
+package src.metier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ public class QCM extends Question
 {
 	boolean       estQCU;
 	List<Reponse> lstReponses;
-	public QCM(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses)
+	public QCM(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses, String explication)
 	{
-		super(notion, text, timer, nbPoint, difficulte);
+		super(notion, text, timer, nbPoint, difficulte, explication);
 		this.lstReponses = new ArrayList<>();
 		this.lstReponses = lstReponses;
 		this.estQCU      = this.estUnique();

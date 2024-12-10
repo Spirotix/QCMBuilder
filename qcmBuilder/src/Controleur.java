@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import metier.*;
-
-
+package src;
+import  src.metier.*;
+import  java.util.ArrayList;
 
 public class Controleur
 {
@@ -70,7 +69,7 @@ public class Controleur
 		return n.setNom(newNom);
 	}
 
-	public boolean ajouterQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint, int nbIndiceUtilisé, int difficulte)
+	public boolean ajouterQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint, int nbIndiceUtilise, int difficulte)
 	{
 		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
 		Question q = null;
@@ -78,15 +77,15 @@ public class Controleur
 
 		switch (type) {
 			case "QCM" -> {
-				q = new QCM(n, 0, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
+				q = new QCM(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
 			}
 
 			case "Association" -> {
-				q = new Association(n, 0, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
+				q = new Association(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
 			}
 
 			case "Elimination" -> {
-				q = new Elimination(n, 0, text, timer, nbPoint, nbIndiceUtilisé, difficulte);
+				q = new Elimination(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
 			}
 		}
 
@@ -99,13 +98,13 @@ public class Controleur
 		return n.supprimerQuestion(n.rechercherQuestion(text));
 	}
 
-	public boolean modifierQuestion(String nomRessource, String nomNotion, String text, String newText, int newTimer, int newNbPoint, int newNbIndiceUtilisé, int newDifficulte)
+	public boolean modifierQuestion(String nomRessource, String nomNotion, String text, String newText, int newTimer, int newNbPoint, int newNbIndiceUtilise, int newDifficulte)
 	{
 		Question q = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion).rechercherQuestion(text);
 		q.setText(newText);
 		q.setTimer(newTimer);
 		q.setNbPoint(newNbPoint);
-		q.setNbIndiceUtilisé(newNbIndiceUtilisé);
+		q.setNbIndiceUtilise(newNbIndiceUtilise);
 		q.setDifficulte(newDifficulte);
 		return true;
 	}

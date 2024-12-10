@@ -1,17 +1,15 @@
-package metier;
+package src.metier;
 
 public class Reponse 
 {
 	private String  text;
 	private boolean estVrai;
-	private double     pointPerdu;
 
-	public Reponse(String estVrai, String textReponse, double nbPointPerdu)
+	public Reponse(String estVrai, String textReponse)
 	{
 		this.text = textReponse;
-		if(estVrai.equals("Vrai")){this.estVrai=true;}
+		if(estVrai.equals("Vrai")){ this.estVrai=true; }
 		else{ this.estVrai = false;}
-		this.pointPerdu = nbPointPerdu;
 	}
 
 	public String  getText()                        { return text;                  }
@@ -19,7 +17,4 @@ public class Reponse
 
 	public boolean estVrai()                        { return estVrai;               }
 	public void    setEstVrai(boolean estVrai)      { this.estVrai = estVrai;       }
-	
-	public double  getPointPerdu()                  { return pointPerdu;            }
-	public void    setPointPerdu(double pointPerdu) { this.pointPerdu = pointPerdu; }
 }
