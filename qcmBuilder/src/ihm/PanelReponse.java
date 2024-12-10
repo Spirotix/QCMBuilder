@@ -53,9 +53,9 @@ public class PanelReponse extends JPanel implements ActionListener
 
 		str+=this.contenu.getText();
 		if (this.validation.isSelected())
-			str+="_OUI";
+			str+="_VRAI";
 		else 
-			str+="_NON";
+			str+="_FAUX";
 		
 		return str;
 	}
