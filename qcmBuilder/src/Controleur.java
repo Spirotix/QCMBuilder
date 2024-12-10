@@ -109,5 +109,9 @@ public class Controleur
 		return true;
 	}
 
-	public void genererQuestionnaire()
+	public void genererQuestionnaire(String nomRessource, String nomNotion)
+	{
+		qcmBuilder.genererQuestionnaire(nomRessource, nomNotion);
+	}
+
 }
