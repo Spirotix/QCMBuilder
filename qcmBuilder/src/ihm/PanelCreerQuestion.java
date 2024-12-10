@@ -6,6 +6,8 @@ import java.util.*;
 import javax.swing.*;
 import src.Controleur;
 
+import src.Controleur;
+
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener
 {
 	private 	Controleur 	ctrl;
@@ -366,8 +368,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.typeQuestion="QCM";
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion=explication;
-		//creerQuestion(String type, String nomRessource, String nomNotion, String text, int timer, int nbPoint/*/, int nbIndiceUtilise*/, ArrayList<String> lstReponse, int difficulte)
-		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion,lstReponses, this.difficulteQuestion);
+		//creerQuestion(String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<String> lstReponse, int difficulte)
+		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
 	}
 
 }
