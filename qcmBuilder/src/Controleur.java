@@ -74,7 +74,7 @@ public class Controleur
 
 	public boolean creerQuestion(String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<String> lstReponse, int difficulte)
 	{
-		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
+		/*Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
 		Question q;
 
 		
@@ -85,7 +85,8 @@ public class Controleur
 		//q = new Elimination(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
 			
 		//mettre cette ligne dans QCM builder je pense
-		//return n.ajouterQuestion(q);
+		//return n.ajouterQuestion(q);*/
+		return true;
 	}
 
 

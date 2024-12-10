@@ -23,6 +23,7 @@ public class QCMBuilder
 		try 
 		{
 			Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
+			scanner.nextLine();
 			while (scanner.hasNextLine()) 
 			{
 				String   line         = scanner.nextLine();
