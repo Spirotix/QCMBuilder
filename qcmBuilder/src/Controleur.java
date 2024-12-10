@@ -109,4 +109,6 @@ public class Controleur
 		q.setDifficulte(newDifficulte);
 		return true;
 	}
+
+	public void genererQuestionnaire()
 }
