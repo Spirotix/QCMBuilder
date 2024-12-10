@@ -1,9 +1,8 @@
 package src;
 import  java.util.ArrayList;
 import java.util.List;
-
-import  src.metier.*;
 import  src.ihm.*;
+import  src.metier.*;
 
 public class Controleur
 {
@@ -84,7 +83,6 @@ public class Controleur
 			
 		//mettre cette ligne dans QCM builder je pense
 		//return n.ajouterQuestion(q);*/
-		return true;
 	}
 
 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/styles.css">
+	<title>Accueil Questionnaire</title>
+</head>
+<body value="3">
+	<div class="container">
+		<div class="informations">
+			<p class="question-number">Question numéro : <span class="question-number-data">3</span></p>
+			<p class="notion">Notion : <span class="notion-data">Notion 2</span></p>
+			<p class="difficulty">Difficulté : <span class="difficulty-data">Moyenne</span></p>
+			<p class="estimated-time">Temps estimé : <span class="estimated-time-data">1min</span></p>
+		</div>
+
+		<!-- barre de progression des questions -->
+		<div class="progress-bar" data-total="4" data-current="3">
+			<div class="progress-bar-fill"></div>
+		</div>
+
+		<!-- Pas tous le temps -->
+		<div class="countdown">
+			<p class="countdown-title">Temps restant :</p>
+			<p class="countdown-data">60</p>
+		</div>
+
+		<!-- Image pour la question -->
+		<img src="../images/drapeau_france.png" alt="Exemple d'association" class="question-image">
+
+		<button type="button" class="complementary-file-button">Voir le fichier complémentaire</button>
+
+		<div class="question">
+			<p class="question-text">Associez les éléments de la colonne de gauche avec ceux de la colonne de droite :</p>
+			<div class="association-container">
+				<div class="association-column left-column">
+					<div class="association-item" data-id="1">Cheval</div>
+					<div class="association-item" data-id="2"><img src="../images/cheval.jpg" alt="Image 1"></div>
+					<div class="association-item" data-id="3">Vache</div>
+				</div>
+				<div class="association-column right-column">
+					<div class="association-item" data-id="A">Horse</div>
+					<div class="association-item" data-id="B">Caballo</div>
+					<div class="association-item" data-id="C"><img src="../images/cheval1.jpg" alt="Image 2"></div>
+					<div class="association-item" data-id="D">Pferd</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Attention si l'évaluation est chronométrée il ne peut pas revenir en arrière et
+			il peut choisir de ne pas répondre à certaines d'entre elles -->
+		<div class="nav">
+			<button type="button" class="nav-button previous-button">Précédent</button>
+			<button type="button" class="nav-button validate-button">Valider</button>
+			<button type="button" class="nav-button feedback-button">Feedback</button>
+			<button type="button" class="nav-button next-button">Suivant</button>
+		</div>
+	</div>
+	<!-- PopUp pour le feedback -->
+	<div class="popup">
+		<div class="popup-content">
+			<button type="button" class="close-button">Fermer</button>
+			<p class="feedback-title">Réponse</p>
+			<p class="feedback-text">La réponse à la question est la suivante : "Blanc".</p>
+		</div>
+	</div>
+
+	<script src="../script/popup.js"></script>
+	<script src="../script/index.js"></script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const progressBars = document.querySelectorAll(".progress-bar");
+
+			progressBars.forEach(progressBar => {
+				const total = parseInt(progressBar.dataset.total, 10);
+				const current = parseInt(progressBar.dataset.current, 10);
+				const progressFill = progressBar.querySelector(".progress-bar-fill");
+
+				if (total && current >= 0) {
+					const widthPercentage = (current / total) * 100;
+					progressFill.style.width = `${widthPercentage}%`;
+				}
+			});
+		});
+	</script>
+</body>
+</html>
