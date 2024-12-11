@@ -29,31 +29,34 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try
 		{
-			Scanner scanner = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom + ".rtf"));
-			while (scanner.hasNextLine())
+			Scanner scTextQuestion = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom + ".rtf"));
+			Scanner scInformations = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom + ".csv"));
+
+			while ( scTextQuestion.hasNextLine() && scInformations.hasNextLine() )
 			{
-				String line = scanner.nextLine();
-				while ( scanner.hasNextLine() && ! line.contains("Question") )
+				String lineTextQuestion = scTextQuestion.nextLine();
+				String lineInformations = scInformations.nextLine();
+				while ( scTextQuestion.hasNextLine() && ! lineTextQuestion.contains("Question") )
 				{
-					line = scanner.nextLine();
+					lineTextQuestion = scTextQuestion.nextLine();
 				}
 
-				if ( !scanner.hasNextLine()) break;
+				if ( !scTextQuestion.hasNextLine() || !scInformations.hasNextLine() ) break;
 
-				line = scanner.nextLine();
-				String text = line.substring(0, line.indexOf("\\par"));
+				lineTextQuestion = scTextQuestion.nextLine();
+				String text      = lineTextQuestion.substring(0, lineTextQuestion.indexOf("\\par"));
 
-				line           = scanner.nextLine();
-				double nbPoint = Double.parseDouble(line.substring(line.indexOf("} ") + 2, line.indexOf("\\par") - 1));
+				lineInformations = scInformations.nextLine();
+				double nbPoint   = Double.parseDouble( lineInformations.substring(lineInformations.indexOf("} ") + 2) );
 
-				line = scanner.nextLine();
-				String type = line.substring(line.indexOf("} ") + 2, line.indexOf("\\par") - 1);
+				lineInformations = scInformations.nextLine();
+				String type      = lineInformations.substring(lineInformations.indexOf("} ") + 2);
 
-				line = scanner.nextLine();
-				String sNiveau = line.substring( line.indexOf("} ") + 2, line.indexOf("\\par") - 1);
+				lineInformations = scInformations.nextLine();
+				String sNiveau   = lineInformations.substring(lineInformations.indexOf("} ") + 2);
 
-				line = scanner.nextLine();
-				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 2, line.indexOf("\\par") - 1));
+				lineInformations = scInformations.nextLine();
+				int temps        = Integer.parseInt( lineInformations.substring( lineInformations.indexOf("} ") + 2) );
 
 				int niveau;
 				switch(sNiveau)
@@ -64,53 +67,55 @@ public class Notion
 					case "D"  -> { niveau = 4; }
 					default   ->
 					{
-						scanner.close();
+						scTextQuestion.close();
+						scInformations.close();
 						throw new IllegalArgumentException("Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
 					}
 				}
 
-				scanner.nextLine();
-				line = scanner.nextLine();
+				scTextQuestion.nextLine();
+				scInformations.nextLine();
+				lineInformations = scInformations.nextLine();
 
 				if ( type.equals("Association") )
 				{
 					List<ReponseAssociation> lstReponse = new ArrayList<>();
 
-					while (!line.contains("{\\b Fin}"))
+					while (!lineInformations.contains("{Fin}"))
 					{
 						List<Integer> lstInd = new ArrayList<>();
 
-						String[] tmp = line.substring(line.indexOf("->") + 2, line.indexOf("::") - 1).split("_");
+						String[] tmp = lineInformations.substring(lineInformations.indexOf("->") + 2, lineInformations.indexOf("::") - 1).split("_");
 						for (String s : tmp)
 							lstInd.add( Integer.parseInt(s) );
 
 						String textReponseDroite = "";
 
-						if ( line.contains("->") )
-							textReponseDroite = line.substring(line.indexOf("} ") + 2, line.indexOf("->"));
+						if ( lineInformations.contains("->") )
+							textReponseDroite = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("->"));
 						else
-							textReponseDroite = line.substring(line.indexOf("} ") + 2, line.indexOf("::"));
+							textReponseDroite = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("::"));
 
 						String textReponseGauche = "";
 
-						textReponseGauche = line.substring(line.indexOf("} ") + 2, line.indexOf("::"));
+						textReponseGauche = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("::"));
 	
 						if ( !textReponseDroite.equals("[null]") )
 							lstReponse.add(new ReponseAssociation(
 							                                      textReponseDroite,
 							                                      lstInd,
-							                                      Integer.parseInt(line.substring(line.indexOf("\b ") + 3, line.indexOf(":}") - 1)),
+							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("\b ") + 3, lineInformations.indexOf(":}") - 1)),
 							                                      true
 							                                     ));
 						if ( !textReponseGauche.equals("[null]") )
 							lstReponse.add(new ReponseAssociation(
 							                                      textReponseGauche,
 							                                      null,
-							                                      Integer.parseInt(line.substring(line.indexOf("\b ") + 3, line.indexOf(":}") - 1)),
+							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("\b ") + 3, lineInformations.indexOf(":}") - 1)),
 							                                      false
-							                                      ));
+							                                     ));
   
-						line = scanner.nextLine();
+						lineInformations = scInformations.nextLine();
 					}
 
 					Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
@@ -119,14 +124,14 @@ public class Notion
 				else if ( type.equals("Elimination"))
 				{
 					List<ReponseElimination> lstReponse = new ArrayList<>();
-					while ( !line.contains("{\\b Fin}") )
+					while ( !lineInformations.contains("{Fin}") )
 					{
 						lstReponse.add(new ReponseElimination(
-						                                      line.substring(line.indexOf("} ") + 2, line.indexOf("|")),
-						                                      line.substring(line.indexOf("|") + 1, line.indexOf("||")),
-						                                      Integer.parseInt(line.substring(line.indexOf("||") + 2, line.indexOf("/")))
+						                                      lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("|")),
+						                                      lineInformations.substring(lineInformations.indexOf("|") + 1, lineInformations.indexOf("||")),
+						                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/")))
 						                                     ));
-						line = scanner.nextLine();
+						lineInformations = scInformations.nextLine();
 					}
 
 					//Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
@@ -135,13 +140,13 @@ public class Notion
 				else if (type.equals("QCM"))
 				{
 					List<ReponseQCM> lstReponse = new ArrayList<>();
-					while (!line.contains("{\\b Fin}"))
+					while (!lineInformations.contains("{Fin}"))
 					{
 						lstReponse.add(new ReponseQCM(
-						                              line.substring(line.indexOf("} ") + 2, line.indexOf("|")),
-						                              line.substring(line.indexOf("|") + 1, line.indexOf("||"))
+						                              lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("|")),
+						                              lineInformations.substring(lineInformations.indexOf("|") + 1, lineInformations.indexOf("||"))
 						                             ));
-						line = scanner.nextLine();
+						lineInformations = scInformations.nextLine();
 					}
 
 					Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
@@ -149,11 +154,13 @@ public class Notion
 				}
 				else
 				{
-					scanner.close();
+					scTextQuestion.close();
+					scInformations.close();
 					throw new IllegalArgumentException("Le type doit être appartenir aux options suivantes : 'Association','Elimination','QCM'"); 
 				}
 			}
-			scanner.close();
+			scTextQuestion.close();
+			scInformations.close();
 		}
 		catch (FileNotFoundException e)
 		{

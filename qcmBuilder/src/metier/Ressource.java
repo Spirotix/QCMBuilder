@@ -11,7 +11,7 @@ public class Ressource
 	private String nom;
 	private List<Notion> notions;
 
-	public Ressource(String nom)
+	public Ressource(String code, String nom)
 	{
 		this.nom = nom;
 		this.notions = lireNotions();

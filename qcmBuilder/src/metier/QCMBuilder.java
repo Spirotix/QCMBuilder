@@ -28,9 +28,10 @@ public class QCMBuilder
 			{
 				String   line         = scanner.nextLine();
 				String[] parts        = line.split(";");
-				String   nomRessource = parts[0];
+				String   codeRessource = parts[0];
+				String   nomRessource  = parts[1];
 
-				Ressource ressource = new Ressource(nomRessource);
+				Ressource ressource = new Ressource(codeRessource, nomRessource);
 
 				for (Ressource r : ressources)
 				{
