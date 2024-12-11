@@ -12,8 +12,8 @@ public class PanelReponseAsso extends JPanel
 	private PanelReponseGaucheAsso 	panelGauche;
 	private PanelReponseDroiteAsso 	panelDroite;
 
-	private PanelReponseGaucheAsso 	lierGauche;
-	private PanelReponseDroiteAsso	lierDroite;
+	private static PanelReponseGaucheAsso 	lierGauche;
+	private static PanelReponseDroiteAsso	lierDroite;
 
 
 	public PanelReponseAsso (PanelCreerQuestionAsso panelQ)
@@ -24,10 +24,6 @@ public class PanelReponseAsso extends JPanel
 		//Initialisation
 		this.panelGauche = new PanelReponseGaucheAsso(this);
 		this.panelDroite = new PanelReponseDroiteAsso(this);
-
-		this.panelQ.addReponseDroite(this.panelDroite);
-		this.panelQ.addReponseGauche(this.panelGauche);
-
 
 		//Insertion
 		this.add (this.panelGauche 	);
@@ -40,53 +36,53 @@ public class PanelReponseAsso extends JPanel
 	public void lier(PanelReponseGaucheAsso gauche)
 	{
 		
-		this.lierGauche=gauche;
+		PanelReponseAsso.lierGauche=gauche;
 
 		String str1, str2;
-		if (this.lierGauche==null)
+		if (PanelReponseAsso.lierGauche==null)
 			str1=null;
 		else 
-			str1 = this.lierGauche.getNom();
+			str1 = PanelReponseAsso.lierGauche.getNom();
 
-		if (this.lierDroite==null)
+		if (PanelReponseAsso.lierDroite==null)
 			str2=null;
 		else 
-			str2 = this.lierDroite.getNom();
+			str2 = PanelReponseAsso.lierDroite.getNom();
 		
 		System.out.println("etape 1 : "+str1 +" : "+str2);
 
-		if (this.lierDroite!=null)
+		if (PanelReponseAsso.lierDroite!=null)
 		{
-			this.lierGauche.ajouterBonneRep(this.lierDroite);
-			this.lierDroite=null;
-			this.lierGauche=null;
+			PanelReponseAsso.lierGauche.ajouterBonneRep(PanelReponseAsso.lierDroite);
+			PanelReponseAsso.lierDroite=null;
+			PanelReponseAsso.lierGauche=null;
 		}
 		System.out.println("etape 2 : "+str1 +" : "+str2);
 	}
 
 	public void lier(PanelReponseDroiteAsso droite)
 	{
-		this.lierDroite=droite;
+		PanelReponseAsso.lierDroite=droite;
 
 		String str1, str2;
-		if (this.lierGauche==null)
+		if (PanelReponseAsso.lierGauche==null)
 			str1=null;
 		else 
-			str1 = this.lierGauche.getNom();
+			str1 = PanelReponseAsso.lierGauche.getNom();
 
-		if (this.lierDroite==null)
+		if (PanelReponseAsso.lierDroite==null)
 			str2=null;
 		else 
 			str2 = this.lierDroite.getNom();
 		
 		System.out.println("etape 1 : "+str1 +" : "+str2);
 
-		if (this.lierGauche!=null)
+		if (PanelReponseAsso.lierGauche!=null)
 		{	
 			System.out.println("liaison");
-			this.lierGauche.ajouterBonneRep(this.lierDroite);
-			this.lierDroite=null;
-			this.lierGauche=null;
+			PanelReponseAsso.lierGauche.ajouterBonneRep(PanelReponseAsso.lierDroite);
+			PanelReponseAsso.lierDroite=null;
+			PanelReponseAsso.lierGauche=null;
 		}
 
 		System.out.println("etape 2 : "+str1 +" : "+str2);
@@ -114,6 +110,7 @@ public class PanelReponseAsso extends JPanel
 		else 
 		{
 			this.removeAll();
+			this.panelGauche.supprimerLiaison(p);
 			this.add(this.panelGauche);
 			this.panelDroite=null;
 			this.add(new JPanel());
@@ -123,6 +120,10 @@ public class PanelReponseAsso extends JPanel
 		
 	}
 
+	
+
+	public PanelCreerQuestionAsso getPanelDeBase() {return this.panelQ;}
+
 	public String getString()
 	{
 		String str = "";
@@ -130,4 +131,7 @@ public class PanelReponseAsso extends JPanel
 		
 		return str;
 	}
+
+	public PanelReponseGaucheAsso getPanelGauche (){return this.panelGauche;}
+	public PanelReponseDroiteAsso getPanelDroit  (){return this.panelDroite;}
 }

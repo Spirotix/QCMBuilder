@@ -51,9 +51,12 @@ public class PanelReponseDroiteAsso extends JPanel implements ActionListener
 		{
 			this.panelQ.lier(this);
 		}
+		this.panelQ.getPanelDeBase().getPaintComponent().repaint();
 	}
 
 	public String getNom () {return this.nom;}
+
+	public JButton getBoutton() {return this.lier;}
 
 	public String getString()
 	{
