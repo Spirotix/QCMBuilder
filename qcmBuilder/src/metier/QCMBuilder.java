@@ -170,200 +170,178 @@ public class QCMBuilder
 			new File("../questionnaire/pages").mkdirs();
 			new File("../questionnaire/script").mkdirs();
 
-			String headerQuestion = "<!DOCTYPE html>\n" + //
-									"<html lang=\"fr\">\n" + //
-									"<head>\n" + //
-									"\t<meta charset=\"UTF-8\">\n" + //
-									"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" + //
-									"\t<link rel=\"stylesheet\" href=\"../css/styles.css\">\n" + //
-									"\t<title>Accueil Questionnaire</title>\n" + //
+			String headerQuestion = "<!DOCTYPE html>" +
+									"<html lang=\"fr\">" +
+									"<head>" +
+									"<meta charset=\"UTF-8\">" +
+									"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+									"<link rel=\"stylesheet\" href=\"../css/styles.css\">" +
+									"<title>Accueil Questionnaire</title>" +
 									"</head>\n";
 
-			String header = "<!DOCTYPE html>\n" + //
-							"<html lang=\"fr\">\n" + //
-							"<head>\n" + //
-							"\t<meta charset=\"UTF-8\">\n" + //
-							"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" + //
-							"\t<link rel=\"stylesheet\" href=\"styles.css\">\n" + //
-							"\t<title>Accueil Questionnaire</title>\n" + //
+			String header = "<!DOCTYPE html>" +
+							"<html lang=\"fr\">" +
+							"<head>" +
+							"<meta charset=\"UTF-8\">" +
+							"<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+							"<link rel=\"stylesheet\" href=\"styles.css\">" +
+							"<title>Accueil Questionnaire</title>" +
 							"</head>\n";
 
 			PrintWriter indexWriter = new PrintWriter("../questionnaire/index.html");
-			String sIndex =  header + //
-								"<body>\n" + //
-								"\t\n" + //
-								"\t<h1 class=\"evaluation-title\">Questionnaire "+ nomRessource +"</h1>\n" + //
-								"\n" + //
-								"\t<div class=\"informations\">\n" + //
-								"\t\t<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">20h</span></p>\n" + //
-								"\n" + //
-								"\t\t<p class=\"resource\">Ressources concernée : <span class=\"resource-data\">"+nomRessource+"</span></p>\n" + //
-								"\n" + //
-								"\t\t<p class=\"notions-title\">Notion abordées :</p>\n" + //
-								"\t\t<ul class=\"notions-list\">\n"; //
+			String sIndex =  header +
+								"<body>" +
+								"" +
+								"<h1 class=\"evaluation-title\">Questionnaire "+ nomRessource +"</h1>" +
+								"<div class=\"informations\">" +
+								"<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">20h</span></p>" +
+								"<p class=\"resource\">Ressources concernée : <span class=\"resource-data\">"+nomRessource+"</span></p>" +
+								"<p class=\"notions-title\">Notion abordées :</p>" +
+								"<ul class=\"notions-list\">\n";
 
 								for (String nom : nomsNotions)
-									sIndex+="\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">"+ nom +"</span></li>\n"; //
+									sIndex+="<li class=\"notion-item\"><span class=\"notions-item-data\">"+ nom +"</span></li>\n";
 
-								sIndex+="\t\t</ul>\n" + //
-								"\n" + //
-								"\t\t<p class=\"questions-count\">Nombre de questions : <span class=\"questions-count-data\">10</span></p>\n" + //
-								"\t\t<ul class=\"difficulty-list\">\n" + //
-								"\t\t\t<li class=\"difficulty-item very-easy\">Très facile : <span class=\"difficulty-item-data\">0</span></li>\n" + //
-								"\t\t\t<li class=\"difficulty-item easy\">     Facile :      <span class=\"difficulty-item-data\">3</span></li>\n" + //
-								"\t\t\t<li class=\"difficulty-item medium\">   Moyenne :     <span class=\"difficulty-item-data\">4</span></li>\n" + //
-								"\t\t\t<li class=\"difficulty-item hard\">     Difficile :   <span class=\"difficulty-item-data\">3</span></li>\n" + //
-								"\t\t</ul>\n" + //
-								"\t\t<button type=\"button\" class=\"start-button\">Commencer</button>\n" + //
-								"\t</div>\n" + //
-								"\t<script src=\"script/index.js\"></script>\n" + //
-								"</body>\n" + //
+								sIndex+="</ul>" +
+
+								"<p class=\"questions-count\">Nombre de questions : <span class=\"questions-count-data\">10</span></p>" +
+								"<ul class=\"difficulty-list\">" +
+								"<li class=\"difficulty-item very-easy\">Très facile : <span class=\"difficulty-item-data\">0</span></li>" +
+								"<li class=\"difficulty-item easy\">     Facile :      <span class=\"difficulty-item-data\">3</span></li>" +
+								"<li class=\"difficulty-item medium\">   Moyenne :     <span class=\"difficulty-item-data\">4</span></li>" +
+								"<li class=\"difficulty-item hard\">     Difficile :   <span class=\"difficulty-item-data\">3</span></li>" +
+								"</ul>" +
+								"<button type=\"button\" class=\"start-button\">Commencer</button>" +
+								"</div>" +
+								"<script src=\"script/index.js\"></script>" +
+								"</body>" +
 								"</html>";
 			indexWriter.println(sIndex);
 			indexWriter.close();
 
 			PrintWriter finWriter = new PrintWriter("../questionnaire/fin.html");
-			String sFin = header + //
-							"<body>\n" + //
-							"\t\n" + //
-							"\t<h1 class=\"evaluation-title\">Fin du questionnaire</h1>\n" + //
-							"\n" + //
-							"\t<div class=\"informations\">\n" + //
-							"\t\t<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">20h</span></p>\n" + //
-							"\n" + //
-							"\t\t<p class=\"resource\">Ressources concernée : <span class=\"resource-data\">r1.01</span></p>\n" + //
-							"\n" + //
-							"\t\t<p class=\"notions-title\">Notion abordées :</p>\n" + //
-							"\t\t<ul class=\"notions-list\">\n" + //
-							"\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 1</span></li>\n" + //
-							"\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 2</span></li>\n" + //
-							"\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 3</span></li>\n" + //
-							"\t\t</ul>\n" + //
-							"\n" + //
-							"\t\t<p class=\"questions-count\">Nombre de questions : <span class=\"questions-count-data\">10</span></p>\n" + //
-							"\t\t<ul class=\"difficulty-list\">\n" + //
-							"\t\t\t<li class=\"difficulty-item very-easy\">Très facile : <span class=\"difficulty-item-data\">0</span></li>\n" + //
-							"\t\t\t<li class=\"difficulty-item easy\">     Facile :      <span class=\"difficulty-item-data\">3</span></li>\n" + //
-							"\t\t\t<li class=\"difficulty-item medium\">   Moyenne :     <span class=\"difficulty-item-data\">4</span></li>\n" + //
-							"\t\t\t<li class=\"difficulty-item hard\">     Difficile :   <span class=\"difficulty-item-data\">3</span></li>\n" + //
-							"\t\t</ul>\n" + //
-							"\n" + //
-							"\t\t<!-- Score -->\n" + //
-							"\t\t<p class=\"score\">Votre score : <span class=\"score-data\">8/10</span></p>\n" + //
-							"\n" + //
-							"\t\t<!-- Bouton recommencer -->\n" + //
-							"\t\t<button type=\"button\" class=\"restart-button\" onclick=\"window.location.href='index.html'\">Recommencer</button>\n" + //
-							"\t</div>\n" + //
-							"</body>\n" + //
+			String sFin = header +
+							"<body>" +
+							"" +
+							"<h1 class=\"evaluation-title\">Fin du questionnaire</h1>" +
+							"<div class=\"informations\">" +
+							"<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">20h</span></p>" +
+							"<p class=\"resource\">Ressources concernée : <span class=\"resource-data\">r1.01</span></p>" +
+							"<p class=\"notions-title\">Notion abordées :</p>" +
+							"<ul class=\"notions-list\">" +
+							"<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 1</span></li>" +
+							"<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 2</span></li>" +
+							"<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 3</span></li>" +
+							"</ul>" +
+							"<p class=\"questions-count\">Nombre de questions : <span class=\"questions-count-data\">10</span></p>" +
+							"<ul class=\"difficulty-list\">" +
+							"<li class=\"difficulty-item very-easy\">Très facile : <span class=\"difficulty-item-data\">0</span></li>" +
+							"<li class=\"difficulty-item easy\">     Facile :      <span class=\"difficulty-item-data\">3</span></li>" +
+							"<li class=\"difficulty-item medium\">   Moyenne :     <span class=\"difficulty-item-data\">4</span></li>" +
+							"<li class=\"difficulty-item hard\">     Difficile :   <span class=\"difficulty-item-data\">3</span></li>" +
+							"</ul>" +
+							"<!-- Score -->" +
+							"<p class=\"score\">Votre score : <span class=\"score-data\">8/10</span></p>" +
+							"<!-- Bouton recommencer -->" +
+							"<button type=\"button\" class=\"restart-button\" onclick=\"window.location.href=\'index.html\'\">Recommencer</button>" +
+							"</div>" +
+							"</body>" +
 							"</html>";
 			finWriter.println(sFin);
 			finWriter.close();
 
 
 			PrintWriter stylesCss = new PrintWriter("../questionnaire/styles.css");
-			String sStyles = "body {\n" + //
-							"\tfont-family: Arial, sans-serif;\n" + //
-							"\tbackground-color: #f4f4f9;\n" + //
-							"\tcolor: #333;\n" + //
-							"\tmargin: 0;\n" + //
-							"\tpadding: 20px;\n" + //
-							"}\n" + //
-							"\n" + //
-							"h1.evaluation-title {\n" + //
-							"\tcolor: #395cce;\n" + //
-							"\ttext-align: center;\n" + //
-							"\tmargin-bottom: 20px;\n" + //
-							"\tfont-size: 3em;\n" + //
-							"}\n" + //
-							"\n" + //
-							".informations {\n" + //
-							"\tbackground-color: #fff;\n" + //
-							"\tborder: 1px solid #ddd;\n" + //
-							"\tborder-radius: 10px;\n" + //
-							"\tpadding: 20px;\n" + //
-							"\tbox-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n" + //
-							"\tmax-width: 600px;\n" + //
-							"\tmargin: 20px auto;\n" + //
-							"}\n" + //
-							"\n" + //
-							"p.estimated-time,\n" + //
-							"p.resource,\n" + //
-							"p.notions-title,\n" + //
-							"p.questions-count,\n" + //
-							"p.score {\n" + //
-							"\tfont-size: 1.2em;\n" + //
-							"\tmargin: 10px 0;\n" + //
-							"}\n" + //
-							"\n" + //
-							"ul.notions-list,\n" + //
-							"ul.difficulty-list {\n" + //
-							"\tlist-style-type: none;\n" + //
-							"\tpadding: 0;\n" + //
-							"\tmargin-left: 5%;\n" + //
-							"\tmargin-right: 10%;\n" + //
-							"\tword-wrap: break-word;\n" + //
-							"}\n" + //
-							"\n" + //
-							"ul.notions-list li.notion-item,\n" + //
-							"ul.difficulty-list li.difficulty-item {\n" + //
-							"\tbackground-color: #fff;\n" + //
-							"\tborder: 1px solid #ddd;\n" + //
-							"\tborder-radius: 5px;\n" + //
-							"\tpadding: 10px;\n" + //
-							"\tmargin: 5px 0;\n" + //
-							"}\n" + //
-							"\n" + //
-							"ul.difficulty-list li.difficulty-item.very-easy {\n" + //
-							"\tborder-left: 5px solid #8BC34A;\n" + //
-							"}\n" + //
-							"\n" + //
-							"ul.difficulty-list li.difficulty-item.easy {\n" + //
-							"\tborder-left: 5px solid #4CAF50;\n" + //
-							"}\n" + //
-							"\n" + //
-							"ul.difficulty-list li.difficulty-item.medium {\n" + //
-							"\tborder-left: 5px solid #FFEB3B;\n" + //
-							"}\n" + //
-							"\n" + //
-							"ul.difficulty-list li.difficulty-item.hard {\n" + //
-							"\tborder-left: 5px solid #FF5722;\n" + //
-							"}\n" + //
-							"\n" + //
-							"span.estimated-time-data,\n" + //
-							"span.resource-data,\n" + //
-							"span.notions-item-data,\n" + //
-							"span.questions-count-data,\n" + //
-							"span.difficulty-item-data,\n" + //
-							"span.score-data {\n" + //
-							"\tfont-weight: bold;\n" + //
-							"}\n" + //
-							"\n" + //
-							"p.score {\n" + //
-							"\tfont-size: 2em;\n" + //
-							"\ttext-align: center;\n" + //
-							"\tmargin-top: 20px;\n" + //
-							"}\n" + //
-							"\n" + //
-							".start-button,\n" + //
-							".restart-button {\n" + //
-							"\tdisplay: block;\n" + //
-							"\twidth: 200px;\n" + //
-							"\tmargin: 20px auto;\n" + //
-							"\tpadding: 10px 20px;\n" + //
-							"\tbackground-color: #395cce;\n" + //
-							"\tcolor: white;\n" + //
-							"\ttext-align: center;\n" + //
-							"\tborder: none;\n" + //
-							"\tborder-radius: 5px;\n" + //
-							"\tcursor: pointer;\n" + //
-							"\tfont-size: 1.2em;\n" + //
-							"\tbox-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n" + //
-							"\ttransition: background-color 0.3s ease;\n" + //
-							"\t}\n" + //
-							"\n" + //
-							".start-button:hover,\n" + //
-							".restart-button:hover {\n" + //
-							"\tbackground-color: #4772ff;\n" + //
+			String sStyles = "body {" +
+							"font-family: Arial, sans-serif;" +
+							"background-color: #f4f4f9;" +
+							"color: #333;" +
+							"margin: 0;" +
+							"padding: 20px;" +
+							"}" +
+							"h1.evaluation-title {" +
+							"color: #395cce;" +
+							"text-align: center;" +
+							"margin-bottom: 20px;" +
+							"font-size: 3em;" +
+							"}" +
+							".informations {" +
+							"background-color: #fff;" +
+							"border: 1px solid #ddd;" +
+							"border-radius: 10px;" +
+							"padding: 20px;" +
+							"box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" +
+							"max-width: 600px;" +
+							"margin: 20px auto;" +
+							"}" +
+							"p.estimated-time," +
+							"p.resource," +
+							"p.notions-title," +
+							"p.questions-count," +
+							"p.score {" +
+							"font-size: 1.2em;" +
+							"margin: 10px 0;" +
+							"}" +
+							"ul.notions-list," +
+							"ul.difficulty-list {" +
+							"list-style-type: none;" +
+							"padding: 0;" +
+							"margin-left: 5%;" +
+							"margin-right: 10%;" +
+							"word-wrap: break-word;" +
+							"}" +
+							"ul.notions-list li.notion-item," +
+							"ul.difficulty-list li.difficulty-item {" +
+							"background-color: #fff;" +
+							"border: 1px solid #ddd;" +
+							"border-radius: 5px;" +
+							"padding: 10px;" +
+							"margin: 5px 0;" +
+							"}" +
+							"ul.difficulty-list li.difficulty-item.very-easy {" +
+							"border-left: 5px solid #8BC34A;" +
+							"}" +
+							"ul.difficulty-list li.difficulty-item.easy {" +
+							"border-left: 5px solid #4CAF50;" +
+							"}" +
+							"ul.difficulty-list li.difficulty-item.medium {" +
+							"border-left: 5px solid #FFEB3B;" +
+							"}" +
+							"ul.difficulty-list li.difficulty-item.hard {" +
+							"border-left: 5px solid #FF5722;" +
+							"}" +
+							"span.estimated-time-data," +
+							"span.resource-data," +
+							"span.notions-item-data," +
+							"span.questions-count-data," +
+							"span.difficulty-item-data," +
+							"span.score-data {" +
+							"font-weight: bold;" +
+							"}" +
+							"p.score {" +
+							"font-size: 2em;" +
+							"text-align: center;" +
+							"margin-top: 20px;" +
+							"}" +
+							".start-button," +
+							".restart-button {" +
+							"display: block;" +
+							"width: 200px;" +
+							"margin: 20px auto;" +
+							"padding: 10px 20px;" +
+							"background-color: #395cce;" +
+							"color: white;" +
+							"text-align: center;" +
+							"border: none;" +
+							"border-radius: 5px;" +
+							"cursor: pointer;" +
+							"font-size: 1.2em;" +
+							"box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" +
+							"transition: background-color 0.3s ease;" +
+							"}" +
+							".start-button:hover," +
+							".restart-button:hover {" +
+							"background-color: #4772ff;" +
 							"}";
 			stylesCss.println(sStyles);
 			stylesCss.close();
@@ -382,374 +360,331 @@ public class QCMBuilder
 
 			// Create and write to HTML files
 			PrintWriter question1Writer = new PrintWriter("../questionnaire/pages/question1.html");
-			String sQuestion1 = headerQuestion + //
-								"<body value=\"1\">\n" + //
-								"\t<div class=\"container question-multiple\">\n" + //
-								"\t\t<div class=\"informations\">\n" + //
-								"\t\t\t<p class=\"question-number\">Question numéro : <span class=\"question-number-data\">1</span></p>\n" + //
-								"\t\t\t<p class=\"notion\">Notion : <span class=\"notion-data\">Notion 1</span></p>\n" + //
-								"\t\t\t<p class=\"difficulty\">Difficulté : <span class=\"difficulty-data\">Facile</span></p>\n" + //
-								"\t\t\t<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">30sec</span></p>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- barre de progression des questions -->\n" + //
-								"\t\t<div class=\"progress-bar\" data-total=\"4\" data-current=\"1\">\n" + //
-								"\t\t\t<div class=\"progress-bar-fill\"></div>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Pas tous le temps -->\n" + //
-								"\t\t<div class=\"countdown\">\n" + //
-								"\t\t\t<p class=\"countdown-title\">Temps restant :</p>\n" + //
-								"\t\t\t<p class=\"countdown-data\">50000</p>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Image pour la question -->\n" + //
-								"\t\t<img src=\"../images/drapeau_france.png\" alt=\"rgpd\" class=\"question-image\">\n" + //
-								"\n" + //
-								"\t\t<button type=\"button\" class=\"complementary-file-button\">Voir le fichier complémentaire</button>\n" + //
-								"\n" + //
-								"\t\t<div class=\"question\">\n" + //
-								"\t\t\t<p class=\"question-text\">Quels sont les couleurs du drapeau français ?</p>\n" + //
-								"\t\t\t<div class=\"answers\">\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"checkbox\" name=\"answer\" id=\"answer1\" value=\"answer3\">\n" + //
-								"\t\t\t\t\t<label for=\"answer1\">Rouge</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"checkbox\" name=\"answer\" id=\"answer2\" value=\"answer5\">\n" + //
-								"\t\t\t\t\t<label for=\"answer2\">Jaune</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"checkbox\" name=\"answer\" id=\"answer3\" value=\"answer1\">\n" + //
-								"\t\t\t\t\t<label for=\"answer3\">Bleu</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"checkbox\" name=\"answer\" id=\"answer4\" value=\"answer4\">\n" + //
-								"\t\t\t\t\t<label for=\"answer4\">Vert</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"checkbox\" name=\"answer\" id=\"answer5\" value=\"answer2\">\n" + //
-								"\t\t\t\t\t<label for=\"answer5\">Blanc</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t</div>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Attention si l'évaluation est chronométrée il ne peut pas revenir en arrière et\n" + //
-								"\t\t\til peut choisir de ne pas répondre à certaines d'entre elles -->\n" + //
-								"\t\t<div class=\"nav\">\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button previous-button\">Précédent</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button validate-button\">Valider</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button feedback-button\">Feedback</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button next-button\">Suivant</button>\n" + //
-								"\t\t</div>\n" + //
-								"\t</div>\n" + //
-								"\t<!-- PopUp pour le feedback -->\n" + //
-								"\t<div class=\"popup\">\n" + //
-								"\t\t<div class=\"popup-content\">\n" + //
-								"\t\t\t<button type=\"button\" class=\"close-button\">Fermer</button>\n" + //
-								"\t\t\t<p class=\"feedback-title\">Réponse</p>\n" + //
-								"\t\t\t<p class=\"feedback-text\">Et oui ! Le drapeau français est BLEU BLANC et ROUGE.</p>\n" + //
-								"\t\t</div>\n" + //
-								"\t</div>\n" + //
-								"\n" + //
-								"\t<script src=\"../script/popup.js\"></script>\n" + //
-								"\t<script src=\"../script/index.js\"></script>\n" + //
-								"\n" + //
-								"\t<script>\n" + //
-								"\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {\n" + //
-								"\t\t\tconst progressBars = document.querySelectorAll(\".progress-bar\");\n" + //
-								"\n" + //
-								"\t\t\tprogressBars.forEach(progressBar => {\n" + //
-								"\t\t\t\tconst total = parseInt(progressBar.dataset.total, 10);\n" + //
-								"\t\t\t\tconst current = parseInt(progressBar.dataset.current, 10);\n" + //
-								"\t\t\t\tconst progressFill = progressBar.querySelector(\".progress-bar-fill\");\n" + //
-								"\n" + //
-								"\t\t\t\tif (total && current >= 0) {\n" + //
-								"\t\t\t\tconst widthPercentage = (current / total) * 100;\n" + //
-								"\t\t\t\tprogressFill.style.width = `${widthPercentage}%`;\n" + //
-								"\t\t\t\t}\n" + //
-								"\t\t\t});\n" + //
-								"\t\t});\n" + //
-								"\t</script>\n" + //
-								"</body>\n" + //
+			String sQuestion1 = headerQuestion +
+								"<body value=\"1\">" +
+								"<div class=\"container question-multiple\">" +
+								"<div class=\"informations\">" +
+								"<p class=\"question-number\">Question numéro : <span class=\"question-number-data\">1</span></p>" +
+								"<p class=\"notion\">Notion : <span class=\"notion-data\">Notion 1</span></p>" +
+								"<p class=\"difficulty\">Difficulté : <span class=\"difficulty-data\">Facile</span></p>" +
+								"<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">30sec</span></p>" +
+								"</div>" +
+								"<!-- barre de progression des questions -->" +
+								"<div class=\"progress-bar\" data-total=\"4\" data-current=\"1\">" +
+								"<div class=\"progress-bar-fill\"></div>" +
+								"</div>" +
+								"<!-- Pas tous le temps -->" +
+								"<div class=\"countdown\">" +
+								"<p class=\"countdown-title\">Temps restant :</p>" +
+								"<p class=\"countdown-data\">50000</p>" +
+								"</div>" +
+								"<!-- Image pour la question -->" +
+								"<img src=\"../images/drapeau_france.png\" alt=\"rgpd\" class=\"question-image\">" +
+								"<button type=\"button\" class=\"complementary-file-button\">Voir le fichier complémentaire</button>" +
+								"<di class=\"question\">" +
+								"<p class=\"question-text\">Quels sont les couleurs du drapeau français ?</p>" +
+								"<div class=\"answers\">" +
+								"<div class=\"answer\">" +
+								"<input type=\"checkbox\" name=\"answer\" id=\"answer1\" value=\"answer3\">" +
+								"<label for=\"answer1\">Rouge</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"checkbox\" name=\"answer\" id=\"answer2\" value=\"answer5\">" +
+								"<label for=\"answer2\">Jaune</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"checkbox\" name=\"answer\" id=\"answer3\" value=\"answer1\">" +
+								"<label for=\"answer3\">Bleu</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"checkbox\" name=\"answer\" id=\"answer4\" value=\"answer4\">" +
+								"<label for=\"answer4\">Vert</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"checkbox\" name=\"answer\" id=\"answer5\" value=\"answer2\">" +
+								"<label for=\"answer5\">Blanc</label>" +
+								"</div>" +
+								"</div>" +
+								"</div>" +
+								"<!-- Attention si l\'évaluation est chronométrée il ne peut pas revenir en arrière et" +
+								"il peut choisir de ne pas répondre à certaines d\'entre elles -->" +
+								"<div class=\"nav\">" +
+								"<button type=\"button\" class=\"nav-button previous-button\">Précédent</button>" +
+								"<button type=\"button\" class=\"nav-button validate-button\">Valider</button>" +
+								"<button type=\"button\" class=\"nav-button feedback-button\">Feedback</button>" +
+								"<button type=\"button\" class=\"nav-button next-button\">Suivant</button>" +
+								"</div>" +
+								"</div>" +
+								"<!-- PopUp pour le feedback -->" +
+								"<div class=\"popup\">" +
+								"<div class=\"popup-content\">" +
+								"<button type=\"button\" class=\"close-button\">Fermer</button>" +
+								"<p class=\"feedback-title\">Réponse</p>" +
+								"<p class=\"feedback-text\">Et oui ! Le drapeau français est BLEU BLANC et ROUGE.</p>" +
+								"</div>" +
+								"</div>" +
+								"<script src=\"../script/popup.js\"></script>" +
+								"<script src=\"../script/index.js\"></script>" +
+								"<script>" +
+								"document.addEventListener(\"DOMContentLoaded\", function () {" +
+								"const progressBars = document.querySelectorAll(\".progress-bar\");" +
+								"progressBars.forEach(progressBar => {" +
+								"const total = parseInt(progressBar.dataset.total, 10);" +
+								"const current = parseInt(progressBar.dataset.current, 10);" +
+								"const progressFill = progressBar.querySelector(\".progress-bar-fill\");" +
+								"if (total && current >= 0) {" +
+								"const widthPercentage = (current / total) * 100;" +
+								"progressFill.style.width = `${widthPercentage}%`;" +
+								"}" +
+								"});" +
+								"});" +
+								"</script>" +
+								"</body>" +
 								"</html>";
 			question1Writer.println(sQuestion1);
 			question1Writer.close();
 
 			PrintWriter question2Writer = new PrintWriter("../questionnaire/pages/question2.html");
-			String sQuestion2 = headerQuestion + //
-								"<body value=\"2\">\n" + //
-								"\t<div class=\"container eliminate-question\">\n" + //
-								"\t\t<div class=\"informations\">\n" + //
-								"\t\t\t<p class=\"question-number\">Question numéro : <span class=\"question-number-data\">2</span></p>\n" + //
-								"\t\t\t<p class=\"notion\">Notion : <span class=\"notion-data\">Notion 1</span></p>\n" + //
-								"\t\t\t<p class=\"difficulty\">Difficulté : <span class=\"difficulty-data\">Facile</span></p>\n" + //
-								"\t\t\t<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">30sec</span></p>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- barre de progression des questions -->\n" + //
-								"\t\t<div class=\"progress-bar\" data-total=\"4\" data-current=\"2\">\n" + //
-								"\t\t\t<div class=\"progress-bar-fill\"></div>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Pas tous le temps -->\n" + //
-								"\t\t<div class=\"countdown\">\n" + //
-								"\t\t\t<p class=\"countdown-title\">Temps restant :</p>\n" + //
-								"\t\t\t<p class=\"countdown-data\">50</p>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Image pour la question -->\n" + //
-								"\t\t<img src=\"../images/cheval.jpg\" alt=\"Cheval blanc d'Henri IV\" class=\"question-image\">\n" + //
-								"\n" + //
-								"\t\t<button type=\"button\" class=\"complementary-file-button\">Voir le fichier complémentaire</button>\n" + //
-								"\n" + //
-								"\t\t<div class=\"question\">\n" + //
-								"\t\t\t<p class=\"question-text\">Quelle est la couleur du cheval blanc d'Henri IV ?</p>\n" + //
-								"\t\t\t<div class=\"answers\">\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"radio\" name=\"answer\" id=\"answer1\" value=\"answer1\">\n" + //
-								"\t\t\t\t\t<label for=\"answer1\">Blanc</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"radio\" name=\"answer\" id=\"answer2\" value=\"answer2\">\n" + //
-								"\t\t\t\t\t<label for=\"answer2\">Noir</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"radio\" name=\"answer\" id=\"answer3\" value=\"answer3\">\n" + //
-								"\t\t\t\t\t<label for=\"answer3\">Rouge</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"radio\" name=\"answer\" id=\"answer4\" value=\"answer4\">\n" + //
-								"\t\t\t\t\t<label for=\"answer4\">Vert</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t</div>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Bouton indice -->\n" + //
-								"\t\t<div class=\"hint\">\n" + //
-								"\t\t\t<button type=\"button\" class=\"hint-button\">Indice</button>\n" + //
-								"\t\t\t<div class=\"hint-count\">\n" + //
-								"\t\t\t\t<p>Indice : <span class=\"hint-current-data\">0</span>/<span class=\"hint-total-data\">2</span></p>\n" + //
-								"\t\t\t</div>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\n" + //
-								"\t\t<!-- Attention si l'évaluation est chronométrée il ne peut pas revenir en arrière et\n" + //
-								"\t\t\til peut choisir de ne pas répondre à certaines d'entre elles -->\n" + //
-								"\t\t<div class=\"nav\">\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button previous-button\">Précédent</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button validate-button\">Valider</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button feedback-button\">Feedback</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button next-button\">Suivant</button>\n" + //
-								"\t\t</div>\n" + //
-								"\t</div>\n" + //
-								"\t<!-- PopUp pour le feedback -->\n" + //
-								"\t<div class=\"popup\">\n" + //
-								"\t\t<div class=\"popup-content\">\n" + //
-								"\t\t\t<button type=\"button\" class=\"close-button\">Fermer</button>\n" + //
-								"\t\t\t<p class=\"feedback-title\">Réponse</p>\n" + //
-								"\t\t\t<p class=\"feedback-text\">La réponse à la question est la suivante : \"Blanc\".</p>\n" + //
-								"\t\t</div>\n" + //
-								"\t</div>\n" + //
-								"\n" + //
-								"\t<script src=\"../script/popup.js\"></script>\n" + //
-								"\t<script src=\"../script/index.js\"></script>\n" + //
-								"\n" + //
-								"\t<script>\n" + //
-								"\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {\n" + //
-								"\t\t\tconst progressBars = document.querySelectorAll(\".progress-bar\");\n" + //
-								"\n" + //
-								"\t\t\tprogressBars.forEach(progressBar => {\n" + //
-								"\t\t\t\tconst total = parseInt(progressBar.dataset.total, 10);\n" + //
-								"\t\t\t\tconst current = parseInt(progressBar.dataset.current, 10);\n" + //
-								"\t\t\t\tconst progressFill = progressBar.querySelector(\".progress-bar-fill\");\n" + //
-								"\n" + //
-								"\t\t\t\tif (total && current >= 0) {\n" + //
-								"\t\t\t\t\tconst widthPercentage = (current / total) * 100;\n" + //
-								"\t\t\t\t\tprogressFill.style.width = `${widthPercentage}%`;\n" + //
-								"\t\t\t\t}\n" + //
-								"\t\t\t});\n" + //
-								"\t\t});\n" + //
-								"\t</script>\n" + //
-								"</body>\n" + //
+			String sQuestion2 = headerQuestion +
+								"<body value=\"2\">" +
+								"<div class=\"container eliminate-question\">" +
+								"<div class=\"informations\">" +
+								"<p class=\"question-number\">Question numéro : <span class=\"question-number-data\">2</span></p>" +
+								"<p class=\"notion\">Notion : <span class=\"notion-data\">Notion 1</span></p>" +
+								"<p class=\"difficulty\">Difficulté : <span class=\"difficulty-data\">Facile</span></p>" +
+								"<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">30sec</span></p>" +
+								"</div>" +
+								"<!-- barre de progression des questions -->" +
+								"<div class=\"progress-bar\" data-total=\"4\" data-current=\"2\">" +
+								"<div class=\"progress-bar-fill\"></div>" +
+								"</div>" +
+								"<!-- Pas tous le temps -->" +
+								"<div class=\"countdown\">" +
+								"<p class=\"countdown-title\">Temps restant :</p>" +
+								"<p class=\"countdown-data\">50</p>" +
+								"</div>" +
+								"<!-- Image pour la question -->" +
+								"<img src=\"../images/cheval.jpg\" alt=\"Cheval blanc d\'Henri IV\" class=\"question-image\">" +
+								"<button type=\"button\" class=\"complementary-file-button\">Voir le fichier complémentaire</button>" +
+								"<div class=\"question\">" +
+								"<p class=\"question-text\">Quelle est la couleur du cheval blanc d\'Henri IV ?</p>" +
+								"<div class=\"answers\">" +
+								"<div class=\"answer\">" +
+								"<input type=\"radio\" name=\"answer\" id=\"answer1\" value=\"answer1\">" +
+								"<label for=\"answer1\">Blanc</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"radio\" name=\"answer\" id=\"answer2\" value=\"answer2\">" +
+								"<label for=\"answer2\">Noir</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"radio\" name=\"answer\" id=\"answer3\" value=\"answer3\">" +
+								"<label for=\"answer3\">Rouge</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"radio\" name=\"answer\" id=\"answer4\" value=\"answer4\">" +
+								"<label for=\"answer4\">Vert</label>" +
+								"</div>" +
+								"</div>" +
+								"</div>" +
+								"<!-- Bouton indice -->" +
+								"<div class=\"hint\">" +
+								"<button type=\"button\" class=\"hint-button\">Indice</button>" +
+								"<div class=\"hint-count\">" +
+								"<p>Indice : <span class=\"hint-current-data\">0</span>/<span class=\"hint-total-data\">2</span></p>" +
+								"</div>" +
+								"</div>" +
+								"<!-- Attention si l\'évaluation est chronométrée il ne peut pas revenir en arrière et" +
+								"il peut choisir de ne pas répondre à certaines d\'entre elles -->" +
+								"<div class=\"nav\">" +
+								"<button type=\"button\" class=\"nav-button previous-button\">Précédent</button>" +
+								"<button type=\"button\" class=\"nav-button validate-button\">Valider</button>" +
+								"<button type=\"button\" class=\"nav-button feedback-button\">Feedback</button>" +
+								"<button type=\"button\" class=\"nav-button next-button\">Suivant</button>" +
+								"</div>" +
+								"</div>" +
+								"<!-- PopUp pour le feedback -->" +
+								"<div class=\"popup\">" +
+								"<div class=\"popup-content\">" +
+								"<button type=\"button\" class=\"close-button\">Fermer</button>" +
+								"<p class=\"feedback-title\">Réponse</p>" +
+								"<p class=\"feedback-text\">La réponse à la question est la suivante : \"Blanc\".</p>" +
+								"</div>" +
+								"</div>" +
+								"<script src=\"../script/popup.js\"></script>" +
+								"<script src=\"../script/index.js\"></script>" +
+								"<script>" +
+								"document.addEventListener(\"DOMContentLoaded\", function () {" +
+								"const progressBars = document.querySelectorAll(\".progress-bar\");" +
+								"progressBars.forEach(progressBar => {" +
+								"const total = parseInt(progressBar.dataset.total, 10);" +
+								"const current = parseInt(progressBar.dataset.current, 10);" +
+								"const progressFill = progressBar.querySelector(\".progress-bar-fill\");" +
+								"if (total && current >= 0) {" +
+								"const widthPercentage = (current / total) * 100;" +
+								"progressFill.style.width = `${widthPercentage}%`;" +
+								"}" +
+								"});" +
+								"});" +
+								"</script>" +
+								"</body>" +
 								"</html>";
 			question2Writer.println(sQuestion2);
 			question2Writer.close();
 
 			PrintWriter question3Writer = new PrintWriter("../questionnaire/pages/question3.html");
-			String sQuestion3 = headerQuestion + //
-								"<body value=\"3\">\n" + //
-								"\t<div class=\"container\">\n" + //
-								"\t\t<div class=\"informations\">\n" + //
-								"\t\t\t<p class=\"question-number\">Question numéro : <span class=\"question-number-data\">3</span></p>\n" + //
-								"\t\t\t<p class=\"notion\">Notion : <span class=\"notion-data\">Notion 2</span></p>\n" + //
-								"\t\t\t<p class=\"difficulty\">Difficulté : <span class=\"difficulty-data\">Moyenne</span></p>\n" + //
-								"\t\t\t<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">1min</span></p>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- barre de progression des questions -->\n" + //
-								"\t\t<div class=\"progress-bar\" data-total=\"4\" data-current=\"3\">\n" + //
-								"\t\t\t<div class=\"progress-bar-fill\"></div>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Pas tous le temps -->\n" + //
-								"\t\t<div class=\"countdown\">\n" + //
-								"\t\t\t<p class=\"countdown-title\">Temps restant :</p>\n" + //
-								"\t\t\t<p class=\"countdown-data\">60</p>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Image pour la question -->\n" + //
-								"\t\t<img src=\"../images/drapeau_france.png\" alt=\"Exemple d'association\" class=\"question-image\">\n" + //
-								"\n" + //
-								"\t\t<button type=\"button\" class=\"complementary-file-button\">Voir le fichier complémentaire</button>\n" + //
-								"\n" + //
-								"\t\t<div class=\"question\">\n" + //
-								"\t\t\t<p class=\"question-text\">Associez les éléments de la colonne de gauche avec ceux de la colonne de droite :</p>\n" + //
-								"\t\t\t<div class=\"association-container\">\n" + //
-								"\t\t\t\t<div class=\"association-column left-column\">\n" + //
-								"\t\t\t\t\t<div class=\"association-item\" data-id=\"1\">Cheval</div>\n" + //
-								"\t\t\t\t\t<div class=\"association-item\" data-id=\"2\"><img src=\"../images/cheval.jpg\" alt=\"Image 1\"></div>\n" + //
-								"\t\t\t\t\t<div class=\"association-item\" data-id=\"3\">Vache</div>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"association-column right-column\">\n" + //
-								"\t\t\t\t\t<div class=\"association-item\" data-id=\"A\">Horse</div>\n" + //
-								"\t\t\t\t\t<div class=\"association-item\" data-id=\"B\">Caballo</div>\n" + //
-								"\t\t\t\t\t<div class=\"association-item\" data-id=\"C\"><img src=\"../images/cheval1.jpg\" alt=\"Image 2\"></div>\n" + //
-								"\t\t\t\t\t<div class=\"association-item\" data-id=\"D\">Pferd</div>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t</div>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Attention si l'évaluation est chronométrée il ne peut pas revenir en arrière et\n" + //
-								"\t\t\til peut choisir de ne pas répondre à certaines d'entre elles -->\n" + //
-								"\t\t<div class=\"nav\">\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button previous-button\">Précédent</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button validate-button\">Valider</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button feedback-button\">Feedback</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button next-button\">Suivant</button>\n" + //
-								"\t\t</div>\n" + //
-								"\t</div>\n" + //
-								"\t<!-- PopUp pour le feedback -->\n" + //
-								"\t<div class=\"popup\">\n" + //
-								"\t\t<div class=\"popup-content\">\n" + //
-								"\t\t\t<button type=\"button\" class=\"close-button\">Fermer</button>\n" + //
-								"\t\t\t<p class=\"feedback-title\">Réponse</p>\n" + //
-								"\t\t\t<p class=\"feedback-text\">La réponse à la question est la suivante : \"Blanc\".</p>\n" + //
-								"\t\t</div>\n" + //
-								"\t</div>\n" + //
-								"\n" + //
-								"\t<script src=\"../script/popup.js\"></script>\n" + //
-								"\t<script src=\"../script/index.js\"></script>\n" + //
-								"\n" + //
-								"\t<script>\n" + //
-								"\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {\n" + //
-								"\t\t\tconst progressBars = document.querySelectorAll(\".progress-bar\");\n" + //
-								"\n" + //
-								"\t\t\tprogressBars.forEach(progressBar => {\n" + //
-								"\t\t\t\tconst total = parseInt(progressBar.dataset.total, 10);\n" + //
-								"\t\t\t\tconst current = parseInt(progressBar.dataset.current, 10);\n" + //
-								"\t\t\t\tconst progressFill = progressBar.querySelector(\".progress-bar-fill\");\n" + //
-								"\n" + //
-								"\t\t\t\tif (total && current >= 0) {\n" + //
-								"\t\t\t\t\tconst widthPercentage = (current / total) * 100;\n" + //
-								"\t\t\t\t\tprogressFill.style.width = `${widthPercentage}%`;\n" + //
-								"\t\t\t\t}\n" + //
-								"\t\t\t});\n" + //
-								"\t\t});\n" + //
-								"\t</script>\n" + //
-								"</body>\n" + //
+			String sQuestion3 = headerQuestion +
+								"<body value=\"3\">" +
+								"<div class=\"container\">" +
+								"<div class=\"informations\">" +
+								"<p class=\"question-number\">Question numéro : <span class=\"question-number-data\">3</span></p>" +
+								"<p class=\"notion\">Notion : <span class=\"notion-data\">Notion 2</span></p>" +
+								"<p class=\"difficulty\">Difficulté : <span class=\"difficulty-data\">Moyenne</span></p>" +
+								"<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">1min</span></p>" +
+								"</div>" +
+								"<!-- barre de progression des questions -->" +
+								"<div class=\"progress-bar\" data-total=\"4\" data-current=\"3\">" +
+								"<div class=\"progress-bar-fill\"></div>" +
+								"</div>" +
+								"<!-- Pas tous le temps -->" +
+								"<div class=\"countdown\">" +
+								"<p class=\"countdown-title\">Temps restant :</p>" +
+								"<p class=\"countdown-data\">60</p>" +
+								"</div>" +
+								"<!-- Image pour la question -->" +
+								"<img src=\"../images/drapeau_france.png\" alt=\"Exemple d\'association\" class=\"question-image\">" +
+								"<button type=\"button\" class=\"complementary-file-button\">Voir le fichier complémentaire</button>" +
+								"<div class=\"question\">" +
+								"<p class=\"question-text\">Associez les éléments de la colonne de gauche avec ceux de la colonne de droite :</p>" +
+								"<div class=\"association-container\">" +
+								"<div class=\"association-column left-column\">" +
+								"<div class=\"association-item\" data-id=\"1\">Cheval</div>" +
+								"<div class=\"association-item\" data-id=\"2\"><img src=\"../images/cheval.jpg\" alt=\"Image 1\"></div>" +
+								"<div class=\"association-item\" data-id=\"3\">Vache</div>" +
+								"</div>" +
+								"<div class=\"association-column right-column\">" +
+								"<div class=\"association-item\" data-id=\"A\">Horse</div>" +
+								"<div class=\"association-item\" data-id=\"B\">Caballo</div>" +
+								"<div class=\"association-item\" data-id=\"C\"><img src=\"../images/cheval1.jpg\" alt=\"Image 2\"></div>" +
+								"<div class=\"association-item\" data-id=\"D\">Pferd</div>" +
+								"</div>" +
+								"</div>" +
+								"</div>" +
+								"<!-- Attention si l\'évaluation est chronométrée il ne peut pas revenir en arrière et" +
+								"il peut choisir de ne pas répondre à certaines d\'entre elles -->" +
+								"<div class=\"nav\">" +
+								"<button type=\"button\" class=\"nav-button previous-button\">Précédent</button>" +
+								"<button type=\"button\" class=\"nav-button validate-button\">Valider</button>" +
+								"<button type=\"button\" class=\"nav-button feedback-button\">Feedback</button>" +
+								"<button type=\"button\" class=\"nav-button next-button\">Suivant</button>" +
+								"</div>" +
+								"</div>" +
+								"<!-- PopUp pour le feedback -->" +
+								"<div class=\"popup\">" +
+								"<div class=\"popup-content\">" +
+								"<button type=\"button\" class=\"close-button\">Fermer</button>" +
+								"<p class=\"feedback-title\">Réponse</p>" +
+								"<p class=\"feedback-text\">La réponse à la question est la suivante : \"Blanc\".</p>" +
+								"</div>" +
+								"</div>" +
+								"<script src=\"../script/popup.js\"></script>" +
+								"<script src=\"../script/index.js\"></script>" +
+								"<script>" +
+								"document.addEventListener(\"DOMContentLoaded\", function () {" +
+								"const progressBars = document.querySelectorAll(\".progress-bar\");" +
+								"progressBars.forEach(progressBar => {" +
+								"const total = parseInt(progressBar.dataset.total, 10);" +
+								"const current = parseInt(progressBar.dataset.current, 10);" +
+								"const progressFill = progressBar.querySelector(\".progress-bar-fill\");" +
+								"if (total && current >= 0) {" +
+								"const widthPercentage = (current / total) * 100;" +
+								"progressFill.style.width = `${widthPercentage}%`;" +
+								"}" +
+								"});" +
+								"});" +
+								"</script>" +
+								"</body>" +
 								"</html>";
 			question3Writer.println(sQuestion3);
 			question3Writer.close();
 
 			PrintWriter question4Writer = new PrintWriter("../questionnaire/pages/question4.html");
-			String sQuestion4 = headerQuestion + //
-								"<body value=\"4\">\n" + //
-								"\t<div class=\"container question-unique\">\n" + //
-								"\t\t<div class=\"informations\">\n" + //
-								"\t\t\t<p class=\"question-number\">Question numéro : <span class=\"question-number-data\">4</span></p>\n" + //
-								"\t\t\t<p class=\"notion\">Notion : <span class=\"notion-data\">Notion 1</span></p>\n" + //
-								"\t\t\t<p class=\"difficulty\">Difficulté : <span class=\"difficulty-data\">Facile</span></p>\n" + //
-								"\t\t\t<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">30sec</span></p>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- barre de progression des questions -->\n" + //
-								"\t\t<div class=\"progress-bar\" data-total=\"4\" data-current=\"4\">\n" + //
-								"\t\t\t<div class=\"progress-bar-fill\"></div>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Pas tous le temps -->\n" + //
-								"\t\t<div class=\"countdown\">\n" + //
-								"\t\t\t<p class=\"countdown-title\">Temps restant :</p>\n" + //
-								"\t\t\t<p class=\"countdown-data\">30</p>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Image pour la question -->\n" + //
-								"\t\t<img src=\"../images/cheval.jpg\" alt=\"Cheval blanc d'Henri IV\" class=\"question-image\">\n" + //
-								"\n" + //
-								"\t\t<button type=\"button\" class=\"complementary-file-button\">Voir le fichier complémentaire</button>\n" + //
-								"\n" + //
-								"\t\t<div class=\"question\">\n" + //
-								"\t\t\t<p class=\"question-text\">Quelle est la couleur du cheval blanc d'Henri IV ?</p>\n" + //
-								"\t\t\t<div class=\"answers\">\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"radio\" name=\"answer\" id=\"answer1\" value=\"answer1\">\n" + //
-								"\t\t\t\t\t<label for=\"answer1\">Blanc</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"radio\" name=\"answer\" id=\"answer2\" value=\"answer2\">\n" + //
-								"\t\t\t\t\t<label for=\"answer2\">Noir</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"radio\" name=\"answer\" id=\"answer3\" value=\"answer3\">\n" + //
-								"\t\t\t\t\t<label for=\"answer3\">Rouge</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t\t<div class=\"answer\">\n" + //
-								"\t\t\t\t\t<input type=\"radio\" name=\"answer\" id=\"answer4\" value=\"answer4\">\n" + //
-								"\t\t\t\t\t<label for=\"answer4\">Vert</label>\n" + //
-								"\t\t\t\t</div>\n" + //
-								"\t\t\t</div>\n" + //
-								"\t\t</div>\n" + //
-								"\n" + //
-								"\t\t<!-- Attention si l'évaluation est chronométrée il ne peut pas revenir en arrière et\n" + //
-								"\t\t\til peut choisir de ne pas répondre à certaines d'entre elles -->\n" + //
-								"\t\t<div class=\"nav\">\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button previous-button\">Précédent</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button validate-button\">Valider</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button feedback-button\">Feedback</button>\n" + //
-								"\t\t\t<button type=\"button\" class=\"nav-button next-button\">Suivant</button>\n" + //
-								"\t\t</div>\n" + //
-								"\t</div>\n" + //
-								"\n" + //
-								"\t<!-- PopUp pour le feedback -->\n" + //
-								"\t<div class=\"popup\">\n" + //
-								"\t\t<div class=\"popup-content\">\n" + //
-								"\t\t\t<button type=\"button\" class=\"close-button\">Fermer</button>\n" + //
-								"\t\t\t<p class=\"feedback-title\">Réponse</p>\n" + //
-								"\t\t\t<p class=\"feedback-text\">La réponse à la question est la suivante : \"Blanc\".</p>\n" + //
-								"\t\t</div>\n" + //
-								"\t</div>\n" + //
-								"\n" + //
-								"\t<script src=\"../script/popup.js\"></script>\n" + //
-								"\t<script src=\"../script/index.js\"></script>\n" + //
-								"\n" + //
-								"\t<script>\n" + //
-								"\t\tdocument.addEventListener(\"DOMContentLoaded\", function () {\n" + //
-								"\t\t\tconst progressBars = document.querySelectorAll(\".progress-bar\");\n" + //
-								"\n" + //
-								"\t\t\tprogressBars.forEach(progressBar => {\n" + //
-								"\t\t\t\tconst total = parseInt(progressBar.dataset.total, 10);\n" + //
-								"\t\t\t\tconst current = parseInt(progressBar.dataset.current, 10);\n" + //
-								"\t\t\t\tconst progressFill = progressBar.querySelector(\".progress-bar-fill\");\n" + //
-								"\n" + //
-								"\t\t\t\tif (total && current >= 0) {\n" + //
-								"\t\t\t\tconst widthPercentage = (current / total) * 100;\n" + //
-								"\t\t\t\tprogressFill.style.width = `${widthPercentage}%`;\n" + //
-								"\t\t\t\t}\n" + //
-								"\t\t\t});\n" + //
-								"\t\t});\n" + //
-								"\t</script>\n" + //
-								"</body>\n" + //
+			String sQuestion4 = headerQuestion +
+								"<body value=\"4\">" +
+								"<div class=\"container question-unique\">" +
+								"<div class=\"informations\">" +
+								"<p class=\"question-number\">Question numéro : <span class=\"question-number-data\">4</span></p>" +
+								"<p class=\"notion\">Notion : <span class=\"notion-data\">Notion 1</span></p>" +
+								"<p class=\"difficulty\">Difficulté : <span class=\"difficulty-data\">Facile</span></p>" +
+								"<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">30sec</span></p>" +
+								"</div>" +
+								"<!-- barre de progression des questions -->" +
+								"<div class=\"progress-bar\" data-total=\"4\" data-current=\"4\">" +
+								"<div class=\"progress-bar-fill\"></div>" +
+								"</div>" +
+								"<!-- Pas tous le temps -->" +
+								"<div class=\"countdown\">" +
+								"<p class=\"countdown-title\">Temps restant :</p>" +
+								"<p class=\"countdown-data\">30</p>" +
+								"</div>" +
+								"<!-- Image pour la question -->" +
+								"<img src=\"../images/cheval.jpg\" alt=\"Cheval blanc d\'Henri IV\" class=\"question-image\">" +
+								"<button type=\"button\" class=\"complementary-file-button\">Voir le fichier complémentaire</button>" +
+								"<div class=\"question\">" +
+								"<p class=\"question-text\">Quelle est la couleur du cheval blanc d\'Henri IV ?</p>" +
+								"<div class=\"answers\">" +
+								"<div class=\"answer\">" +
+								"<input type=\"radio\" name=\"answer\" id=\"answer1\" value=\"answer1\">" +
+								"<label for=\"answer1\">Blanc</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"radio\" name=\"answer\" id=\"answer2\" value=\"answer2\">" +
+								"<label for=\"answer2\">Noir</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"radio\" name=\"answer\" id=\"answer3\" value=\"answer3\">" +
+								"<label for=\"answer3\">Rouge</label>" +
+								"</div>" +
+								"<div class=\"answer\">" +
+								"<input type=\"radio\" name=\"answer\" id=\"answer4\" value=\"answer4\">" +
+								"<label for=\"answer4\">Vert</label>" +
+								"</div>" +
+								"</div>" +
+								"</div>" +
+								"<!-- Attention si l\'évaluation est chronométrée il ne peut pas revenir en arrière et" +
+								"il peut choisir de ne pas répondre à certaines d\'entre elles -->" +
+								"<div class=\"nav\">" +
+								"<button type=\"button\" class=\"nav-button previous-button\">Précédent</button>" +
+								"<button type=\"button\" class=\"nav-button validate-button\">Valider</button>" +
+								"<button type=\"button\" class=\"nav-button feedback-button\">Feedback</button>" +
+								"<button type=\"button\" class=\"nav-button next-button\">Suivant</button>" +
+								"</div>" +
+								"</div>" +
+								"<!-- PopUp pour le feedback -->" +
+								"<div class=\"popup\">" +
+								"<div class=\"popup-content\">" +
+								"<button type=\"button\" class=\"close-button\">Fermer</button>" +
+								"<p class=\"feedback-title\">Réponse</p>" +
+								"<p class=\"feedback-text\">La réponse à la question est la suivante : \"Blanc\".</p>" +
+								"</div>" +
+								"</div>" +
+								"<script src=\"../script/popup.js\"></script>" +
+								"<script src=\"../script/index.js\"></script>" +
+								"<script>" +
+								"document.addEventListener(\"DOMContentLoaded\", function () {" +
+								"const progressBars = document.querySelectorAll(\".progress-bar\");" +
+								"progressBars.forEach(progressBar => {" +
+								"const total = parseInt(progressBar.dataset.total, 10);" +
+								"const current = parseInt(progressBar.dataset.current, 10);" +
+								"const progressFill = progressBar.querySelector(\".progress-bar-fill\");" +
+								"if (total && current >= 0) {" +
+								"const widthPercentage = (current / total) * 100;" +
+								"progressFill.style.width = `${widthPercentage}%`;" +
+								"}" +
+								"});" +
+								"});" +
+								"</script>" +
+								"</body>" +
 								"</html>";
 			question4Writer.println(sQuestion4);
 			question4Writer.close();
@@ -761,27 +696,23 @@ public class QCMBuilder
 			indexJsWriter.close();
 
 			PrintWriter popupJsWriter = new PrintWriter("../questionnaire/script/popup.js");
-			String sPopup = "// Ouvrir et fermer la popup\n" + //
-							"document.addEventListener(\"DOMContentLoaded\", function () {\n" + //
-							"\tconst feedbackButton = document.querySelector(\".feedback-button\");\n" + //
-							"\tconst popup = document.querySelector(\".popup\");\n" + //
-							"\tconst closeButton = document.querySelector(\".close-button\");\n" + //
-							"\n" + //
-							"\n" + //
-							"\tfeedbackButton.addEventListener(\"click\", function () {\n" + //
-							"\t\tpopup.style.display = 'flex';\n" + //
-							"\t});\n" + //
-							"\n" + //
-							"\tcloseButton.addEventListener(\"click\", function () {\n" + //
-							"\t\tpopup.style.display = 'none';\n" + //
-							"\t});\n" + //
-							"\n" + //
-							"\t// Fermer la popup en cliquant en dehors de la popup\n" + //
-							"\twindow.addEventListener(\"click\", function (event) {\n" + //
-							"\t\tif (event.target === popup) {\n" + //
-							"\t\t\tpopup.style.display = 'none';\n" + //
-							"\t\t}\n" + //
-							"\t});\n" + //
+			String sPopup = "// Ouvrir et fermer la popup" +
+							"document.addEventListener(\"DOMContentLoaded\", function () {" +
+							"const feedbackButton = document.querySelector(\".feedback-button\");" +
+							"const popup = document.querySelector(\".popup\");" +
+							"const closeButton = document.querySelector(\".close-button\");" +
+							"feedbackButton.addEventListener(\"click\", function () {" +
+							"popup.style.display = \'flex\';" +
+							"});" +
+							"closeButton.addEventListener(\"click\", function () {" +
+							"popup.style.display = \'none\';" +
+							"});" +
+							"// Fermer la popup en cliquant en dehors de la popup" +
+							"window.addEventListener(\"click\", function (event) {" +
+							"if (event.target === popup) {" +
+							"popup.style.display = \'none\';" +
+							"}" +
+							"});" +
 							"});";
 			popupJsWriter.println(sPopup);
 			popupJsWriter.close();
