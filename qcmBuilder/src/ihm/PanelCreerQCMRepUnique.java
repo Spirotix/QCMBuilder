@@ -92,7 +92,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 			for (PanelReponse p : this.reponsesPossibles)
 				lstReponses.add(p.getString());
 
-			this.panelQ.creer(this.txtExplication, this.question.getText(), lstReponses);
+			this.panelQ.creerQCM(this.txtExplication, this.question.getText(), lstReponses);
 		}
 		
 		

@@ -108,7 +108,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 			for (PanelReponseAsso p : this.reponsesPossibles)
 				lstReponses.add(p.getString());
 
-			this.panelQ.creer(this.txtExplication, this.question.getText(), lstReponses);
+			this.panelQ.creerAsso(this.txtExplication, this.question.getText(), lstReponses);
 		}
 			
 		
