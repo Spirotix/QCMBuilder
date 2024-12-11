@@ -72,25 +72,57 @@ public class Notion
 				scanner.nextLine();
 				line = scanner.nextLine();
 
-				if ( type.equals("Association"))
+				if ( type.equals("Association") )
 				{
 					List<ReponseAssociation> lstReponse = new ArrayList<>();
+
 					while (!line.contains("{\\b Fin}"))
 					{
-						
+						List<Integer> lstInd = new ArrayList<>();
+
+						String[] tmp = line.substring(line.indexOf("->") + 2, line.indexOf("::") - 1).split("_");
+						for (String s : tmp)
+							lstInd.add( Integer.parseInt(s) );
+
+						String textReponseDroite = "";
+
+						if ( line.contains("->") )
+							textReponseDroite = line.substring(line.indexOf("} ") + 2, line.indexOf("->"));
+						else
+							textReponseDroite = line.substring(line.indexOf("} ") + 2, line.indexOf("::"));
+
+						String textReponseGauche = "";
+
+						textReponseGauche = line.substring(line.indexOf("} ") + 2, line.indexOf("::"));
+	
+						if ( !textReponseDroite.equals("[null]") )
+							lstReponse.add(new ReponseAssociation(
+							                                      textReponseDroite,
+							                                      lstInd,
+							                                      Integer.parseInt(line.substring(line.indexOf("\b ") + 3, line.indexOf(":}") - 1)),
+							                                      true
+							                                     ));
+						if ( !textReponseGauche.equals("[null]") )
+							lstReponse.add(new ReponseAssociation(
+							                                      textReponseGauche,
+							                                      null,
+							                                      Integer.parseInt(line.substring(line.indexOf("\b ") + 3, line.indexOf(":}") - 1)),
+							                                      false
+							                                      ));
+  
+						line = scanner.nextLine();
 					}
 
 					Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
 					questions.add(question);
 				}
-				
 				else if ( type.equals("Elimination"))
 				{
 					List<ReponseElimination> lstReponse = new ArrayList<>();
 					while ( !line.contains("{\\b Fin}") )
 					{
 						lstReponse.add(new ReponseElimination(
-						                                      line.substring(line.indexOf("} ") + 1, line.indexOf("|")),
+						                                      line.substring(line.indexOf("} ") + 2, line.indexOf("|")),
 						                                      line.substring(line.indexOf("|") + 1, line.indexOf("||")),
 						                                      Integer.parseInt(line.substring(line.indexOf("||") + 2, line.indexOf("/")))
 						                                     ));
@@ -100,26 +132,24 @@ public class Notion
 					//Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
 					//questions.add(question);
 				}
-
 				else if (type.equals("QCM"))
 				{
 					List<ReponseQCM> lstReponse = new ArrayList<>();
 					while (!line.contains("{\\b Fin}"))
 					{
 						lstReponse.add(new ReponseQCM(
-						                           line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
-						                           line.substring(line.indexOf(".")  + 1, line.indexOf("|"))
-						                          ));
+						                              line.substring(line.indexOf("} ") + 2, line.indexOf("|")),
+						                              line.substring(line.indexOf("|") + 1, line.indexOf("||"))
+						                             ));
 						line = scanner.nextLine();
 					}
 
 					Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
 					questions.add(question);
 				}
-
 				else
-				{			scanner.close();
-
+				{
+					scanner.close();
 					throw new IllegalArgumentException("Le type doit être appartenir aux options suivantes : 'Association','Elimination','QCM'"); 
 				}
 			}
