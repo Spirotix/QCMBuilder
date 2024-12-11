@@ -30,7 +30,7 @@ public class PaintComponentAsso extends JPanel
 		{
 			System.out.println("Ca affiche2");
 			pg = this.panelQ.getLstReponses().get(j).getPanelGauche();
-			if (pg.getListe().size()!=0)
+			if (pg!=null && pg.getListe().size()!=0)
 			{
 				System.out.println("Ca affiche3");
 				for (int i=0; i<pg.getListe().size(); i++)
