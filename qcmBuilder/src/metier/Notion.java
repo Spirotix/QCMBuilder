@@ -25,29 +25,31 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try
 		{
-			Scanner scanner = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom));
+			Scanner scanner = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom + ".rtf"));
 			while (scanner.hasNextLine())
 			{
 				String line = scanner.nextLine();
-				while ( !line.contains("Question"))
+				while ( scanner.hasNextLine() && ! line.contains("Question") )
 				{
 					line = scanner.nextLine();
 				}
+
+				if ( !scanner.hasNextLine()) break;
 
 				line = scanner.nextLine();
 				String text = line.substring(0, line.indexOf("\\par"));
 
 				line           = scanner.nextLine();
-				double nbPoint = Double.parseDouble(line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
+				double nbPoint = Double.parseDouble(line.substring(line.indexOf("} ") + 2, line.indexOf("\\par") - 1));
 
 				line = scanner.nextLine();
-				String type = line.substring(line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
+				String type = line.substring(line.indexOf("} ") + 2, line.indexOf("\\par") - 1);
 
 				line = scanner.nextLine();
-				String sNiveau = line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1);
+				String sNiveau = line.substring( line.indexOf("} ") + 2, line.indexOf("\\par") - 1);
 
 				line = scanner.nextLine();
-				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 1, line.indexOf("\\par") - 1));
+				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 2, line.indexOf("\\par") - 1));
 
 				int niveau;
 				switch(sNiveau)

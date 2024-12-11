@@ -354,8 +354,9 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		 * Texte_réponse1 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
 		 * Texte_réponse2 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
 		 * Exemple : 
-		 * Maison -> 1_3_5///fenetre
-		 * Cabane -> 2_3///porte
+		 * Chien -> 1_3///aboie
+		 * Chat -> 2///Miaule
+		 * Poisson///grogne
 		 */
 		this.typeQuestion = "Association";
 		this.textQuestion = intituleQuestion;

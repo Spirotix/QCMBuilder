@@ -1,6 +1,7 @@
 package src.test;
 
 import src.metier.Notion;
+import src.metier.Question;
 import src.metier.Ressource;
 
 public class AffichageNotion 
@@ -11,6 +12,11 @@ public class AffichageNotion
 		for ( Notion n : r1.getNotions() )
 		{
 			System.out.println(n.getNom());
+
+			for ( Question q : n.getQuestions() )
+			{
+				System.out.println(q.getText());
+			}
 		}
 	}
 }
