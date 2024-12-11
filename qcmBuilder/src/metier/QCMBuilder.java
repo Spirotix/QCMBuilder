@@ -750,15 +750,14 @@ public class QCMBuilder
 		}
 	}
 
-	public static void main(String[] args) {
-		QCMBuilder qcmBuilder = new QCMBuilder();
+	public static void main(String[] args)
+	{
+		QCMBuilder   qcmBuilder  = new QCMBuilder();
 		List<String> nomsNotions = new ArrayList<>();
-		nomsNotions.add("Le pipi");
-		nomsNotions.add("Le caca");
-		nomsNotions.add("Le popo");
-		nomsNotions.add("Bilel");
+		nomsNotions.add("Les types de bases");
+		nomsNotions.add("Les tableaux à 1 dimension");
+		nomsNotions.add("Les tableaux à deux dimensions");
 
-
-		qcmBuilder.genererQuestionnaire("Bases de données", nomsNotions);
+		qcmBuilder.genererQuestionnaire("Initiation au développement", nomsNotions);
 	}
 }
