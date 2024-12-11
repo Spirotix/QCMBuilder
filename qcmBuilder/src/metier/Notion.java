@@ -16,7 +16,6 @@ public class Notion
 	private String         nom      ;
 	private Ressource      ressource;
 	private List<Question> questions;
-	private List<Couple>   couples  ;
 
 	public Notion(String nom, Ressource ressource)
 	{
@@ -73,97 +72,85 @@ public class Notion
 				scanner.nextLine();
 				line = scanner.nextLine();
 
-				List<Reponse> lstReponse;
-				lstReponse = new ArrayList<>();
-
-				List<Couple> lstCouple;
-				lstCouple  = new ArrayList<>();
-
-				if ( type.equals("Association"))
+				if ( type.equals("Association") )
 				{
+					List<ReponseAssociation> lstReponse = new ArrayList<>();
+
 					while (!line.contains("{\\b Fin}"))
 					{
-						Reponse premier;
-						Reponse second ;
+						List<Integer> lstInd = new ArrayList<>();
 
-						if (line.substring(line.indexOf("} ") + 1, line.indexOf("::") - 1).equals("[null]"))
-						{
-							premier = null;
-						}
+						String[] tmp = line.substring(line.indexOf("->") + 2, line.indexOf("::") - 1).split("_");
+						for (String s : tmp)
+							lstInd.add( Integer.parseInt(s) );
+
+						String textReponseDroite = "";
+
+						if ( line.contains("->") )
+							textReponseDroite = line.substring(line.indexOf("} ") + 2, line.indexOf("->"));
 						else
-						{
-							premier = new Reponse(
-							                      "Vrai",
-							                      line.substring(line.indexOf("} ") + 1, line.indexOf("::"))
-							                     );
-						}
+							textReponseDroite = line.substring(line.indexOf("} ") + 2, line.indexOf("::"));
 
-						if ( line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1).equals("[null]"))
-						{
-							second = null;
-						}
-						else
-						{
-							second = new Reponse(
-							                     "Vrai",
-							                     line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1)
-							                    );
-						}
+						String textReponseGauche = "";
 
-						lstCouple.add(new Couple(premier, second));
+						textReponseGauche = line.substring(line.indexOf("} ") + 2, line.indexOf("::"));
+	
+						if ( !textReponseDroite.equals("[null]") )
+							lstReponse.add(new ReponseAssociation(
+							                                      textReponseDroite,
+							                                      lstInd,
+							                                      Integer.parseInt(line.substring(line.indexOf("\b ") + 3, line.indexOf(":}") - 1)),
+							                                      true
+							                                     ));
+						if ( !textReponseGauche.equals("[null]") )
+							lstReponse.add(new ReponseAssociation(
+							                                      textReponseGauche,
+							                                      null,
+							                                      Integer.parseInt(line.substring(line.indexOf("\b ") + 3, line.indexOf(":}") - 1)),
+							                                      false
+							                                      ));
+  
 						line = scanner.nextLine();
 					}
+
+					Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
+					questions.add(question);
 				}
-				if ( type.equals("Elimination"))
+				else if ( type.equals("Elimination"))
 				{
-					while (!line.contains("{\\b Fin}"))
+					List<ReponseElimination> lstReponse = new ArrayList<>();
+					while ( !line.contains("{\\b Fin}") )
 					{
 						lstReponse.add(new ReponseElimination(
-						                           line.substring(line.indexOf("} ") + 1, line.indexOf("|")),
-						                           line.substring(line.indexOf("|") + 1, line.indexOf("||")),
-						                           Integer.parseInt(line.substring(line.indexOf("||") + 2, line.indexOf("/")))
-						                          ));
+						                                      line.substring(line.indexOf("} ") + 2, line.indexOf("|")),
+						                                      line.substring(line.indexOf("|") + 1, line.indexOf("||")),
+						                                      Integer.parseInt(line.substring(line.indexOf("||") + 2, line.indexOf("/")))
+						                                     ));
 						line = scanner.nextLine();
 					}
-				}
-				
-				if (type.equals("QCM"))
-				{
 
+					//Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
+					//questions.add(question);
+				}
+				else if (type.equals("QCM"))
+				{
+					List<ReponseQCM> lstReponse = new ArrayList<>();
 					while (!line.contains("{\\b Fin}"))
 					{
-						lstReponse.add(new Reponse(
-						                           line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
-						                           line.substring(line.indexOf(".")  + 1, line.indexOf("|"))
-						                          ));
+						lstReponse.add(new ReponseQCM(
+						                              line.substring(line.indexOf("} ") + 2, line.indexOf("|")),
+						                              line.substring(line.indexOf("|") + 1, line.indexOf("||"))
+						                             ));
 						line = scanner.nextLine();
 					}
+
+					Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
+					questions.add(question);
 				}
-
-				switch (type)
+				else
 				{
-					case "QCM" ->
-					{
-						Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
-						questions.add(question);
-					}
-
-					case "Association" ->
-					{
-						Question question = new Association(this, text, temps, nbPoint, niveau, lstCouple, "");
-						questions.add(question);
-					}
-
-					case "Elimination" ->
-					{
-						//Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
-						//questions.add(question);
-					}
-
-					default ->
-					{
-						System.out.println("Type de question inconnu");
-					}
+					scanner.close();
+					throw new IllegalArgumentException("Le type doit être appartenir aux options suivantes : 'Association','Elimination','QCM'"); 
 				}
 			}
 			scanner.close();
