@@ -1,7 +1,6 @@
 package src;
 import  java.util.ArrayList;
 import java.util.List;
-import  src.ihm.*;
 import  src.metier.*;
 
 public class Controleur
@@ -86,9 +85,9 @@ public class Controleur
 	}
 
 
-	public void genererQuestionnaire(String nomRessource, String nomNotion)
+	public void genererQuestionnaire(String nomRessource, List<String> nomsNotions)
 	{
-		qcmBuilder.genererQuestionnaire(nomRessource, nomNotion);
+		qcmBuilder.genererQuestionnaire(nomRessource, nomsNotions);
 	}
 
 	public static void main(String[] args) {
