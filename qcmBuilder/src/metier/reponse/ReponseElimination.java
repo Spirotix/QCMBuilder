@@ -2,9 +2,9 @@ package src.metier.reponse;
 
 public class ReponseElimination extends Reponse
 {
-	int ordreIndice;
-	boolean estVisible;
-	boolean estVrai;
+	private int ordreIndice;
+	private boolean estVisible;
+	private boolean estVrai;
 	public ReponseElimination(String textReponse, int ordreIndice, String estVrai)
 	{
 		super(textReponse);

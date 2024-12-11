@@ -5,10 +5,9 @@ import  src.metier.*;
 
 public class Controleur
 {
-	QCMBuilder qcmBuilder;
-	
+	private QCMBuilder qcmBuilder;
 
-	public Controleur() 
+	public Controleur()
 	{
 		qcmBuilder = new QCMBuilder();
 		new FrameCreerQuestion(this);
