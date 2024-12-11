@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import src.metier.question.Association;
+import src.metier.question.QCM;
+import src.metier.question.Question;
+import src.metier.reponse.*;
+
 public class Notion
 {
 	private String         nom      ;
@@ -89,8 +94,7 @@ public class Notion
 						{
 							premier = new Reponse(
 							                      "Vrai",
-							                      line.substring(line.indexOf("} ") + 1, line.indexOf("::")),
-							                      0
+							                      line.substring(line.indexOf("} ") + 1, line.indexOf("::"))
 							                     );
 						}
 
@@ -102,7 +106,7 @@ public class Notion
 						{
 							second = new Reponse(
 							                     "Vrai",
-							                     line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1),
+							                     line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1)
 							                    );
 						}
 
@@ -114,14 +118,15 @@ public class Notion
 				{
 					while (!line.contains("{\\b Fin}"))
 					{
-						lstReponse.add(new Reponse(
+						lstReponse.add(new ReponseElimination(
 						                           line.substring(line.indexOf("} ") + 1, line.indexOf("|")),
 						                           line.substring(line.indexOf("|") + 1, line.indexOf("||")),
-						                           0
+						                           Integer.parseInt(line.substring(line.indexOf("||") + 2, line.indexOf("/")))
 						                          ));
 						line = scanner.nextLine();
 					}
 				}
+				
 				if (type.equals("QCM"))
 				{
 
@@ -129,8 +134,7 @@ public class Notion
 					{
 						lstReponse.add(new Reponse(
 						                           line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
-						                           line.substring(line.indexOf(".")  + 1, line.indexOf("|")),
-						                           0
+						                           line.substring(line.indexOf(".")  + 1, line.indexOf("|"))
 						                          ));
 						line = scanner.nextLine();
 					}

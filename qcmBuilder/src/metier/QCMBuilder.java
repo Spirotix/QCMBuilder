@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import src.metier.question.Association;
+import src.metier.question.QCM;
+import src.metier.reponse.Reponse;
+
 public class QCMBuilder
 {
 	private List<Ressource> ressources;
@@ -106,7 +110,7 @@ public class QCMBuilder
 			for (String sReponse : sLstReponses)
 			{
 				String[] parts = sReponse.split("_");
-				Reponse reponse = new Reponse(parts[1], parts[0], 0);
+				Reponse reponse = new Reponse(parts[1], parts[0]);
 				lstReponses.add(reponse);
 			}
 
@@ -114,6 +118,19 @@ public class QCMBuilder
 			return true;
 		}
 
+		if ( type.equals("Association"))
+		{
+			List<Couple> lstCouple = new ArrayList<>();
+			for (String sCouple : sLstReponses)
+			{
+				String[] parts = sCouple.split("_");
+				Couple couple = new Couple(parts[0], parts[1]);
+				lstCouple.add(couple);
+			}
+
+			notion.ajouterQuestion(new Association(notion, text, timer, nbPoint, difficulte, lstCouple, explication));
+			return true;
+		}
 		return false;
 	}
 

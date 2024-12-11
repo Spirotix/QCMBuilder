@@ -1,5 +1,8 @@
-package src.metier;
+package src.metier.question;
 import java.util.List;
+
+import src.metier.Notion;
+import src.metier.reponse.Reponse;
 
 public class Elimination extends Question
 {
@@ -40,6 +43,6 @@ public class Elimination extends Question
 		}
 	}
 
-	
+
 
 }

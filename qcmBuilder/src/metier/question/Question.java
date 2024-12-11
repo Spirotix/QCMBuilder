@@ -1,4 +1,6 @@
-package src.metier;
+package src.metier.question;
+
+import src.metier.Notion;
 
 public abstract class Question 
 {
