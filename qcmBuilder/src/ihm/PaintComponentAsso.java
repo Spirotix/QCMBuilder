@@ -19,6 +19,7 @@ public class PaintComponentAsso extends JPanel
 
 	public void paintComponent(Graphics g)
 	{
+		super.paintComponent(g);
 		this.g2 = (Graphics2D) g;
 		PanelReponseGaucheAsso pg = null;
 
