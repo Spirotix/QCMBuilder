@@ -43,6 +43,8 @@ public class Elimination extends Question
 		}
 	}
 
-
-
+	public List<ReponseElimination> getReponses() 
+	{
+		return this.lstReponses;
+	}
 }

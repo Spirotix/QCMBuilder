@@ -8,10 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import src.metier.question.Association;
-import src.metier.question.QCM;
-import src.metier.reponse.Reponse;
-import src.metier.reponse.ReponseAssociation;
+import src.metier.question.*;
+import src.metier.reponse.*;
 
 public class QCMBuilder
 {
@@ -107,11 +105,11 @@ public class QCMBuilder
 
 		if ( type.equals("QCM") )
 		{
-			List<Reponse> lstReponses = new ArrayList<>();
+			List<ReponseQCM> lstReponses = new ArrayList<>();
 			for (String sReponse : sLstReponses)
 			{
 				String[] parts = sReponse.split("_");
-				Reponse reponse = new Reponse(parts[1], parts[0]);
+				ReponseQCM reponse = new ReponseQCM(parts[1], parts[0]);
 				lstReponses.add(reponse);
 			}
 
@@ -122,13 +120,40 @@ public class QCMBuilder
 		if ( type.equals("Association"))
 		{
 			List<ReponseAssociation> lstReponse = new ArrayList<>();
+			int ind = 1;
 			for (String sRep : sLstReponses)
 			{
-				String[] parts = sRep.split("_");
-				ReponseAssociation couple = new ReponseAssociation(parts[0], parts[1]);
-				lstReponse.add(couple);
-			}
+				String textRep       = "";
+				List<Integer> lstInd = new ArrayList<>();
+				String textRep2      = "";
+				
+				if (!sRep.startsWith("[null]"))
+				{
+					if (sRep.contains("->"))
+					{
+						textRep  = sRep.substring(0, sRep.indexOf("->") - 2);
 
+						String allInd = sRep.substring(sRep.indexOf("->" + 2), sRep.indexOf("///") - -1);
+						String[] parts = allInd.split("_");
+						for (String part : parts)
+							lstInd.add(Integer.parseInt(part));
+					}
+					else
+					{
+						textRep = sRep.substring(0, sRep.indexOf("///") -1);
+						lstInd = null;
+					}
+					
+					lstReponse.add(new ReponseAssociation( textRep, lstInd, ind, true));
+				}
+				if ( !sRep.endsWith("[null]"))
+				{
+					textRep2 = sRep.substring(sRep.indexOf("///") + 3, sRep.length());
+					lstReponse.add(new ReponseAssociation( textRep2, null, ind, false));
+				}
+
+				ind++;
+			}
 			notion.ajouterQuestion(new Association(notion, text, timer, nbPoint, difficulte, lstReponse, explication));
 			return true;
 		}

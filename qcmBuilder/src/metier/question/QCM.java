@@ -1,39 +1,42 @@
 package src.metier.question;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import src.metier.Notion;
-import src.metier.reponse.Reponse;
+import src.metier.reponse.*;
 
 
 public class QCM extends Question
 {
 	private boolean       estQCU;
-	private List<Reponse> lstReponses;
+	private List<ReponseQCM> lstReponses;
 
-	public QCM(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses, String explication)
+	public QCM(Notion notion, String text, int timer, double nbPoint, int difficulte, List<ReponseQCM> lstReponses, String explication)
 	{
 		super(notion, text, timer, nbPoint, difficulte, explication);
 
 		this.lstReponses = lstReponses;
 		this.estQCU      = this.estUnique();
-	}
 
-	public boolean estUnique()
-	{
 		int nbReponseVrai = 0;
 
-		for( Reponse reponse : lstReponses)
+		for (ReponseQCM reponse : lstReponses)
 		{
-			if ( reponse.estVrai()){nbReponseVrai ++;}
+			if (reponse.estVrai())
+			{
+				nbReponseVrai++;
+			}
 		}
 
-		if ( nbReponseVrai > 1){return false;}
-		return true;
+		if (nbReponseVrai > 1)
+			this.estQCU = false;
+		else
+			this.estQCU = true;
 	}
 
-	public void setLstReponses (List<Reponse> lstReponses) { this.lstReponses = lstReponses; }
+	public boolean estUnique() { return estQCU;	}
 
-	public List<Reponse> getlstReponses(){ return lstReponses; }
+	public void setLstReponses (List<ReponseQCM> lstReponses) { this.lstReponses = lstReponses; }
+
+	public List<ReponseQCM> getlstReponses(){ return lstReponses; }
 }

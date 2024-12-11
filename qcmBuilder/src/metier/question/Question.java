@@ -10,7 +10,7 @@ public abstract class Question
 	protected double        nbPoint;
 	protected int           difficulte;
 	protected String        explication;
-
+	
 	public Question(Notion notion, String text, int timer, double nbPoint, int difficulte, String explication)
 	{
 		this.notions     = notion;
