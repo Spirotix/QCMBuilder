@@ -5,7 +5,7 @@ public class ReponseElimination extends Reponse
 	private int ordreIndice;
 	private boolean estVisible;
 	private boolean estVrai;
-	public ReponseElimination(String textReponse, int ordreIndice, String estVrai)
+	public ReponseElimination(String estVrai, String textReponse, int ordreIndice )
 	{
 		super(textReponse);
 		this.ordreIndice = ordreIndice;
