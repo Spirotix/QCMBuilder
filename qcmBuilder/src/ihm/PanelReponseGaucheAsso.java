@@ -79,9 +79,14 @@ public class PanelReponseGaucheAsso extends JPanel implements ActionListener
 
 	public void supprimerLiaison (PanelReponseDroiteAsso pd)
 	{
+		boolean estPresent=false;
+		System.out.println("Suppresion " +this.nom + " : "+pd.getNom());
 		for (PanelReponseDroiteAsso prd: this.lstLiaison)
 			if (prd.equals(pd))
-				this.lstLiaison.remove (pd);
+				estPresent=true;
+		
+		if (estPresent)
+			this.lstLiaison.remove (pd);
 	}
 
 	public ArrayList<PanelReponseDroiteAsso> getListe() {return this.lstLiaison;}

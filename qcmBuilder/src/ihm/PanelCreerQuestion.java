@@ -328,19 +328,55 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		}
 	}
 
-	public void creerQCM(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
+	/*
+	 * Format des réponses QCM
+	 * Texte_réponse1_VRAI
+	 * Texte_réponse2_FAUX
+	 * Texte_réponse3_FAUX
+	 * Texte_réponse4_FAUX
+	 * Exemple : 
+	 * 35_VRAI
+	 * 33_FAUX
+	 * 25_FAUX
+	 */
+	/*
+	 * Format des réponses Association
+	 * Texte_réponse1 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
+	 * Texte_réponse2 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
+	 * Exemple : 
+	 * Chien -> 1_3///aboie
+	 * Chat -> 2///Miaule
+	 * Poisson///grogne
+	 */
+	/*
+	 * Format des réponses Elimination
+	 * Texte_réponse1_VRAI_cout_ordre
+	 * Texte_réponse2_FAUX_cout_ordre
+	 * Exemple : 
+	 * blablacar_FAUX_-0,25_1
+	 * Youtube_VRAI_0_0
+	 * Twitch_FAUX_0_0
+	 * Amazon_FAUX_-0,5_2
+	 */
+
+	public void creerQuestion(String explication, String intituleQuestion, ArrayList<String> lstReponses)
 	{
-		/*
-		 * Format des réponses
-		 * Texte_réponse1_VRAI
-		 * Texte_réponse2_FAUX
-		 * Texte_réponse3_FAUX
-		 * Texte_réponse4_FAUX
-		 * Exemple : 
-		 * 35_VRAI
-		 * 33_FAUX
-		 * 25_FAUX
-		 */
+		if (this.btnChoixMult.isSelected() || this.btnChoixUnique.isSelected())
+			this.typeQuestion = "QCM";
+		if (this.btnAsso.isSelected())
+			this.typeQuestion = "Association";
+		if (this.btnElim.isSelected())
+			this.typeQuestion = "Elimination";
+		
+		this.textQuestion = intituleQuestion;
+		this.explicationQuestion = explication;
+		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
+	}
+
+
+	/*public void creerQCM(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
+	{
+		
 		this.typeQuestion = "QCM";
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion = explication;
@@ -349,15 +385,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 	public void creerAsso(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
 	{
-		/*
-		 * Format des réponses
-		 * Texte_réponse1 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
-		 * Texte_réponse2 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
-		 * Exemple : 
-		 * Chien -> 1_3///aboie
-		 * Chat -> 2///Miaule
-		 * Poisson///grogne
-		 */
+		
 		this.typeQuestion = "Association";
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion = explication;
@@ -366,19 +394,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 	public void creerElim(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
 	{
-		/*
-		 * Format des réponses
-		 * Texte_réponse1_VRAI_cout_ordre
-		 * Texte_réponse2_FAUX_cout_ordre
-		 * Exemple : 
-		 * blablacar_FAUX_-0,25_1
-		 * Youtube_VRAI_0_0
-		 * Twitch_FAUX_0_0
-		 * Amazon_FAUX_-0,5_2
-		 */
+		
 		this.typeQuestion = "Elimination";
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion = explication;
 		this.ctrl.creerElim(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
-	}
+	}*/
 }

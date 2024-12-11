@@ -115,7 +115,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 			for (PanelReponseAsso p : this.reponsesPossibles)
 				lstReponses.add(p.getString());
 
-			this.panelQ.creerAsso(this.txtExplication, this.question.getText(), lstReponses);
+			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), lstReponses);
 		}
 		if (e.getSource().equals(this.explication))
 		{
@@ -128,6 +128,13 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	public void setTxtExplication(String expli) 
 	{
 		this.txtExplication = expli;
+	}
+
+	public void supprimerLiaison(PanelReponseDroiteAsso pd)
+	{
+		System.out.println("supprime");
+		for (PanelReponseAsso pa : this.reponsesPossibles)
+			pa.getPanelGauche().supprimerLiaison(pd);
 	}
 
 	// Obtenir le texte de l'explication

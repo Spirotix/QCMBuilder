@@ -92,7 +92,7 @@ public class PanelCreerElim extends JPanel implements ActionListener
 			for (PanelCreerReponsesElim p : this.reponsesPossibles)
 				lstReponses.add(p.getString());
 
-			this.panelQ.creerElim(this.txtExplication, this.question.getText(), lstReponses);
+			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), lstReponses);
 		}
 		
 		

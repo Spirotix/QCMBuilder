@@ -98,6 +98,8 @@ public class FrameExplication extends JFrame implements ActionListener
 				this.panelQCM.setTxtExplication(this.texts.getText());
 			if (this.panelAsso!=null)
 				this.panelAsso.setTxtExplication(this.texts.getText());
+			if (this.panelElim!=null)
+				this.panelElim.setTxtExplication(this.texts.getText());
 			this.dispose();
 		}
 	}

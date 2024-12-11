@@ -109,9 +109,10 @@ public class PanelReponseAsso extends JPanel
 			this.panelQ.supprimer(this);
 		else 
 		{
+			
 			this.removeAll();
-			this.panelGauche.supprimerLiaison(p);
 			this.add(this.panelGauche);
+			this.panelQ.supprimerLiaison(p);
 			this.panelDroite=null;
 			this.add(new JPanel());
 			this.revalidate();
@@ -127,15 +128,23 @@ public class PanelReponseAsso extends JPanel
 	public String getString()
 	{
 		String str ="";
-		str += this.panelGauche.getString();
-		if (this.panelGauche.getListe().size()>0)
+		if (this.panelGauche==null)
+			str += "[null]";
+		else 
 		{
-			str += " -> ";
-			for (PanelReponseDroiteAsso prd : this.panelGauche.getListe())
-				str+= prd.getNbReponse()+"_";
+			str += this.panelGauche.getString();
+			if (this.panelGauche.getListe().size()>0)
+			{
+				str += " -> ";
+				for (PanelReponseDroiteAsso prd : this.panelGauche.getListe())
+					str+= prd.getNbReponse()+"_";
+			}
 		}
-
-		str += "///"+this.panelDroite.getString();
+		
+		if (this.panelDroite==null)
+			str += "///[null]";
+		else
+			str += "///"+this.panelDroite.getString();
 
 		return str;
 	}
