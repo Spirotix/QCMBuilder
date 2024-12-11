@@ -1,10 +1,10 @@
 ./qcmBuilder/src/Controleur.java
 
 ./qcmBuilder/src/metier/question/Association.java
-./qcmBuilder/src/metier/question/Couple.java
+./qcmBuilder/src/metier/Couple.java
 ./qcmBuilder/src/metier/question/Elimination.java
 ./qcmBuilder/src/metier/Notion.java
-./qcmBuilder/src/metier/QCM.java
+./qcmBuilder/src/metier/question/QCM.java
 ./qcmBuilder/src/metier/QCMBuilder.java
 ./qcmBuilder/src/metier/question/Question.java
 ./qcmBuilder/src/metier/reponse/ReponseAssociation.java
