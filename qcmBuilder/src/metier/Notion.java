@@ -103,7 +103,6 @@ public class Notion
 							second = new Reponse(
 							                     "Vrai",
 							                     line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1),
-							                     0
 							                    );
 						}
 
