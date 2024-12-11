@@ -2,7 +2,7 @@ package src.metier.reponse;
 
 public class ReponseElimination extends Reponse
 {
-	int ordreIndice;
+	private int ordreIndice;
 
 	public ReponseElimination(String estVrai, String textReponse, int ordreIndice)
 	{
