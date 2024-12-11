@@ -41,7 +41,8 @@ public class PanelReponseGaucheAsso extends JPanel implements ActionListener
 		this.setVisible(true);
 
 	}
-
+	
+	
 	public String getNom () {return this.nom;}
 
 	public void ajouterBonneRep (PanelReponseDroiteAsso pb)

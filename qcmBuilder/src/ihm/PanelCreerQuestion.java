@@ -326,10 +326,38 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		}
 	}
 
-	public void creer(String explication, String intituleQuestion, ArrayList<String> lstReponses) {
+	public void creerQCM(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
+	{
+		/*
+		 * Format des réponses
+		 * Texte_réponse1_VRAI
+		 * Texte_réponse2_FAUX
+		 * Texte_réponse3_FAUX
+		 * Texte_réponse4_FAUX
+		 * Exemple : 
+		 * 35_VRAI
+		 * 33_FAUX
+		 * 25_FAUX
+		 */
 		this.typeQuestion = "QCM";
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion = explication;
-		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
+		this.ctrl.creerQCM(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
+	}
+
+	public void creerAsso(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
+	{
+		/*
+		 * Format des réponses
+		 * Texte_réponse1 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
+		 * Texte_réponse2 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
+		 * Exemple : 
+		 * Maison -> 1_3_5///fenetre
+		 * Cabane -> 2_3///porte
+		 */
+		this.typeQuestion = "Association";
+		this.textQuestion = intituleQuestion;
+		this.explicationQuestion = explication;
+		this.ctrl.creerAsso(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
 	}
 }

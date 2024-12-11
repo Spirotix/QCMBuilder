@@ -12,12 +12,14 @@ public class PanelReponseDroiteAsso extends JPanel implements ActionListener
 	private JButton				lier;
 	private JTextArea			contenu;
 	private static int 			nbPanel = 0;
+	public  int 				indice;
 	private String 				nom ;
 
 	public PanelReponseDroiteAsso (PanelReponseAsso panelQ)
 	{
 		this.panelQ = panelQ;
 		this.nom = "Panel Droite "+ ++PanelReponseDroiteAsso.nbPanel;
+		this.indice = PanelReponseDroiteAsso.nbPanel;
 		this.setLayout(new FlowLayout());
 
 		//Initialisation
@@ -38,6 +40,11 @@ public class PanelReponseDroiteAsso extends JPanel implements ActionListener
 
 		this.setVisible(true);
 
+	}
+
+	public int getNbReponse ()
+	{
+		return this.indice;
 	}
 
 	public void actionPerformed(ActionEvent e)
