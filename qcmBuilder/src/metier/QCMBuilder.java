@@ -11,6 +11,7 @@ import java.util.Scanner;
 import src.metier.question.Association;
 import src.metier.question.QCM;
 import src.metier.reponse.Reponse;
+import src.metier.reponse.ReponseAssociation;
 
 public class QCMBuilder
 {
@@ -120,15 +121,15 @@ public class QCMBuilder
 
 		if ( type.equals("Association"))
 		{
-			List<Couple> lstCouple = new ArrayList<>();
-			for (String sCouple : sLstReponses)
+			List<ReponseAssociation> lstReponse = new ArrayList<>();
+			for (String sRep : sLstReponses)
 			{
-				String[] parts = sCouple.split("_");
-				Couple couple = new Couple(parts[0], parts[1]);
-				lstCouple.add(couple);
+				String[] parts = sRep.split("_");
+				ReponseAssociation couple = new ReponseAssociation(parts[0], parts[1]);
+				lstReponse.add(couple);
 			}
 
-			notion.ajouterQuestion(new Association(notion, text, timer, nbPoint, difficulte, lstCouple, explication));
+			notion.ajouterQuestion(new Association(notion, text, timer, nbPoint, difficulte, lstReponse, explication));
 			return true;
 		}
 		return false;

@@ -17,5 +17,6 @@ public class ReponseAssociation extends Reponse
 	
 	public List<Integer> getLstInt()            { return lstInt;        }
 	public void setLstInt(List<Integer> lstInt) { this.lstInt = lstInt; }
+	public void addLstInt(int ind)              { this.lstInt.add(ind); }
 	
 }

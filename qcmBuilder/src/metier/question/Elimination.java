@@ -2,16 +2,16 @@ package src.metier.question;
 import java.util.List;
 
 import src.metier.Notion;
-import src.metier.reponse.Reponse;
+import src.metier.reponse.*;
 
 public class Elimination extends Question
 {
 	private int           nbIndice;
 	private int           nbIndiceUtilise;
 	private double[]      nbPointPerdu;
-	private List<Reponse> lstReponses;
+	private List<ReponseElimination> lstReponses;
 
-	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<Reponse> lstReponses, List<Double> nbPointPerdu, int nbIndice, String explication)
+	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<ReponseElimination> lstReponses, List<Double> nbPointPerdu, int nbIndice, String explication)
 	{
 		super(notion, text, timer, nbPoint, difficulte, explication);
 
@@ -37,7 +37,7 @@ public class Elimination extends Question
 		if ( nbIndiceUtilise >= nbIndice ){ return; }
 
 		nbIndiceUtilise++;
-		for ( Reponse reponse : lstReponses)
+		for ( ReponseElimination reponse : lstReponses)
 		{
 			if ( reponse.getOrdreIndice() == nbIndiceUtilise ) { reponse.setEstVisible(false); }
 		}
