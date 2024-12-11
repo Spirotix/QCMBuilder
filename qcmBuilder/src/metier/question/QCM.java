@@ -1,7 +1,10 @@
-package src.metier;
+package src.metier.question;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import src.metier.Notion;
+import src.metier.reponse.Reponse;
 
 
 public class QCM extends Question

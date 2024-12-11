@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import src.metier.question.Association;
+import src.metier.question.QCM;
+import src.metier.reponse.Reponse;
+import src.metier.reponse.ReponseAssociation;
+
 public class QCMBuilder
 {
 	private List<Ressource> ressources;
@@ -106,7 +111,7 @@ public class QCMBuilder
 			for (String sReponse : sLstReponses)
 			{
 				String[] parts = sReponse.split("_");
-				Reponse reponse = new Reponse(parts[1], parts[0], 0);
+				Reponse reponse = new Reponse(parts[1], parts[0]);
 				lstReponses.add(reponse);
 			}
 
@@ -114,6 +119,19 @@ public class QCMBuilder
 			return true;
 		}
 
+		if ( type.equals("Association"))
+		{
+			List<ReponseAssociation> lstReponse = new ArrayList<>();
+			for (String sRep : sLstReponses)
+			{
+				String[] parts = sRep.split("_");
+				ReponseAssociation couple = new ReponseAssociation(parts[0], parts[1]);
+				lstReponse.add(couple);
+			}
+
+			notion.ajouterQuestion(new Association(notion, text, timer, nbPoint, difficulte, lstReponse, explication));
+			return true;
+		}
 		return false;
 	}
 
@@ -750,15 +768,14 @@ public class QCMBuilder
 		}
 	}
 
-	public static void main(String[] args) {
-		QCMBuilder qcmBuilder = new QCMBuilder();
+	public static void main(String[] args)
+	{
+		QCMBuilder   qcmBuilder  = new QCMBuilder();
 		List<String> nomsNotions = new ArrayList<>();
-		nomsNotions.add("Le pipi");
-		nomsNotions.add("Le caca");
-		nomsNotions.add("Le popo");
-		nomsNotions.add("Bilel");
+		nomsNotions.add("Les types de bases");
+		nomsNotions.add("Les tableaux à 1 dimension");
+		nomsNotions.add("Les tableaux à deux dimensions");
 
-
-		qcmBuilder.genererQuestionnaire("Bases de données", nomsNotions);
+		qcmBuilder.genererQuestionnaire("Initiation au développement", nomsNotions);
 	}
 }

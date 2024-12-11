@@ -1,8 +1,8 @@
 package src.test;
 
 import src.metier.Notion;
-import src.metier.Question;
 import src.metier.Ressource;
+import src.metier.question.Question;
 
 public class AffichageNotion 
 {

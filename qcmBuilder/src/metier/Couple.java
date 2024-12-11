@@ -1,5 +1,7 @@
 package src.metier;
 
+import src.metier.reponse.Reponse;
+
 public class Couple
 {
 	private Reponse premier;

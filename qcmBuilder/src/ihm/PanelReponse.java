@@ -2,13 +2,11 @@
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
 
 public class PanelReponse extends JPanel implements ActionListener
 {
 	private PanelCreerQCMRepUnique 	panelQ;
-	private ArrayList<JPanel>	reponsesPossibles;
 	private JButton				corbeille;
 	private JTextField			contenu	;
 	private JCheckBox			validation ; 

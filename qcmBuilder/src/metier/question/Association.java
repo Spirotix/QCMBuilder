@@ -1,7 +1,10 @@
-package src.metier;
+package src.metier.question;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import src.metier.Couple;
+import src.metier.Notion;
 
 public class Association extends Question
 {

@@ -2,13 +2,11 @@
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
 
 public class PanelCreerReponsesElim extends JPanel implements ActionListener
 {
 	private PanelCreerElim 	panelQ;
-	private ArrayList<JPanel>	reponsesPossibles;
 	private JButton				corbeille;
 	private JTextField			ordre, cout, contenu	;
 	private JCheckBox			validation ; 

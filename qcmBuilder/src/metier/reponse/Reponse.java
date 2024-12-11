@@ -1,20 +1,18 @@
-package src.metier;
+package src.metier.reponse;
 
 public class Reponse 
 {
 	private String  text;
 	private boolean estVrai;
 	private boolean estVisible;
-	private int     ordreIndice;
 
-	public Reponse(String estVrai, String textReponse, int ordreIndice)
+	public Reponse(String estVrai, String textReponse)
 	{
 		this.text = textReponse;
 		if(estVrai.equals("Vrai")){ this.estVrai=true; }
 		else{ this.estVrai = false;}
 		this.estVisible = true;
 		
-		this.ordreIndice = ordreIndice;
 
 		this.text = textReponse;
 		if(estVrai.equals("Vrai")){ this.estVrai=true; }
@@ -31,6 +29,4 @@ public class Reponse
 	public boolean estVisible()                      { return estVisible;              }
 	public void    setEstVisible(boolean estVisible) { this.estVisible = estVisible;   }
 
-	public int    getOrdreIndice()                   { return ordreIndice;             }
-	public void   setOrdreIndice(int ordreIndice)    { this.ordreIndice = ordreIndice; }
 }

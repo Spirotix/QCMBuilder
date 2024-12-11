@@ -1,14 +1,11 @@
 //package src.ihm;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import java.util.*;
 
 public class PanelReponseAsso extends JPanel
 {
 	private PanelCreerQuestionAsso 	panelQ;
-	private ArrayList<JPanel>		reponsesPossibles;
 	private PanelReponseGaucheAsso 	panelGauche;
 	private PanelReponseDroiteAsso 	panelDroite;
 
@@ -73,7 +70,7 @@ public class PanelReponseAsso extends JPanel
 		if (PanelReponseAsso.lierDroite==null)
 			str2=null;
 		else 
-			str2 = this.lierDroite.getNom();
+			str2 = PanelReponseAsso.lierDroite.getNom();
 		
 		System.out.println("etape 1 : "+str1 +" : "+str2);
 
