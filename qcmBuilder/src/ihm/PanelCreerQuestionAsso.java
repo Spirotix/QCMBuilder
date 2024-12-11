@@ -134,7 +134,11 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	{
 		System.out.println("supprime");
 		for (PanelReponseAsso pa : this.reponsesPossibles)
-			pa.getPanelGauche().supprimerLiaison(pd);
+		{
+			if (pa.getPanelGauche()!=null)
+				pa.getPanelGauche().supprimerLiaison(pd);
+		}
+			
 	}
 
 	// Obtenir le texte de l'explication
