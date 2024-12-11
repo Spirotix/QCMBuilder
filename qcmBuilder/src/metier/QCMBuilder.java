@@ -117,7 +117,7 @@ public class QCMBuilder
 		return false;
 	}
 
-	public void genererQuestionnaire(String nomRessource, String nomNotion)
+	public void genererQuestionnaire(String nomRessource, List<String> nomsNotions)
 	{
 		try {
 
@@ -149,7 +149,7 @@ public class QCMBuilder
 			String sIndex =  header + //
 								"<body>\n" + //
 								"\t\n" + //
-								"\t<h1 class=\"evaluation-title\">Questionnaire "+ nomNotion + "</h1>\n" + //
+								"\t<h1 class=\"evaluation-title\">Questionnaire "+ nomRessource +"</h1>\n" + //
 								"\n" + //
 								"\t<div class=\"informations\">\n" + //
 								"\t\t<p class=\"estimated-time\">Temps estimé : <span class=\"estimated-time-data\">20h</span></p>\n" + //
@@ -157,11 +157,12 @@ public class QCMBuilder
 								"\t\t<p class=\"resource\">Ressources concernée : <span class=\"resource-data\">"+nomRessource+"</span></p>\n" + //
 								"\n" + //
 								"\t\t<p class=\"notions-title\">Notion abordées :</p>\n" + //
-								"\t\t<ul class=\"notions-list\">\n" + //
-								"\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 1</span></li>\n" + //
-								"\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 2</span></li>\n" + //
-								"\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">Notion 3</span></li>\n" + //
-								"\t\t</ul>\n" + //
+								"\t\t<ul class=\"notions-list\">\n"; //
+
+								for (String nom : nomsNotions)
+									sIndex+="\t\t\t<li class=\"notion-item\"><span class=\"notions-item-data\">"+ nom +"</span></li>\n"; //
+
+								sIndex+="\t\t</ul>\n" + //
 								"\n" + //
 								"\t\t<p class=\"questions-count\">Nombre de questions : <span class=\"questions-count-data\">10</span></p>\n" + //
 								"\t\t<ul class=\"difficulty-list\">\n" + //
@@ -751,6 +752,13 @@ public class QCMBuilder
 
 	public static void main(String[] args) {
 		QCMBuilder qcmBuilder = new QCMBuilder();
-		qcmBuilder.genererQuestionnaire("Bases de données", "SQL");
+		List<String> nomsNotions = new ArrayList<>();
+		nomsNotions.add("Le pipi");
+		nomsNotions.add("Le caca");
+		nomsNotions.add("Le popo");
+		nomsNotions.add("Bilel");
+
+
+		qcmBuilder.genererQuestionnaire("Bases de données", nomsNotions);
 	}
 }
