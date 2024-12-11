@@ -1,6 +1,11 @@
 # Compiled class file
 *.class
 
+# Ne pas ignorer les .class dans le dossier class
+!class/src/*.class
+!class/src/metier/*.class
+!class/src/ihm/*.class
+
 # Log file
 *.log
 

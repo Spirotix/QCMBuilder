@@ -10,13 +10,3 @@
 ./qcmBuilder/src/metier/Reponse.java
 ./qcmBuilder/src/metier/Ressource.java
 
-./qcmBuilder/src/ihm/FrameCreerAssociation.java
-./qcmBuilder/src/ihm/FrameCreerQCMRepUnique.java
-./qcmBuilder/src/ihm/FrameCreerQuestion.java
-./qcmBuilder/src/ihm/FrameExplication.java
-./qcmBuilder/src/ihm/PanelCreerQCMRepUnique.java
-./qcmBuilder/src/ihm/PanelCreerQuestion.java
-./qcmBuilder/src/ihm/PanelCreerQuestionAsso.java
-./qcmBuilder/src/ihm/PanelReponse.java
-./qcmBuilder/src/ihm/PanelReponseAsso.java
-./qcmBuilder/src/ihm/TestCreerQuestion.java
