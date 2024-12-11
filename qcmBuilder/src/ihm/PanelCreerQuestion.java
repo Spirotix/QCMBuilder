@@ -220,6 +220,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 					new FrameCreerQCMRepUnique(this);
 				if (this.btnAsso.isSelected())
 					new FrameCreerAssociation(this);
+				if (this.btnElim.isSelected())
+					new FrameCreerElimination(this);
 				this.fr.dispose();
 			}
 		}
@@ -360,5 +362,23 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion = explication;
 		this.ctrl.creerAsso(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
+	}
+
+	public void creerElim(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
+	{
+		/*
+		 * Format des réponses
+		 * Texte_réponse1_VRAI_cout_ordre
+		 * Texte_réponse2_FAUX_cout_ordre
+		 * Exemple : 
+		 * blablacar_FAUX_-0,25_1
+		 * Youtube_VRAI_0_0
+		 * Twitch_FAUX_0_0
+		 * Amazon_FAUX_-0,5_2
+		 */
+		this.typeQuestion = "Elimination";
+		this.textQuestion = intituleQuestion;
+		this.explicationQuestion = explication;
+		this.ctrl.creerElim(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
 	}
 }
