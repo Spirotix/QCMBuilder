@@ -2,7 +2,7 @@ package src.metier.reponse;
 
 public class ReponseQCM extends Reponse
 {
-	boolean estVrai;
+	private boolean estVrai;
 	public ReponseQCM(String estVrai, String textReponse)
 	{
 		super(textReponse);
