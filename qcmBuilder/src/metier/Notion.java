@@ -16,7 +16,6 @@ public class Notion
 	private String         nom      ;
 	private Ressource      ressource;
 	private List<Question> questions;
-	private List<Couple>   couples  ;
 
 	public Notion(String nom, Ressource ressource)
 	{
@@ -73,49 +72,21 @@ public class Notion
 				scanner.nextLine();
 				line = scanner.nextLine();
 
-				List<Reponse> lstReponse;
-				lstReponse = new ArrayList<>();
-
-				List<Couple> lstCouple;
-				lstCouple  = new ArrayList<>();
-
 				if ( type.equals("Association"))
 				{
+					List<ReponseAssociation> lstReponse = new ArrayList<>();
 					while (!line.contains("{\\b Fin}"))
 					{
-						Reponse premier;
-						Reponse second ;
 
-						if (line.substring(line.indexOf("} ") + 1, line.indexOf("::") - 1).equals("[null]"))
-						{
-							premier = null;
-						}
-						else
-						{
-							premier = new Reponse(
-							                      "Vrai",
-							                      line.substring(line.indexOf("} ") + 1, line.indexOf("::"))
-							                     );
-						}
-
-						if ( line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1).equals("[null]"))
-						{
-							second = null;
-						}
-						else
-						{
-							second = new Reponse(
-							                     "Vrai",
-							                     line.substring(line.indexOf("::") + 1, line.indexOf("\\par") - 1)
-							                    );
-						}
-
-						lstCouple.add(new Couple(premier, second));
-						line = scanner.nextLine();
 					}
+
+					Question question = new Association(this, text, temps, nbPoint, niveau, lstCouple, "");
+					questions.add(question);
 				}
-				if ( type.equals("Elimination"))
+				
+				else if ( type.equals("Elimination"))
 				{
+					List<ReponseElimination> lstReponse = new ArrayList<>();
 					while (!line.contains("{\\b Fin}"))
 					{
 						lstReponse.add(new ReponseElimination(
@@ -125,45 +96,30 @@ public class Notion
 						                          ));
 						line = scanner.nextLine();
 					}
-				}
-				
-				if (type.equals("QCM"))
-				{
 
+					//Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
+					//questions.add(question);
+				}
+
+				else if (type.equals("QCM"))
+				{
+					List<ReponseQCM> lstReponse = new ArrayList<>();
 					while (!line.contains("{\\b Fin}"))
 					{
-						lstReponse.add(new Reponse(
+						lstReponse.add(new ReponseQCM(
 						                           line.substring(line.indexOf("} ") + 1, line.indexOf(".")),
 						                           line.substring(line.indexOf(".")  + 1, line.indexOf("|"))
 						                          ));
 						line = scanner.nextLine();
 					}
+
+					Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
+					questions.add(question);
 				}
 
-				switch (type)
-				{
-					case "QCM" ->
-					{
-						Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
-						questions.add(question);
-					}
-
-					case "Association" ->
-					{
-						Question question = new Association(this, text, temps, nbPoint, niveau, lstCouple, "");
-						questions.add(question);
-					}
-
-					case "Elimination" ->
-					{
-						//Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
-						//questions.add(question);
-					}
-
-					default ->
-					{
-						System.out.println("Type de question inconnu");
-					}
+				else
+				{ 
+					throw new IllegalArgumentException("Le type doit être appartenir aux options suivantes : 'Association','Elimination','QCM'"); 
 				}
 			}
 			scanner.close();
