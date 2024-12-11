@@ -87,13 +87,13 @@ public class Notion
 				else if ( type.equals("Elimination"))
 				{
 					List<ReponseElimination> lstReponse = new ArrayList<>();
-					while (!line.contains("{\\b Fin}"))
+					while ( !line.contains("{\\b Fin}") )
 					{
 						lstReponse.add(new ReponseElimination(
-						                           line.substring(line.indexOf("} ") + 1, line.indexOf("|")),
-						                           line.substring(line.indexOf("|") + 1, line.indexOf("||")),
-						                           Integer.parseInt(line.substring(line.indexOf("||") + 2, line.indexOf("/")))
-						                          ));
+						                                      line.substring(line.indexOf("} ") + 1, line.indexOf("|")),
+						                                      line.substring(line.indexOf("|") + 1, line.indexOf("||")),
+						                                      Integer.parseInt(line.substring(line.indexOf("||") + 2, line.indexOf("/")))
+						                                     ));
 						line = scanner.nextLine();
 					}
 
@@ -118,7 +118,8 @@ public class Notion
 				}
 
 				else
-				{ 
+				{			scanner.close();
+
 					throw new IllegalArgumentException("Le type doit être appartenir aux options suivantes : 'Association','Elimination','QCM'"); 
 				}
 			}
