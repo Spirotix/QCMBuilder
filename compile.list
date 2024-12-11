@@ -1,7 +1,6 @@
 ./qcmBuilder/src/Controleur.java
 
 ./qcmBuilder/src/metier/question/Association.java
-./qcmBuilder/src/metier/Couple.java
 ./qcmBuilder/src/metier/question/Elimination.java
 ./qcmBuilder/src/metier/Notion.java
 ./qcmBuilder/src/metier/question/QCM.java
