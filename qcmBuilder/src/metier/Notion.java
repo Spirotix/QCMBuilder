@@ -77,10 +77,10 @@ public class Notion
 					List<ReponseAssociation> lstReponse = new ArrayList<>();
 					while (!line.contains("{\\b Fin}"))
 					{
-
+						
 					}
 
-					Question question = new Association(this, text, temps, nbPoint, niveau, lstCouple, "");
+					Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
 					questions.add(question);
 				}
 				
