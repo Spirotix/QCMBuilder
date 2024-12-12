@@ -54,6 +54,12 @@ public class FrameMenu extends JFrame implements ActionListener
 			new FrameCreerQuestion(this.ctrl);
 			this.dispose();
 		}
+
+		if (e.getSource().equals(this.creerQuestionnaire))
+		{
+			new FrameCreerQuestionnaire(this.ctrl);
+			this.dispose();
+		}
 	}
 
 

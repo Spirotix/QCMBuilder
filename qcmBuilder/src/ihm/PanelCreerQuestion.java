@@ -8,34 +8,34 @@ import javax.swing.*;
 
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener
 {
-	private 	TestCreerQuestion 	ctrl;
-	private 	JTextField 		nbPoints, tpsReponses;
-	private  	Choice 			choixRessource, choixNotion;
-	private 	ButtonGroup		btnGroup, btnGroupImg;
-	private 	JRadioButton	btnChoixUnique, btnChoixMult, btnAsso, btnElim;
-	private		JButton 		btnCreer;	
-	private 	JRadioButton 	btnTF, btnF, btnM, btnD ; 
-	private 	JLabel			msgErrNbPts, msgErrTpsRep, msgErrRess,msgErrNiv,msgErrNot, msgChoixType ;
-	private 	FrameCreerQuestion fr;
+	private 	TestCreerQuestion 	ctrl																	;
+	private 	JTextField 			nbPoints, tpsReponses													;
+	private  	Choice 				choixRessource, choixNotion												;
+	private 	ButtonGroup			btnGroup, btnGroupImg													;
+	private 	JRadioButton		btnChoixUnique, btnChoixMult, btnAsso, btnElim							;
+	private		JButton 			btnCreer																;	
+	private 	JRadioButton 		btnTF, btnF, btnM, btnD 												; 
+	private 	JLabel				msgErrNbPts, msgErrTpsRep, msgErrRess,msgErrNiv,msgErrNot, msgChoixType ;
+	private 	FrameCreerQuestion 	fr																		;
 
 	//Ressources finale
-	private		String		typeQuestion;
-	private 	String		ressourceQuestion;
-	private 	String 		notionQuestion;
-	private 	String 		textQuestion;
-	private 	int 		tempsQuestion;
-	private 	int 		nbPointQuestion;
-	private 	int 		difficulteQuestion ;
-	private 	String 		explicationQuestion;
+	private		String		typeQuestion		;
+	private 	String		ressourceQuestion	;
+	private 	String 		notionQuestion		;
+	private 	String 		textQuestion		;
+	private 	int 		tempsQuestion		;
+	private 	int 		nbPointQuestion		;
+	private 	int 		difficulteQuestion 	;
+	private 	String 		explicationQuestion	;
 
 	public PanelCreerQuestion (TestCreerQuestion ctrl, FrameCreerQuestion fr)
 	{
 		this.ctrl = ctrl;
-		this.fr = fr;
+		this.fr   = fr;
 		this.setLayout(new GridLayout(11, 1));
 
 		// Initialisation
-		this.nbPoints = new JTextField("5", 5);
+		this.nbPoints 	 = new JTextField("5" , 5);
 		this.tpsReponses = new JTextField("10", 5);
 
 		this.choixRessource = new Choice();
@@ -49,67 +49,67 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.choixNotion.setEnabled(false); // Disable initially
 
 		this.btnGroupImg = new ButtonGroup();
-		this.btnTF = new JRadioButton(new ImageIcon("img/TF2.PNG"));
-		this.btnF = new JRadioButton(new ImageIcon("img/F2.PNG"));
-		this.btnM = new JRadioButton(new ImageIcon("img/M2.PNG"));
-		this.btnD = new JRadioButton(new ImageIcon("img/D2.PNG"));
+		this.btnTF		 = new JRadioButton(new ImageIcon("img/TF2.PNG"));
+		this.btnF		 = new JRadioButton(new ImageIcon("img/F2.PNG" ));
+		this.btnM		 = new JRadioButton(new ImageIcon("img/M2.PNG" ));
+		this.btnD 		 = new JRadioButton(new ImageIcon("img/D2.PNG" ));
 
 		this.btnTF.setEnabled(false);
-		this.btnF.setEnabled(false);
-		this.btnM.setEnabled(false);
-		this.btnD.setEnabled(false);
+		this.btnF .setEnabled(false);
+		this.btnM .setEnabled(false);
+		this.btnD .setEnabled(false);
 
 		this.btnGroupImg.add(this.btnTF);
-		this.btnGroupImg.add(this.btnF);
-		this.btnGroupImg.add(this.btnM);
-		this.btnGroupImg.add(this.btnD);
+		this.btnGroupImg.add(this.btnF );
+		this.btnGroupImg.add(this.btnM );
+		this.btnGroupImg.add(this.btnD );
 
-		this.btnChoixUnique = new JRadioButton("Choix Unique");
-		this.btnChoixMult = new JRadioButton("Choix Multiple");
-		this.btnAsso = new JRadioButton("Associatif");
-		this.btnElim = new JRadioButton("Elimination");
+		this.btnChoixUnique = new JRadioButton("Choix Unique"	);
+		this.btnChoixMult 	= new JRadioButton("Choix Multiple" );
+		this.btnAsso 		= new JRadioButton("Associatif"		);
+		this.btnElim 		= new JRadioButton("Elimination"	);
 
-		this.msgErrNbPts = new JLabel("");
-		this.msgErrTpsRep = new JLabel("");
-		this.msgErrRess = new JLabel("");
-		this.msgErrNiv = new JLabel("");
-		this.msgErrNot = new JLabel("");
-		this.msgChoixType = new JLabel("");
+		this.msgErrNbPts  	= new JLabel("");
+		this.msgErrTpsRep 	= new JLabel("");
+		this.msgErrRess   	= new JLabel("");
+		this.msgErrNiv 		= new JLabel("");
+		this.msgErrNot 		= new JLabel("");
+		this.msgChoixType 	= new JLabel("");
 
-		this.btnGroup = new ButtonGroup();
-		this.btnGroup.add(this.btnChoixUnique);
-		this.btnGroup.add(this.btnChoixMult);
-		this.btnGroup.add(this.btnAsso);
-		this.btnGroup.add(this.btnElim);
+		this.btnGroup = new ButtonGroup(		);
+		this.btnGroup.add (this.btnChoixUnique	);
+		this.btnGroup.add (this.btnChoixMult	);
+		this.btnGroup.add (this.btnAsso			);
+		this.btnGroup.add (this.btnElim			);
 
 		this.btnCreer = new JButton("Creer");
 
 		// ActionListener / itemListener
-		this.nbPoints.addActionListener(this);
-		this.tpsReponses.addActionListener(this);
-		this.btnTF.addActionListener(this);
-		this.btnF.addActionListener(this);
-		this.btnM.addActionListener(this);
-		this.btnD.addActionListener(this);
-		this.btnChoixUnique.addActionListener(this);
-		this.btnChoixMult.addActionListener(this);
-		this.btnAsso.addActionListener(this);
-		this.btnElim.addActionListener(this);
-		this.choixRessource.addItemListener(this);
-		this.choixNotion.addItemListener(this);
-		this.btnCreer.addActionListener(this);
+		this.nbPoints		.addActionListener	(this);
+		this.tpsReponses	.addActionListener	(this);
+		this.btnTF			.addActionListener	(this);
+		this.btnF			.addActionListener	(this);
+		this.btnM			.addActionListener	(this);
+		this.btnD			.addActionListener	(this);
+		this.btnChoixUnique	.addActionListener	(this);
+		this.btnChoixMult	.addActionListener	(this);
+		this.btnAsso		.addActionListener	(this);
+		this.btnElim		.addActionListener	(this);
+		this.choixRessource	.addItemListener	(this);
+		this.choixNotion	.addItemListener	(this);
+		this.btnCreer		.addActionListener	(this);
 
 		// Layout
-		this.add(createLabeledPanel("Nombre de points", this.nbPoints));
-		this.add(createLabeledPanel("Temps de réponse", this.tpsReponses));
-		this.add(createErrorPanel(this.msgErrNbPts, this.msgErrTpsRep));
-		this.add(createLabeledPanel("Ressource", this.choixRessource));
-		this.add(createLabeledPanel("Notion", this.choixNotion));
-		this.add(createErrorPanel(this.msgErrRess, this.msgErrNot));
-		this.add(createLabeledPanel("Niveau", createDifficultyPanel()));
-		this.add(createErrorPanel(this.msgErrNiv));
-		this.add(createLabeledPanel("Type de question", createTypePanel()));
-		this.add(createErrorPanel(this.msgChoixType));
+		this.add(createLabeledPanel	("Nombre de points"	,this.nbPoints			));
+		this.add(createLabeledPanel	("Temps de réponse"	,this.tpsReponses		));
+		this.add(createErrorPanel	(this.msgErrNbPts	,this.msgErrTpsRep		));
+		this.add(createLabeledPanel	("Ressource"		,this.choixRessource	));
+		this.add(createLabeledPanel	("Notion"			,this.choixNotion		));
+		this.add(createErrorPanel	(this.msgErrRess	,this.msgErrNot			));
+		this.add(createLabeledPanel	("Niveau"			,createDifficultyPanel()));
+		this.add(createErrorPanel	(this.msgErrNiv								));
+		this.add(createLabeledPanel	("Type de question"	,createTypePanel()		));
+		this.add(createErrorPanel	(this.msgChoixType							));
 		this.add(this.btnCreer);
 
 		this.setVisible(true);
@@ -328,37 +328,6 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		}
 	}
 
-	/*
-	 * Format des réponses QCM
-	 * Texte_réponse1_VRAI
-	 * Texte_réponse2_FAUX
-	 * Texte_réponse3_FAUX
-	 * Texte_réponse4_FAUX
-	 * Exemple : 
-	 * 35_VRAI
-	 * 33_FAUX
-	 * 25_FAUX
-	 */
-	/*
-	 * Format des réponses Association
-	 * Texte_réponse1 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
-	 * Texte_réponse2 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
-	 * Exemple : 
-	 * Chien -> 1_3///aboie
-	 * Chat -> 2///Miaule
-	 * Poisson///grogne
-	 */
-	/*
-	 * Format des réponses Elimination
-	 * Texte_réponse1_VRAI_cout_ordre
-	 * Texte_réponse2_FAUX_cout_ordre
-	 * Exemple : 
-	 * blablacar_FAUX_-0,25_1
-	 * Youtube_VRAI_0_0
-	 * Twitch_FAUX_0_0
-	 * Amazon_FAUX_-0,5_2
-	 */
-
 	public void creerQuestion(String explication, String intituleQuestion, ArrayList<TypeReponse> reponses)
 	{
 		if (this.btnChoixMult.isSelected() || this.btnChoixUnique.isSelected())
@@ -372,32 +341,4 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.explicationQuestion = explication;
 		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, reponses, this.difficulteQuestion);
 	}
-
-
-	/*public void creerQCM(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
-	{
-		
-		this.typeQuestion = "QCM";
-		this.textQuestion = intituleQuestion;
-		this.explicationQuestion = explication;
-		this.ctrl.creerQCM(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
-	}
-
-	public void creerAsso(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
-	{
-		
-		this.typeQuestion = "Association";
-		this.textQuestion = intituleQuestion;
-		this.explicationQuestion = explication;
-		this.ctrl.creerAsso(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
-	}
-
-	public void creerElim(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
-	{
-		
-		this.typeQuestion = "Elimination";
-		this.textQuestion = intituleQuestion;
-		this.explicationQuestion = explication;
-		this.ctrl.creerElim(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
-	}*/
 }

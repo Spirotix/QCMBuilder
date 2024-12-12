@@ -1,17 +1,11 @@
 //package src.ihm;
 
-import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 
 public class PanelLiaison extends JPanel implements ActionListener 
@@ -106,7 +100,7 @@ public class PanelLiaison extends JPanel implements ActionListener
 		bouton.addActionListener(this);
 		boutons.add(bouton);
 
-		JButton boutonSupprimer = new JButton("Sup");
+		JButton boutonSupprimer = new JButton(new ImageIcon("img/poubelle.PNG"));
 		boutonSupprimer.addActionListener(this);
 
 		panelBouton.add(textField, BorderLayout.CENTER);
