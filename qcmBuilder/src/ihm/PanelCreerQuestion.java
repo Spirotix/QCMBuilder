@@ -12,7 +12,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private JRadioButton btnChoixUnique, btnChoixMult, btnAsso, btnElim;
 	private JButton btnCreer;
 	private JRadioButton btnTF, btnF, btnM, btnD;
-	private JLabel msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrNot, msZgChoixType;
+	private JLabel msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrNot, msgChoixType;
 	private FrameCreerQuestion fr;
 
 	// Ressources finale
