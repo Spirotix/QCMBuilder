@@ -27,5 +27,3 @@
 ./src/ihm/PanelReponse.java
 ./src/ihm/TestCreerQuestion.java
 ./src/ihm/TypeReponse.java
-
-./src/test/AffichageNotion.java
