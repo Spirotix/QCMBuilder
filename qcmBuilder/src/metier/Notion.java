@@ -117,7 +117,7 @@ public class Notion
 						lineTextQuestion = scTextQuestion.nextLine();
 					}
 
-					Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
+					Association question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
 					questions.add(question);
 				}
 				else if ( type.equals("Elimination"))
@@ -144,7 +144,7 @@ public class Notion
 						lineTextQuestion = scTextQuestion.nextLine();
 					}
 
-					Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
+					Elimination question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
 					questions.add(question);
 				}
 				else if (type.equals("QCM"))
@@ -159,7 +159,7 @@ public class Notion
 						lineTextQuestion = scTextQuestion.nextLine();
 					}
 
-					Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
+					QCM question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
 					questions.add(question);
 				}
 				else
