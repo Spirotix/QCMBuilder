@@ -30,7 +30,7 @@ public class Notion
 		try
 		{
 			Scanner scTextQuestion = new Scanner(new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf"));
-			Scanner scInformations = new Scanner(new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".csv"));
+			Scanner scInformations = new Scanner(new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf"));
 
 			scInformations.nextLine();
 
