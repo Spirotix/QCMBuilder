@@ -90,6 +90,25 @@ public class TestCreerQuestion
 		System.out.println(str);
 	}
 
+	public void creerQuestionnaire (String ressource, boolean estChrono, ArrayList<TypeQuestionnaire> lstType)
+	{
+		String str=""; 
+
+
+		str += "Questionnaire sur la ressource : "+ ressource;
+		
+		if (estChrono)
+			str+="   //Il est chronometré";
+		else 
+			str+="    //Il nest pas chronometré";
+		
+		str += "\nLes ressources : ";
+		for (TypeQuestionnaire t : lstType)
+			str+="\n"+t.getNotion()+"_"+t.getNbTf()+"_"+t.getNbF()+"_"+t.getNbM()+"_"+t.getNbD();
+		
+		System.out.println(str);
+	}
+
 
 	/*public void creerElim(String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, int nbIndiceUtilise, ArrayList<String> lstReponse, int difficulte)
 	{

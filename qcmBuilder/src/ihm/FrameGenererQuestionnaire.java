@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class FrameCreerQuestionnaire extends JFrame
 {
-	private panelCreerQuestionnaire panelQ	;
+	private PanelCreerQuestionnaire panelQ	;
 	private TestCreerQuestion		ctrl	;
 
 	public FrameCreerQuestionnaire (TestCreerQuestion ctrl)
@@ -14,7 +14,7 @@ public class FrameCreerQuestionnaire extends JFrame
 		this.setTitle   ("Creation d'un questionnaire"	);
 		this.setSize    ( 500,500  						);
 
-		this.panelQ=new panelCreerQuestionnaire(this.ctrl);
+		this.panelQ=new PanelCreerQuestionnaire(this.ctrl);
 
 		this.add (this.panelQ);
 

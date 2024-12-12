@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class PanelCreerReponsesElim extends JPanel implements ActionListener
 {
-	private PanelCreerElim 	panelQ;
+	private PanelCreerElim 		panelQ;
 	private JButton				corbeille;
 	private JTextField			ordre, cout, contenu	;
 	private JCheckBox			validation ; 
