@@ -124,12 +124,16 @@ public class Notion
 				else if ( type.equals("Elimination"))
 				{
 					List<ReponseElimination> lstReponse = new ArrayList<>();
+
+					boolean bool;
+
 					while ( !lineInformations.contains("{Fin}") )
 					{
 						lstReponse.add(new ReponseElimination(
 						                                      lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("|")),
 						                                      lineInformations.substring(lineInformations.indexOf("|") + 1, lineInformations.indexOf("||")),
-						                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/")))
+						                                      Integer.parseInt  (lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/"))),
+						                                      Double.parseDouble(lineInformations.substring(lineInformations.indexOf("/") + 1) )
 						                                     ));
 						lineInformations = scInformations.nextLine();
 					}
