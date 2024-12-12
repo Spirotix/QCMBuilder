@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import src.metier.reponse.ReponseQCM;
+import src.metier.reponse.*;
+import src.metier.question.*;
 
 public class QCMBuilder
 {
@@ -109,7 +110,7 @@ public class QCMBuilder
 			for (String sReponse : sLstReponses)
 			{
 				String[] parts = sReponse.split("_");
-				ReponseQCM reponse = new ReponseQCM(parts[1], parts[0], 0);
+				ReponseQCM reponse = new ReponseQCM(parts[1], parts[0]);
 				lstReponses.add(reponse);
 			}
 
