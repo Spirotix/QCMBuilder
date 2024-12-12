@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import src.metier.question.Association;
 import src.metier.question.QCM;
-import src.metier.question.Question;
+import src.metier.question.*;
 import src.metier.reponse.*;
 
 public class Notion
