@@ -197,9 +197,31 @@ public class Notion
 		return questions;
 	}
 
-	public String         getNom      () { return nom;       }
-	public Ressource      getRessource() { return ressource; }
-	public List<Question> getQuestions() { return questions; }
+	public String         getNom      ()
+	{
+		String nomN = this.nom.substring(0);
+
+		return nomN;
+	}
+
+	public Ressource      getRessource()
+	{
+		Ressource ressourceN = new Ressource( this.ressource.getCode(), this.ressource.getNom() );
+
+		return ressourceN;
+	}
+
+	public List<Question> getQuestions()
+	{
+		List<Question> questionsN = new ArrayList<>();
+
+		for (Question q : this.questions)
+		{
+			questionsN.add( q );                                            // Intégrité des données pas folle
+		}
+
+		return questionsN;
+	}
 
 	public boolean setNom (String nom)
 	{ 
