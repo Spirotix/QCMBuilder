@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import src.metier.reponse.ReponseQCM;
+
 public class QCMBuilder
 {
 	private List<Ressource> ressources;
@@ -103,11 +105,11 @@ public class QCMBuilder
 
 		if ( type.equals("QCM") )
 		{
-			List<Reponse> lstReponses = new ArrayList<>();
+			List<ReponseQCM> lstReponses = new ArrayList<>();
 			for (String sReponse : sLstReponses)
 			{
 				String[] parts = sReponse.split("_");
-				Reponse reponse = new Reponse(parts[1], parts[0], 0);
+				ReponseQCM reponse = new ReponseQCM(parts[1], parts[0], 0);
 				lstReponses.add(reponse);
 			}
 
