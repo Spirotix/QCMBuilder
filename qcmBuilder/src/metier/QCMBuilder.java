@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import src.metier.reponse.*;
 import src.metier.question.*;
+import src.ihm.TypeReponse;
 
 public class QCMBuilder
 {
@@ -112,27 +113,45 @@ public class QCMBuilder
 		ressource.setNom(nouveauNom);
 		return true;
 	}
-	
-	public boolean creerQuestion(String type, String nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, List<String> sLstReponses, String explication)
-	{
-		Notion notion = rechercherRessource(nomRessource).rechercherNotion(nomNotion);
-		
-		if ( type.equals("Elimination") )
-			//notion.ajouterQuestion(new Elimination());
 
-		if ( type.equals("QCM") )
+	public boolean creerQuestion(String type, String code_nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, /*List<String>*/ ArrayList<TypeReponse> sLstReponses, String explication)
+	{
+		Notion notion = rechercherRessource( code_nomRessource.substring(0, code_nomRessource.indexOf("_")) ).rechercherNotion(nomNotion);
+
+		/*if ( type.equals("Elimination") )
 		{
-			List<ReponseQCM> lstReponses = new ArrayList<>();
-			for (String sReponse : sLstReponses)
+			List<ReponseElimination> lstReponses = new ArrayList<>();
+			for (TypeReponse typeReponse : sLstReponses)
 			{
-				String[] parts = sReponse.split("_");
-				ReponseQCM reponse = new ReponseQCM(parts[1], parts[0]);
+				ReponseElimination reponse = new ReponseElimination( typeReponse.getEstBonneReponse(), typeReponse.getContenu(), typeReponse.getOrdre(), typeReponse.getCout() );
 				lstReponses.add(reponse);
 			}
 
-			notion.ajouterQuestion(new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication));
+			// Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
+			// return true;
+		}
+		else if ( type.equals("QCM") )
+		{
+			List<ReponseQCM> lstReponses = new ArrayList<>();
+			for (TypeReponse typeReponse : sLstReponses)
+			{
+				ReponseQCM reponse = new ReponseQCM(typeReponse.getEstBonneReponse(), typeReponse.getContenu());
+				lstReponses.add(reponse);
+			}
+
+			notion.ajouterQuestion( new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
 			return true;
 		}
+		else if ( type.equals("Association") )
+		{
+			//List<ReponseAssociation> lstReponses = new ArrayList<>();
+			//Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
+			//return true;
+		}
+		else
+		{
+			throw new Exception("Le type de la question crée est invalide, ou n'est pas pris en charge.")
+		}*/
 
 		return false;
 	}
