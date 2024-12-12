@@ -1,42 +1,135 @@
 package src.metier.question;
+
 import java.util.List;
-
 import src.metier.Notion;
-import src.metier.reponse.*;
+import src.metier.reponse.ReponseElimination;
 
-public class Elimination extends Question
+public class Elimination implements Question
 {
-	private int           nbIndice;
-	private int           nbIndiceUtilise;
+	private Notion notions;
+	private String text;
+	private int timer;
+	private double nbPoint;
+	private int difficulte;
+	private String explication;
+	private int nbIndice;
+	private int nbIndiceUtilise;
 	private List<ReponseElimination> lstReponses;
 
-	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<ReponseElimination> lstReponses, int nbIndice, String explication)
+	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte,
+			List<ReponseElimination> lstReponses, int nbIndice, String explication)
 	{
-		super(notion, text, timer, nbPoint, difficulte, explication);
-
-		this.nbIndice = nbIndice;
-
+		this.notions = notion;
+		this.text = text;
+		this.timer = timer;
+		this.nbPoint = nbPoint;
+		this.difficulte = difficulte;
 		this.lstReponses = lstReponses;
-
+		this.nbIndice = nbIndice;
+		this.explication = explication;
 		this.nbIndiceUtilise = 0;
 	}
 
-	public int    getNbIndiceUtilise() { return this.nbIndiceUtilise; }
+	@Override
+	public String getText()
+	{
+		return this.text;
+	}
 
-	public void setNbIndiceUtilise(int nbIndiceUtilise ) { this.nbIndiceUtilise = nbIndiceUtilise; }
+	@Override
+	public int getTimer()
+	{
+		return this.timer;
+	}
 
-	public void utiliseIndice() 
-	{ 
-		if ( nbIndiceUtilise >= nbIndice ){ return; }
+	@Override
+	public double getNbPoint()
+	{
+		return this.nbPoint;
+	}
+
+	@Override
+	public int getDifficulte()
+	{
+		return this.difficulte;
+	}
+
+	@Override
+	public Notion getNotions()
+	{
+		return this.notions;
+	}
+
+	@Override
+	public String getExplication()
+	{
+		return this.explication;
+	}
+
+	@Override
+	public void setText(String text)
+	{
+		this.text = text;
+	}
+
+	@Override
+	public void setTimer(int timer)
+	{
+		this.timer = timer;
+	}
+
+	@Override
+	public void setNbPoint(double nbPoint)
+	{
+		this.nbPoint = nbPoint;
+	}
+
+	@Override
+	public void setDifficulte(int difficulte)
+	{
+		this.difficulte = difficulte;
+	}
+
+	@Override
+	public void setNotions(Notion notions)
+	{
+		this.notions = notions;
+	}
+
+	@Override
+	public void setExplication(String explication)
+	{
+		this.explication = explication;
+	}
+
+	public int getNbIndiceUtilise()
+	{
+		return this.nbIndiceUtilise;
+	}
+
+	public void setNbIndiceUtilise(int nbIndiceUtilise)
+	{
+		this.nbIndiceUtilise = nbIndiceUtilise;
+	}
+
+	public void utiliseIndice()
+	{
+		if (nbIndiceUtilise >= nbIndice)
+		{
+			return;
+		}
 
 		nbIndiceUtilise++;
-		for ( ReponseElimination reponse : lstReponses)
+		for (ReponseElimination reponse : lstReponses)
 		{
-			if ( reponse.getOrdreIndice() == nbIndiceUtilise ) { reponse.setEstVisible(false); }
+			if (reponse.getOrdreIndice() == nbIndiceUtilise)
+			{
+				reponse.setEstVisible(false);
+			}
 		}
 	}
 
-	public List<ReponseElimination> getReponses() 
+	public List<ReponseElimination> getReponses()
 	{
 		return this.lstReponses;
 	}

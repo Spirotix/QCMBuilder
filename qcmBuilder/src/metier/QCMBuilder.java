@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import src.metier.reponse.*;
 import src.metier.question.*;
-import src.ihm.TypeReponse;
+import src.ihm.*;
 
 public class QCMBuilder
 {
