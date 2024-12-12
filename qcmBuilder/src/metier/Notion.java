@@ -75,62 +75,46 @@ public class Notion
 					}
 				}
 
-				scTextQuestion.nextLine();
 				scInformations.nextLine();
-				lineInformations = scInformations.nextLine();
+
+				scTextQuestion.nextLine();
+				lineTextQuestion = scTextQuestion.nextLine();
 
 				if ( type.equals("Association") )
 				{
 					List<ReponseAssociation> lstReponse = new ArrayList<>();
 
-					while (!lineInformations.contains("{Fin}"))
+					while (!lineTextQuestion.contains("\\par{Fin}"))
 					{
-						List<Integer> lstInd = new ArrayList<>();
-
-						String[] tmp = lineInformations.substring(lineInformations.indexOf("->") + 2, lineInformations.indexOf("::")).split("_");
-						for (String s : tmp)
-						{
-							if ( s.length() > 3 )
-							{
-								lstInd = null;
-								break;
-							}
-							else
-							{
-								lstInd.add( Integer.parseInt(s) );
-							}
-						}
-
 						ReponseAssociation reponseA;
-						String textReponseA = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("::"));
+						String textReponseA = lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("::"));
 
 						ReponseAssociation reponseB;
-						String textReponseB = lineInformations.substring(lineInformations.indexOf("::") + 2);
+						String textReponseB = lineTextQuestion.substring(lineTextQuestion.indexOf("::") + 2);
 
-						// System.out.println(lineInformations);
+						// System.out.println(lineTextQuestion);
 						// System.out.println(textReponseA);
 						// System.out.println(textReponseB);
-						// System.out.println(lstInd);
 						// System.out.println();
 
 						reponseA = new ReponseAssociation(
-						                                   textReponseA,
-						                                   null,
-						                                   Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
-						                                   false
-						                                  );
+						                                  textReponseA,
+						                                  null,
+						                                  Integer.parseInt(lineTextQuestion.substring(lineTextQuestion.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
+						                                  false
+						                                 );
 						lstReponse.add( reponseA );
 
 						reponseB = new ReponseAssociation(
 						                                  textReponseB,
 						                                  reponseA,
-						                                  Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
+						                                  Integer.parseInt(lineTextQuestion.substring(lineTextQuestion.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
 						                                  false
 						                                 );
 						reponseA.setReponseAssocie( reponseB );
 						lstReponse.add( reponseB );
 
-						lineInformations = scInformations.nextLine();
+						lineTextQuestion = scTextQuestion.nextLine();
 					}
 
 					Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
@@ -140,22 +124,24 @@ public class Notion
 				{
 					List<ReponseElimination> lstReponse = new ArrayList<>();
 
-					boolean bool;
-					int     nbIndice = 0;
+					int nbIndice = 0;
 
-					while ( !lineInformations.contains("{Fin}") )
+					while ( !lineTextQuestion.contains("\\par{Fin}") )
 					{
+						// System.out.println(lineTextQuestion);
+						// System.out.println();
+
 						lstReponse.add(new ReponseElimination(
-						                                      lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("|")),
-						                                      lineInformations.substring(lineInformations.indexOf("|") + 1, lineInformations.indexOf("||")),
-						                                      Integer.parseInt  (lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/"))),
-						                                      Double.parseDouble(lineInformations.substring(lineInformations.indexOf("/") + 1) )
+						                                      lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")),
+						                                      lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1, lineTextQuestion.indexOf("||")),
+						                                      Integer.parseInt  (lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/"))),
+						                                      Double.parseDouble(lineTextQuestion.substring(lineTextQuestion.indexOf("/") + 1))
 						                                     ));
 
-						if ( nbIndice < Integer.parseInt( lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/")) ) )
-							nbIndice = Integer.parseInt( lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/")) );
+						if ( nbIndice < Integer.parseInt( lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/")) ) )
+							nbIndice  = Integer.parseInt( lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/")) );
 
-						lineInformations = scInformations.nextLine();
+						lineTextQuestion = scTextQuestion.nextLine();
 					}
 
 					Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
@@ -164,13 +150,13 @@ public class Notion
 				else if (type.equals("QCM"))
 				{
 					List<ReponseQCM> lstReponse = new ArrayList<>();
-					while (!lineInformations.contains("{Fin}"))
+					while (!lineTextQuestion.contains("\\par{Fin}"))
 					{
 						lstReponse.add(new ReponseQCM(
-						                              lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("|")),
-						                              lineInformations.substring(lineInformations.indexOf("|") + 1, lineInformations.indexOf("||"))
+						                              lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")),
+						                              lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1, lineTextQuestion.indexOf("||"))
 						                             ));
-						lineInformations = scInformations.nextLine();
+						lineTextQuestion = scTextQuestion.nextLine();
 					}
 
 					Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
