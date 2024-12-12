@@ -144,6 +144,7 @@ public class Notion
 					List<ReponseElimination> lstReponse = new ArrayList<>();
 
 					boolean bool;
+					int     nbIndice = 0;
 
 					while ( !lineInformations.contains("{Fin}") )
 					{
@@ -153,11 +154,15 @@ public class Notion
 						                                      Integer.parseInt  (lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/"))),
 						                                      Double.parseDouble(lineInformations.substring(lineInformations.indexOf("/") + 1) )
 						                                     ));
+
+						if ( nbIndice < Integer.parseInt( lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/")) ) )
+							nbIndice = Integer.parseInt( lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/")) );
+
 						lineInformations = scInformations.nextLine();
 					}
 
-					//Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
-					//questions.add(question);
+					Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
+					questions.add(question);
 				}
 				else if (type.equals("QCM"))
 				{
