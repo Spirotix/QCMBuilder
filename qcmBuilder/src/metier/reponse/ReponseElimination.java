@@ -2,19 +2,19 @@ package src.metier.reponse;
 
 public class ReponseElimination extends Reponse
 {
-	private int ordreIndice;
+	private int     ordreIndice;
 	private boolean estVisible;
 	private boolean estVrai;
-	public ReponseElimination(String estVrai, String textReponse, int ordreIndice )
+	private double  nbPointPerdu;
+
+	public ReponseElimination(String estVrai, String textReponse, int ordreIndice, double nbPointPerdu )
 	{
 		super(textReponse);
-		this.ordreIndice = ordreIndice;
 
-		this.estVisible = true;
-
-		if(estVrai.equals("Vrai")){ this.estVrai=true; }
-		else{ this.estVrai = false;}
-
+		this.ordreIndice  = ordreIndice;
+		this.estVisible   = true;
+		this.estVrai      = estVrai.equals("Vrai");
+		this.nbPointPerdu = nbPointPerdu;
 	}
 
 	public int  getOrdreIndice()                   { return ordreIndice;             }

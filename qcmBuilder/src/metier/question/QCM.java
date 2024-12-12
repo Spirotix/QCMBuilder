@@ -3,7 +3,7 @@ package src.metier.question;
 import java.util.List;
 
 import src.metier.Notion;
-import src.metier.reponse.*;
+import src.metier.reponse.ReponseQCM;
 
 
 public class QCM extends Question

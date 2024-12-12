@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import src.metier.question.Association;
 import src.metier.question.QCM;
-import src.metier.question.Question;
+import src.metier.question.*;
 import src.metier.reponse.*;
 
 public class Notion
@@ -29,31 +29,36 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try
 		{
-			Scanner scanner = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom + ".rtf"));
-			while (scanner.hasNextLine())
+			Scanner scTextQuestion = new Scanner(new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf"));
+			Scanner scInformations = new Scanner(new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".csv"));
+
+			scInformations.nextLine();
+
+			while ( scTextQuestion.hasNextLine() && scInformations.hasNextLine() )
 			{
-				String line = scanner.nextLine();
-				while ( scanner.hasNextLine() && ! line.contains("Question") )
+				String lineTextQuestion = scTextQuestion.nextLine();
+				String lineInformations = scInformations.nextLine();
+				while ( scTextQuestion.hasNextLine() && ! lineTextQuestion.contains("Question") )
 				{
-					line = scanner.nextLine();
+					lineTextQuestion = scTextQuestion.nextLine();
 				}
 
-				if ( !scanner.hasNextLine()) break;
+				if ( !scTextQuestion.hasNextLine() || !scInformations.hasNextLine() ) break;
 
-				line = scanner.nextLine();
-				String text = line.substring(0, line.indexOf("\\par"));
+				lineTextQuestion = scTextQuestion.nextLine();
+				String text      = lineTextQuestion.substring(0, lineTextQuestion.indexOf("\\par"));
 
-				line           = scanner.nextLine();
-				double nbPoint = Double.parseDouble(line.substring(line.indexOf("} ") + 2, line.indexOf("\\par") - 1));
+				lineInformations = scInformations.nextLine();
+				double nbPoint   = Double.parseDouble( lineInformations.substring(lineInformations.indexOf("} ") + 2) );
 
-				line = scanner.nextLine();
-				String type = line.substring(line.indexOf("} ") + 2, line.indexOf("\\par") - 1);
+				lineInformations = scInformations.nextLine();
+				String type      = lineInformations.substring(lineInformations.indexOf("} ") + 2);
 
-				line = scanner.nextLine();
-				String sNiveau = line.substring( line.indexOf("} ") + 2, line.indexOf("\\par") - 1);
+				lineInformations = scInformations.nextLine();
+				String sNiveau   = lineInformations.substring(lineInformations.indexOf("} ") + 2);
 
-				line = scanner.nextLine();
-				int    temps   = Integer.parseInt(line.substring( line.indexOf("} ") + 2, line.indexOf("\\par") - 1));
+				lineInformations = scInformations.nextLine();
+				int temps        = Integer.parseInt( lineInformations.substring( lineInformations.indexOf("} ") + 2) );
 
 				int niveau;
 				switch(sNiveau)
@@ -64,53 +69,71 @@ public class Notion
 					case "D"  -> { niveau = 4; }
 					default   ->
 					{
-						scanner.close();
+						scTextQuestion.close();
+						scInformations.close();
 						throw new IllegalArgumentException("Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
 					}
 				}
 
-				scanner.nextLine();
-				line = scanner.nextLine();
+				scTextQuestion.nextLine();
+				scInformations.nextLine();
+				lineInformations = scInformations.nextLine();
 
 				if ( type.equals("Association") )
 				{
 					List<ReponseAssociation> lstReponse = new ArrayList<>();
 
-					while (!line.contains("{\\b Fin}"))
+					while (!lineInformations.contains("{Fin}"))
 					{
 						List<Integer> lstInd = new ArrayList<>();
 
-						String[] tmp = line.substring(line.indexOf("->") + 2, line.indexOf("::") - 1).split("_");
+						String[] tmp = lineInformations.substring(lineInformations.indexOf("->") + 2, lineInformations.indexOf("::")).split("_");
 						for (String s : tmp)
-							lstInd.add( Integer.parseInt(s) );
-
-						String textReponseDroite = "";
-
-						if ( line.contains("->") )
-							textReponseDroite = line.substring(line.indexOf("} ") + 2, line.indexOf("->"));
-						else
-							textReponseDroite = line.substring(line.indexOf("} ") + 2, line.indexOf("::"));
+						{
+							if ( s.length() > 3 )
+							{
+								lstInd = null;
+								break;
+							}
+							else
+							{
+								lstInd.add( Integer.parseInt(s) );
+							}
+						}
 
 						String textReponseGauche = "";
 
-						textReponseGauche = line.substring(line.indexOf("} ") + 2, line.indexOf("::"));
+						if ( lineInformations.contains("->") )
+							textReponseGauche = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("->"));
+						else
+							textReponseGauche = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("::"));
+
+						String textReponseDroite = "";
+
+						textReponseDroite = lineInformations.substring(lineInformations.indexOf("::") + 2);
+
+						// System.out.println(lineInformations);
+						// System.out.println(textReponseDroite);
+						// System.out.println(textReponseGauche);
+						// System.out.println(lstInd);
+						// System.out.println();
 	
 						if ( !textReponseDroite.equals("[null]") )
 							lstReponse.add(new ReponseAssociation(
-							                                      textReponseDroite,
+							                                      textReponseGauche,
 							                                      lstInd,
-							                                      Integer.parseInt(line.substring(line.indexOf("\b ") + 3, line.indexOf(":}") - 1)),
+							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
 							                                      true
 							                                     ));
 						if ( !textReponseGauche.equals("[null]") )
 							lstReponse.add(new ReponseAssociation(
-							                                      textReponseGauche,
+							                                      textReponseDroite,
 							                                      null,
-							                                      Integer.parseInt(line.substring(line.indexOf("\b ") + 3, line.indexOf(":}") - 1)),
+							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
 							                                      false
-							                                      ));
+							                                     ));
   
-						line = scanner.nextLine();
+						lineInformations = scInformations.nextLine();
 					}
 
 					Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
@@ -119,29 +142,38 @@ public class Notion
 				else if ( type.equals("Elimination"))
 				{
 					List<ReponseElimination> lstReponse = new ArrayList<>();
-					while ( !line.contains("{\\b Fin}") )
+
+					boolean bool;
+					int     nbIndice = 0;
+
+					while ( !lineInformations.contains("{Fin}") )
 					{
 						lstReponse.add(new ReponseElimination(
-						                                      line.substring(line.indexOf("} ") + 2, line.indexOf("|")),
-						                                      line.substring(line.indexOf("|") + 1, line.indexOf("||")),
-						                                      Integer.parseInt(line.substring(line.indexOf("||") + 2, line.indexOf("/")))
+						                                      lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("|")),
+						                                      lineInformations.substring(lineInformations.indexOf("|") + 1, lineInformations.indexOf("||")),
+						                                      Integer.parseInt  (lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/"))),
+						                                      Double.parseDouble(lineInformations.substring(lineInformations.indexOf("/") + 1) )
 						                                     ));
-						line = scanner.nextLine();
+
+						if ( nbIndice < Integer.parseInt( lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/")) ) )
+							nbIndice = Integer.parseInt( lineInformations.substring(lineInformations.indexOf("||") + 2, lineInformations.indexOf("/")) );
+
+						lineInformations = scInformations.nextLine();
 					}
 
-					//Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, "");
-					//questions.add(question);
+					Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
+					questions.add(question);
 				}
 				else if (type.equals("QCM"))
 				{
 					List<ReponseQCM> lstReponse = new ArrayList<>();
-					while (!line.contains("{\\b Fin}"))
+					while (!lineInformations.contains("{Fin}"))
 					{
 						lstReponse.add(new ReponseQCM(
-						                              line.substring(line.indexOf("} ") + 2, line.indexOf("|")),
-						                              line.substring(line.indexOf("|") + 1, line.indexOf("||"))
+						                              lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("|")),
+						                              lineInformations.substring(lineInformations.indexOf("|") + 1, lineInformations.indexOf("||"))
 						                             ));
-						line = scanner.nextLine();
+						lineInformations = scInformations.nextLine();
 					}
 
 					Question question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
@@ -149,11 +181,13 @@ public class Notion
 				}
 				else
 				{
-					scanner.close();
+					scTextQuestion.close();
+					scInformations.close();
 					throw new IllegalArgumentException("Le type doit être appartenir aux options suivantes : 'Association','Elimination','QCM'"); 
 				}
 			}
-			scanner.close();
+			scTextQuestion.close();
+			scInformations.close();
 		}
 		catch (FileNotFoundException e)
 		{
@@ -163,9 +197,31 @@ public class Notion
 		return questions;
 	}
 
-	public String         getNom      () { return nom;       }
-	public Ressource      getRessource() { return ressource; }
-	public List<Question> getQuestions() { return questions; }
+	public String         getNom      ()
+	{
+		String nomN = this.nom.substring(0);
+
+		return nomN;
+	}
+
+	public Ressource      getRessource()
+	{
+		Ressource ressourceN = new Ressource( this.ressource.getCode(), this.ressource.getNom() );
+
+		return ressourceN;
+	}
+
+	public List<Question> getQuestions()
+	{
+		List<Question> questionsN = new ArrayList<>();
+
+		for (Question q : this.questions)
+		{
+			questionsN.add( q );                                            // Intégrité des données pas folle
+		}
+
+		return questionsN;
+	}
 
 	public boolean setNom (String nom)
 	{ 

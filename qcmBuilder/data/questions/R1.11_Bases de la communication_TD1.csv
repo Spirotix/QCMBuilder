@@ -1,0 +1,23 @@
+{R1.11 Bases de la communication_TD1}
+{Question 1}
+{Point :} 2
+{Type :} Elimination
+{Niveau :} TF
+{Temps :} 30
+{Reponses ( Vrai|reponse||placeElimination/nbPointPerdu ) :}
+{1 :} Faux|3||1/-0.5
+{2 :} Vrai|4||0/0
+{3 :} Faux|5||2/-0.5
+{4 :} Faux|8||1/-0.5
+{Fin}
+{Question 2}
+{Point :} 2
+{Type :} Elimination
+{Niveau :} F
+{Temps :} 31
+{Reponses ( Vrai|reponse||placeElimination/nbPointPerdu ) :}
+{1 :} Faux|64||1/-0.5
+{2 :} Vrai|0||0/0
+{3 :} Faux|1||2/-0.5
+{4 :} Faux|-8||1/-0.5
+{Fin}

@@ -6,6 +6,7 @@
 ./qcmBuilder/src/metier/question/QCM.java
 ./qcmBuilder/src/metier/QCMBuilder.java
 ./qcmBuilder/src/metier/question/Question.java
+./qcmBuilder/src/metier/reponse/ReponseQCM.java
 ./qcmBuilder/src/metier/reponse/ReponseAssociation.java
 ./qcmBuilder/src/metier/reponse/ReponseElimination.java
 ./qcmBuilder/src/metier/reponse/Reponse.java
@@ -21,3 +22,5 @@
 ./qcmBuilder/src/ihm/PanelReponse.java
 ./qcmBuilder/src/ihm/PanelReponseAsso.java
 ./qcmBuilder/src/ihm/TestCreerQuestion.java
+
+./qcmBuilder/src/test/AffichageNotion.java
