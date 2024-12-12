@@ -1,23 +1,25 @@
-//package src.ihm;
+package src.ihm;
 
+import java.awt.*;
 import javax.swing.*;
-//import src.Controleur;
+import src.Controleur;
 
 public class FrameCreerQuestion extends JFrame
 {
-	private TestCreerQuestion 		ctrl 	;
+	private Controleur 			ctrl;
 	private PanelCreerQuestion 	panelQ;
 
-	public FrameCreerQuestion (TestCreerQuestion ctrl)
+	public FrameCreerQuestion (Controleur ctrl)
 	{
 		this.ctrl=ctrl;
 
 		
 		this.setTitle   ("Creation de question");
-		this.setSize    ( 500,600  );
+		this.setSize    ( 630,350  );
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
+		this.setBackground(Color.LIGHT_GRAY);
 
 		this.panelQ=new PanelCreerQuestion(this.ctrl, this);
 

@@ -8,7 +8,7 @@ if [[ -f "arg.list" && -f "compile.list" ]]; then
 	# Vérifie si la compilation a réussi
 	if [[ $? -eq 0 ]]; then
 		echo "Compilation réussie. Exécution de src/Controleur..."
-		java src/Controleur
+		java class/Controleur
 	else
 		echo "Erreur : La compilation a échoué."
 		exit 1

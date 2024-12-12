@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 import src.metier.reponse.*;
 import src.metier.question.*;
-import src.ihm.TypeReponse;
+import src.ihm.*;
 
 public class QCMBuilder
 {
@@ -26,7 +26,7 @@ public class QCMBuilder
 		List<Ressource> ressources = new ArrayList<>();
 		try
 		{
-			Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
+			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
 			scanner.nextLine();
 			while (scanner.hasNextLine())
 			{

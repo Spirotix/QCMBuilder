@@ -2,17 +2,18 @@ package src;
 
 import java.util.ArrayList;
 import java.util.List;
-import src.metier.*;
 import src.ihm.*;
+import src.metier.*;
 
 public class Controleur
 {
 	private QCMBuilder qcmBuilder;
+	private FrameMenu frameMenu;
 
 	public Controleur()
 	{
-		qcmBuilder = new QCMBuilder();
-		new FrameCreerQuestion(this);
+		this.qcmBuilder = new QCMBuilder();
+		this.frameMenu = new FrameMenu(this);
 	}
 
 	public ArrayList<String> getChoixNotion(String s)
@@ -73,16 +74,12 @@ public class Controleur
 		return n.setNom(newNom);
 	}*/
 
-	public void creerQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, /*List<String>*/ ArrayList<TypeReponse> lstReponse, int difficulte)
+
+	public void creerQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<TypeReponse> lstReponse, int difficulte)
 	{
 		qcmBuilder.creerQuestion(type, code_nomRessource, nomNotion, text, timer, nbPoint, difficulte,  lstReponse, explication);
 			
-		//q = new Association(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
 		
-		//q = new Elimination(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
-			
-		//mettre cette ligne dans QCM builder je pense
-		//return n.ajouterQuestion(q);*/
 	}
 
 
