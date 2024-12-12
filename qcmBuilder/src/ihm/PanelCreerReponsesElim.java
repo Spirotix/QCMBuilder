@@ -62,24 +62,39 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 
 	
 
-	public String getString()
+	public String getString(){return this.contenu.getText();}
+	public int    getOrdre()
 	{
-		String str = "";
+		int rtnOrdre;
 
-		str+=this.contenu.getText();
-		if (this.validation.isSelected())
-			str+="_VRAI_";
-		else 
-			str+="_FAUX_";
-		
-		if (this.cout.getText().equals(""))
-			this.cout.setText("0");
-		
-		if (this.ordre.getText().equals(""))
-			this.ordre.setText("0");
-		
-		str+=this.cout.getText()+"_"+this.ordre.getText();
-		
-		return str;
+		try 
+		{
+			rtnOrdre = Integer.parseInt(this.ordre.getText());
+			return rtnOrdre;
+		} 
+		catch (Exception ex) 
+		{
+			System.out.println("Ce n'est pas un entier (ordre)");
+			return 0;
+		}
 	}
+
+	public int    getCout()
+	{
+		int rtnCout;
+
+		try 
+		{
+			rtnCout = Integer.parseInt(this.cout.getText());
+			return rtnCout;
+		} 
+		catch (Exception ex) 
+		{
+			System.out.println("Ce n'est pas un entier (cout)");
+			return 0;
+		}
+	}
+
+	public boolean  getEstBonneReponse ( )	{return this.validation.isSelected();}
+
 }

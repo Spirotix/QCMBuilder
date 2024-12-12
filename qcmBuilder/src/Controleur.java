@@ -1,7 +1,9 @@
 package src;
-import  java.util.ArrayList;
+
+import java.util.ArrayList;
 import java.util.List;
-import  src.metier.*;
+import src.metier.*;
+import src.ihm.*;
 
 public class Controleur
 {
@@ -32,7 +34,7 @@ public class Controleur
 		ArrayList<String> ressources = new ArrayList<>();
 		for (Ressource r : qcmBuilder.getRessources())
 		{
-			ressources.add(r.getNom());
+			ressources.add( r.getCode() + "_" + r.getNom() );
 		}
 		return ressources;
 	}
@@ -71,9 +73,9 @@ public class Controleur
 		return n.setNom(newNom);
 	}*/
 
-	public void creerQuestion(String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, List<String> lstReponse, int difficulte)
+	public void creerQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, /*List<String>*/ ArrayList<TypeReponse> lstReponse, int difficulte)
 	{
-		qcmBuilder.creerQuestion(type, nomRessource, nomNotion, text, timer, nbPoint, difficulte,  lstReponse, explication);
+		qcmBuilder.creerQuestion(type, code_nomRessource, nomNotion, text, timer, nbPoint, difficulte,  lstReponse, explication);
 			
 		//q = new Association(n, 0, text, timer, nbPoint, nbIndiceUtilise, difficulte);
 		

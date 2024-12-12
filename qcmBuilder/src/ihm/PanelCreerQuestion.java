@@ -12,7 +12,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private JRadioButton btnChoixUnique, btnChoixMult, btnAsso, btnElim;
 	private JButton btnCreer;
 	private JRadioButton btnTF, btnF, btnM, btnD;
-	private JLabel msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrNot, msgChoixType;
+	private JLabel msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrNot, msZgChoixType;
 	private FrameCreerQuestion fr;
 
 	// Ressources finale
@@ -35,7 +35,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 
 		// Initialisation
-		this.nbPoints = new JTextField("5", 5);
+		this.nbPoints 	 = new JTextField("5" , 5);
 		this.tpsReponses = new JTextField("10", 5);
 
 		this.choixRessource = new Choice();
@@ -48,10 +48,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.choixNotion.setEnabled(false); // Disable initially
 
 		this.btnGroupImg = new ButtonGroup();
-		this.btnTF = new JRadioButton(new ImageIcon("img/TF2.PNG"));
-		this.btnF = new JRadioButton(new ImageIcon("img/F2.PNG"));
-		this.btnM = new JRadioButton(new ImageIcon("img/M2.PNG"));
-		this.btnD = new JRadioButton(new ImageIcon("img/D2.PNG"));
+		this.btnTF		 = new JRadioButton(new ImageIcon("img/TF2.PNG"));
+		this.btnF		 = new JRadioButton(new ImageIcon("img/F2.PNG" ));
+		this.btnM		 = new JRadioButton(new ImageIcon("img/M2.PNG" ));
+		this.btnD 		 = new JRadioButton(new ImageIcon("img/D2.PNG" ));
 
 		this.btnTF.setOpaque(false);
 		this.btnF.setOpaque(false);
@@ -62,37 +62,37 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		
 
 		this.btnTF.setEnabled(false);
-		this.btnF.setEnabled(false);
-		this.btnM.setEnabled(false);
-		this.btnD.setEnabled(false);
+		this.btnF .setEnabled(false);
+		this.btnM .setEnabled(false);
+		this.btnD .setEnabled(false);
 
 		this.btnGroupImg.add(this.btnTF);
-		this.btnGroupImg.add(this.btnF);
-		this.btnGroupImg.add(this.btnM);
-		this.btnGroupImg.add(this.btnD);
+		this.btnGroupImg.add(this.btnF );
+		this.btnGroupImg.add(this.btnM );
+		this.btnGroupImg.add(this.btnD );
 
-		this.btnChoixUnique = new JRadioButton("Choix Unique");
-		this.btnChoixMult = new JRadioButton("Choix Multiple");
-		this.btnAsso = new JRadioButton("Associatif");
-		this.btnElim = new JRadioButton("Elimination");
+		this.btnChoixUnique = new JRadioButton("Choix Unique"	);
+		this.btnChoixMult 	= new JRadioButton("Choix Multiple" );
+		this.btnAsso 		= new JRadioButton("Associatif"		);
+		this.btnElim 		= new JRadioButton("Elimination"	);
 
 		this.btnChoixUnique.setOpaque(false);
 		this.btnChoixMult.setOpaque(false);
 		this.btnAsso.setOpaque(false);
 		this.btnElim.setOpaque(false);
 
-		this.msgErrNbPts = new JLabel("");
+		this.msgErrNbPts  = new JLabel("");
 		this.msgErrTpsRep = new JLabel("");
-		this.msgErrRess = new JLabel("");
-		this.msgErrNiv = new JLabel("");
-		this.msgErrNot = new JLabel("");
+		this.msgErrRess   = new JLabel("");
+		this.msgErrNiv    = new JLabel("");
+		this.msgErrNot    = new JLabel("");
 		this.msgChoixType = new JLabel("");
 
-		this.btnGroup = new ButtonGroup();
-		this.btnGroup.add(this.btnChoixUnique);
-		this.btnGroup.add(this.btnChoixMult);
-		this.btnGroup.add(this.btnAsso);
-		this.btnGroup.add(this.btnElim);
+		this.btnGroup = new ButtonGroup(		);
+		this.btnGroup.add (this.btnChoixUnique	);
+		this.btnGroup.add (this.btnChoixMult	);
+		this.btnGroup.add (this.btnAsso			);
+		this.btnGroup.add (this.btnElim			);
 
 		this.btnCreer = new JButton("Creer");
 
@@ -104,19 +104,19 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 
 		// ActionListener / itemListener
-		this.nbPoints.addActionListener(this);
-		this.tpsReponses.addActionListener(this);
-		this.btnTF.addActionListener(this);
-		this.btnF.addActionListener(this);
-		this.btnM.addActionListener(this);
-		this.btnD.addActionListener(this);
-		this.btnChoixUnique.addActionListener(this);
-		this.btnChoixMult.addActionListener(this);
-		this.btnAsso.addActionListener(this);
-		this.btnElim.addActionListener(this);
-		this.choixRessource.addItemListener(this);
-		this.choixNotion.addItemListener(this);
-		this.btnCreer.addActionListener(this);
+		this.nbPoints		.addActionListener	(this);
+		this.tpsReponses	.addActionListener	(this);
+		this.btnTF			.addActionListener	(this);
+		this.btnF			.addActionListener	(this);
+		this.btnM			.addActionListener	(this);
+		this.btnD			.addActionListener	(this);
+		this.btnChoixUnique	.addActionListener	(this);
+		this.btnChoixMult	.addActionListener	(this);
+		this.btnAsso		.addActionListener	(this);
+		this.btnElim		.addActionListener	(this);
+		this.choixRessource	.addItemListener	(this);
+		this.choixNotion	.addItemListener	(this);
+		this.btnCreer		.addActionListener	(this);
 
 		// Layout
 		gbc.gridx = 0;
@@ -389,7 +389,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		}
 	}
 
-	public void creerQuestion(String explication, String intituleQuestion, ArrayList<String> lstReponses) {
+	public void creerQuestion(String explication, String intituleQuestion, ArrayList<TypeReponse> reponses)
+	{
 		if (this.btnChoixMult.isSelected() || this.btnChoixUnique.isSelected())
 			this.typeQuestion = "QCM";
 		if (this.btnAsso.isSelected())
@@ -399,6 +400,6 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion = explication;
-		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
+		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, reponses, this.difficulteQuestion);
 	}
 }

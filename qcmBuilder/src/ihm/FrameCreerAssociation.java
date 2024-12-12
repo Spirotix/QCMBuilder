@@ -13,7 +13,7 @@ public class FrameCreerAssociation extends JFrame
 
 		
 		this.setTitle   ("Creation d'une Question par association");
-		this.setSize    ( 1500,800  );
+		this.setSize    ( 1000,800  );
 
 		this.panel=new PanelCreerQuestionAsso(this.panelQ);
 

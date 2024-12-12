@@ -88,11 +88,14 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 		} 
 		if (e.getSource() == this.enreg) 
 		{
-			ArrayList<String> lstReponses = new ArrayList<String>();
+			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
 			for (PanelReponse p : this.reponsesPossibles)
-				lstReponses.add(p.getString());
+			{
+				reponses.add(new TypeReponse(p.getString(), p.getEstBonneReponse()));
+			}
+				
 
-			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), lstReponses);
+			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
 		}
 		
 		

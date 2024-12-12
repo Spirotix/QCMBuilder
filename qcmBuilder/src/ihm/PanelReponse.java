@@ -43,19 +43,10 @@ public class PanelReponse extends JPanel implements ActionListener
 		}
 	}
 
-
 	
 
-	public String getString()
-	{
-		String str = "";
+	public boolean  getEstBonneReponse ( )	{return this.validation.isSelected();}
+	
 
-		str+=this.contenu.getText();
-		if (this.validation.isSelected())
-			str+="_VRAI";
-		else 
-			str+="_FAUX";
-		
-		return str;
-	}
+	public String getString(){return this.contenu.getText();}
 }
