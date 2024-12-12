@@ -3,17 +3,17 @@ package src.ihm;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import src.Controleur;
+import src.Controleur;
 
-public class PanelCreerQuestionnaire extends JPanel implements ActionListener, ItemListener
+public class PanelGenererQuestionnaire extends JPanel implements ActionListener, ItemListener
 {
 	//private Controleur ctrl
-	private TestCreerQuestion 	ctrl			;
+	private Controleur 	ctrl			;
 	private Choice 				choixRessource	;
 	private ButtonGroup			grpOuiNon		;
 	private JRadioButton		btnOui, btnNon	;
 
-	public PanelCreerQuestionnaire (TestCreerQuestion ctrl)
+	public PanelGenererQuestionnaire (Controleur ctrl)
 	{
 		this.ctrl=ctrl;
 		this.setLayout(new GridLayout (10,1));
