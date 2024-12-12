@@ -1,12 +1,11 @@
-//package src.ihm;
+package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
 //import src.Controleur;
 
-public class panelCreerQuestionnaire extends JPanel implements ActionListener, ItemListener
+public class PanelCreerQuestionnaire extends JPanel implements ActionListener, ItemListener
 {
 	//private Controleur ctrl
 	private TestCreerQuestion 	ctrl			;
@@ -14,7 +13,7 @@ public class panelCreerQuestionnaire extends JPanel implements ActionListener, I
 	private ButtonGroup			grpOuiNon		;
 	private JRadioButton		btnOui, btnNon	;
 
-	public panelCreerQuestionnaire (TestCreerQuestion ctrl)
+	public PanelCreerQuestionnaire (TestCreerQuestion ctrl)
 	{
 		this.ctrl=ctrl;
 		this.setLayout(new GridLayout (10,1));

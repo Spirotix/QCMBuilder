@@ -1,3 +1,5 @@
+package src.ihm;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -82,7 +84,7 @@ public class FrameMenu extends JFrame implements ActionListener {
 			this.dispose();
 		}
 
-		if (e.getSource().equals(this.creerQuestionnaire))
+		if (e.getSource().equals(this.genererQuestionnaire))
 		{
 			new FrameCreerQuestionnaire(this.ctrl);
 			this.dispose();
