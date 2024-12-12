@@ -4,14 +4,15 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import src.Controleur;
 
 public class FrameMenu extends JFrame implements ActionListener {
 
 	private JButton creerQuestion, genererQuestionnaire, creerResNot;
-	private TestCreerQuestion ctrl;
+	private Controleur ctrl;
 	private JPanel panel;
 
-	public FrameMenu(TestCreerQuestion ctrl) {
+	public FrameMenu(Controleur ctrl) {
 		this.ctrl = ctrl;
 
 		this.setLayout(new BorderLayout());
@@ -86,7 +87,7 @@ public class FrameMenu extends JFrame implements ActionListener {
 
 		if (e.getSource().equals(this.genererQuestionnaire))
 		{
-			new FrameCreerQuestionnaire(this.ctrl);
+			new FrameGenererQuestionnaire(this.ctrl);
 			this.dispose();
 		}
 	}

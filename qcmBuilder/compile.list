@@ -16,14 +16,14 @@
 ./src/ihm/FrameCreerElimination.java
 ./src/ihm/FrameCreerQCMRepUnique.java
 ./src/ihm/FrameCreerQuestion.java
-./src/ihm/FrameCreerQuestionnaire.java
+./src/ihm/FrameGenererQuestionnaire.java
 ./src/ihm/FrameExplication.java
 ./src/ihm/FrameMenu.java
 ./src/ihm/PanelCreerElim.java
 ./src/ihm/PanelCreerQCMRepUnique.java
 ./src/ihm/PanelCreerQuestion.java
 ./src/ihm/PanelCreerQuestionAsso.java
-./src/ihm/PanelCreerQuestionnaire.java
+./src/ihm/PanelGenererQuestionnaire.java
 ./src/ihm/PanelReponse.java
 ./src/ihm/TestCreerQuestion.java
 ./src/ihm/TypeReponse.java

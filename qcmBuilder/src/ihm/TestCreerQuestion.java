@@ -6,7 +6,7 @@ public class TestCreerQuestion
 {
 	public TestCreerQuestion ()
 	{
-		new FrameMenu(this);
+		//new FrameMenu(this);
 	}
 
 	public static void main (String[] a)
