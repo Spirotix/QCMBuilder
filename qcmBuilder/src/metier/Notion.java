@@ -29,8 +29,10 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try
 		{
-			Scanner scTextQuestion = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom + ".rtf"));
-			Scanner scInformations = new Scanner(new File("./data/questions/" + this.ressource.getNom() + "_" + this.nom + ".csv"));
+			Scanner scTextQuestion = new Scanner(new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf"));
+			Scanner scInformations = new Scanner(new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".csv"));
+
+			scInformations.nextLine();
 
 			while ( scTextQuestion.hasNextLine() && scInformations.hasNextLine() )
 			{
@@ -85,33 +87,49 @@ public class Notion
 					{
 						List<Integer> lstInd = new ArrayList<>();
 
-						String[] tmp = lineInformations.substring(lineInformations.indexOf("->") + 2, lineInformations.indexOf("::") - 1).split("_");
+						String[] tmp = lineInformations.substring(lineInformations.indexOf("->") + 2, lineInformations.indexOf("::")).split("_");
 						for (String s : tmp)
-							lstInd.add( Integer.parseInt(s) );
-
-						String textReponseDroite = "";
-
-						if ( lineInformations.contains("->") )
-							textReponseDroite = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("->"));
-						else
-							textReponseDroite = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("::"));
+						{
+							if ( s.length() > 3 )
+							{
+								lstInd = null;
+								break;
+							}
+							else
+							{
+								lstInd.add( Integer.parseInt(s) );
+							}
+						}
 
 						String textReponseGauche = "";
 
-						textReponseGauche = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("::"));
+						if ( lineInformations.contains("->") )
+							textReponseGauche = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("->"));
+						else
+							textReponseGauche = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("::"));
+
+						String textReponseDroite = "";
+
+						textReponseDroite = lineInformations.substring(lineInformations.indexOf("::") + 2);
+
+						// System.out.println(lineInformations);
+						// System.out.println(textReponseDroite);
+						// System.out.println(textReponseGauche);
+						// System.out.println(lstInd);
+						// System.out.println();
 	
 						if ( !textReponseDroite.equals("[null]") )
 							lstReponse.add(new ReponseAssociation(
-							                                      textReponseDroite,
+							                                      textReponseGauche,
 							                                      lstInd,
-							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("\b ") + 3, lineInformations.indexOf(":}") - 1)),
+							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
 							                                      true
 							                                     ));
 						if ( !textReponseGauche.equals("[null]") )
 							lstReponse.add(new ReponseAssociation(
-							                                      textReponseGauche,
+							                                      textReponseDroite,
 							                                      null,
-							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("\b ") + 3, lineInformations.indexOf(":}") - 1)),
+							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
 							                                      false
 							                                     ));
   

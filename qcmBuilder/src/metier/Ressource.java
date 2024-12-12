@@ -30,12 +30,12 @@ public class Ressource
 
 			while (scanner.hasNextLine())
 			{
-				String   line         = scanner.nextLine();
-				String[] parts        = line.split(";");
-				String   nomRessource = parts[0];
-				String   nomNotion    = parts[1];
+				String   line          = scanner.nextLine();
+				String[] parts         = line.split(";");
+				String   codeRessource = parts[0];
+				String   nomNotion     = parts[2];
 
-				if ( nomRessource.equals(this.nom) )
+				if ( codeRessource.equals(this.code) )
 				{
 					Notion notion = new Notion(nomNotion, this);
 					notions.add(notion);
@@ -48,9 +48,8 @@ public class Ressource
 		return notions;
 	}
 
-
-	public String       getCode()    { return this.code; }
-	public String       getNom()     { return this.nom; }
+	public String       getCode()    { return this.code;       }
+	public String       getNom()     { return this.nom;        }
 	public List<Notion> getNotions() { return this.lstNotions; }
 
 	public boolean setNom(String nom) 
