@@ -27,7 +27,7 @@ public class QCMBuilder
 		{
 			Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
 			scanner.nextLine();
-			while (scanner.hasNextLine()) 
+			while (scanner.hasNextLine())
 			{
 				String   line         = scanner.nextLine();
 				String[] parts        = line.split(";");
@@ -38,11 +38,11 @@ public class QCMBuilder
 
 				for (Ressource r : ressources)
 				{
-					if (r.getNom().equals(nomRessource))
+					if (r.getCode().equals(codeRessource))
 						ressource = r;
 				}
 
-				if (!ressources.contains(ressource))
+				if ( ! ressources.contains(ressource) )
 					ressources.add(ressource);
 			}
 			scanner.close();
@@ -52,35 +52,52 @@ public class QCMBuilder
 		return ressources;
 	}
 
-
 	public List<Ressource> getRessources() { return ressources; }
 
 	public boolean ajouterRessource(Ressource ressource)
 	{
-		if (ressource == null)
+		for (Ressource r : ressources)
+		{
+			if ( r.getCode().equals(ressource.getCode()) )
+				ressource = r;
+		}
+
+		if ( ! ressources.contains(ressource))
+		{
+			ressources.add(ressource);
+			return true;
+		}
+		else
+		{
 			return false;
-		if (ressources.contains(ressource))
-			return false;
-		ressources.add(ressource);
-		return true;
+		}
 	}
 
 	public boolean supprimerRessource(Ressource ressource)
 	{
-		if (ressource == null)
+		for (Ressource r : ressources)
+		{
+			if ( r.getCode().equals(ressource.getCode()) )
+				ressource = r;
+		}
+
+		if ( ! ressources.contains(ressource))
+		{
+			ressources.remove(ressource);
+			return true;
+		}
+		else
+		{
 			return false;
-		if (!ressources.contains(ressource))
-			return false;
-		ressources.remove(ressource);
-		return true;
+		}
 	}
 
-	public Ressource rechercherRessource(String nom)
+	public Ressource rechercherRessource(String code)
 	{
 		Ressource ressourceTrouvee = null;
 		for (Ressource ressource : ressources)
 		{
-			if (ressource.getNom().equals(nom))
+			if (ressource.getCode().equals(code))
 				ressourceTrouvee = ressource;
 		}
 		return ressourceTrouvee;
@@ -98,7 +115,6 @@ public class QCMBuilder
 	
 	public boolean creerQuestion(String type, String nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, List<String> sLstReponses, String explication)
 	{
-
 		Notion notion = rechercherRessource(nomRessource).rechercherNotion(nomNotion);
 		
 		if ( type.equals("Elimination") )
