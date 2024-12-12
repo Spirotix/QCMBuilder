@@ -75,7 +75,7 @@ public class TestCreerQuestion
 		System.out.println(str);
 	}*/
 
-	public void creerQuestion (String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint/*/, int nbIndiceUtilise*/, ArrayList<String> lstReponse, int difficulte)
+	public void creerQuestion (String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint/*/, int nbIndiceUtilise*/, ArrayList<TypeReponse> lstReponse, int difficulte)
 	{
 		String str=""; 
 		int cpt=0;
@@ -84,8 +84,8 @@ public class TestCreerQuestion
 		str+="\nintitule : "+text ;
 		str += "\nexplication : "+explication;
 		str+="\ntemps : "+timer + " nmbres de points : "+nbPoint +" difficulte : "+difficulte;
-		for (String s : lstReponse)
-			str+="\nReponse "+ ++cpt+": "+s ;
+		for (TypeReponse s : lstReponse)
+			str+="\nReponse "+ ++cpt+": "+s.toString(type) ;
 		
 		System.out.println(str);
 	}

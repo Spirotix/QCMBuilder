@@ -359,7 +359,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	 * Amazon_FAUX_-0,5_2
 	 */
 
-	public void creerQuestion(String explication, String intituleQuestion, ArrayList<String> lstReponses)
+	public void creerQuestion(String explication, String intituleQuestion, ArrayList<TypeReponse> reponses)
 	{
 		if (this.btnChoixMult.isSelected() || this.btnChoixUnique.isSelected())
 			this.typeQuestion = "QCM";
@@ -370,7 +370,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion = explication;
-		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
+		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, reponses, this.difficulteQuestion);
 	}
 
 
