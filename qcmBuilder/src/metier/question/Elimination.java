@@ -16,8 +16,7 @@ public class Elimination implements Question
 	private int nbIndiceUtilise;
 	private List<ReponseElimination> lstReponses;
 
-	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte,
-			List<ReponseElimination> lstReponses, int nbIndice, String explication)
+	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<ReponseElimination> lstReponses, int nbIndice, String explication)
 	{
 		this.notions = notion;
 		this.text = text;
