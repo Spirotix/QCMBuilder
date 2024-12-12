@@ -5,8 +5,8 @@
 {Niveau :} M
 {Temps :} 45
 {Reponses :}
-{1 :} Chien->1_3::Aboie
-{2 :} Chat->2::Miaule
-{3 :} Poisson::grogne
-{4 :} [null]::begue
+{1 :} Chien::Aboie
+{2 :} Chat::Miaule
+{3 :} Poisson::bloblote
+{4 :} Thibault::begue
 {Fin}

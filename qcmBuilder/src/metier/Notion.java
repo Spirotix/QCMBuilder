@@ -101,38 +101,35 @@ public class Notion
 							}
 						}
 
-						String textReponseGauche = "";
+						ReponseAssociation reponseA;
+						String textReponseA = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("::"));
 
-						if ( lineInformations.contains("->") )
-							textReponseGauche = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("->"));
-						else
-							textReponseGauche = lineInformations.substring(lineInformations.indexOf("} ") + 2, lineInformations.indexOf("::"));
-
-						String textReponseDroite = "";
-
-						textReponseDroite = lineInformations.substring(lineInformations.indexOf("::") + 2);
+						ReponseAssociation reponseB;
+						String textReponseB = lineInformations.substring(lineInformations.indexOf("::") + 2);
 
 						// System.out.println(lineInformations);
-						// System.out.println(textReponseDroite);
-						// System.out.println(textReponseGauche);
+						// System.out.println(textReponseA);
+						// System.out.println(textReponseB);
 						// System.out.println(lstInd);
 						// System.out.println();
-	
-						if ( !textReponseDroite.equals("[null]") )
-							lstReponse.add(new ReponseAssociation(
-							                                      textReponseGauche,
-							                                      lstInd,
-							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
-							                                      true
-							                                     ));
-						if ( !textReponseGauche.equals("[null]") )
-							lstReponse.add(new ReponseAssociation(
-							                                      textReponseDroite,
-							                                      null,
-							                                      Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
-							                                      false
-							                                     ));
-  
+
+						reponseA = new ReponseAssociation(
+						                                   textReponseA,
+						                                   null,
+						                                   Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
+						                                   false
+						                                  );
+						lstReponse.add( reponseA );
+
+						reponseB = new ReponseAssociation(
+						                                  textReponseB,
+						                                  reponseA,
+						                                  Integer.parseInt(lineInformations.substring(lineInformations.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
+						                                  false
+						                                 );
+						reponseA.setReponseAssocie( reponseB );
+						lstReponse.add( reponseB );
+
 						lineInformations = scInformations.nextLine();
 					}
 
