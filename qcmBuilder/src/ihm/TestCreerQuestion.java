@@ -1,12 +1,27 @@
-package src.ihm;
+//package src.ihm;
 
 import java.util.*;
 
 public class TestCreerQuestion 
 {
+	private ArrayList<String> lstNotion		;
+	private ArrayList<String> lstRessource	;
+
 	public TestCreerQuestion ()
 	{
-		//new FrameMenu(this);
+		this.lstRessource = new ArrayList<String>();
+		this.lstRessource.add("ressource1");
+		this.lstRessource.add("ressource2");
+		this.lstRessource.add("ressource3");
+		this.lstRessource.add("ressource4");
+
+		this.lstNotion = new ArrayList<String>();
+		this.lstNotion.add("notion1");
+		this.lstNotion.add("notion2");
+		this.lstNotion.add("notion3");
+		this.lstNotion.add("notion4");
+
+		new FrameMenu(this);
 	}
 
 	public static void main (String[] a)
@@ -17,24 +32,25 @@ public class TestCreerQuestion
 	public ArrayList<String> getChoixNotion(String s)
 	{
 		ArrayList<String> str = new ArrayList<String>();
-		str.add("Test1 : "+s);
-		str.add("Test2 : "+s);
-		str.add("Test3 : "+s);
-		str.add("Test4 : "+s);
+		for (int i=0; i<this.lstRessource.size();i++)
+			str.add(s+" : "+this.lstNotion.get(i));
 
 		return str;
 	}
 
 	public ArrayList<String> getChoixRessources()
 	{
-		ArrayList<String> str = new ArrayList<String>();
-		
-		str.add("Test1");
-		str.add("Test2");
-		str.add("Test3");
-		str.add("Test4");
+		return this.lstRessource;
+	}
 
-		return str;
+	public void ajouterNotion (String nomNotion)
+	{
+		this.lstNotion.add(nomNotion);
+	}
+
+	public void ajouterRessource (String nomRessource)
+	{
+		this.lstRessource.add(nomRessource);
 	}
 
 	/*

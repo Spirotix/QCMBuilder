@@ -1,3 +1,5 @@
+//package src.ihm;
+
 import java.util.ArrayList;
 
 public class TypeQuestionnaire 

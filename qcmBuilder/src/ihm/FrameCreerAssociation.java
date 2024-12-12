@@ -1,5 +1,4 @@
-package src.ihm;
-
+//package src.ihm;
 import javax.swing.*;
 
 public class FrameCreerAssociation extends JFrame
