@@ -51,6 +51,7 @@ public class PanelReponseAsso extends JPanel
 		if (PanelReponseAsso.lierDroite!=null)
 		{
 			PanelReponseAsso.lierGauche.ajouterBonneRep(PanelReponseAsso.lierDroite);
+			panelQ.getPaintComponent().repaint();
 			PanelReponseAsso.lierDroite=null;
 			PanelReponseAsso.lierGauche=null;
 		}
@@ -78,6 +79,7 @@ public class PanelReponseAsso extends JPanel
 		{	
 			System.out.println("liaison");
 			PanelReponseAsso.lierGauche.ajouterBonneRep(PanelReponseAsso.lierDroite);
+			panelQ.getPaintComponent().repaint();
 			PanelReponseAsso.lierDroite=null;
 			PanelReponseAsso.lierGauche=null;
 		}

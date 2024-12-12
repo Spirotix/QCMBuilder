@@ -1,38 +1,38 @@
-//package src.ihm;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
-//import src.Controleur;
+import javax.swing.border.LineBorder;
 
-public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener
-{
-	private 	TestCreerQuestion 	ctrl;
-	private 	JTextField 		nbPoints, tpsReponses;
-	private  	Choice 			choixRessource, choixNotion;
-	private 	ButtonGroup		btnGroup, btnGroupImg;
-	private 	JRadioButton	btnChoixUnique, btnChoixMult, btnAsso, btnElim;
-	private		JButton 		btnCreer;	
-	private 	JRadioButton 	btnTF, btnF, btnM, btnD ; 
-	private 	JLabel			msgErrNbPts, msgErrTpsRep, msgErrRess,msgErrNiv,msgErrNot, msgChoixType ;
-	private 	FrameCreerQuestion fr;
+public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener {
+	private TestCreerQuestion ctrl;
+	private JTextField nbPoints, tpsReponses;
+	private Choice choixRessource, choixNotion;
+	private ButtonGroup btnGroup, btnGroupImg;
+	private JRadioButton btnChoixUnique, btnChoixMult, btnAsso, btnElim;
+	private JButton btnCreer;
+	private JRadioButton btnTF, btnF, btnM, btnD;
+	private JLabel msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrNot, msgChoixType;
+	private FrameCreerQuestion fr;
 
-	//Ressources finale
-	private		String		typeQuestion;
-	private 	String		ressourceQuestion;
-	private 	String 		notionQuestion;
-	private 	String 		textQuestion;
-	private 	int 		tempsQuestion;
-	private 	int 		nbPointQuestion;
-	private 	int 		difficulteQuestion ;
-	private 	String 		explicationQuestion;
+	// Ressources finale
+	private String typeQuestion;
+	private String ressourceQuestion;
+	private String notionQuestion;
+	private String textQuestion;
+	private int tempsQuestion;
+	private int nbPointQuestion;
+	private int difficulteQuestion;
+	private String explicationQuestion;
 
-	public PanelCreerQuestion (TestCreerQuestion ctrl, FrameCreerQuestion fr)
-	{
+	public PanelCreerQuestion(TestCreerQuestion ctrl, FrameCreerQuestion fr) {
 		this.ctrl = ctrl;
 		this.fr = fr;
-		this.setLayout(new GridLayout(11, 1));
+		this.setLayout(new GridBagLayout());
+		this.setBackground(Color.LIGHT_GRAY);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(5, 5, 5, 5);
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 
 		// Initialisation
 		this.nbPoints = new JTextField("5", 5);
@@ -44,8 +44,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.choixRessource.add(s);
 
 		this.choixNotion = new Choice();
-		
-		this.choixNotion.add("                    ");
+		this.choixNotion.add(" ");
 		this.choixNotion.setEnabled(false); // Disable initially
 
 		this.btnGroupImg = new ButtonGroup();
@@ -53,6 +52,14 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.btnF = new JRadioButton(new ImageIcon("img/F2.PNG"));
 		this.btnM = new JRadioButton(new ImageIcon("img/M2.PNG"));
 		this.btnD = new JRadioButton(new ImageIcon("img/D2.PNG"));
+
+		this.btnTF.setOpaque(false);
+		this.btnF.setOpaque(false);
+		this.btnM.setOpaque(false);
+		this.btnD.setOpaque(false);
+		
+
+		
 
 		this.btnTF.setEnabled(false);
 		this.btnF.setEnabled(false);
@@ -69,6 +76,11 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.btnAsso = new JRadioButton("Associatif");
 		this.btnElim = new JRadioButton("Elimination");
 
+		this.btnChoixUnique.setOpaque(false);
+		this.btnChoixMult.setOpaque(false);
+		this.btnAsso.setOpaque(false);
+		this.btnElim.setOpaque(false);
+
 		this.msgErrNbPts = new JLabel("");
 		this.msgErrTpsRep = new JLabel("");
 		this.msgErrRess = new JLabel("");
@@ -83,6 +95,13 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.btnGroup.add(this.btnElim);
 
 		this.btnCreer = new JButton("Creer");
+
+		this.btnCreer.setOpaque(false);
+		this.btnCreer.setContentAreaFilled(false);
+		this.btnCreer.setBorder(new LineBorder(Color.BLACK));
+		this.btnCreer.setFocusPainted(false);
+		this.btnCreer.setForeground(Color.BLACK);
+
 
 		// ActionListener / itemListener
 		this.nbPoints.addActionListener(this);
@@ -100,30 +119,76 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.btnCreer.addActionListener(this);
 
 		// Layout
-		this.add(createLabeledPanel("Nombre de points", this.nbPoints));
-		this.add(createLabeledPanel("Temps de réponse", this.tpsReponses));
-		this.add(createErrorPanel(this.msgErrNbPts, this.msgErrTpsRep));
-		this.add(createLabeledPanel("Ressource", this.choixRessource));
-		this.add(createLabeledPanel("Notion", this.choixNotion));
-		this.add(createErrorPanel(this.msgErrRess, this.msgErrNot));
-		this.add(createLabeledPanel("Niveau", createDifficultyPanel()));
-		this.add(createErrorPanel(this.msgErrNiv));
-		this.add(createLabeledPanel("Type de question", createTypePanel()));
-		this.add(createErrorPanel(this.msgChoixType));
-		this.add(this.btnCreer);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		this.add(new JLabel("Nombre de points"), gbc);
+		gbc.gridx = 1;
+		this.add(this.nbPoints, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		this.add(new JLabel("Temps de réponse"), gbc);
+		gbc.gridx = 1;
+		this.add(this.tpsReponses, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgErrNbPts, this.msgErrTpsRep), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		gbc.gridwidth = 1;
+		this.add(new JLabel("Ressource"), gbc);
+		gbc.gridx = 1;
+		this.add(this.choixRessource, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		this.add(new JLabel("Notion"), gbc);
+		gbc.gridx = 1;
+		this.add(this.choixNotion, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgErrRess, this.msgErrNot), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		gbc.gridwidth = 1;
+		this.add(new JLabel("Niveau"), gbc);
+		gbc.gridx = 1;
+		this.add(createDifficultyPanel(), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgErrNiv), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		gbc.gridwidth = 1;
+		this.add(new JLabel("Type de question"), gbc);
+		gbc.gridx = 1;
+		this.add(createTypePanel(), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 9;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgChoixType), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 10;
+		gbc.gridwidth = 2;
+		this.add(this.btnCreer, gbc);
 
 		this.setVisible(true);
 	}
 
-	private JPanel createLabeledPanel(String labelText, Component component) {
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		panel.add(new JLabel(labelText));
-		panel.add(component);
-		return panel;
-	}
-
 	private JPanel createErrorPanel(JLabel... labels) {
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel.setBackground(Color.LIGHT_GRAY);
 		for (JLabel label : labels) {
 			panel.add(label);
 		}
@@ -132,6 +197,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 	private JPanel createDifficultyPanel() {
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel.setBackground(Color.LIGHT_GRAY);
 		panel.add(this.btnTF);
 		panel.add(this.btnF);
 		panel.add(this.btnM);
@@ -141,6 +207,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 	private JPanel createTypePanel() {
 		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel.setBackground(Color.LIGHT_GRAY);
 		panel.add(this.btnChoixUnique);
 		panel.add(this.btnChoixMult);
 		panel.add(this.btnAsso);
@@ -214,8 +281,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 				this.msgErrNiv.setText("");
 			}
 
-			if (peutCreer)
-			{
+			if (peutCreer) {
 				if (this.btnChoixMult.isSelected() || this.btnChoixUnique.isSelected())
 					new FrameCreerQCMRepUnique(this);
 				if (this.btnAsso.isSelected())
@@ -224,48 +290,44 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 					new FrameCreerElimination(this);
 				this.fr.dispose();
 			}
+
+
+			
 		}
 
-		if (this.btnTF.isSelected() && !this.choixNotion.getSelectedItem().equals("")&& !this.choixRessource.getSelectedItem().equals("                    "))
+		if (this.btnTF.isSelected() )
 		{
 			this.btnTF.setIcon(new ImageIcon("img/TF1.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
 			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
 			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
-			this.difficulteQuestion = 1;
 			this.msgErrNiv.setText("");
 		}
 
-		else if (this.btnF.isSelected() && !this.choixNotion.getSelectedItem().equals("") && !this.choixRessource.getSelectedItem().equals("                    "))
+		else if (this.btnF.isSelected() )
 		{
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F1.PNG" ));
 			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
 			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
-			this.difficulteQuestion = 2;
 			this.msgErrNiv.setText("");
 		}
-
-		else if (this.btnM.isSelected() && !this.choixNotion.getSelectedItem().equals("")&& !this.choixRessource.getSelectedItem().equals("                    "))
+		else if (this.btnM.isSelected() )
 			{
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
 			this.btnM .setIcon(new ImageIcon("img/M1.PNG" ));
 			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
-			this.difficulteQuestion = 3;
 			this.msgErrNiv.setText("");
 		}
-
-		else if (this.btnD.isSelected() && !this.choixNotion.getSelectedItem().equals("")&& !this.choixRessource.getSelectedItem().equals("                    "))
+		else if (this.btnD.isSelected() )
 		{
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
 			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
 			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
 			this.btnD .setIcon(new ImageIcon("img/D1.PNG" ));
-			this.difficulteQuestion = 4;
 			this.msgErrNiv.setText("");
 		}
-		
 
 		updateDifficultyIcons();
 	}
@@ -301,12 +363,12 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.btnM.setEnabled(false);
 			this.btnD.setEnabled(false);
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
-			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
-			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
-			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.btnF.setIcon(new ImageIcon("img/F2.PNG"));
+			this.btnM.setIcon(new ImageIcon("img/M2.PNG"));
+			this.btnD.setIcon(new ImageIcon("img/D2.PNG"));
 		}
 
-		if (e.getSource().equals(this.choixNotion) && !this.choixNotion.getSelectedItem().equals("                    ")) {
+		if (e.getSource().equals(this.choixNotion) && !this.choixNotion.getSelectedItem().equals(" ")) {
 			this.notionQuestion = this.choixNotion.getSelectedItem();
 			this.btnGroupImg.clearSelection();
 			this.btnTF.setEnabled(true);
@@ -315,89 +377,28 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.btnD.setEnabled(true);
 		}
 
-		if (e.getSource().equals(this.choixNotion) && this.choixNotion.getSelectedItem().equals("                    ")) {
+		if (e.getSource().equals(this.choixNotion) && this.choixNotion.getSelectedItem().equals(" ")) {
 			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
-			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
-			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
-			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.btnF.setIcon(new ImageIcon("img/F2.PNG"));
+			this.btnM.setIcon(new ImageIcon("img/M2.PNG"));
+			this.btnD.setIcon(new ImageIcon("img/D2.PNG"));
 			this.btnTF.setEnabled(false);
 			this.btnF.setEnabled(false);
 			this.btnM.setEnabled(false);
 			this.btnD.setEnabled(false);
-			
 		}
 	}
 
-	/*
-	 * Format des réponses QCM
-	 * Texte_réponse1_VRAI
-	 * Texte_réponse2_FAUX
-	 * Texte_réponse3_FAUX
-	 * Texte_réponse4_FAUX
-	 * Exemple : 
-	 * 35_VRAI
-	 * 33_FAUX
-	 * 25_FAUX
-	 */
-	/*
-	 * Format des réponses Association
-	 * Texte_réponse1 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
-	 * Texte_réponse2 -> indice-liaison1_indice-liaison2_indice-liaison3///Texte_réponse_coté_opposée
-	 * Exemple : 
-	 * Chien -> 1_3///aboie
-	 * Chat -> 2///Miaule
-	 * Poisson///grogne
-	 */
-	/*
-	 * Format des réponses Elimination
-	 * Texte_réponse1_VRAI_cout_ordre
-	 * Texte_réponse2_FAUX_cout_ordre
-	 * Exemple : 
-	 * blablacar_FAUX_-0,25_1
-	 * Youtube_VRAI_0_0
-	 * Twitch_FAUX_0_0
-	 * Amazon_FAUX_-0,5_2
-	 */
-
-	public void creerQuestion(String explication, String intituleQuestion, ArrayList<String> lstReponses)
-	{
+	public void creerQuestion(String explication, String intituleQuestion, ArrayList<String> lstReponses) {
 		if (this.btnChoixMult.isSelected() || this.btnChoixUnique.isSelected())
 			this.typeQuestion = "QCM";
 		if (this.btnAsso.isSelected())
 			this.typeQuestion = "Association";
 		if (this.btnElim.isSelected())
 			this.typeQuestion = "Elimination";
-		
+
 		this.textQuestion = intituleQuestion;
 		this.explicationQuestion = explication;
 		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
 	}
-
-
-	/*public void creerQCM(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
-	{
-		
-		this.typeQuestion = "QCM";
-		this.textQuestion = intituleQuestion;
-		this.explicationQuestion = explication;
-		this.ctrl.creerQCM(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
-	}
-
-	public void creerAsso(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
-	{
-		
-		this.typeQuestion = "Association";
-		this.textQuestion = intituleQuestion;
-		this.explicationQuestion = explication;
-		this.ctrl.creerAsso(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
-	}
-
-	public void creerElim(String explication, String intituleQuestion, ArrayList<String> lstReponses) 
-	{
-		
-		this.typeQuestion = "Elimination";
-		this.textQuestion = intituleQuestion;
-		this.explicationQuestion = explication;
-		this.ctrl.creerElim(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, lstReponses, this.difficulteQuestion);
-	}*/
 }
