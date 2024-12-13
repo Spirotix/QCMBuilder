@@ -22,12 +22,12 @@ public class Ressource
 
 	public Ressource(String code, String nom)
 	{
-		this.code    = code;
-		this.nom     = nom;
+		this.code       = code;
+		this.nom        = nom;
 		this.lstNotions = lireNotions();
 	}
 
-	private List<Notion> lireNotions() 
+	private List<Notion> lireNotions()
 	{
 		List<Notion> notions = new ArrayList<>();
 		try 
@@ -60,9 +60,9 @@ public class Ressource
 	public String       getNom()     { return this.nom;        }
 	public List<Notion> getNotions() { return this.lstNotions; }
 
-	public boolean setNom(String nom) 
+	public boolean setNom(String nom)
 	{ 
-		this.nom = nom; 
+		this.nom = nom;
 		return true;
 	}
 
