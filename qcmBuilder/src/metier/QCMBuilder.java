@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import src.ihm.*;
+import src.metier.reponse.*;
+import src.metier.question.*;
 
 public class QCMBuilder
 {
@@ -79,8 +81,9 @@ public class QCMBuilder
 				ressource = r;
 		}
 
-		if ( ! ressources.contains(ressource))
+		if ( ressources.contains(ressource))
 		{
+			//ressource.supprimerAllNotion();
 			ressources.remove(ressource);
 			return true;
 		}
@@ -115,24 +118,36 @@ public class QCMBuilder
 	{
 		Notion notion = rechercherRessource( code_nomRessource.substring(0, code_nomRessource.indexOf("_")) ).rechercherNotion(nomNotion);
 
-		/*if ( type.equals("Elimination") )
+		if ( type.equals("Elimination") )
 		{
 			List<ReponseElimination> lstReponses = new ArrayList<>();
 			for (TypeReponse typeReponse : sLstReponses)
 			{
-				ReponseElimination reponse = new ReponseElimination( typeReponse.getEstBonneReponse(), typeReponse.getContenu(), typeReponse.getOrdre(), typeReponse.getCout() );
+				String StringVrai;
+				if ( typeReponse.getEstBonneReponse())
+					StringVrai = "Vrai";
+				else
+					StringVrai = "Faux";
+
+				ReponseElimination reponse = new ReponseElimination( StringVrai, typeReponse.getContenu(), typeReponse.getOrdre(), typeReponse.getCout() );
 				lstReponses.add(reponse);
 			}
 
-			// Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
-			// return true;
+			// Question question = new Elimination(this, text, timer, nbPoint, difficulte, lstReponses, nbIndice, "");
+			return true;
 		}
 		else if ( type.equals("QCM") )
 		{
 			List<ReponseQCM> lstReponses = new ArrayList<>();
 			for (TypeReponse typeReponse : sLstReponses)
 			{
-				ReponseQCM reponse = new ReponseQCM(typeReponse.getEstBonneReponse(), typeReponse.getContenu());
+				String StringVrai;
+				if ( typeReponse.getEstBonneReponse())
+					StringVrai = "Vrai";
+				else
+					StringVrai = "Faux";
+
+				ReponseQCM reponse = new ReponseQCM(StringVrai, typeReponse.getContenu());
 				lstReponses.add(reponse);
 			}
 
@@ -141,9 +156,9 @@ public class QCMBuilder
 		}
 		else if ( type.equals("Association") )
 		{
-			//List<ReponseAssociation> lstReponses = new ArrayList<>();
-			//Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
-			//return true;
+			List<ReponseAssociation> lstReponses = new ArrayList<>();
+			// Question question = new Association(this, text, timer, nbPoint, difficulte, lstReponses, "");
+			return true;
 		}
 		else
 		{

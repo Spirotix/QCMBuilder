@@ -366,6 +366,20 @@ public class Notion
 		return true;
 	}
 
+	public boolean supprimerAllQuestions ()
+	{
+		File fileTextQuestion = new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
+		File fileInformations = new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
+
+		if (fileTextQuestion.exists()) { fileTextQuestion.delete(); }
+		else { return false; }
+
+		if (fileInformations.exists()) { fileInformations.delete(); }
+		else { return false; }
+		
+		return true;
+	
+	}
 	public Question rechercherQuestion (String text)
 	{
 		Question questionTrouvee = null;
