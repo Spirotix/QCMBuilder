@@ -247,7 +247,11 @@ public class Notion
 				PrintWriter writerQues = new PrintWriter( new FileWriter("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf", true) );
 				PrintWriter writerData = new PrintWriter( new FileWriter("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf", true) );
 
-				Scanner sc = new Scanner( "./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf" );
+				Scanner scQues = new Scanner( "./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf" );
+				Scanner scData = new Scanner( "./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf" );
+
+				if ( ! scData.nextLine().equals( "{" + this.ressource.getCode() + " " + this.ressource.getNom() + "_" + this.nom + "}" ) )
+					writerData.println( "{" + this.ressource.getCode() + " " + this.ressource.getNom() + "_" + this.nom + "}" );
 
 				String strReponses = "";
 
