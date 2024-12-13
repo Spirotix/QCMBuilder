@@ -30,7 +30,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private int difficulteQuestion;
 	private String explicationQuestion;
 
-	public PanelCreerQuestion(Controleur ctrl, FrameCreerQuestion fr) {
+	public PanelCreerQuestion(Controleur ctrl, FrameCreerQuestion fr) 
+	{
 		this.ctrl = ctrl;
 		this.fr = fr;
 		this.setLayout(new GridBagLayout());
@@ -50,6 +51,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 		this.choixNotion = new Choice();
 		this.choixNotion.add(" ");
+		this.choixNotion.add("justePourTest");
 		this.choixNotion.setEnabled(false); // Disable initially
 
 		this.btnGroupImg = new ButtonGroup();
@@ -61,10 +63,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.btnTF.setOpaque(false);
 		this.btnF.setOpaque(false);
 		this.btnM.setOpaque(false);
-		this.btnD.setOpaque(false);
-		
-
-		
+		this.btnD.setOpaque(false); 
 
 		this.btnTF.setEnabled(false);
 		this.btnF .setEnabled(false);
@@ -288,11 +287,11 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 			if (peutCreer) {
 				if (this.btnChoixMult.isSelected() || this.btnChoixUnique.isSelected())
-					new FrameCreerQCMRepUnique(this);
+					new FrameCreerQCMRepUnique(this, this.ctrl);
 				if (this.btnAsso.isSelected())
-					new FrameCreerAssociation(this);
+					new FrameCreerAssociation(this, this.ctrl);
 				if (this.btnElim.isSelected())
-					new FrameCreerElimination(this);
+					new FrameCreerElimination(this, this.ctrl);
 				this.fr.dispose();
 			}
 
@@ -354,6 +353,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.choixNotion.setEnabled(true);
 			this.choixNotion.removeAll();
 			this.choixNotion.add(" ");
+			this.choixNotion.add("justepourTest");
 			this.ressourceQuestion = this.choixRessource.getSelectedItem();
 			for (String s : this.ctrl.getChoixNotion(this.choixRessource.getSelectedItem()))
 				this.choixNotion.add(s);
