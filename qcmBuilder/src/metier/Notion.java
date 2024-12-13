@@ -31,8 +31,8 @@ public class Notion
 		{
 			boolean fichieCree = false;
 
-			File fileTextQuestion = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
-			File fileInformations = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
+			File fileTextQuestion = new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
+			File fileInformations = new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
 
 			if ( !fileTextQuestion.exists() )
 			{
@@ -198,7 +198,7 @@ public class Notion
 				}
 				else if (type.equals("QCM"))
 				{
-					List<ReponseQCM> lstReponse = new ArrayList<>();
+				List<ReponseQCM> lstReponse = new ArrayList<>();
 					while (!lineTextQuestion.contains("\\par{Fin}"))
 					{
 						lstReponse.add(new ReponseQCM(
