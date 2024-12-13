@@ -3,6 +3,7 @@ package src.metier.question;
 import java.util.List;
 import src.metier.Notion;
 import src.metier.reponse.ReponseElimination;
+import src.metier.reponse.ReponseQCM;
 
 public class Elimination implements Question
 {
@@ -63,6 +64,11 @@ public class Elimination implements Question
 	public String getExplication()
 	{
 		return this.explication;
+	}
+
+	public List<ReponseElimination> getLstReponses()
+	{
+		return this.lstReponses;
 	}
 
 	@Override

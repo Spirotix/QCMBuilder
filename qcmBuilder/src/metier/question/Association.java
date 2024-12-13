@@ -62,6 +62,11 @@ public class Association implements Question
 		return this.explication;
 	}
 
+	public List<ReponseAssociation> getLstReponses()
+	{
+		return this.lstReponseAsso;
+	}
+
 	@Override
 	public void setText(String text)
 	{

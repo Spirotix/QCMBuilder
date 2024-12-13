@@ -78,6 +78,11 @@ public class QCM implements Question
 		return this.explication;
 	}
 
+	public List<ReponseQCM> getLstReponses()
+	{
+		return this.lstReponses;
+	}
+
 	@Override
 	public void setText(String text)
 	{
