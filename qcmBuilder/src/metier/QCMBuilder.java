@@ -98,7 +98,7 @@ public class QCMBuilder
 		Ressource ressourceTrouvee = null;
 		for (Ressource ressource : ressources)
 		{
-			if ((ressource.getCode()+"_"+ressource.getNom()).equals(code_nom))
+			if ( (ressource.getCode() + "_" + ressource.getNom()).equals(code_nom) )
 				ressourceTrouvee = ressource;
 		}
 		return ressourceTrouvee;
@@ -114,7 +114,7 @@ public class QCMBuilder
 		return true;
 	}
 
-	public boolean creerQuestion(String type, String code_nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, /*List<String>*/ ArrayList<TypeReponse> sLstReponses, String explication) throws Exception
+	public boolean creerQuestion(String type, String code_nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, /*List<String>*/ ArrayList<TypeReponse> sLstReponses, String explication)
 	{
 		Notion notion = rechercherRessource( code_nomRessource.substring(0, code_nomRessource.indexOf("_")) ).rechercherNotion(nomNotion);
 
