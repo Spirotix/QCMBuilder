@@ -37,8 +37,6 @@ public class FrameCreerElimination extends JFrame implements ActionListener
 		this.retourMenu	.addActionListener(this);
 		this.retour 	.addActionListener(this);
 		
-
-		
 		this.setTitle   ("Creation d'une question à élimination");
 		this.setSize    ( 500,500  );
 
