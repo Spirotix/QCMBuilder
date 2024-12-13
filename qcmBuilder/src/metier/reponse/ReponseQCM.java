@@ -3,7 +3,7 @@ package src.metier.reponse;
 public class ReponseQCM extends Reponse
 {
 	private boolean estVrai;
-	public ReponseQCM(String estVrai, String textReponse)
+	public ReponseQCM(String textReponse, String estVrai)
 	{
 		super(textReponse);
 		if(estVrai.equals("Vrai")){ this.estVrai=true; }

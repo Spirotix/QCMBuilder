@@ -32,7 +32,7 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
+			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
 
 			if( scanner.hasNextLine()) scanner.nextLine();
 
@@ -78,9 +78,9 @@ public class Ressource
 		{
 			try
 			{
-				PrintWriter writer = new PrintWriter( new FileWriter("./data/ressources_notions.csv", true) );
+				PrintWriter writer = new PrintWriter( new FileWriter("../data/ressources_notions.csv", true) );
 
-				Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
+				Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
 				scanner.nextLine();
 				while (scanner.hasNextLine())
 				{
@@ -142,7 +142,7 @@ public class Ressource
 	{
 		Ressource r = new Ressource("R1.11", "Bases de la communication");
 
-		Notion    n = new Notion("George Le Canard", r);
+		Notion    n = new Notion("George", r);
 
 		r.ajouterNotion( n );
 
@@ -160,6 +160,6 @@ public class Ressource
 		n.ajouterQuestion( new Elimination(n, "Question hohoooo", 10, 5.5, 3, lstEli, 2, "") );
 		n.ajouterQuestion( new Association(n, "Question hohoooooo", 30, 10.87, 4, lstAss, "") );
 
-	//	n.ajouterQuestion( new Elimination(n, "Question TESTTTTTTTTTT", 10, 5.5, 3, lstEli, 2, "") );
+	//	n.ajouterQuestion( new Elimination(n, "Question TESTTTTTTTTTT", 10, 5.5, 3, lstEli, 2, "") ); // à ajouter apres les 3 autres
 	}
 }

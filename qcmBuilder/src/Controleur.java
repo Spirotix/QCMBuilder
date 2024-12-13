@@ -52,12 +52,8 @@ public class Controleur
 
 	public void creerQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<TypeReponse> lstReponse, int difficulte)
 	{
-		qcmBuilder.creerQuestion(type, code_nomRessource, nomNotion, text, timer, nbPoint, difficulte,  lstReponse, explication);
-			
-		
+		qcmBuilder.creerQuestion(type, code_nomRessource, nomNotion, text, timer, nbPoint, difficulte, lstReponse, explication);
 	}
-
-	
 
 	public void genererQuestionnaire(String ressource ,boolean chrono,ArrayList<TypeQuestionnaire> questions)
 	{

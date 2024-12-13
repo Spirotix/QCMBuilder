@@ -8,6 +8,7 @@ public interface Question
 	int getTimer();
 	double getNbPoint();
 	int getDifficulte();
+	String getStringDifficulte();
 	Notion getNotions();
 	String getExplication();
 

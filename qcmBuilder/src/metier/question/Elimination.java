@@ -138,4 +138,24 @@ public class Elimination implements Question
 	{
 		return this.lstReponses;
 	}
+
+	public String getStringDifficulte()
+	{
+		String niveau;
+
+		switch(this.difficulte)
+		{
+			case 1 -> { niveau = "TF"; }
+			case 2 -> { niveau = "F" ; }
+			case 3 -> { niveau = "M" ; }
+			case 4 -> { niveau = "D" ; }
+			default   ->
+			{
+				niveau = "INVALIDE";
+			}
+		}
+
+		return niveau;
+	}
+
 }
