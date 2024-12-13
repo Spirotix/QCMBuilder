@@ -1,10 +1,13 @@
 package src.metier;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -30,7 +33,30 @@ public class Notion
 		try
 		{
 			File    fileTextQuestion = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
-			File    fileInformations = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
+			File    fileInformations = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".csv");
+
+			boolean fichieCree = false;
+			if (!fileTextQuestion.exists())
+			{
+				try (PrintWriter writerQues = new PrintWriter(new FileWriter(fileTextQuestion)))
+				{
+					writerQues.println("{\\rtf1\\ansi\\deff0\n{\\fonttbl{\\f0\\fswiss Helvetica;}}\n\\viewkind4\\uc1\\pard\\f0\n");
+				}
+				catch (IOException e) { e.printStackTrace(); }
+				fichieCree = true;
+			}
+
+			if (!fileInformations.exists())
+			{
+				try (PrintWriter writerData = new PrintWriter(new FileWriter(fileInformations)))
+				{
+					writerData.println("N_QUESTION;POINT;TYPE;NIVEAU;TEMPS");
+				}
+				catch (IOException e) { e.printStackTrace(); }
+				fichieCree = true;
+			}
+			if ( fichieCree )
+				return new ArrayList<>();
 
 			Scanner scTextQuestion   = new Scanner( fileTextQuestion );
 			Scanner scInformations   = new Scanner( fileInformations );
@@ -55,22 +81,20 @@ public class Notion
 					lineTextQuestion = scTextQuestion.nextLine();
 				}
 
-				if ( !scTextQuestion.hasNextLine() || !scInformations.hasNextLine() ) break;
+				if ( !scTextQuestion.hasNextLine() ) break;
+
+				String[] informations = lineInformations.split(";");
 
 				lineTextQuestion = scTextQuestion.nextLine();
 				String text      = lineTextQuestion.substring(0, lineTextQuestion.indexOf("\\par"));
 
-				lineInformations = scInformations.nextLine();
-				double nbPoint   = Double.parseDouble( lineInformations.substring(lineInformations.indexOf("} ") + 2) );
+				double nbPoint   = Double.parseDouble( informations[1] );
 
-				lineInformations = scInformations.nextLine();
-				String type      = lineInformations.substring(lineInformations.indexOf("} ") + 2);
+				String type      = informations[2];
 
-				lineInformations = scInformations.nextLine();
-				String sNiveau   = lineInformations.substring(lineInformations.indexOf("} ") + 2);
+				String sNiveau   = informations[3];
 
-				lineInformations = scInformations.nextLine();
-				int temps        = Integer.parseInt( lineInformations.substring( lineInformations.indexOf("} ") + 2) );
+				int    temps     = Integer.parseInt( informations[4] );
 
 				int niveau;
 				switch(sNiveau)
@@ -86,8 +110,6 @@ public class Notion
 						throw new IllegalArgumentException("Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
 					}
 				}
-
-				scInformations.nextLine();
 
 				scTextQuestion.nextLine();
 				lineTextQuestion = scTextQuestion.nextLine();
@@ -112,7 +134,7 @@ public class Notion
 						reponseA = new ReponseAssociation(
 						                                  textReponseA,
 						                                  null,
-						                                  Integer.parseInt(lineTextQuestion.substring(lineTextQuestion.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
+						                                  Integer.parseInt(lineTextQuestion.substring(lineTextQuestion.indexOf("{") + 1, lineTextQuestion.indexOf(":}") - 1)),
 						                                  false
 						                                 );
 						lstReponse.add( reponseA );
@@ -120,7 +142,7 @@ public class Notion
 						reponseB = new ReponseAssociation(
 						                                  textReponseB,
 						                                  reponseA,
-						                                  Integer.parseInt(lineTextQuestion.substring(lineTextQuestion.indexOf("{") + 1, lineInformations.indexOf(":}") - 1)),
+						                                  Integer.parseInt(lineTextQuestion.substring(lineTextQuestion.indexOf("{") + 1, lineTextQuestion.indexOf(":}") - 1)),
 						                                  false
 						                                 );
 						reponseA.setReponseAssocie( reponseB );
@@ -141,6 +163,10 @@ public class Notion
 					while ( !lineTextQuestion.contains("\\par{Fin}") )
 					{
 						// System.out.println(lineTextQuestion);
+						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")));
+						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1, lineTextQuestion.indexOf("||")));
+						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/")));
+						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("/") + 1));
 						// System.out.println();
 
 						lstReponse.add(new ReponseElimination(
@@ -161,12 +187,12 @@ public class Notion
 				}
 				else if (type.equals("QCM"))
 				{
-				List<ReponseQCM> lstReponse = new ArrayList<>();
+					List<ReponseQCM> lstReponse = new ArrayList<>();
 					while (!lineTextQuestion.contains("\\par{Fin}"))
 					{
 						lstReponse.add(new ReponseQCM(
 						                              lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")),
-						                              lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1, lineTextQuestion.indexOf("||"))
+						                              lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1)
 						                             ));
 						lineTextQuestion = scTextQuestion.nextLine();
 					}
@@ -230,96 +256,96 @@ public class Notion
 		return true;
 	}
 
-	public boolean ajouterQuestion (Question question)
+	public boolean ajouterQuestion(Question question)
 	{
-		for ( Question q : lstQuestions )
+		for (Question q : lstQuestions)
 		{
-			if ( q.getText().equals(question.getText()) )
-			question = q;
+			if (q.getText().equals(question.getText()))
+			{
+				question = q;
+			}
 		}
-
-		if ( ! lstQuestions.contains(question) )
+	
+		if (!lstQuestions.contains(question))
 		{
 			lstQuestions.add(question);
-
+	
 			try
 			{
-				PrintWriter writerQues = new PrintWriter( new FileWriter("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf", true) );
-				PrintWriter writerData = new PrintWriter( new FileWriter("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf", true) );
+				File fileQues = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
+				File fileData = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".csv");
 
-				Scanner scQues = new Scanner( "./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf" );
-				Scanner scData = new Scanner( "./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf" );
-
-				if ( ! scData.nextLine().equals( "{" + this.ressource.getCode() + " " + this.ressource.getNom() + "_" + this.nom + "}" ) )
-					writerData.println( "{" + this.ressource.getCode() + " " + this.ressource.getNom() + "_" + this.nom + "}" );
-
-				String strReponses = "";
-
-				if ( question.getClass().getSimpleName().equals("QCM") )
+				if (fileQues.exists() && fileQues.length() > 0)
 				{
-					int indRep = 1;
-
-					QCM qcm;
-					qcm = (QCM) question;
-
-					for (ReponseQCM r : qcm.getlstReponses())
+					RandomAccessFile raf = new RandomAccessFile(fileQues, "rw");
+					long length = raf.length();
+					if (length > 0)
 					{
-						strReponses += "\\par{" + indRep++ + " :} " + r.getText() + "|" + r.estVrai() + "\n";
+						raf.setLength(length - 2); // SUPPRIME LE DERNIER }
 					}
-				}
-				else if ( question.getClass().getSimpleName().equals("Elimination") )
-				{
-					int indRep = 1;
-
-					Elimination elimination;
-					elimination = (Elimination) question;
-
-					for (ReponseElimination r : elimination.getLstReponses())
-					{
-						strReponses += "\\par{" + indRep++ + " :} " + (r.estVrai() ? "Vrai" : "Faux") + "|" + r.getText() + "||" + r.getOrdreIndice() + "/" + r.getNbPointPerdu() + "\n";
-					}
-				}
-				else if ( question.getClass().getSimpleName().equals("Association") )
-				{
-					int indRep = 1;
-
-					Association association;
-					association = (Association) question;
-
-					for (ReponseAssociation r : association.getLstReponses())
-					{
-						if ( r.estAGauche() )
-							strReponses += "\\par{" + indRep++ + " :} " + r.getText() + "::" + r.getReponseAssocie().getText() + "\n";
-					}
+					raf.close();
 				}
 
-				writerQues.println(
-					"{\\rtf1\\ansi\\deff0\n"                                    +
-					"{\\fonttbl{\\f0\\fswiss Helvetica;}}\n"                    +
-					"\\viewkind4\\uc1\\pard\\f0\\\n"                            +
-					"{\\b Question " + this.lstQuestions.size() + " :} \\par\n" +
-					question.getText() + "\\par\n"                              +
-					"{Reponses :}\n"                                            +
-					strReponses + "\\par{Fin}\n}"
-				);
+				try (PrintWriter writerQues = new PrintWriter(new FileWriter(fileQues, true));
+					 PrintWriter writerData = new PrintWriter(new FileWriter(fileData, true)))
+				{
+					String strReponses = "";
+	
+					if (question.getClass().getSimpleName().equals("QCM"))
+					{
+						int indRep = 1;
+						QCM qcm = (QCM) question;
+	
+						for (ReponseQCM r : qcm.getlstReponses())
+						{
+							strReponses += "\\par{" + indRep++ + " :} " + r.getText() + "|" + (r.estVrai() ? "Vrai" : "Faux") + "\n";
+						}
+					}
+					else if (question.getClass().getSimpleName().equals("Elimination"))
+					{
+						int indRep = 1;
+						Elimination elimination = (Elimination) question;
+	
+						for (ReponseElimination r : elimination.getLstReponses())
+						{
+							strReponses += "\\par{" + indRep++ + " :} " + (r.estVrai() ? "Vrai" : "Faux") + "|" + r.getText() + "||" + r.getOrdreIndice() + "/" + r.getNbPointPerdu() + "\n";
+						}
+					}
+					else if (question.getClass().getSimpleName().equals("Association"))
+					{
+						int indRep = 1;
+						Association association = (Association) question;
+	
+						for (ReponseAssociation r : association.getLstReponses())
+						{
+							if (r.estAGauche())
+							{
+								strReponses += "\\par{" + indRep++ + " :} " + r.getText() + "::" + r.getReponseAssocie().getText() + "\n";
+							}
+						}
+					}
+	
+					writerQues.println(
+						"{\\b Question " + this.lstQuestions.size() + " :} \\par\n" +
+						question.getText() + "\\par\n" +
+						"{Reponses :}\n" +
+						strReponses + "\\par{Fin}\n}"
+					);
 
-				writerData.println(
-					"{Question "  + this.lstQuestions.size()            + "}\n" +
-					"{Point :} "  + question.getNbPoint()               + "\n"  +
-					"{Type :} "   + question.getClass().getSimpleName() + "\n"  +
-					"{Niveau :} " + question.getDifficulte()            + "\n"  +
-					"{Temps :} "  + question.getTimer()                 + "\n"  +
-					"{Fin}"
-				);
-
-				writerQues.close();
-				writerData.close();
+					writerData.println(
+						this.lstQuestions.size()            + ";" +
+						question.getNbPoint()               + ";" +
+						question.getClass().getSimpleName() + ";" +
+						question.getStringDifficulte()      + ";" +
+						question.getTimer()
+					);
+				}
 			}
 			catch (IOException e)
 			{
 				e.printStackTrace();
 			}
-
+	
 			return true;
 		}
 		else
