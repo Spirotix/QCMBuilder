@@ -1,9 +1,7 @@
 package src.metier;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -218,7 +216,7 @@ public class Notion
 		return lstQuestions;
 	}
 
-	public String         getNom      ()
+	public String         getNom()
 	{
 		String nomN = this.nom.substring(0);
 
@@ -238,7 +236,7 @@ public class Notion
 
 		for (Question q : this.lstQuestions)
 		{
-			questionsN.add( q );                                            // Intégrité des données pas folle
+			questionsN.add( q );                                           // Intégrité des données pas folle
 		}
 
 		return questionsN;
