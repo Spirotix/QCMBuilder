@@ -157,7 +157,9 @@ public class QCMBuilder
 		else if ( type.equals("Association") )
 		{
 			List<ReponseAssociation> lstReponses = new ArrayList<>();
+
 			// Question question = new Association(this, text, timer, nbPoint, difficulte, lstReponses, "");
+
 			return true;
 		}
 		else
