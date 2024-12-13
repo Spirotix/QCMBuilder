@@ -6,7 +6,7 @@ import src.Controleur;
 public class FrameGenererQuestionnaire extends JFrame
 {
 	private PanelGenererQuestionnaire panelQ	;
-	private Controleur		ctrl	;
+	private Controleur				  ctrl		;
 
 	public FrameGenererQuestionnaire (Controleur ctrl)
 	{
