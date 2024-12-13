@@ -1,18 +1,19 @@
-package src.ihm;
+//package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import src.Controleur;
+//import src.Controleur;
 
 public class FrameMenu extends JFrame implements ActionListener {
 
 	private JButton creerQuestion, genererQuestionnaire, creerResNot;
-	private Controleur ctrl;
+	private TestCreerQuestion ctrl;
 	private JPanel panel;
 
-	public FrameMenu(Controleur ctrl) {
+	public FrameMenu(TestCreerQuestion ctrl) 
+	{
 		this.ctrl = ctrl;
 
 		this.setLayout(new BorderLayout());
@@ -88,6 +89,12 @@ public class FrameMenu extends JFrame implements ActionListener {
 		if (e.getSource().equals(this.genererQuestionnaire))
 		{
 			new FrameGenererQuestionnaire(this.ctrl);
+			this.dispose();
+		}
+
+		if (e.getSource().equals(this.creerResNot))
+		{
+			new FrameCreerRessource(this.ctrl);
 			this.dispose();
 		}
 	}
