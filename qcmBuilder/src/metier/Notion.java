@@ -2,6 +2,9 @@ package src.metier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,70 +13,33 @@ import src.metier.reponse.*;
 
 public class Notion
 {
-	private String         nom      ;
-	private Ressource      ressource;
-	private List<Question> questions;
+	private String         nom         ;
+	private Ressource      ressource   ;
+	private List<Question> lstQuestions;
 
 	public Notion(String nom, Ressource ressource)
 	{
-		this.nom       = nom;
-		this.ressource = ressource;
-		this.questions = lireQuestions();
+		this.nom          = nom;
+		this.ressource    = ressource;
+		this.lstQuestions = lireQuestions();
 	}
 
 	private List<Question> lireQuestions()
 	{
-		List<Question> questions = new ArrayList<>();
+		List<Question> lstQuestions = new ArrayList<>();
 		try
 		{
-			boolean fichieCree = false;
+			File    fileTextQuestion = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
+			File    fileInformations = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
 
-			File fileTextQuestion = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
-			File fileInformations = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
-
-			if ( !fileTextQuestion.exists() )
-			{
-				try
-				{
-					if ( fileTextQuestion.createNewFile() )
-					{
-						System.out.println("Fichier créé : " + fileTextQuestion.getName());
-						fichieCree = true;
-					}
-				}
-				catch (Exception e)
-				{
-					System.out.println("Une erreur s'est produite : " + e.getMessage());
-				}
-			}
-			if ( !fileInformations.exists() )
-			{
-				try
-				{
-					if ( fileInformations.createNewFile() )
-					{
-						System.out.println("Fichier créé : " + fileInformations.getName());
-						fichieCree = true;
-					}
-				}
-				catch (Exception e)
-				{
-					System.out.println("Une erreur s'est produite : " + e.getMessage());
-				}
-			}
-
-			if ( fichieCree )
-				return null;
-
-
-			Scanner scTextQuestion = new Scanner( fileTextQuestion );
-			Scanner scInformations = new Scanner( fileInformations );
+			Scanner scTextQuestion   = new Scanner( fileTextQuestion );
+			Scanner scInformations   = new Scanner( fileInformations );
 			
 			if ( !scTextQuestion.hasNextLine() || !scInformations.hasNextLine() )
 			{
 				scTextQuestion.close();
 				scInformations.close();
-				return null;
+				return new ArrayList<>();
 			}
 			else
 			{
@@ -164,7 +130,7 @@ public class Notion
 					}
 
 					Association question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
-					questions.add(question);
+					lstQuestions.add(question);
 				}
 				else if ( type.equals("Elimination"))
 				{
@@ -191,11 +157,11 @@ public class Notion
 					}
 
 					Elimination question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
-					questions.add(question);
+					lstQuestions.add(question);
 				}
 				else if (type.equals("QCM"))
 				{
-					List<ReponseQCM> lstReponse = new ArrayList<>();
+				List<ReponseQCM> lstReponse = new ArrayList<>();
 					while (!lineTextQuestion.contains("\\par{Fin}"))
 					{
 						lstReponse.add(new ReponseQCM(
@@ -206,7 +172,7 @@ public class Notion
 					}
 
 					QCM question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
-					questions.add(question);
+					lstQuestions.add(question);
 				}
 				else
 				{
@@ -223,7 +189,7 @@ public class Notion
 			e.printStackTrace();
 		}
 
-		return questions;
+		return lstQuestions;
 	}
 
 	public String         getNom      ()
@@ -244,7 +210,7 @@ public class Notion
 	{
 		List<Question> questionsN = new ArrayList<>();
 
-		for (Question q : this.questions)
+		for (Question q : this.lstQuestions)
 		{
 			questionsN.add( q );                                            // Intégrité des données pas folle
 		}
@@ -266,14 +232,100 @@ public class Notion
 
 	public boolean ajouterQuestion (Question question)
 	{
-		if (question == null)
-			return false;
+		for ( Question q : lstQuestions )
+		{
+			if ( q.getText().equals(question.getText()) )
+			question = q;
+		}
 
-		if (questions.contains(question))
-			return false;
+		if ( ! lstQuestions.contains(question) )
+		{
+			lstQuestions.add(question);
 
-		questions.add(question);
-		return true;
+			try
+			{
+				PrintWriter writerQues = new PrintWriter( new FileWriter("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf", true) );
+				PrintWriter writerData = new PrintWriter( new FileWriter("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf", true) );
+
+				Scanner scQues = new Scanner( "./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf" );
+				Scanner scData = new Scanner( "./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf" );
+
+				if ( ! scData.nextLine().equals( "{" + this.ressource.getCode() + " " + this.ressource.getNom() + "_" + this.nom + "}" ) )
+					writerData.println( "{" + this.ressource.getCode() + " " + this.ressource.getNom() + "_" + this.nom + "}" );
+
+				String strReponses = "";
+
+				if ( question.getClass().getSimpleName().equals("QCM") )
+				{
+					int indRep = 1;
+
+					QCM qcm;
+					qcm = (QCM) question;
+
+					for (ReponseQCM r : qcm.getlstReponses())
+					{
+						strReponses += "\\par{" + indRep++ + " :} " + r.getText() + "|" + r.estVrai() + "\n";
+					}
+				}
+				else if ( question.getClass().getSimpleName().equals("Elimination") )
+				{
+					int indRep = 1;
+
+					Elimination elimination;
+					elimination = (Elimination) question;
+
+					for (ReponseElimination r : elimination.getLstReponses())
+					{
+						strReponses += "\\par{" + indRep++ + " :} " + (r.estVrai() ? "Vrai" : "Faux") + "|" + r.getText() + "||" + r.getOrdreIndice() + "/" + r.getNbPointPerdu() + "\n";
+					}
+				}
+				else if ( question.getClass().getSimpleName().equals("Association") )
+				{
+					int indRep = 1;
+
+					Association association;
+					association = (Association) question;
+
+					for (ReponseAssociation r : association.getLstReponses())
+					{
+						if ( r.estAGauche() )
+							strReponses += "\\par{" + indRep++ + " :} " + r.getText() + "::" + r.getReponseAssocie().getText() + "\n";
+					}
+				}
+
+				writerQues.println(
+					"{\\rtf1\\ansi\\deff0\n"                                    +
+					"{\\fonttbl{\\f0\\fswiss Helvetica;}}\n"                    +
+					"\\viewkind4\\uc1\\pard\\f0\\\n"                            +
+					"{\\b Question " + this.lstQuestions.size() + " :} \\par\n" +
+					question.getText() + "\\par\n"                              +
+					"{Reponses :}\n"                                            +
+					strReponses + "\\par{Fin}\n}"
+				);
+
+				writerData.println(
+					"{Question "  + this.lstQuestions.size()            + "}\n" +
+					"{Point :} "  + question.getNbPoint()               + "\n"  +
+					"{Type :} "   + question.getClass().getSimpleName() + "\n"  +
+					"{Niveau :} " + question.getDifficulte()            + "\n"  +
+					"{Temps :} "  + question.getTimer()                 + "\n"  +
+					"{Fin}"
+				);
+
+				writerQues.close();
+				writerData.close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	public boolean supprimerQuestion (Question question)
@@ -281,10 +333,10 @@ public class Notion
 		if (question == null)
 			return false;
 
-		if (!questions.contains(question))
+		if (!lstQuestions.contains(question))
 			return false;
 
-		questions.remove(question);
+			lstQuestions.remove(question);
 		return true;
 	}
 
@@ -292,7 +344,7 @@ public class Notion
 	{
 		Question questionTrouvee = null;
 
-		for (Question question : questions)
+		for (Question question : lstQuestions)
 		{
 			if (question.getText().equals(text))
 				questionTrouvee = question;

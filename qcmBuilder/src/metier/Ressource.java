@@ -2,11 +2,17 @@ package src.metier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import src.metier.question.Association;
+import src.metier.question.Elimination;
+import src.metier.question.QCM;
+import src.metier.reponse.*;
 
 public class Ressource
 {
@@ -26,7 +32,7 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
+			Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
 
 			if( scanner.hasNextLine()) scanner.nextLine();
 
@@ -70,14 +76,32 @@ public class Ressource
 
 		if ( ! lstNotions.contains(notion) )
 		{
-			lstNotions.add(notion);
-
 			try
 			{
-				PrintWriter writer = new PrintWriter( "./test.txt" );
+				PrintWriter writer = new PrintWriter( new FileWriter("./data/ressources_notions.csv", true) );
 
-				writer.println( "Ajout de la Notion : " + notion.getNom() );
+				Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
+				scanner.nextLine();
+				while (scanner.hasNextLine())
+				{
+					String line = scanner.nextLine();
+					if (line.equals(this.getCode() + ";" + this.getNom() + ";" + notion.getNom()))
+					{
+						System.out.println("La ligne existe déjà");
+						scanner.close();
+						writer.close();
+						return false;
+					}
 
+					System.out.println("Ligne : " + line);
+					System.out.println("Ajout : " + this.getCode() + ";" + this.getNom() + ";" + notion.getNom() + "\n");
+				}
+
+				lstNotions.add(notion);
+
+				writer.println( this.getCode() + ";" + this.getNom() + ";" + notion.getNom() );
+
+				scanner.close();
 				writer.close();
 			}
 			catch (IOException e)
@@ -118,8 +142,24 @@ public class Ressource
 	{
 		Ressource r = new Ressource("R1.11", "Bases de la communication");
 
-		r.ajouterNotion( new Notion("NOTION 1", r) );
-		r.ajouterNotion( new Notion("NOTION 2", r) );
-		//r.ajouterNotion( new Notion("NOTION 3", r) );
+		Notion    n = new Notion("George Le Canard", r);
+
+		r.ajouterNotion( n );
+
+		List<ReponseQCM> lstQCM = new ArrayList<>();
+		lstQCM.add( new ReponseQCM("Vrai", "REPONSE 1") );
+		lstQCM.add( new ReponseQCM("Faux", "REPONSE 2") );
+		List<ReponseElimination> lstEli = new ArrayList<>();
+		lstEli.add( new ReponseElimination("Vrai", "REPONSE 1", 0, 0) );
+		lstEli.add( new ReponseElimination("Faux", "REPONSE 2", 1, 0.5) );
+		List<ReponseAssociation> lstAss = new ArrayList<>();
+		lstAss.add( new ReponseAssociation("REPONSE 1", new ReponseAssociation("REPONSE 11", null, 1, false), 1, true) );
+		lstAss.add( new ReponseAssociation("REPONSE 2", new ReponseAssociation("REPONSE 22", null, 1, false), 1, true) );
+
+		n.ajouterQuestion( new QCM        (n, "Question hohoo", 0, 2.23, 1, lstQCM, "") );
+		n.ajouterQuestion( new Elimination(n, "Question hohoooo", 10, 5.5, 3, lstEli, 2, "") );
+		n.ajouterQuestion( new Association(n, "Question hohoooooo", 30, 10.87, 4, lstAss, "") );
+
+	//	n.ajouterQuestion( new Elimination(n, "Question TESTTTTTTTTTT", 10, 5.5, 3, lstEli, 2, "") );
 	}
 }
