@@ -29,48 +29,11 @@ public class Notion
 		List<Question> lstQuestions = new ArrayList<>();
 		try
 		{
-			boolean fichieCree = false;
+			File    fileTextQuestion = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
+			File    fileInformations = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
 
-			File fileTextQuestion = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
-			File fileInformations = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
-
-			if ( !fileTextQuestion.exists() )
-			{
-				try
-				{
-					if ( fileTextQuestion.createNewFile() )
-					{
-						System.out.println("Fichier créé : " + fileTextQuestion.getName());
-						fichieCree = true;
-					}
-				}
-				catch (Exception e)
-				{
-					System.out.println("Une erreur s'est produite : " + e.getMessage());
-				}
-			}
-			if ( !fileInformations.exists() )
-			{
-				try
-				{
-					if ( fileInformations.createNewFile() )
-					{
-						System.out.println("Fichier créé : " + fileInformations.getName());
-						fichieCree = true;
-					}
-				}
-				catch (Exception e)
-				{
-					System.out.println("Une erreur s'est produite : " + e.getMessage());
-				}
-			}
-
-			if ( fichieCree )
-				return new ArrayList<>();
-
-
-			Scanner scTextQuestion = new Scanner( fileTextQuestion );
-			Scanner scInformations = new Scanner( fileInformations );
+			Scanner scTextQuestion   = new Scanner( fileTextQuestion );
+			Scanner scInformations   = new Scanner( fileInformations );
 			
 			if ( !scTextQuestion.hasNextLine() || !scInformations.hasNextLine() )
 			{
@@ -281,37 +244,40 @@ public class Notion
 
 			try
 			{
-				PrintWriter writer = new PrintWriter( new FileWriter("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf", true) );
+				PrintWriter writerQues = new PrintWriter( new FileWriter("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf", true) );
+				PrintWriter writerData = new PrintWriter( new FileWriter("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf", true) );
+
+				Scanner sc = new Scanner( "./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf" );
 
 				String strReponses = "";
 
 				if ( question.getClass().getSimpleName().equals("QCM") )
 				{
-					int ind = 1;
+					int indRep = 1;
 
 					QCM qcm;
 					qcm = (QCM) question;
 
 					for (ReponseQCM r : qcm.getlstReponses())
 					{
-						strReponses += "\\par{" + ind++ + " :} " + r.getText() + "|" + r.estVrai() + "\n";
+						strReponses += "\\par{" + indRep++ + " :} " + r.getText() + "|" + r.estVrai() + "\n";
 					}
 				}
 				else if ( question.getClass().getSimpleName().equals("Elimination") )
 				{
-					int ind = 1;
+					int indRep = 1;
 
 					Elimination elimination;
 					elimination = (Elimination) question;
 
 					for (ReponseElimination r : elimination.getLstReponses())
 					{
-						strReponses += "\\par{" + ind++ + " :} " + (r.estVrai() ? "Vrai" : "Faux") + "|" + r.getText() + "||" + r.getOrdreIndice() + "/" + r.getNbPointPerdu() + "\n";
+						strReponses += "\\par{" + indRep++ + " :} " + (r.estVrai() ? "Vrai" : "Faux") + "|" + r.getText() + "||" + r.getOrdreIndice() + "/" + r.getNbPointPerdu() + "\n";
 					}
 				}
 				else if ( question.getClass().getSimpleName().equals("Association") )
 				{
-					int ind = 1;
+					int indRep = 1;
 
 					Association association;
 					association = (Association) question;
@@ -319,11 +285,11 @@ public class Notion
 					for (ReponseAssociation r : association.getLstReponses())
 					{
 						if ( r.estAGauche() )
-							strReponses += "\\par{" + ind++ + " :} " + r.getText() + "::" + r.getReponseAssocie().getText() + "\n";
+							strReponses += "\\par{" + indRep++ + " :} " + r.getText() + "::" + r.getReponseAssocie().getText() + "\n";
 					}
 				}
 
-				writer.println(
+				writerQues.println(
 					"{\\rtf1\\ansi\\deff0\n"                                    +
 					"{\\fonttbl{\\f0\\fswiss Helvetica;}}\n"                    +
 					"\\viewkind4\\uc1\\pard\\f0\\\n"                            +
@@ -333,7 +299,17 @@ public class Notion
 					strReponses + "\\par{Fin}\n}"
 				);
 
-				writer.close();
+				writerData.println(
+					"{Question "  + this.lstQuestions.size()            + "}\n" +
+					"{Point :} "  + question.getNbPoint()               + "\n"  +
+					"{Type :} "   + question.getClass().getSimpleName() + "\n"  +
+					"{Niveau :} " + question.getDifficulte()            + "\n"  +
+					"{Temps :} "  + question.getTimer()                 + "\n"  +
+					"{Fin}"
+				);
+
+				writerQues.close();
+				writerData.close();
 			}
 			catch (IOException e)
 			{
