@@ -1,5 +1,6 @@
 package src.ihm.question;
-//package src.ihm;
+
+import src.ihm.*;
 import javax.swing.*;
 
 public class FrameCreerAssociation extends JFrame
@@ -13,7 +14,7 @@ public class FrameCreerAssociation extends JFrame
 
 		
 		this.setTitle   ("Creation d'une Question par association");
-		this.setSize    ( 1000,800  );
+		this.setSize    ( 500,500  );
 
 		this.panel=new PanelCreerQuestionAsso(this.panelQ);
 

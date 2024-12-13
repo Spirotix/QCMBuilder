@@ -7,8 +7,7 @@ import src.Controleur;
 
 public class PanelGenererQuestionnaire extends JPanel implements ActionListener, ItemListener
 {
-	//private Controleur ctrl
-	private Controleur 	ctrl			;
+	private Controleur 			ctrl			;
 	private Choice 				choixRessource	;
 	private ButtonGroup			grpOuiNon		;
 	private JRadioButton		btnChronoOui, btnChronoNon	;

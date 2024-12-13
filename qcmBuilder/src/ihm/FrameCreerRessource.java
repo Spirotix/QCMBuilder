@@ -6,7 +6,7 @@ import src.Controleur;
 public class FrameCreerRessource extends JFrame
 {
 	private PanelCreerRessource 	panelC	;
-	private Controleur		ctrl	;
+	private Controleur				ctrl	;
 
 	public FrameCreerRessource (Controleur ctrl)
 	{
