@@ -12,6 +12,7 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 	private PanelRessource 		panelR;
 	private PanelNotion 		panelN;
 	private JButton				btnAjouterR, btnAjouterN;
+	private JTextField 			textNumR, textNumN, textNomR, textNomN;
 
 	public PanelCreerRessource (Controleur ctrl)
 	{
@@ -21,6 +22,8 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		JPanel panelHaut 	= new JPanel(new GridLayout(1,2));
 		JPanel panelMilieu 	= new JPanel(new GridLayout(1,2));
 		JPanel panelBas 	= new JPanel(new GridLayout(1,2));
+		JPanel panelBasG	= new JPanel(new FlowLayout(5,5,5));
+		JPanel panelBasD	= new JPanel(new FlowLayout(5,5,5));
 
 		panelHaut.add(new JLabel("Choix de la Ressource"));
 		panelHaut.add(new JLabel("Choix de la notion"	));
@@ -38,11 +41,30 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		this.btnAjouterR = new JButton("ajouter");
 		this.btnAjouterN = new JButton("ajouter");
 
+		this.textNumR = new JTextField();
+		this.textNumR.setColumns(5);
+		this.textNumN = new JTextField();
+		this.textNumN.setColumns(5);
+
+		this.textNomR = new JTextField();
+		this.textNomR.setColumns(10);
+		this.textNomN = new JTextField();
+		this.textNomN.setColumns(10);
+
 		this.btnAjouterR.addActionListener(this);
 		this.btnAjouterN.addActionListener(this);
 
-		panelBas.add(this.btnAjouterR);
-		panelBas.add(this.btnAjouterN);
+		panelBasG.add(this.btnAjouterR);
+		panelBasG.add(this.textNumR);
+		panelBasG.add(this.textNomR);
+
+		panelBasD.add(this.btnAjouterN);
+		panelBasD.add(this.textNumN);
+		panelBasD.add(this.textNomN);
+
+
+		panelBas.add(panelBasG);
+		panelBas.add(panelBasD);
 
 		this.add(panelBas, BorderLayout.SOUTH);
 		this.setVisible(true);

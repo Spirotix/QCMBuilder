@@ -13,7 +13,7 @@ public class FrameGenererQuestionnaire extends JFrame
 		this.ctrl=ctrl;
 
 		this.setTitle   ("Creation d'un questionnaire"	);
-		this.setSize    ( 500,500  						);
+		this.setSize    ( 500,600  						);
 
 		this.panelQ=new PanelGenererQuestionnaire(this.ctrl);
 
