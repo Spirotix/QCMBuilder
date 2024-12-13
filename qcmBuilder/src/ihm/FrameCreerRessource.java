@@ -13,7 +13,7 @@ public class FrameCreerRessource extends JFrame
 		this.ctrl=ctrl;
 
 		this.setTitle   ("Creation de Ressource et de Notion"	);
-		this.setSize    ( 500,500  								);
+		this.setSize    ( 750,750  								);
 
 		this.panelC=new PanelCreerRessource(this.ctrl);
 
