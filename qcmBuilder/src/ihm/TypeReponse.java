@@ -8,7 +8,8 @@ public class TypeReponse
 	private boolean 				estBonneReponse		;
 	private TypeReponse  			repGauche,repDroite ;
 	private ArrayList<TypeReponse> 	lstLiaisonRep1		;
-	private int 					ordre, cout 		;
+	private int 					ordre				;
+	private double					cout 				;
 	private String 					position 			;
 	private static int 				nbG, nbD 			;
 	public int 						cptG, cptD			;
@@ -42,7 +43,7 @@ public class TypeReponse
 			return this.cptD;
 		return 0;
 	}
-	public TypeReponse(String contenu, int ordre, int cout, boolean estBonneReponse)
+	public TypeReponse(String contenu, int ordre, double cout, boolean estBonneReponse)
 	{
 		this.contenu		 = contenu			;
 		this.ordre 			 = ordre			;
@@ -64,7 +65,7 @@ public class TypeReponse
 	public String  	getPosition 	   () {return this.position		  ;}
 	public boolean	getEstBonneReponse () {return this.estBonneReponse;}
 	public int  	getOrdre 		   () {return this.ordre		  ;}
-	public int	 	getCout			   () {return this.cout			  ;}
+	public double 	getCout			   () {return this.cout			  ;}
 
 	public TypeReponse 							getRepGauche  () {return this.repGauche		;}
 	public TypeReponse 							getRepDroite  () {return this.repDroite		;}
