@@ -1,14 +1,13 @@
 package src.ihm.question;
 //package src.ihm;
 
-import src.ihm.TypeReponse;
-
-import src.Controleur;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import src.Controleur;
+import src.ihm.TypeReponse;
 
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener {
 	private Controleur ctrl;
@@ -54,10 +53,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.choixNotion.setEnabled(false); // Disable initially
 
 		this.btnGroupImg = new ButtonGroup();
-		this.btnTF		 = new JRadioButton(new ImageIcon("img/TF2.PNG"));
-		this.btnF		 = new JRadioButton(new ImageIcon("img/F2.PNG" ));
-		this.btnM		 = new JRadioButton(new ImageIcon("img/M2.PNG" ));
-		this.btnD 		 = new JRadioButton(new ImageIcon("img/D2.PNG" ));
+		this.btnTF		 = new JRadioButton(new ImageIcon("../img/TF2.PNG"));
+		this.btnF		 = new JRadioButton(new ImageIcon("../img/F2.PNG" ));
+		this.btnM		 = new JRadioButton(new ImageIcon("../img/M2.PNG" ));
+		this.btnD 		 = new JRadioButton(new ImageIcon("../img/D2.PNG" ));
 
 		this.btnTF.setOpaque(false);
 		this.btnF.setOpaque(false);
@@ -303,35 +302,35 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 		if (this.btnTF.isSelected() )
 		{
-			this.btnTF.setIcon(new ImageIcon("img/TF1.PNG"));
-			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
-			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
-			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.btnTF.setIcon(new ImageIcon("../img/TF1.PNG"));
+			this.btnF .setIcon(new ImageIcon("../img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("../img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("../img/D2.PNG" ));
 			this.msgErrNiv.setText("");
 		}
 
 		else if (this.btnF.isSelected() )
 		{
-			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
-			this.btnF .setIcon(new ImageIcon("img/F1.PNG" ));
-			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
-			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.btnTF.setIcon(new ImageIcon("../img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("../img/F1.PNG" ));
+			this.btnM .setIcon(new ImageIcon("../img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("../img/D2.PNG" ));
 			this.msgErrNiv.setText("");
 		}
 		else if (this.btnM.isSelected() )
 			{
-			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
-			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
-			this.btnM .setIcon(new ImageIcon("img/M1.PNG" ));
-			this.btnD .setIcon(new ImageIcon("img/D2.PNG" ));
+			this.btnTF.setIcon(new ImageIcon("../img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("../img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("../img/M1.PNG" ));
+			this.btnD .setIcon(new ImageIcon("../img/D2.PNG" ));
 			this.msgErrNiv.setText("");
 		}
 		else if (this.btnD.isSelected() )
 		{
-			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
-			this.btnF .setIcon(new ImageIcon("img/F2.PNG" ));
-			this.btnM .setIcon(new ImageIcon("img/M2.PNG" ));
-			this.btnD .setIcon(new ImageIcon("img/D1.PNG" ));
+			this.btnTF.setIcon(new ImageIcon("../img/TF2.PNG"));
+			this.btnF .setIcon(new ImageIcon("../img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("../img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("../img/D1.PNG" ));
 			this.msgErrNiv.setText("");
 		}
 
@@ -368,10 +367,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.btnF.setEnabled(false);
 			this.btnM.setEnabled(false);
 			this.btnD.setEnabled(false);
-			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
-			this.btnF.setIcon(new ImageIcon("img/F2.PNG"));
-			this.btnM.setIcon(new ImageIcon("img/M2.PNG"));
-			this.btnD.setIcon(new ImageIcon("img/D2.PNG"));
+			this.btnTF.setIcon(new ImageIcon("../img/TF2.PNG"));
+			this.btnF.setIcon(new ImageIcon("../img/F2.PNG"));
+			this.btnM.setIcon(new ImageIcon("../img/M2.PNG"));
+			this.btnD.setIcon(new ImageIcon("../img/D2.PNG"));
 		}
 
 		if (e.getSource().equals(this.choixNotion) && !this.choixNotion.getSelectedItem().equals(" ")) {
@@ -384,10 +383,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		}
 
 		if (e.getSource().equals(this.choixNotion) && this.choixNotion.getSelectedItem().equals(" ")) {
-			this.btnTF.setIcon(new ImageIcon("img/TF2.PNG"));
-			this.btnF.setIcon(new ImageIcon("img/F2.PNG"));
-			this.btnM.setIcon(new ImageIcon("img/M2.PNG"));
-			this.btnD.setIcon(new ImageIcon("img/D2.PNG"));
+			this.btnTF.setIcon(new ImageIcon("../img/TF2.PNG"));
+			this.btnF.setIcon(new ImageIcon("../img/F2.PNG"));
+			this.btnM.setIcon(new ImageIcon("../img/M2.PNG"));
+			this.btnD.setIcon(new ImageIcon("../img/D2.PNG"));
 			this.btnTF.setEnabled(false);
 			this.btnF.setEnabled(false);
 			this.btnM.setEnabled(false);

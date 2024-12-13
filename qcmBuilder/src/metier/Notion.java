@@ -5,9 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import src.metier.question.Association;
-import src.metier.question.QCM;
 import src.metier.question.*;
 import src.metier.reponse.*;
 
@@ -29,10 +26,59 @@ public class Notion
 		List<Question> questions = new ArrayList<>();
 		try
 		{
-			Scanner scTextQuestion = new Scanner(new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf"));
-			Scanner scInformations = new Scanner(new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf"));
+			boolean fichieCree = false;
 
-			scInformations.nextLine();
+			File fileTextQuestion = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
+			File fileInformations = new File("../data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
+
+			if ( !fileTextQuestion.exists() )
+			{
+				try
+				{
+					if ( fileTextQuestion.createNewFile() )
+					{
+						System.out.println("Fichier créé : " + fileTextQuestion.getName());
+						fichieCree = true;
+					}
+				}
+				catch (Exception e)
+				{
+					System.out.println("Une erreur s'est produite : " + e.getMessage());
+				}
+			}
+			if ( !fileInformations.exists() )
+			{
+				try
+				{
+					if ( fileInformations.createNewFile() )
+					{
+						System.out.println("Fichier créé : " + fileInformations.getName());
+						fichieCree = true;
+					}
+				}
+				catch (Exception e)
+				{
+					System.out.println("Une erreur s'est produite : " + e.getMessage());
+				}
+			}
+
+			if ( fichieCree )
+				return null;
+
+
+			Scanner scTextQuestion = new Scanner( fileTextQuestion );
+			Scanner scInformations = new Scanner( fileInformations );
+			
+			if ( !scTextQuestion.hasNextLine() || !scInformations.hasNextLine() )
+			{
+				scTextQuestion.close();
+				scInformations.close();
+				return null;
+			}
+			else
+			{
+				scInformations.nextLine();
+			}
 
 			while ( scTextQuestion.hasNextLine() && scInformations.hasNextLine() )
 			{

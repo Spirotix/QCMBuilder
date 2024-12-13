@@ -10,7 +10,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 	private Controleur 	ctrl			;
 	private Choice 				choixRessource	;
 	private ButtonGroup			grpOuiNon		;
-	private JRadioButton		btnOui, btnNon	;
+	private JRadioButton		btnChronoOui, btnChronoNon	;
 	private JPanel 				ligne1, fin		;
 	private PanelGrilleQuestionnaire grille 	;
 	private JButton 			generer			;
@@ -28,12 +28,12 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 		for (String s : this.ctrl.getChoixRessources())
 			this.choixRessource.add(s);
 		
-		this.btnOui = new JRadioButton("oui");
-		this.btnNon = new JRadioButton("non");
+		this.btnChronoOui = new JRadioButton("oui");
+		this.btnChronoNon = new JRadioButton("non");
 
 		this.grpOuiNon = new ButtonGroup();
-		this.grpOuiNon.add(this.btnOui);
-		this.grpOuiNon.add(this.btnNon);
+		this.grpOuiNon.add(this.btnChronoOui);
+		this.grpOuiNon.add(this.btnChronoNon);
 		
 		this.generer = new JButton ("generer questionnaire");
 
@@ -53,8 +53,8 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 		gauche.add(this.choixRessource,BorderLayout.CENTER);
 
 		droite = new JPanel(new GridLayout(2,1));
-		droite.add(this.btnOui);
-		droite.add(this.btnNon);
+		droite.add(this.btnChronoOui);
+		droite.add(this.btnChronoNon);
 
 		droite2 = new JPanel(new GridLayout(1,2));
 		droite2.add(new JLabel(new ImageIcon("img/chrono.PNG")));
@@ -71,8 +71,8 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 		 * Ajout des actionListeners/ itemListener
 		 */
 		this.choixRessource	.addItemListener	(this);
-		this.btnOui 		.addActionListener	(this);
-		this.btnNon 		.addActionListener	(this);
+		this.btnChronoOui 		.addActionListener	(this);
+		this.btnChronoNon 		.addActionListener	(this);
 		this.generer		.addActionListener	(this);
 
 		/*
@@ -105,7 +105,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 	public void actionPerformed(ActionEvent e) 
 	{
 		if (e.getSource().equals(this.generer))
-			this.ctrl.creerQuestionnaire(this.choixRessource.getSelectedItem(),this.btnOui.isSelected(),this.grille.getSelectionner());
+			this.ctrl.genererQuestionnaire(this.choixRessource.getSelectedItem(),this.btnChronoOui.isSelected(),this.grille.getSelectionner());
 	}
 
 	public void itemStateChanged(ItemEvent e) 

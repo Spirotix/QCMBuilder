@@ -73,7 +73,7 @@ public class PanelRessource extends JPanel
 
 	public void ajouter(String nomRessource)
 	{
-		this.ctrl.ajouterRessource(nomRessource);
+		//this.ctrl.ajouterRessource(nomRessource);
 		this.Update();
 	}
 }

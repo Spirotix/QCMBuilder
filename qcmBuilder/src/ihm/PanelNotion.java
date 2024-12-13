@@ -54,7 +54,7 @@ public class PanelNotion extends JPanel
 
 	public void ajouter(String nomNotion)
 	{
-		this.ctrl.ajouterNotion(nomNotion);
+		//this.ctrl.ajouterNotion(nomNotion);
 		this.Update(this.ressource);
 	}
 }

@@ -2,6 +2,8 @@ package src.metier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,7 +26,7 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
+			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
 
 			if( scanner.hasNextLine()) scanner.nextLine();
 
@@ -60,12 +62,35 @@ public class Ressource
 
 	public boolean ajouterNotion(Notion notion)
 	{
-		if (notion == null)
+		for ( Notion n : lstNotions )
+		{
+			if ( n.getNom().equals(notion.getNom()) )
+				notion = n;
+		}
+
+		if ( ! lstNotions.contains(notion) )
+		{
+			lstNotions.add(notion);
+
+			try
+			{
+				PrintWriter writer = new PrintWriter( "./test.txt" );
+
+				writer.println( "Ajout de la Notion : " + notion.getNom() );
+
+				writer.close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+
+			return true;
+		}
+		else
+		{
 			return false;
-		if (lstNotions.contains(notion))
-			return false;
-		lstNotions.add(notion);
-		return true;
+		}
 	}
 
 	public boolean supprimerNotion(Notion notion)
@@ -89,5 +114,12 @@ public class Ressource
 		return notionTrouvee;
 	}
 
-	
+	public static void main(String[] args)
+	{
+		Ressource r = new Ressource("R1.11", "Bases de la communication");
+
+		r.ajouterNotion( new Notion("NOTION 1", r) );
+		r.ajouterNotion( new Notion("NOTION 2", r) );
+		//r.ajouterNotion( new Notion("NOTION 3", r) );
+	}
 }
