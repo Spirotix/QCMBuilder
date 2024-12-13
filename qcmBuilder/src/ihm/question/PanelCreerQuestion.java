@@ -1,14 +1,13 @@
 package src.ihm.question;
 //package src.ihm;
 
-import src.ihm.TypeReponse;
-
-import src.Controleur;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import src.Controleur;
+import src.ihm.TypeReponse;
 
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener {
 	private Controleur ctrl;
