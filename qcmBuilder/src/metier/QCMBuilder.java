@@ -114,7 +114,7 @@ public class QCMBuilder
 		return true;
 	}
 
-	public boolean creerQuestion(String type, String code_nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, /*List<String>*/ ArrayList<TypeReponse> sLstReponses, String explication)
+	public boolean creerQuestion(String type, String code_nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, /*List<String>*/ ArrayList<TypeReponse> sLstReponses, String explication) throws Exception
 	{
 		Notion notion = rechercherRessource( code_nomRessource.substring(0, code_nomRessource.indexOf("_")) ).rechercherNotion(nomNotion);
 
@@ -162,10 +162,9 @@ public class QCMBuilder
 		}
 		else
 		{
-			throw new Exception("Le type de la question crée est invalide, ou n'est pas pris en charge.")
-		}*/
-
-		return false;
+			System.out.println("Le type de la question crée est invalide, ou n'est pas pris en charge.");
+			return false;
+		}
 	}
 
 	public void genererQuestionnaire(String nomRessource, List<String> nomsNotions)
