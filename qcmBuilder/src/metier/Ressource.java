@@ -146,20 +146,20 @@ public class Ressource
 
 		r.ajouterNotion( n );
 
-	//	List<ReponseQCM> lstQCM = new ArrayList<>();
-	//	lstQCM.add( new ReponseQCM("Vrai", "REPONSE 1") );
-	//	lstQCM.add( new ReponseQCM("Faux", "REPONSE 2") );
+		List<ReponseQCM> lstQCM = new ArrayList<>();
+		lstQCM.add( new ReponseQCM("Vrai", "REPONSE 1") );
+		lstQCM.add( new ReponseQCM("Faux", "REPONSE 2") );
 		List<ReponseElimination> lstEli = new ArrayList<>();
 		lstEli.add( new ReponseElimination("Vrai", "REPONSE 1", 0, 0) );
 		lstEli.add( new ReponseElimination("Faux", "REPONSE 2", 1, 0.5) );
-	//	List<ReponseAssociation> lstAss = new ArrayList<>();
-	//	lstAss.add( new ReponseAssociation("REPONSE 1", new ReponseAssociation("REPONSE 11", null, 1, false), 1, true) );
-	//	lstAss.add( new ReponseAssociation("REPONSE 2", new ReponseAssociation("REPONSE 22", null, 1, false), 1, true) );
+		List<ReponseAssociation> lstAss = new ArrayList<>();
+		lstAss.add( new ReponseAssociation("REPONSE 1", new ReponseAssociation("REPONSE 11", null, 1, false), 1, true) );
+		lstAss.add( new ReponseAssociation("REPONSE 2", new ReponseAssociation("REPONSE 22", null, 1, false), 1, true) );
 
-	//	n.ajouterQuestion( new QCM        (n, "Question hohoo", 0, 2.23, 1, lstQCM, "") );
-	//	n.ajouterQuestion( new Elimination(n, "Question hohoooo", 10, 5.5, 3, lstEli, 2, "") );
-	//	n.ajouterQuestion( new Association(n, "Question hohoooooo", 30, 10.87, 4, lstAss, "") );
+		n.ajouterQuestion( new QCM        (n, "Question hohoo", 0, 2.23, 1, lstQCM, "") );
+		n.ajouterQuestion( new Elimination(n, "Question hohoooo", 10, 5.5, 3, lstEli, 2, "") );
+		n.ajouterQuestion( new Association(n, "Question hohoooooo", 30, 10.87, 4, lstAss, "") );
 
-		n.ajouterQuestion( new Elimination(n, "Question TESTTTTTTTTTT", 10, 5.5, 3, lstEli, 2, "") );
+	//	n.ajouterQuestion( new Elimination(n, "Question TESTTTTTTTTTT", 10, 5.5, 3, lstEli, 2, "") );
 	}
 }
