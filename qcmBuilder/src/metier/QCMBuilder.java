@@ -79,8 +79,9 @@ public class QCMBuilder
 				ressource = r;
 		}
 
-		if ( ! ressources.contains(ressource))
+		if ( ressources.contains(ressource))
 		{
+			ressource.supprimerAllNotion();
 			ressources.remove(ressource);
 			return true;
 		}
