@@ -154,7 +154,7 @@ public class QCMBuilder
 			notion.ajouterQuestion( new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
 			return true;
 		}
-		else if ( type.equals("Association") )
+		/*else if ( type.equals("Association") )
 		{
 			List<ReponseAssociation> lstReponses = new ArrayList<>();
 			// Question question = new Association(this, text, timer, nbPoint, difficulte, lstReponses, "");
@@ -162,7 +162,7 @@ public class QCMBuilder
 		}
 		else
 		{
-			throw new Exception("Le type de la question crée est invalide, ou n'est pas pris en charge.")
+			throw new Exception("Le type de la question crée est invalide, ou n'est pas pris en charge.");
 		}*/
 
 		return false;

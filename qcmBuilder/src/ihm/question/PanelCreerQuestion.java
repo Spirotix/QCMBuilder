@@ -52,10 +52,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		for (String s : this.ctrl.getChoixRessources())
 			this.choixRessource.add(s);
 
-		this.choixNotion = new Choice	();
-		this.choixNotion.add			(" "  );
+		this.choixNotion = new Choice	(		);
+		this.choixNotion.add			(" "  	);
 		this.choixNotion.add			("justePourTest");
-		this.choixNotion.setEnabled		(false);
+		this.choixNotion.setEnabled		(false	);
 
 		this.btnGroupImg = new ButtonGroup (							   );
 		this.btnTF		 = new JRadioButton(new ImageIcon("../img/TF2.PNG"));
@@ -325,9 +325,6 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	
 				this.fr.dispose();
 			}
-
-
-			
 		}
 
 		if (this.btnTF.isSelected() )
