@@ -1,19 +1,19 @@
-//package src.ihm;
+package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import src.Controleur;
+import src.Controleur;
 
 public class PanelCreerRessource extends JPanel implements ActionListener
 {
 	//private Controleur ctrl
-	private TestCreerQuestion 	ctrl;
+	private Controleur 	ctrl;
 	private PanelRessource 		panelR;
 	private PanelNotion 		panelN;
 	private JButton				btnAjouterR, btnAjouterN;
 
-	public PanelCreerRessource (TestCreerQuestion ctrl)
+	public PanelCreerRessource (Controleur ctrl)
 	{
 		this.ctrl=ctrl;
 		this. setLayout (new BorderLayout(30,30));

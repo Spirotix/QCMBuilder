@@ -40,11 +40,11 @@ public class Controleur
 		return ressources;
 	}
 
-	/*public boolean ajouterRessource(String nom)
+	public boolean ajouterRessource(String code, String nom)
 	{
-		return qcmBuilder.ajouterRessource(new Ressource(nom));
+		return qcmBuilder.ajouterRessource(new Ressource(code, nom));
 	}
-
+	/* 
 	public boolean supprimerRessource(String nom)
 	{
 		return qcmBuilder.supprimerRessource(qcmBuilder.rechercherRessource(nom));
@@ -54,7 +54,7 @@ public class Controleur
 	{
 		Ressource r = qcmBuilder.rechercherRessource(nom);
 		return r.setNom(newNom);
-	}
+	}*/
 
 	public boolean ajouterNotion(String nomRessource, String nomNotion)
 	{
@@ -62,12 +62,14 @@ public class Controleur
 		return r.ajouterNotion(new Notion(nomNotion, r));
 	}
 
+	/* 
 	public boolean supprimerNotion(String nomRessource, String nomNotion)
 	{
 		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
 		return r.supprimerNotion(r.rechercherNotion(nomNotion));
 	}
 
+	
 	public boolean modifierNotion(String nomRessource, String nomNotion, String newNom)
 	{
 		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);

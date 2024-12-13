@@ -1,12 +1,14 @@
+package src.ihm.question;
 //package src.ihm;
+
 import javax.swing.*;
 
-public class FrameCreerElimination extends JFrame
+public class FrameCreerQCMRepUnique extends JFrame
 {
 	private PanelCreerQuestion 		panelQ;
-	private PanelCreerElim 			panel ;
+	private PanelCreerQCMRepUnique 	panel ;
 
-	public FrameCreerElimination (PanelCreerQuestion panelQ)
+	public FrameCreerQCMRepUnique (PanelCreerQuestion panelQ)
 	{
 		this.panelQ=panelQ;
 
@@ -14,7 +16,7 @@ public class FrameCreerElimination extends JFrame
 		this.setTitle   ("Creation d'un QCM a choix unique");
 		this.setSize    ( 500,500  );
 
-		this.panel=new PanelCreerElim(this.panelQ);
+		this.panel=new PanelCreerQCMRepUnique(this.panelQ);
 
 		this.add (this.panel);
 

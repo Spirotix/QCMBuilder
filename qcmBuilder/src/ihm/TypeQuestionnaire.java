@@ -1,6 +1,4 @@
-//package src.ihm;
-
-import java.util.ArrayList;
+package src.ihm;
 
 public class TypeQuestionnaire 
 {

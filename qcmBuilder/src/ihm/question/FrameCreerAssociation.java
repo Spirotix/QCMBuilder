@@ -1,3 +1,4 @@
+package src.ihm.question;
 //package src.ihm;
 import javax.swing.*;
 

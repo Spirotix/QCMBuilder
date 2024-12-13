@@ -1,20 +1,22 @@
-//package src.ihm;
+package src.ihm;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.*;
 
+import src.Controleur;
+
 public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 {
-	private TestCreerQuestion 					ctrl;
+	private Controleur 					ctrl;
 	private ArrayList<JCheckBox> 				lstBox;
 	private int 								nbTF, nbF, nbM , nbD ;
 	private ArrayList<ArrayList<JTextField>> 	lstTextField;
 	private JLabel 								nbTFS, nbFS, nbMS, nbDS, nbTotal;
 	private String								ressource;
 
-	public PanelGrilleQuestionnaire(TestCreerQuestion ctrl, String ressource) 
+	public PanelGrilleQuestionnaire(Controleur ctrl, String ressource) 
 	{
 		this.ctrl = ctrl;
 		this.ressource = ressource;

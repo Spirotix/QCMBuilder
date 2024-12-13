@@ -1,9 +1,11 @@
-//package src.ihm;
+package src.ihm.question;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 import java.util.*;
+import javax.swing.*;
+import src.ihm.FrameExplication;
+import src.ihm.TypeReponse;
 
 public class PanelCreerQuestionAsso extends JPanel implements ActionListener 
 {

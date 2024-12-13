@@ -1,14 +1,14 @@
-//package src.ihm;
+package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import src.Controleur;
+import src.Controleur;
 
 public class PanelGenererQuestionnaire extends JPanel implements ActionListener, ItemListener
 {
 	//private Controleur ctrl
-	private TestCreerQuestion 	ctrl			;
+	private Controleur 	ctrl			;
 	private Choice 				choixRessource	;
 	private ButtonGroup			grpOuiNon		;
 	private JRadioButton		btnOui, btnNon	;
@@ -16,7 +16,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 	private PanelGrilleQuestionnaire grille 	;
 	private JButton 			generer			;
 
-	public PanelGenererQuestionnaire (TestCreerQuestion ctrl)
+	public PanelGenererQuestionnaire (Controleur ctrl)
 	{
 		this.ctrl=ctrl;
 		this.setLayout(new GridLayout (4,1));
