@@ -1,4 +1,4 @@
-//package src.ihm;
+package src.ihm;
 
 import java.util.*;
 
@@ -21,7 +21,7 @@ public class TestCreerQuestion
 		this.lstNotion.add("notion3");
 		this.lstNotion.add("notion4");
 
-		new FrameMenu(this);
+		// new FrameMenu(this);
 	}
 
 	public static void main (String[] a)

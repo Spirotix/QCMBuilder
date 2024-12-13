@@ -1,8 +1,11 @@
-//package src.ihm;
+package src.ihm;
 
-import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import src.ihm.question.PanelCreerElim;
+import src.ihm.question.PanelCreerQCMRepUnique;
+import src.ihm.question.PanelCreerQuestionAsso;
 
 public class FrameExplication extends JFrame implements ActionListener
 {

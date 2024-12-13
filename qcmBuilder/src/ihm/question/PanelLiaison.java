@@ -1,4 +1,7 @@
+package src.ihm.question;
 //package src.ihm;
+
+import src.ihm.TypeReponse;
 
 import java.awt.*;
 import java.awt.event.*;

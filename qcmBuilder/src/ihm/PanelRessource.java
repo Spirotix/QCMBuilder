@@ -1,19 +1,19 @@
-//package src.ihm;
+package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
-//import src.Controleur;
+import src.Controleur;
 
 public class PanelRessource extends JPanel 
 {
 	//private Controleur ctrl
-	private TestCreerQuestion 	ctrl	;
+	private Controleur 	ctrl	;
 	private PanelCreerRessource panelC	;
 	private ArrayList<JLabel> 	lstLabel;
 
-	public PanelRessource (TestCreerQuestion ctrl, PanelCreerRessource panelC)
+	public PanelRessource (Controleur ctrl, PanelCreerRessource panelC)
 	{
 		this.ctrl=ctrl		;
 		this.panelC=panelC	;
@@ -73,7 +73,7 @@ public class PanelRessource extends JPanel
 
 	public void ajouter(String nomRessource)
 	{
-		this.ctrl.ajouterRessource(nomRessource);
+		//this.ctrl.ajouterRessource(nomRessource);
 		this.Update();
 	}
 }

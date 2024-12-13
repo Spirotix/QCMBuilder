@@ -1,8 +1,9 @@
-//package src.ihm;
+package src.ihm;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import src.ihm.question.PanelCreerQCMRepUnique;
 
 public class PanelReponse extends JPanel implements ActionListener
 {

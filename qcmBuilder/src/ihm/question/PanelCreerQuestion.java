@@ -1,3 +1,4 @@
+package src.ihm.question;
 //package src.ihm;
 
 import java.awt.*;
@@ -5,10 +6,11 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-//import src.Controleur;
+import src.Controleur;
+import src.ihm.TypeReponse;
 
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener {
-	private TestCreerQuestion ctrl;
+	private Controleur ctrl;
 	private JTextField nbPoints, tpsReponses;
 	private Choice choixRessource, choixNotion;
 	private ButtonGroup btnGroup, btnGroupImg;
@@ -28,7 +30,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private int difficulteQuestion;
 	private String explicationQuestion;
 
-	public PanelCreerQuestion(TestCreerQuestion ctrl, FrameCreerQuestion fr) {
+	public PanelCreerQuestion(Controleur ctrl, FrameCreerQuestion fr) {
 		this.ctrl = ctrl;
 		this.fr = fr;
 		this.setLayout(new GridBagLayout());
