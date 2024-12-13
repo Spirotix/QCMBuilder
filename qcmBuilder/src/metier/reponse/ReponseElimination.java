@@ -17,9 +17,13 @@ public class ReponseElimination extends Reponse
 		this.nbPointPerdu = nbPointPerdu;
 	}
 
-	public int  getOrdreIndice()                   { return ordreIndice;             }
-	public void setOrdreIndice(int ordreIndice)    { this.ordreIndice = ordreIndice; }
+	public int  getOrdreIndice()                     { return ordreIndice;             }
+	public void setOrdreIndice(int ordreIndice)      { this.ordreIndice = ordreIndice; }
 
 	public boolean estVisible()                      { return estVisible;              }
 	public void    setEstVisible(boolean estVisible) { this.estVisible = estVisible;   }
+
+	public boolean estVrai()                         { return estVrai;                 }
+
+	public double getNbPointPerdu()                  { return nbPointPerdu;            }
 }

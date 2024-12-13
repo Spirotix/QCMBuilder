@@ -26,7 +26,7 @@ public class QCMBuilder
 		List<Ressource> ressources = new ArrayList<>();
 		try
 		{
-			Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
+			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
 			scanner.nextLine();
 			while (scanner.hasNextLine())
 			{
