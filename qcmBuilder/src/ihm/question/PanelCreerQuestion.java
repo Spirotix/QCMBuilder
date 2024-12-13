@@ -53,10 +53,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.choixNotion.setEnabled(false); // Disable initially
 
 		this.btnGroupImg = new ButtonGroup();
-		this.btnTF		 = new JRadioButton(new ImageIcon("img/TF2.PNG"));
-		this.btnF		 = new JRadioButton(new ImageIcon("img/F2.PNG" ));
-		this.btnM		 = new JRadioButton(new ImageIcon("img/M2.PNG" ));
-		this.btnD 		 = new JRadioButton(new ImageIcon("img/D2.PNG" ));
+		this.btnTF		 = new JRadioButton(new ImageIcon("../img/TF2.PNG"));
+		this.btnF		 = new JRadioButton(new ImageIcon("../img/F2.PNG" ));
+		this.btnM		 = new JRadioButton(new ImageIcon("../img/M2.PNG" ));
+		this.btnD 		 = new JRadioButton(new ImageIcon("../img/D2.PNG" ));
 
 		this.btnTF.setOpaque(false);
 		this.btnF.setOpaque(false);
