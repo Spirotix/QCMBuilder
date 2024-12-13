@@ -9,7 +9,8 @@ if exist arg.list (
 		REM Vérifie si la compilation a réussi
 		if %errorlevel%==0 (
 			echo Compilation réussie. Exécution de src/Controleur...
-			java class/Controleur
+			cd class
+			java src/Controleur
 		) else (
 			echo Erreur : La compilation a échoué.
 			exit /b 1
