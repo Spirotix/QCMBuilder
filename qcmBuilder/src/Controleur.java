@@ -7,7 +7,7 @@ import src.metier.*;
 public class Controleur
 {
 	private QCMBuilder qcmBuilder;
-	private FrameMenu  frameMenu;
+	//private FrameMenu  frameMenu;
 
 	public Controleur()
 	{
