@@ -1,5 +1,7 @@
 //package src.ihm;
+package src.ihm.question;
 
+import src.ihm.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
