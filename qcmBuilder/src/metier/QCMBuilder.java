@@ -7,9 +7,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import src.metier.reponse.*;
-import src.metier.question.*;
 import src.ihm.*;
 
 public class QCMBuilder
@@ -93,12 +90,12 @@ public class QCMBuilder
 		}
 	}
 
-	public Ressource rechercherRessource(String code)
+	public Ressource rechercherRessource(String code_nom)
 	{
 		Ressource ressourceTrouvee = null;
 		for (Ressource ressource : ressources)
 		{
-			if (ressource.getCode().equals(code))
+			if ((ressource.getCode()+"_"+ressource.getNom()).equals(code_nom))
 				ressourceTrouvee = ressource;
 		}
 		return ressourceTrouvee;

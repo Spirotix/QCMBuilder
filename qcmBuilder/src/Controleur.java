@@ -43,38 +43,12 @@ public class Controleur
 	{
 		return qcmBuilder.ajouterRessource(new Ressource(code, nom));
 	}
-	/* 
-	public boolean supprimerRessource(String nom)
-	{
-		return qcmBuilder.supprimerRessource(qcmBuilder.rechercherRessource(nom));
-	}
-
-	public boolean modifierRessource(String nom, String newNom)
-	{
-		Ressource r = qcmBuilder.rechercherRessource(nom);
-		return r.setNom(newNom);
-	}*/
 
 	public boolean ajouterNotion(String nomRessource, String nomNotion)
 	{
 		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
 		return r.ajouterNotion(new Notion(nomNotion, r));
 	}
-
-	/* 
-	public boolean supprimerNotion(String nomRessource, String nomNotion)
-	{
-		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
-		return r.supprimerNotion(r.rechercherNotion(nomNotion));
-	}
-
-	
-	public boolean modifierNotion(String nomRessource, String nomNotion, String newNom)
-	{
-		Notion n = qcmBuilder.rechercherRessource(nomRessource).rechercherNotion(nomNotion);
-		return n.setNom(newNom);
-	}*/
-
 
 	public void creerQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<TypeReponse> lstReponse, int difficulte)
 	{
