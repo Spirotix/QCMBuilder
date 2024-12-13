@@ -7,12 +7,12 @@ import src.metier.*;
 public class Controleur
 {
 	private QCMBuilder qcmBuilder;
-	private FrameMenu frameMenu;
+	private FrameMenu  frameMenu;
 
 	public Controleur()
 	{
 		this.qcmBuilder = new QCMBuilder();
-		this.frameMenu = new FrameMenu(this);
+		this.frameMenu  = new FrameMenu(this);
 	}
 
 	public ArrayList<String> getChoixNotion(String s)
@@ -60,8 +60,8 @@ public class Controleur
 		//qcmBuilder.genererQuestionnaire(ressource, chrono, questions);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		new Controleur();
 	}
-
 }
