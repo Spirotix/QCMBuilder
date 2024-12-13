@@ -12,7 +12,7 @@ public class Controleur
 	public Controleur()
 	{
 		this.qcmBuilder = new QCMBuilder();
-		this.frameMenu  = new FrameMenu(this);
+		//this.frameMenu  = new FrameMenu(this);
 	}
 
 	public ArrayList<String> getChoixNotion(String s)
