@@ -161,7 +161,7 @@ public class Notion
 				}
 				else if (type.equals("QCM"))
 				{
-					List<ReponseQCM> lstReponse = new ArrayList<>();
+				List<ReponseQCM> lstReponse = new ArrayList<>();
 					while (!lineTextQuestion.contains("\\par{Fin}"))
 					{
 						lstReponse.add(new ReponseQCM(

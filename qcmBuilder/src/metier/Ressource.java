@@ -32,7 +32,7 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
+			Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
 
 			if( scanner.hasNextLine()) scanner.nextLine();
 
@@ -76,14 +76,32 @@ public class Ressource
 
 		if ( ! lstNotions.contains(notion) )
 		{
-			lstNotions.add(notion);
-
 			try
 			{
 				PrintWriter writer = new PrintWriter( new FileWriter("./data/ressources_notions.csv", true) );
 
+				Scanner scanner = new Scanner(new File("./data/ressources_notions.csv"));
+				scanner.nextLine();
+				while (scanner.hasNextLine())
+				{
+					String line = scanner.nextLine();
+					if (line.equals(this.getCode() + ";" + this.getNom() + ";" + notion.getNom()))
+					{
+						System.out.println("La ligne existe déjà");
+						scanner.close();
+						writer.close();
+						return false;
+					}
+
+					System.out.println("Ligne : " + line);
+					System.out.println("Ajout : " + this.getCode() + ";" + this.getNom() + ";" + notion.getNom() + "\n");
+				}
+
+				lstNotions.add(notion);
+
 				writer.println( this.getCode() + ";" + this.getNom() + ";" + notion.getNom() );
 
+				scanner.close();
 				writer.close();
 			}
 			catch (IOException e)
@@ -124,7 +142,7 @@ public class Ressource
 	{
 		Ressource r = new Ressource("R1.11", "Bases de la communication");
 
-		Notion    n = new Notion("NOTION 1", r);
+		Notion    n = new Notion("George Le Canard", r);
 
 		r.ajouterNotion( n );
 
