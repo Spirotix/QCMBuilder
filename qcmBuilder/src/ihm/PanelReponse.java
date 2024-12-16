@@ -76,7 +76,7 @@ public class PanelReponse extends JPanel implements ActionListener
 						return;
 					}
 
-					File targetDirectory = new File("imagesReponse");
+					File targetDirectory = new File("imagesReponseQCM");
 					if (!targetDirectory.exists()) 
 						targetDirectory.mkdirs();
 
