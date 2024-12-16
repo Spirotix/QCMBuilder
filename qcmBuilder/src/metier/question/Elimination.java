@@ -3,30 +3,29 @@ package src.metier.question;
 import java.util.List;
 import src.metier.Notion;
 import src.metier.reponse.ReponseElimination;
-import src.metier.reponse.ReponseQCM;
 
 public class Elimination implements Question
 {
-	private Notion notions;
-	private String text;
-	private int timer;
-	private double nbPoint;
-	private int difficulte;
-	private String explication;
-	private int nbIndice;
-	private int nbIndiceUtilise;
+	private Notion                   notions;
+	private String                   text;
+	private int                      timer;
+	private double                   nbPoint;
+	private int                      difficulte;
+	private String                   explication;
+	private int                      nbIndice;
+	private int                      nbIndiceUtilise;
 	private List<ReponseElimination> lstReponses;
 
 	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<ReponseElimination> lstReponses, int nbIndice, String explication)
 	{
-		this.notions = notion;
-		this.text = text;
-		this.timer = timer;
-		this.nbPoint = nbPoint;
-		this.difficulte = difficulte;
-		this.lstReponses = lstReponses;
-		this.nbIndice = nbIndice;
-		this.explication = explication;
+		this.notions         = notion;
+		this.text            = text;
+		this.timer           = timer;
+		this.nbPoint         = nbPoint;
+		this.difficulte      = difficulte;
+		this.lstReponses     = lstReponses;
+		this.nbIndice        = nbIndice;
+		this.explication     = explication;
 		this.nbIndiceUtilise = 0;
 	}
 
@@ -137,5 +136,22 @@ public class Elimination implements Question
 	public List<ReponseElimination> getReponses()
 	{
 		return this.lstReponses;
+	}
+
+	public String getStringDifficulte()
+	{
+		String niveau;
+		switch(this.difficulte)
+		{
+			case 1 -> { niveau = "TF"; }
+			case 2 -> { niveau = "F" ; }
+			case 3 -> { niveau = "M" ; }
+			case 4 -> { niveau = "D" ; }
+			default   ->
+			{
+				niveau = "INVALIDE";
+			}
+		}
+		return niveau;
 	}
 }

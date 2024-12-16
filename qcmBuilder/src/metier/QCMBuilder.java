@@ -98,7 +98,7 @@ public class QCMBuilder
 		Ressource ressourceTrouvee = null;
 		for (Ressource ressource : ressources)
 		{
-			if ((ressource.getCode()+"_"+ressource.getNom()).equals(code_nom))
+			if ( (ressource.getCode() + "_" + ressource.getNom()).equals(code_nom) )
 				ressourceTrouvee = ressource;
 		}
 		return ressourceTrouvee;
@@ -157,15 +157,16 @@ public class QCMBuilder
 		/*else if ( type.equals("Association") )
 		{
 			List<ReponseAssociation> lstReponses = new ArrayList<>();
+
 			// Question question = new Association(this, text, timer, nbPoint, difficulte, lstReponses, "");
+
 			return true;
 		}
 		else
 		{
-			throw new Exception("Le type de la question crée est invalide, ou n'est pas pris en charge.");
-		}*/
-
-		return false;
+			System.out.println("Le type de la question crée est invalide, ou n'est pas pris en charge.");
+			return false;
+		}
 	}
 
 	public void genererQuestionnaire(String nomRessource, List<String> nomsNotions)
