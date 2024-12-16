@@ -44,8 +44,6 @@ public class PanelReponse extends JPanel implements ActionListener
 		}
 	}
 
-	
-
 	public boolean  getEstBonneReponse ( )	{return this.validation.isSelected();}
 	
 
