@@ -361,7 +361,8 @@ public class Notion
 		if (!lstQuestions.contains(question))
 			return false;
 
-			lstQuestions.remove(question);
+		System.out.println("Supprimer2");
+		lstQuestions.remove(question);
 		return true;
 	}
 

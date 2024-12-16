@@ -9,9 +9,10 @@ import src.Controleur;
 public class PanelAfficherQuestion extends JPanel implements ActionListener
 {
 	private Controleur 	ctrl	;
-	private ArrayList<JPanel> 	lstLabel;
+	private ArrayList<JPanel> 	lstPanel;
 	private String				ressource, notion;
 	private ArrayList<JButton> 	btnModif, btnSup;
+	private ArrayList<JLabel>	lstLabel ;
 
 	public PanelAfficherQuestion (Controleur ctrl)
 	{
@@ -19,9 +20,10 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 		this.ressource="";
 		this.notion="";
 		
-		this.lstLabel = new ArrayList<JPanel>();
+		this.lstPanel = new ArrayList<JPanel> ();
 		this.btnModif = new ArrayList<JButton>();
 		this.btnSup	  = new ArrayList<JButton>();
+		this.lstLabel = new ArrayList<JLabel> ();
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -35,13 +37,17 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 		JPanel temp;
 		System.out.println("test");
 
-		this.lstLabel = new ArrayList<JPanel>();
+		this.lstPanel = new ArrayList<JPanel> ();
+		this.lstLabel = new ArrayList<JLabel> ();
+		this.btnSup   = new ArrayList<JButton>();
+		this.btnModif = new ArrayList<JButton>();
 		this.removeAll();
 
 		for (int i=0; i<this.ctrl.getQuestions(this.ressource, this.notion).size(); i++)
 		{
 			temp = new JPanel ();
-			temp.add(new JLabel(this.ctrl.getQuestions(this.ressource, this.notion).get(i)));
+			this.lstLabel.add(new JLabel(this.ctrl.getQuestions(this.ressource, this.notion).get(i)));
+			temp.add(this.lstLabel.get(i));
 
 			this.btnModif.add(new JButton("Modifier"));
 			this.btnModif.get(i).addActionListener(this);
@@ -51,27 +57,23 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 			this.btnSup.get(i).addActionListener(this);
 			temp.add(this.btnSup.get(i));
 
-			this.lstLabel.add(temp);
-			this.add(this.lstLabel.get(i));
+			this.lstPanel.add(temp);
+			this.add(this.lstPanel.get(i));
 		}
 
 		this.revalidate();
+		this.repaint();
 
 	}
 
 	public void actionPerformed(ActionEvent e) 
 	{
-		for (JButton j : this.btnModif)
+		for (int i=0; i<this.lstPanel.size(); i++)
 		{
-			if (e.getSource().equals(j))
-			{
-				System.out.println("test1");
-			}
-		}
-		for (JButton j : this.btnSup)
-		{
-			if (e.getSource().equals(j))
-				System.out.println("test2");
+			if (e.getSource().equals(this.btnSup.get(i)))
+				this.ctrl.supprimerQuestion(this.lstLabel.get(i).getText(), this.ressource, this.notion);
+			
+			this.Update(this.ressource, this.notion);
 		}
 	}
 }
