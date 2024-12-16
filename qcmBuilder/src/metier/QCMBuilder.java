@@ -2,8 +2,6 @@ package src.metier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,11 +11,11 @@ import src.metier.question.*;
 
 public class QCMBuilder
 {
-	private List<Ressource> ressources;
+	private List<Ressource> lstRessources;
 
 	public QCMBuilder()
 	{
-		this.ressources = lireRessources();
+		this.lstRessources = lireRessources();
 	}
 
 	private List<Ressource> lireRessources()
@@ -25,46 +23,49 @@ public class QCMBuilder
 		List<Ressource> ressources = new ArrayList<>();
 		try
 		{
-			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
-			scanner.nextLine();
-			while (scanner.hasNextLine())
+			Scanner scannerRessource = new Scanner(new File("../data/ressources.csv"));
+			Scanner scannerNotion    = new Scanner(new File("../data/notions.csv"   ));
+			scannerRessource.nextLine();
+			while (scannerRessource.hasNextLine())
 			{
-				String   line         = scanner.nextLine();
-				String[] parts        = line.split(";");
-				String   codeRessource = parts[0];
-				String   nomRessource  = parts[1];
+				String   lineRessource = scannerRessource.nextLine();
+				String   lineNotion    = scannerRessource.nextLine();
+
+				String   codeRessource = lineRessource.substring(0, lineRessource.indexOf(";"));
+				String   nomRessource  = lineNotion   .substring(0, lineNotion   .indexOf(";"));
 
 				Ressource ressource = new Ressource(codeRessource, nomRessource);
 
-				for (Ressource r : ressources)
+				for (Ressource r : lstRessources)
 				{
 					if (r.getCode().equals(codeRessource))
 						ressource = r;
 				}
 
-				if ( ! ressources.contains(ressource) )
-					ressources.add(ressource);
+				if ( ! lstRessources.contains(ressource) )
+				lstRessources.add(ressource);
 			}
-			scanner.close();
+			scannerRessource.close();
+			scannerNotion   .close(); // FAIRE CETTE PUTAIN DARBORESSENCE BLC COMMENT CA SECRIS FDP LE PC !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		} 
 		catch (FileNotFoundException e) { e.printStackTrace(); }
 
 		return ressources;
 	}
 
-	public List<Ressource> getRessources() { return ressources; }
+	public List<Ressource> getRessources() { return lstRessources; }
 
 	public boolean ajouterRessource(Ressource ressource)
 	{
-		for (Ressource r : ressources)
+		for (Ressource r : lstRessources)
 		{
 			if ( r.getCode().equals(ressource.getCode()) )
 				ressource = r;
 		}
 
-		if ( ! ressources.contains(ressource))
+		if ( ! lstRessources.contains(ressource))
 		{
-			ressources.add(ressource);
+			lstRessources.add(ressource);
 			return true;
 		}
 		else
@@ -75,16 +76,16 @@ public class QCMBuilder
 
 	public boolean supprimerRessource(Ressource ressource)
 	{
-		for (Ressource r : ressources)
+		for (Ressource r : lstRessources)
 		{
 			if ( r.getCode().equals(ressource.getCode()) )
 				ressource = r;
 		}
 
-		if ( ressources.contains(ressource))
+		if ( lstRessources.contains(ressource))
 		{
 			//ressource.supprimerAllNotion();
-			ressources.remove(ressource);
+			lstRessources.remove(ressource);
 			return true;
 		}
 		else
@@ -96,7 +97,7 @@ public class QCMBuilder
 	public Ressource rechercherRessource(String code_nom)
 	{
 		Ressource ressourceTrouvee = null;
-		for (Ressource ressource : ressources)
+		for (Ressource ressource : lstRessources)
 		{
 			if ( (ressource.getCode() + "_" + ressource.getNom()).equals(code_nom) || (ressource.getCode()).equals(code_nom) )
 				ressourceTrouvee = ressource;
@@ -108,7 +109,7 @@ public class QCMBuilder
 	{
 		if (ressource == null)
 			return false;
-		if (!ressources.contains(ressource))
+		if (!lstRessources.contains(ressource))
 			return false;
 		ressource.setNom(nouveauNom);
 		return true;
