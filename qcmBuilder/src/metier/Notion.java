@@ -38,7 +38,7 @@ public class Notion
 			{
 				try (PrintWriter writerQues = new PrintWriter(new FileWriter(fileTextQuestion)))
 				{
-					writerQues.println("{\\rtf1\\ansi\\deff0\n{\\fonttbl{\\f0\\fswiss Helvetica;}}\n\\viewkind4\\uc1\\pard\\f0\n");
+					writerQues.println("{\\rtf1\\ansi\\deff0\n{\\fonttbl{\\f0\\fswiss Helvetica;}}\n\\viewkind4\\uc1\\pard\\f0\n}");
 				}
 				catch (IOException e) { e.printStackTrace(); }
 				fichieCree = true;
@@ -48,7 +48,7 @@ public class Notion
 			{
 				try (PrintWriter writerData = new PrintWriter(new FileWriter(fileInformations)))
 				{
-					writerData.println("N_QUESTION;POINT;TYPE;NIVEAU;TEMPS");
+					writerData.println("N_QUESTION;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION");
 				}
 				catch (IOException e) { e.printStackTrace(); }
 				fichieCree = true;
@@ -83,16 +83,18 @@ public class Notion
 
 				String[] informations = lineInformations.split(";");
 
-				lineTextQuestion = scTextQuestion.nextLine();
-				String text      = lineTextQuestion.substring(0, lineTextQuestion.indexOf("\\par"));
+				lineTextQuestion      = scTextQuestion.nextLine();
+				String text           = lineTextQuestion.substring(0, lineTextQuestion.indexOf("\\par"));
 
-				double nbPoint   = Double.parseDouble( informations[1] );
+				double nbPoint        = Double.parseDouble( informations[1] );
 
-				String type      = informations[2];
+				String type           = informations[2];
 
-				String sNiveau   = informations[3];
+				String sNiveau        = informations[3];
 
-				int    temps     = Integer.parseInt( informations[4] );
+				int    temps          = Integer.parseInt( informations[4] );
+
+				String explication    = informations[5];
 
 				int niveau;
 				switch(sNiveau)
@@ -147,7 +149,7 @@ public class Notion
 						lineTextQuestion = scTextQuestion.nextLine();
 					}
 
-					Association question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
+					Association question = new Association(this, text, temps, nbPoint, niveau, lstReponse, explication);
 					lstQuestions.add(question);
 				}
 				else if ( type.equals("Elimination"))
@@ -178,7 +180,7 @@ public class Notion
 						lineTextQuestion = scTextQuestion.nextLine();
 					}
 
-					Elimination question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
+					Elimination question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, explication);
 					lstQuestions.add(question);
 				}
 				else if (type.equals("QCM"))
@@ -193,7 +195,7 @@ public class Notion
 						lineTextQuestion = scTextQuestion.nextLine();
 					}
 
-					QCM question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, "");
+					QCM question = new QCM(this, text, temps, nbPoint, niveau, lstReponse, explication);
 					lstQuestions.add(question);
 				}
 				else
@@ -277,7 +279,7 @@ public class Notion
 					long length = raf.length();
 					if (length > 0)
 					{
-						raf.setLength(length - 2); // SUPPRIME LE DERNIER }
+						raf.setLength(length - 2); // SUPPRIME LE DERNIER "}"
 					}
 					raf.close();
 				}
@@ -333,7 +335,8 @@ public class Notion
 						question.getNbPoint()               + ";" +
 						question.getClass().getSimpleName() + ";" +
 						question.getStringDifficulte()      + ";" +
-						question.getTimer()
+						question.getTimer()                 + ";" +
+						question.getExplication()
 					);
 				}
 			}

@@ -139,7 +139,7 @@ public class QCMBuilder
 					lstReponses.add(reponse);
 			}
 
-			notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, "") );
+			notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, explication) );
 			return true;
 		}
 		else if ( type.equals("QCM") )
@@ -189,7 +189,7 @@ public class QCMBuilder
 					lstReponses.add(reponseG);
 			}
 
-			notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstReponses, "") );
+			notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
 			return true;
 		}
 		else
