@@ -98,7 +98,7 @@ public class QCMBuilder
 		Ressource ressourceTrouvee = null;
 		for (Ressource ressource : ressources)
 		{
-			if ( (ressource.getCode() + "_" + ressource.getNom()).equals(code_nom) )
+			if ( (ressource.getCode() + "_" + ressource.getNom()).equals(code_nom) || (ressource.getCode()).equals(code_nom) )
 				ressourceTrouvee = ressource;
 		}
 		return ressourceTrouvee;
@@ -121,19 +121,25 @@ public class QCMBuilder
 		if ( type.equals("Elimination") )
 		{
 			List<ReponseElimination> lstReponses = new ArrayList<>();
+			int nbIndice = 0;
 			for (TypeReponse typeReponse : sLstReponses)
 			{
-				String StringVrai;
+				String stringVrai;
 				if ( typeReponse.getEstBonneReponse())
-					StringVrai = "Vrai";
+					stringVrai = "Vrai";
 				else
-					StringVrai = "Faux";
+					stringVrai = "Faux";
 
-				ReponseElimination reponse = new ReponseElimination( StringVrai, typeReponse.getContenu(), typeReponse.getOrdre(), typeReponse.getCout() );
-				lstReponses.add(reponse);
+				ReponseElimination reponse = new ReponseElimination( stringVrai, typeReponse.getContenu(), typeReponse.getOrdre(), typeReponse.getCout() );
+
+				if ( typeReponse.getOrdre() > nbIndice )
+					nbIndice = typeReponse.getOrdre();
+
+				if ( ! lstReponses.contains(reponse) )
+					lstReponses.add(reponse);
 			}
 
-			// Question question = new Elimination(this, text, timer, nbPoint, difficulte, lstReponses, nbIndice, "");
+			notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, "") );
 			return true;
 		}
 		else if ( type.equals("QCM") )
@@ -141,14 +147,16 @@ public class QCMBuilder
 			List<ReponseQCM> lstReponses = new ArrayList<>();
 			for (TypeReponse typeReponse : sLstReponses)
 			{
-				String StringVrai;
+				String stringVrai;
 				if ( typeReponse.getEstBonneReponse())
-					StringVrai = "Vrai";
+					stringVrai = "Vrai";
 				else
-					StringVrai = "Faux";
+					stringVrai = "Faux";
 
-				ReponseQCM reponse = new ReponseQCM(StringVrai, typeReponse.getContenu());
-				lstReponses.add(reponse);
+				ReponseQCM reponse = new ReponseQCM( stringVrai, typeReponse.getContenu() );
+
+				if ( ! lstReponses.contains(reponse) )
+					lstReponses.add(reponse);
 			}
 
 			notion.ajouterQuestion( new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
@@ -158,8 +166,32 @@ public class QCMBuilder
 		{
 			List<ReponseAssociation> lstReponses = new ArrayList<>();
 
-			// Question question = new Association(this, text, timer, nbPoint, difficulte, lstReponses, "");
+			for (TypeReponse typeReponse : sLstReponses)
+			{
+				ReponseAssociation reponseG = new ReponseAssociation(
+					typeReponse.getRepGauche().getContenu(),
+					null,
+					typeReponse.getRepGauche().getCpt(),
+					true
+				);
 
+				ReponseAssociation reponseD = new ReponseAssociation(
+					typeReponse.getRepDroite().getContenu(),
+					reponseG,
+					typeReponse.getRepDroite().getCpt(),
+					false
+				);
+
+				reponseG.setReponseAssocie( reponseD );
+
+				if ( ! lstReponses.contains(reponseD) )
+					lstReponses.add(reponseD);
+
+				if ( ! lstReponses.contains(reponseG) )
+					lstReponses.add(reponseG);
+			}
+
+			notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstReponses, "") );
 			return true;
 		}
 		else
