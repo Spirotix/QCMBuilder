@@ -81,7 +81,7 @@ QCMBuilder est une application permettant aux enseignants de l'IUT du Havre de c
 
 ## Auteurs
 
-- **Groupe 2** :
+**Groupe 2** :
 
 - Killian Demeillers
 - Fanch Even
