@@ -7,12 +7,12 @@ import src.metier.*;
 public class Controleur
 {
 	private QCMBuilder qcmBuilder;
-	//private FrameMenu  frameMenu;
+	private FrameMenu  frameMenu;
 
 	public Controleur()
 	{
 		this.qcmBuilder = new QCMBuilder();
-		//this.frameMenu  = new FrameMenu(this);
+		this.frameMenu  = new FrameMenu(this);
 	}
 
 	public ArrayList<String> getChoixNotion(String s)
@@ -20,11 +20,15 @@ public class Controleur
 		ArrayList<String> notions = new ArrayList<>();
 
 		Ressource r = qcmBuilder.rechercherRessource(s);
-		System.out.println(r.getNom());
-		for (Notion n : r.getNotions())
+		if (r!=null)
 		{
-			notions.add(n.getNom());
+			System.out.println(r.getNom());
+			for (Notion n : r.getNotions())
+			{
+				notions.add(n.getNom());
+			}
 		}
+		
 		
 		return notions;
 	}

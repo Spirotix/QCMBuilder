@@ -20,7 +20,7 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 		this.setLayout(new GridLayout(1,4));
 
 		//Initialisation
-		this.corbeille = new JButton(new ImageIcon("img/poubelle.PNG"));
+		this.corbeille = new JButton(new ImageIcon("../img/poubelle.PNG"));
 		this.contenu 	= new JTextField ();
 		this.ordre 		= new JTextField ();
 		this.cout 		= new JTextField ();

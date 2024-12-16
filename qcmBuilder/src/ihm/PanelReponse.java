@@ -18,7 +18,7 @@ public class PanelReponse extends JPanel implements ActionListener
 		this.setLayout(new GridLayout(1,3));
 
 		//Initialisation
-		this.corbeille = new JButton(new ImageIcon("img/poubelle.PNG"));
+		this.corbeille = new JButton(new ImageIcon("../img/poubelle.PNG"));
 		this.contenu 	= new JTextField ();
 		this.validation = new JCheckBox();
 

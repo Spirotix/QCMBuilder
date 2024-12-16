@@ -59,11 +59,11 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 				this.lstTextField.add(rowFields);
 		}
 
-		this.nbTFS = new JLabel("0");
-		this.nbFS  = new JLabel("0");
-		this.nbMS  = new JLabel("0");
-		this.nbDS  = new JLabel("0");
-		this.nbTotal  = new JLabel("Total : ");
+		this.nbTFS 		 = new JLabel("0");
+		this.nbFS 		 = new JLabel("0");
+		this.nbMS 		 = new JLabel("0");
+		this.nbDS 		 = new JLabel("0");
+		this.nbTotal 	 = new JLabel("Total : ");
 
 		this.add(new JLabel("Nb questions/catégorie", SwingConstants.CENTER));
 		this.add(new JLabel("", SwingConstants.CENTER));

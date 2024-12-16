@@ -55,8 +55,8 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		// Créer et configurer le panneau des boutons
 		JPanel panelBoutons = new JPanel();
 
-		this.ajouterQ 	 = new JButton (new ImageIcon("img/ajouter.PNG"));
-		this.explication = new JButton (new ImageIcon("img/modifier.PNG"));
+		this.ajouterQ 	 = new JButton (new ImageIcon("../img/ajouter.PNG"));
+		this.explication = new JButton (new ImageIcon("../img/modifier.PNG"));
 		this.enreg		 = new JButton ("Enregistrer");
 
 		panelBoutons.add(this.ajouterQ);
@@ -114,11 +114,11 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		{
 			// Enregistrer la question et les réponses
 			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
-			String 		repGauche,repDroite;
+			TypeReponse 		repGauche,repDroite;
 			for (PanelReponseAsso p : this.reponsesPossibles)
 			{
-				repGauche = p.getContenuGauche();
-				repDroite = p.getContenuDroite();
+				repGauche = new TypeReponse(p.getContenuGauche(), "Gauche");
+				repDroite = new TypeReponse(p.getContenuDroite(),"Droite");
 				reponses.add(new TypeReponse(repGauche, repDroite));
 			}
 			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);

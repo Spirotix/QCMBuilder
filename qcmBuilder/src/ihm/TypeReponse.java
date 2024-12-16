@@ -34,6 +34,12 @@ public class TypeReponse
 		this.lstLiaisonRep1 = new ArrayList<TypeReponse>();
 	}
 
+	public TypeReponse(TypeReponse gauche, TypeReponse droite)
+	{
+		this.repGauche=gauche;
+		this.repDroite = droite;
+	}
+
 	public int getCpt()
 	{
 		if (this.position.equals("Gauche"))
@@ -51,16 +57,6 @@ public class TypeReponse
 		this.estBonneReponse = estBonneReponse	;
 	}
 
-	/*public TypeReponse (TypeReponse rep1, TypeReponse rep2, ArrayList<TypeReponse> liaisonRep1)
-	{
-		this.repGauche 		= rep1			 ;
-		this.repDroite 		= rep2			 ;
-		this.lstLiaisonRep1 = new ArrayList<TypeReponse> ();
-		System.out.println(liaisonRep1);
-		this.lstLiaisonRep1 = lstLiaisonRep1 ;
-		System.out.println(this.lstLiaisonRep1);
-	}*/
-	
 	public String  	getContenu 		   () {return this.contenu		  ;}
 	public String  	getPosition 	   () {return this.position		  ;}
 	public boolean	getEstBonneReponse () {return this.estBonneReponse;}
@@ -69,7 +65,6 @@ public class TypeReponse
 
 	public TypeReponse 							getRepGauche  () {return this.repGauche		;}
 	public TypeReponse 							getRepDroite  () {return this.repDroite		;}
-	public ArrayList<TypeReponse> 				getLstLiaison () {return this.lstLiaisonRep1 ;}
 
 	public void ajouterLiaison(TypeReponse t) {this.lstLiaisonRep1.add(t);} 
 

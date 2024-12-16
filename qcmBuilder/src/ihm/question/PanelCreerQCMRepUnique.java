@@ -52,8 +52,8 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 
 		JPanel panelBoutons = new JPanel();
 
-		this.ajouterQ 	 = new JButton(new ImageIcon("img/ajouter.PNG"	));
-		this.explication = new JButton(new ImageIcon("img/modifier.PNG"	));
+		this.ajouterQ 	 = new JButton(new ImageIcon("../img/ajouter.PNG"	));
+		this.explication = new JButton(new ImageIcon("../img/modifier.PNG"	));
 		this.enreg 		 = new JButton("Enregistrer"		);
 
 
