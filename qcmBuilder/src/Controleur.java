@@ -20,11 +20,15 @@ public class Controleur
 		ArrayList<String> notions = new ArrayList<>();
 
 		Ressource r = qcmBuilder.rechercherRessource(s);
-		System.out.println(r.getNom());
-		for (Notion n : r.getNotions())
+		if (r!=null)
 		{
-			notions.add(n.getNom());
+			System.out.println(r.getNom());
+			for (Notion n : r.getNotions())
+			{
+				notions.add(n.getNom());
+			}
 		}
+		
 		
 		return notions;
 	}

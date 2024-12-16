@@ -19,7 +19,7 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 		JPanel panelGauche = new JPanel();
 		JPanel panelDroite = new JPanel();
 
-		this.corbeille		= new JButton(new ImageIcon("img/poubelle.PNG"));
+		this.corbeille		= new JButton(new ImageIcon("../img/poubelle.PNG"));
 		this.contenuGauche 	= new JTextArea (2,15);
 		this.contenuDroite 	= new JTextArea (2,15);
 

@@ -201,7 +201,7 @@ public class QCMBuilder
 		}
 	}
 
-	public void genererQuestionnaire(String nomRessource, List<String> nomsNotions)
+	/*public void genererQuestionnaire(String nomRessource, List<String> nomsNotions)
 	{
 		try {
 
@@ -413,7 +413,7 @@ public class QCMBuilder
 
 			// Create and write to CSS files
 			PrintWriter cssWriter = new PrintWriter("../questionnaire/css/styles.css");
-			cssWriter.println("/* TODO */");
+			cssWriter.println("/* TODO ");
 			cssWriter.close();
 
 			// Create and write to image files
@@ -832,7 +832,7 @@ public class QCMBuilder
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	public static void main(String[] args)
 	{
@@ -842,6 +842,6 @@ public class QCMBuilder
 		nomsNotions.add("Les tableaux à 1 dimension");
 		nomsNotions.add("Les tableaux à deux dimensions");
 
-		qcmBuilder.genererQuestionnaire("Initiation au développement", nomsNotions);
+		//qcmBuilder.genererQuestionnaire("Initiation au développement", nomsNotions);
 	}
 }

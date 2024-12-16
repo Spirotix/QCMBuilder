@@ -57,7 +57,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 		droite.add(this.btnChronoNon);
 
 		droite2 = new JPanel(new GridLayout(1,2));
-		droite2.add(new JLabel(new ImageIcon("img/chrono.PNG")));
+		droite2.add(new JLabel(new ImageIcon("../img/chrono.PNG")));
 		droite2.add(droite);
 
 		this.ligne1 = new JPanel(new GridLayout(1,2));
@@ -70,10 +70,10 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 		/*
 		 * Ajout des actionListeners/ itemListener
 		 */
-		this.choixRessource	.addItemListener	(this);
+		this.choixRessource		.addItemListener	(this);
 		this.btnChronoOui 		.addActionListener	(this);
 		this.btnChronoNon 		.addActionListener	(this);
-		this.generer		.addActionListener	(this);
+		this.generer			.addActionListener	(this);
 
 		/*
 		 * Placements
@@ -91,7 +91,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 		this.removeAll();
 		this.add(this.ligne1);
 
-		this.grille= new PanelGrilleQuestionnaire(this.ctrl,"Test2");
+		this.grille= new PanelGrilleQuestionnaire(this.ctrl,this.choixRessource.getSelectedItem());
 		/*JScrollPane scrollPane = new JScrollPane(this.grille);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Disposition verticale
 		this.add(scrollPane);*/
