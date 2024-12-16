@@ -3,6 +3,7 @@ package src;
 import java.util.ArrayList;
 import src.ihm.*;
 import src.metier.*;
+import src.metier.question.*;
 
 public class Controleur
 {
@@ -48,6 +49,37 @@ public class Controleur
 		return qcmBuilder.ajouterRessource(new Ressource(code, nom));
 	}
 
+	public ArrayList<String> getQuestions(String ressource, String notion)
+	{
+		//TODO retourne la liste des question reliés à la ressource et à la notion
+		ArrayList<String> 	str = new ArrayList<String>()	;
+		String 				temp							;
+
+		for (Ressource r : this.qcmBuilder.getRessources())
+		{
+			temp = r.getCode()+"_"+r.getNom();
+			System.out.println(temp);
+			System.out.println(ressource);
+			if (temp.equals(ressource))
+			{
+				System.out.println("blablabla");
+				for (Notion n : r.getNotions())
+				{
+					System.out.println("blablabla2");
+					System.out.println(n.getNom());
+					System.out.println(notion);
+					if (n.getNom().equals(notion))
+					{
+						System.out.println("blablabla3");
+						for (Question q : n.getQuestions())
+							str.add(q.getText());
+					}
+				}
+			}
+		}
+		return str;
+	}
+	
 	public boolean ajouterNotion(String nomRessource, String nomNotion)
 	{
 		Ressource r = qcmBuilder.rechercherRessource(nomRessource);

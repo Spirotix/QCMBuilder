@@ -7,7 +7,6 @@ import src.Controleur;
 
 public class PanelCreerRessource extends JPanel implements ActionListener
 {
-	//private Controleur ctrl
 	private Controleur 	ctrl;
 	private PanelRessource 		panelR;
 	private PanelNotion 		panelN;
