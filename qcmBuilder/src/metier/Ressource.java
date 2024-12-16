@@ -109,6 +109,21 @@ public class Ressource
 				e.printStackTrace();
 			}
 
+			// Créer le fichier d'informations de toutes les questions
+			File fileInformations  = new File( "../data/questions_NOUVEAU/" + this.getCode() + "/" + notion.getNom() + "/" + notion.getNom() + ".csv" );
+
+			// Créer les répertoires non existants (ou ce trouve le csv)
+			fileInformations.getParentFile().mkdirs();
+
+			if ( !fileInformations.exists() )
+			{
+				try (PrintWriter writerData = new PrintWriter(new FileWriter(fileInformations)))
+				{
+					writerData.println("N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION");
+				}
+				catch (IOException e) { e.printStackTrace(); }
+			}
+
 			return true;
 		}
 		else
