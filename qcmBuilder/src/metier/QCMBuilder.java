@@ -162,7 +162,7 @@ public class QCMBuilder
 			notion.ajouterQuestion( new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
 			return true;
 		}
-		/*else if ( type.equals("Association") )
+		else if ( type.equals("Association") )
 		{
 			List<ReponseAssociation> lstReponses = new ArrayList<>();
 
