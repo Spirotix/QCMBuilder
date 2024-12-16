@@ -54,7 +54,7 @@ public class Controleur
 		return r.ajouterNotion(new Notion(nomNotion, r));
 	}
 
-	public void creerQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint, ArrayList<TypeReponse> lstReponse, int difficulte)
+	public void creerQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, ArrayList<TypeReponse> lstReponse, int difficulte)
 	{
 		qcmBuilder.creerQuestion(type, code_nomRessource, nomNotion, text, timer, nbPoint, difficulte, lstReponse, explication);
 	}

@@ -26,7 +26,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private String 	notionQuestion		;
 	private String 	textQuestion		;
 	private int 	tempsQuestion		;
-	private int 	nbPointQuestion		;
+	private double 	nbPointQuestion		;
 	private int 	difficulteQuestion	;
 	private String	explicationQuestion	;
 
@@ -54,7 +54,6 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 		this.choixNotion = new Choice	(		);
 		this.choixNotion.add			(" "  	);
-		this.choixNotion.add			("justePourTest");
 		this.choixNotion.setEnabled		(false	);
 
 		this.btnGroupImg = new ButtonGroup (							   );
@@ -246,13 +245,13 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			{
 				try 
 				{
-					this.nbPointQuestion = Integer.parseInt(this.nbPoints.getText());
+					this.nbPointQuestion = Double.valueOf(this.nbPoints.getText());
 					this.msgErrNbPts.setText("");
 				} 
 				catch (Exception ex) 
 				{
 					this.msgErrNbPts.setForeground	(Color.RED												);
-					this.msgErrNbPts.setText		("Vous devez rentrer un entier pour le nombre de points");
+					this.msgErrNbPts.setText		("Vous devez rentrer un nombre à virgule pour le nombre de points");
 					peutCreer = false;
 				}
 			}
@@ -384,7 +383,6 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			this.choixNotion.setEnabled	(true			);
 			this.choixNotion.removeAll	(				);
 			this.choixNotion.add		(" "			);
-			this.choixNotion.add		("justepourTest");
 
 			this.ressourceQuestion = this.choixRessource.getSelectedItem();
 			for (String s : this.ctrl.getChoixNotion(this.choixRessource.getSelectedItem()))

@@ -56,6 +56,20 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
+		if (this.validation.isSelected())
+		{
+			this.cout .setText("");
+			this.ordre.setText("");
+
+			this.cout .setEnabled(false);
+			this.ordre.setEnabled(false);
+		}
+		else 
+		{
+			this.cout .setEnabled(true);
+			this.ordre.setEnabled(true);
+		}
+
 		if (e.getSource().equals(this.corbeille))
 		{
 			this.panelQ.supprimer(this);
