@@ -132,7 +132,6 @@ public class Notion
 						reponseA = new ReponseAssociation(
 						                                  textReponseA,
 						                                  null,
-						                                  Integer.parseInt(lineTextQuestion.substring(lineTextQuestion.indexOf("{") + 1, lineTextQuestion.indexOf(":}") - 1)),
 						                                  false
 						                                 );
 						lstReponse.add( reponseA );
@@ -140,7 +139,6 @@ public class Notion
 						reponseB = new ReponseAssociation(
 						                                  textReponseB,
 						                                  reponseA,
-						                                  Integer.parseInt(lineTextQuestion.substring(lineTextQuestion.indexOf("{") + 1, lineTextQuestion.indexOf(":}") - 1)),
 						                                  false
 						                                 );
 						reponseA.setReponseAssocie( reponseB );

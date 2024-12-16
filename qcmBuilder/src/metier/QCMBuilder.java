@@ -169,16 +169,14 @@ public class QCMBuilder
 			for (TypeReponse typeReponse : sLstReponses)
 			{
 				ReponseAssociation reponseG = new ReponseAssociation(
-					typeReponse.getRepGauche().getContenu(),
+					typeReponse.getContenu(),
 					null,
-					typeReponse.getRepGauche().getCpt(),
 					true
 				);
 
 				ReponseAssociation reponseD = new ReponseAssociation(
 					typeReponse.getRepDroite().getContenu(),
 					reponseG,
-					typeReponse.getRepDroite().getCpt(),
 					false
 				);
 
