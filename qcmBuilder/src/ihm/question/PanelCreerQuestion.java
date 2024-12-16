@@ -430,6 +430,34 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		}
 	}
 
+	public void setValeur(String nbPoint, String tempQuestion, String ressource, String notion, String difficulte)
+	{
+		this.nbPoints.setText(nbPoint	 );
+		this.tpsReponses.setText(tempQuestion);
+
+		this.choixRessource.select(ressource);
+
+		this.choixNotion.setEnabled	(true			);
+		this.choixNotion.removeAll	(				);
+		this.choixNotion.add		(" "			);
+
+		this.ressourceQuestion = this.choixRessource.getSelectedItem();
+		for (String s : this.ctrl.getChoixNotion(this.choixRessource.getSelectedItem()))
+			this.choixNotion.add(s);
+		
+		this.choixNotion.select(notion);
+
+		switch (Integer.parseInt(difficulte))
+		{
+			case 1 : this.btnTF	.setSelected(true);break;
+			case 2 : this.btnF	.setSelected(true);break;
+			case 3 : this.btnM	.setSelected(true);break;
+			case 4 : this.btnD	.setSelected(true);break;
+		}
+
+	}
+
+
 	public void creerQuestion(String explication, String intituleQuestion, ArrayList<TypeReponse> reponses)
 	{
 		if (this.btnChoixMult.isSelected() || this.btnChoixUnique.isSelected())
@@ -443,5 +471,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.explicationQuestion = explication		;
 
 		this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, reponses, this.difficulteQuestion);
+
+		this.repaint();
 	}
 }

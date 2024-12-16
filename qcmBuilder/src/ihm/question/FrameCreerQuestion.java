@@ -128,4 +128,5 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 			return fileName.substring(lastDot + 1).toLowerCase();
 		return null;
 	}
+	public PanelCreerQuestion getPanelCreerQuestion () {return this.panelQ;}
 }

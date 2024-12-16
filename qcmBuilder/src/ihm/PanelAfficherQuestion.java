@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 import src.Controleur;
+import src.ihm.question.*;
 
 public class PanelAfficherQuestion extends JPanel implements ActionListener
 {
@@ -71,9 +72,20 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 		for (int i=0; i<this.lstPanel.size(); i++)
 		{
 			if (e.getSource().equals(this.btnSup.get(i)))
+			{	
 				this.ctrl.supprimerQuestion(this.lstLabel.get(i).getText(), this.ressource, this.notion);
-			
-			this.Update(this.ressource, this.notion);
+				this.Update(this.ressource, this.notion);
+			}
+
+			if (e.getSource().equals(this.btnModif.get(i)))
+			{
+				System.out.println("modif");
+				FrameCreerQuestion fr =new FrameCreerQuestion(this.ctrl);
+				PanelCreerQuestion panel = new PanelCreerQuestion(this.ctrl, fr); 
+
+				System.out.println("modif2");
+				panel.setValeur("10","7,5","Initiation au developpement","TP1","1" );
+			}
 		}
 	}
 }
