@@ -2,3 +2,6 @@ N_QUESTION;POINT;TYPE;NIVEAU;TEMPS
 1;2.23;QCM;TF;0
 2;5.5;Elimination;M;10
 3;10.87;Association;D;30
+4;5.0;Association;D;10
+5;6.0;Association;TF;69
+6;5.0;Elimination;F;10
