@@ -153,8 +153,8 @@ public class Ressource
 		lstEli.add( new ReponseElimination("Vrai", "REPONSE 1", 0, 0) );
 		lstEli.add( new ReponseElimination("Faux", "REPONSE 2", 1, 0.5) );
 		List<ReponseAssociation> lstAss = new ArrayList<>();
-		lstAss.add( new ReponseAssociation("REPONSE 1", new ReponseAssociation("REPONSE 11", null, 1, false), 1, true) );
-		lstAss.add( new ReponseAssociation("REPONSE 2", new ReponseAssociation("REPONSE 22", null, 1, false), 1, true) );
+		lstAss.add( new ReponseAssociation("REPONSE 1", new ReponseAssociation("REPONSE 11", null, false), true) );
+		lstAss.add( new ReponseAssociation("REPONSE 2", new ReponseAssociation("REPONSE 22", null, false), true) );
 
 		n.ajouterQuestion( new QCM        (n, "Question hohoo", 0, 2.23, 1, lstQCM, "") );
 		n.ajouterQuestion( new Elimination(n, "Question hohoooo", 10, 5.5, 3, lstEli, 2, "") );
