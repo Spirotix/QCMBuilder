@@ -1,2 +1,2 @@
-N_QUESTION;POINT;TYPE;NIVEAU;TEMPS
-1;3;Association;M;45
+N_QUESTION;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION
+1;3;Association;M;45;ceci est une explication du TD2

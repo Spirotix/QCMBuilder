@@ -139,7 +139,7 @@ public class QCMBuilder
 					lstReponses.add(reponse);
 			}
 
-			notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, "") );
+			notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, explication) );
 			return true;
 		}
 		else if ( type.equals("QCM") )
@@ -168,16 +168,14 @@ public class QCMBuilder
 
 			for (TypeReponse typeReponse : sLstReponses)
 			{
-				System.out.println( typeReponse.getRepDroite().getContenu() );
-				System.out.println( typeReponse.getRepGauche().getContenu() );
 				ReponseAssociation reponseG = new ReponseAssociation(
-					typeReponse.getContenu(),
+					typeReponse.getRepGauche().getContenu(),
 					null,
 					true
 				);
 
 				ReponseAssociation reponseD = new ReponseAssociation(
-					typeReponse.getPosition(),
+					typeReponse.getRepDroite().getContenu(),
 					reponseG,
 					false
 				);
@@ -191,7 +189,7 @@ public class QCMBuilder
 					lstReponses.add(reponseG);
 			}
 
-			notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstReponses, "") );
+			notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
 			return true;
 		}
 		else
