@@ -12,12 +12,12 @@ import java.util.*;
 
 public class PanelCreerQCMRepUnique extends JPanel implements ActionListener 
 {
-	private PanelCreerQuestion panelQ;
-	private ArrayList<PanelReponse> reponsesPossibles;
-	private JTextArea question;
-	private JButton ajouterQ, explication, enreg;
-	private JPanel panelReponses; 
-	private String txtExplication;
+	private PanelCreerQuestion 		panelQ						;
+	private ArrayList<PanelReponse> reponsesPossibles			;
+	private JTextArea 				question					;
+	private JButton 				ajouterQ, explication, enreg;
+	private JPanel 					panelReponses				; 
+	private String 					txtExplication				;
 
 	public PanelCreerQCMRepUnique(PanelCreerQuestion panelQ) 
 	{
