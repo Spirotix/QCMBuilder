@@ -5,11 +5,11 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import src.Controleur;
+import src.ihm.*;
 import src.ihm.question.FrameCreerQuestion;
 
 public class FrameMenu extends JFrame implements ActionListener 
 {
-
 	private JButton creerQuestion, genererQuestionnaire, creerResNot, modifierUneQuestion;
 	private Controleur ctrl;
 	private JPanel panel;
@@ -115,7 +115,7 @@ public class FrameMenu extends JFrame implements ActionListener
 
 		if (e.getSource().equals(this.modifierUneQuestion))
 		{
-			System.out.println("ca marche");
+			new FrameListerQuestion(this.ctrl);
 			this.dispose();
 		}
 	}
