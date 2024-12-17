@@ -119,20 +119,19 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		} 
 		if (e.getSource() == this.enreg) 
 		{
+			//Verification de la validité de la question
 			if (this.question.getText().equals(""))
 			{
 				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
 				return ;
 			}
 				
-			
 			for (PanelReponseAsso p : this.reponsesPossibles)
 				if (p.getContenuGauche().equals("") || p.getContenuDroite().equals(""))
 				{
 					message.showMessageDialog(null, "Remplissez tous les champs", "Attention", JOptionPane.WARNING_MESSAGE);
 					return ;
 				}
-			
 			// Enregistrer la question et les réponses
 			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
 			TypeReponse 		repGauche,repDroite;
