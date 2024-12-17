@@ -68,6 +68,8 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 			this.lstPanel.add(temp2);
 			this.add(this.lstPanel.get(i));
 		}
+		//JScrollPane scrollPane = new JScrollPane(this, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
 
 		this.revalidate();
 		this.repaint();
@@ -82,6 +84,7 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 			{	
 				this.ctrl.supprimerQuestion(this.lstLabel.get(i).getText(), this.ressource, this.notion);
 				this.Update(this.ressource, this.notion);
+				return;
 			}
 
 			if (e.getSource().equals(this.btnModif.get(i)))
@@ -92,6 +95,7 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 
 				System.out.println("modif2");
 				panel.setValeur("10","7,5","Initiation au developpement","TP1","1" );
+				return;
 			}
 		}
 	}

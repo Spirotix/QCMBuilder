@@ -15,7 +15,7 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 	private JMenuItem retour;
 	
 
-	public FrameCreerQCMRepUnique (PanelCreerQuestion panelQ, Controleur ctrl )
+	public FrameCreerQCMRepUnique (PanelCreerQuestion panelQ, Controleur ctrl, String type )
 	{
 		this.panelQ	= panelQ;
 		this.ctrl	= ctrl;
@@ -42,7 +42,7 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 		this.retour 	.addActionListener(this);
 
 
-		this.panel=new PanelCreerQCMRepUnique(this.panelQ, this, this.ctrl);
+		this.panel=new PanelCreerQCMRepUnique(this.panelQ, this, this.ctrl, type);
 
 		this.add (this.panel);
 

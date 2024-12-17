@@ -22,16 +22,18 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 	private String 					txtExplication				;
 	private FrameCreerQCMRepUnique	fr 							;
 	private Controleur 				ctrl						;
+	private String 					type 						;
 
-	public PanelCreerQCMRepUnique(PanelCreerQuestion panelQ, FrameCreerQCMRepUnique fr, Controleur ctrl) 
+	public PanelCreerQCMRepUnique(PanelCreerQuestion panelQ, FrameCreerQCMRepUnique fr, Controleur ctrl, String type) 
 	{
 		this.panelQ = panelQ;
 		this.ctrl 	= ctrl	;
 		this.fr 	= fr	;
+		this.type	= type	;
 
 		this.reponsesPossibles = new ArrayList<>();
-		this.reponsesPossibles.add(new PanelReponse(this));
-		this.reponsesPossibles.add(new PanelReponse(this));
+		this.reponsesPossibles.add(new PanelReponse(this, this.type));
+		this.reponsesPossibles.add(new PanelReponse(this, this.type));
 
 		this.setLayout(new BorderLayout());
 
@@ -74,6 +76,12 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 		this.enreg.addActionListener(this);
 	}
 
+	public void toutDecocher ()
+	{
+		for (PanelReponse p : this.reponsesPossibles)
+			p.decocher();
+	}
+
 	private void mettreAJourReponses() 
 	{
 		panelReponses.removeAll();
@@ -97,7 +105,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 
 		if (e.getSource() == this.ajouterQ) 
 		{
-			this.reponsesPossibles.add(new PanelReponse(this));
+			this.reponsesPossibles.add(new PanelReponse(this, this.type));
 			mettreAJourReponses();
 		} 
 		if (e.getSource() == this.enreg) 
