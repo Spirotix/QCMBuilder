@@ -63,6 +63,7 @@ public class Notion
 						try
 						{
 							PrintWriter tmp = new PrintWriter( new FileWriter(fileTextQuestion) );
+							tmp.close();
 						}
 						catch (IOException e)
 						{
@@ -306,6 +307,7 @@ public class Notion
 					try
 					{
 						PrintWriter writerQues = new PrintWriter( new FileWriter(fileTextQuestion) );
+						writerQues.close();
 					}
 					catch (IOException e)
 					{
