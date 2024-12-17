@@ -1,16 +1,4 @@
 N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION
 1;3;5.0;QCM;F;10;et oui il est blanc
-1;3;5.0;QCM;F;10;null
 2;3;5.0;QCM;F;10;null
-1;2;5.0;QCM;F;10;null
-1;2;5.0;Elimination;TF;10;null
-1;3;5.0;Elimination;M;10;null
-1;2;5.0;QCM;M;10;null
-1;2;5.0;QCM;F;10;null
-1;2;5.0;QCM;F;10;null
-1;2;5.0;QCM;M;10;null
-2;2;5.0;QCM;F;10;null
-1;2;5.0;QCM;F;10;null
-1;2;5.0;QCM;TF;10;null
-1;2;5.0;QCM;F;10;null
-1;2;5.0;QCM;M;10;null
+3;2;5.0;Association;D;10;explication !
