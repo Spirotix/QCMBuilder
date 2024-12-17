@@ -2,67 +2,70 @@ package src.metier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import src.ihm.*;
+import src.metier.reponse.*;
+import src.metier.question.*;
 
 public class QCMBuilder
 {
-	private List<Ressource> ressources;
+	private List<Ressource> lstRessources;
 
 	public QCMBuilder()
 	{
-		this.ressources = lireRessources();
+		this.lstRessources = lireRessources();
 	}
 
 	private List<Ressource> lireRessources()
 	{
-		List<Ressource> ressources = new ArrayList<>();
+		List<Ressource> lstRessources = new ArrayList<>();
 		try
 		{
-			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
-			scanner.nextLine();
-			while (scanner.hasNextLine())
+			Scanner scannerRessource = new Scanner(new File("../data/ressources.csv"));
+			scannerRessource.nextLine();
+			while (scannerRessource.hasNextLine())
 			{
-				String   line         = scanner.nextLine();
-				String[] parts        = line.split(";");
-				String   codeRessource = parts[0];
-				String   nomRessource  = parts[1];
+				String lineRessource = scannerRessource.nextLine();
+
+				System.out.println();
+				System.out.println(lineRessource);
+
+				String codeRessource = lineRessource.substring( 0, lineRessource.indexOf(";") );
+				String nomRessource  = lineRessource.substring( lineRessource.indexOf(";") + 1 );
 
 				Ressource ressource = new Ressource(codeRessource, nomRessource);
 
-				for (Ressource r : ressources)
+				for (Ressource r : lstRessources)
 				{
 					if (r.getCode().equals(codeRessource))
 						ressource = r;
 				}
 
-				if ( ! ressources.contains(ressource) )
-					ressources.add(ressource);
+				if ( ! lstRessources.contains(ressource) )
+				lstRessources.add(ressource);
 			}
-			scanner.close();
-		} 
+			scannerRessource.close();
+		}
 		catch (FileNotFoundException e) { e.printStackTrace(); }
 
-		return ressources;
+		return lstRessources;
 	}
 
-	public List<Ressource> getRessources() { return ressources; }
+	public List<Ressource> getRessources() { return lstRessources; }
 
 	public boolean ajouterRessource(Ressource ressource)
 	{
-		for (Ressource r : ressources)
+		for (Ressource r : lstRessources)
 		{
 			if ( r.getCode().equals(ressource.getCode()) )
 				ressource = r;
 		}
 
-		if ( ! ressources.contains(ressource))
+		if ( ! lstRessources.contains(ressource))
 		{
-			ressources.add(ressource);
+			lstRessources.add(ressource);
 			return true;
 		}
 		else
@@ -73,15 +76,16 @@ public class QCMBuilder
 
 	public boolean supprimerRessource(Ressource ressource)
 	{
-		for (Ressource r : ressources)
+		for (Ressource r : lstRessources)
 		{
 			if ( r.getCode().equals(ressource.getCode()) )
 				ressource = r;
 		}
 
-		if ( ! ressources.contains(ressource))
+		if ( lstRessources.contains(ressource))
 		{
-			ressources.remove(ressource);
+			//ressource.supprimerAllNotion();
+			lstRessources.remove(ressource);
 			return true;
 		}
 		else
@@ -93,9 +97,9 @@ public class QCMBuilder
 	public Ressource rechercherRessource(String code_nom)
 	{
 		Ressource ressourceTrouvee = null;
-		for (Ressource ressource : ressources)
+		for (Ressource ressource : lstRessources)
 		{
-			if ((ressource.getCode()+"_"+ressource.getNom()).equals(code_nom))
+			if ( (ressource.getCode() + "_" + ressource.getNom()).equals(code_nom) || (ressource.getCode()).equals(code_nom) )
 				ressourceTrouvee = ressource;
 		}
 		return ressourceTrouvee;
@@ -105,7 +109,7 @@ public class QCMBuilder
 	{
 		if (ressource == null)
 			return false;
-		if (!ressources.contains(ressource))
+		if (!lstRessources.contains(ressource))
 			return false;
 		ressource.setNom(nouveauNom);
 		return true;
@@ -115,45 +119,87 @@ public class QCMBuilder
 	{
 		Notion notion = rechercherRessource( code_nomRessource.substring(0, code_nomRessource.indexOf("_")) ).rechercherNotion(nomNotion);
 
-		/*if ( type.equals("Elimination") )
+		if ( type.equals("Elimination") )
 		{
 			List<ReponseElimination> lstReponses = new ArrayList<>();
+			int nbIndice = 0;
 			for (TypeReponse typeReponse : sLstReponses)
 			{
-				ReponseElimination reponse = new ReponseElimination( typeReponse.getEstBonneReponse(), typeReponse.getContenu(), typeReponse.getOrdre(), typeReponse.getCout() );
-				lstReponses.add(reponse);
+				String stringVrai;
+				if ( typeReponse.getEstBonneReponse())
+					stringVrai = "Vrai";
+				else
+					stringVrai = "Faux";
+
+				ReponseElimination reponse = new ReponseElimination( stringVrai, typeReponse.getContenu(), typeReponse.getOrdre(), typeReponse.getCout() );
+
+				if ( typeReponse.getOrdre() > nbIndice )
+					nbIndice = typeReponse.getOrdre();
+
+				if ( ! lstReponses.contains(reponse) )
+					lstReponses.add(reponse);
 			}
 
-			// Question question = new Elimination(this, text, temps, nbPoint, niveau, lstReponse, nbIndice, "");
-			// return true;
+			return notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, explication) );
 		}
 		else if ( type.equals("QCM") )
 		{
 			List<ReponseQCM> lstReponses = new ArrayList<>();
 			for (TypeReponse typeReponse : sLstReponses)
 			{
-				ReponseQCM reponse = new ReponseQCM(typeReponse.getEstBonneReponse(), typeReponse.getContenu());
-				lstReponses.add(reponse);
+				String stringVrai;
+				if ( typeReponse.getEstBonneReponse())
+					stringVrai = "Vrai";
+				else
+					stringVrai = "Faux";
+
+				ReponseQCM reponse = new ReponseQCM( stringVrai, typeReponse.getContenu() );
+
+				if ( ! lstReponses.contains(reponse) )
+					lstReponses.add(reponse);
 			}
 
-			notion.ajouterQuestion( new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
-			return true;
+			return notion.ajouterQuestion( new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
+		
 		}
 		else if ( type.equals("Association") )
 		{
-			//List<ReponseAssociation> lstReponses = new ArrayList<>();
-			//Question question = new Association(this, text, temps, nbPoint, niveau, lstReponse, "");
-			//return true;
+			List<ReponseAssociation> lstReponses = new ArrayList<>();
+
+			for (TypeReponse typeReponse : sLstReponses)
+			{
+				ReponseAssociation reponseG = new ReponseAssociation(
+					typeReponse.getRepGauche().getContenu(),
+					null,
+					true
+				);
+
+				ReponseAssociation reponseD = new ReponseAssociation(
+					typeReponse.getRepDroite().getContenu(),
+					reponseG,
+					false
+				);
+
+				reponseG.setReponseAssocie( reponseD );
+
+				if ( ! lstReponses.contains(reponseD) )
+					lstReponses.add(reponseD);
+
+				if ( ! lstReponses.contains(reponseG) )
+					lstReponses.add(reponseG);
+			}
+
+			return notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
+			
 		}
 		else
 		{
-			throw new Exception("Le type de la question crée est invalide, ou n'est pas pris en charge.")
-		}*/
-
-		return false;
+			System.out.println("Le type de la question crée est invalide, ou n'est pas pris en charge.");
+			return false;
+		}
 	}
 
-	public void genererQuestionnaire(String nomRessource, List<String> nomsNotions)
+	/*public void genererQuestionnaire(String nomRessource, List<String> nomsNotions)
 	{
 		try {
 
@@ -365,7 +411,7 @@ public class QCMBuilder
 
 			// Create and write to CSS files
 			PrintWriter cssWriter = new PrintWriter("../questionnaire/css/styles.css");
-			cssWriter.println("/* TODO */");
+			cssWriter.println("/* TODO ");
 			cssWriter.close();
 
 			// Create and write to image files
@@ -784,7 +830,7 @@ public class QCMBuilder
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	public static void main(String[] args)
 	{
@@ -794,6 +840,6 @@ public class QCMBuilder
 		nomsNotions.add("Les tableaux à 1 dimension");
 		nomsNotions.add("Les tableaux à deux dimensions");
 
-		qcmBuilder.genererQuestionnaire("Initiation au développement", nomsNotions);
+		//qcmBuilder.genererQuestionnaire("Initiation au développement", nomsNotions);
 	}
 }

@@ -30,9 +30,9 @@ public class FrameExplication extends JFrame implements ActionListener
 		this.valider 	= new JButton 	("valider"	);
 
 		this.composant.setLayout(new BorderLayout());
-		this.composant.add(new JLabel("Explications"), BorderLayout.NORTH);
-		this.composant.add(this.texts, BorderLayout.CENTER);
-		this.composant.add(this.valider, BorderLayout.SOUTH);
+		this.composant.add(new JLabel("Explications"), BorderLayout.NORTH );
+		this.composant.add(this.texts				 , BorderLayout.CENTER);
+		this.composant.add(this.valider				 , BorderLayout.SOUTH );
 
 		this.valider.addActionListener(this);
 
@@ -55,9 +55,9 @@ public class FrameExplication extends JFrame implements ActionListener
 		this.valider 	= new JButton 	("valider"	);
 
 		this.composant.setLayout(new BorderLayout());
-		this.composant.add(new JLabel("Explications"), BorderLayout.NORTH);
-		this.composant.add(this.texts, BorderLayout.CENTER);
-		this.composant.add(this.valider, BorderLayout.SOUTH);
+		this.composant.add(new JLabel("Explications")	, BorderLayout.NORTH );
+		this.composant.add(this.texts					, BorderLayout.CENTER);
+		this.composant.add(this.valider					, BorderLayout.SOUTH );
 
 		this.valider.addActionListener(this);
 
@@ -81,8 +81,8 @@ public class FrameExplication extends JFrame implements ActionListener
 
 		this.composant.setLayout(new BorderLayout());
 		this.composant.add(new JLabel("Explications"), BorderLayout.NORTH);
-		this.composant.add(this.texts, BorderLayout.CENTER);
-		this.composant.add(this.valider, BorderLayout.SOUTH);
+		this.composant.add(this.texts				, BorderLayout.CENTER);
+		this.composant.add(this.valider				, BorderLayout.SOUTH );
 
 		this.valider.addActionListener(this);
 
@@ -98,7 +98,7 @@ public class FrameExplication extends JFrame implements ActionListener
 		{
 			System.out.println(this.texts.getText());
 			if (this.panelQCM!=null)
-				this.panelQCM.setTxtExplication(this.texts.getText());
+				this.panelQCM .setTxtExplication(this.texts.getText());
 			if (this.panelAsso!=null)
 				this.panelAsso.setTxtExplication(this.texts.getText());
 			if (this.panelElim!=null)

@@ -8,7 +8,8 @@ public class TypeReponse
 	private boolean 				estBonneReponse		;
 	private TypeReponse  			repGauche,repDroite ;
 	private ArrayList<TypeReponse> 	lstLiaisonRep1		;
-	private int 					ordre, cout 		;
+	private int 					ordre				;
+	private double					cout 				;
 	private String 					position 			;
 	private static int 				nbG, nbD 			;
 	public int 						cptG, cptD			;
@@ -33,6 +34,12 @@ public class TypeReponse
 		this.lstLiaisonRep1 = new ArrayList<TypeReponse>();
 	}
 
+	public TypeReponse(TypeReponse gauche, TypeReponse droite)
+	{
+		this.repGauche=gauche;
+		this.repDroite = droite;
+	}
+
 	public int getCpt()
 	{
 		if (this.position.equals("Gauche"))
@@ -42,7 +49,7 @@ public class TypeReponse
 			return this.cptD;
 		return 0;
 	}
-	public TypeReponse(String contenu, int ordre, int cout, boolean estBonneReponse)
+	public TypeReponse(String contenu, int ordre, double cout, boolean estBonneReponse)
 	{
 		this.contenu		 = contenu			;
 		this.ordre 			 = ordre			;
@@ -50,25 +57,14 @@ public class TypeReponse
 		this.estBonneReponse = estBonneReponse	;
 	}
 
-	/*public TypeReponse (TypeReponse rep1, TypeReponse rep2, ArrayList<TypeReponse> liaisonRep1)
-	{
-		this.repGauche 		= rep1			 ;
-		this.repDroite 		= rep2			 ;
-		this.lstLiaisonRep1 = new ArrayList<TypeReponse> ();
-		System.out.println(liaisonRep1);
-		this.lstLiaisonRep1 = lstLiaisonRep1 ;
-		System.out.println(this.lstLiaisonRep1);
-	}*/
-	
 	public String  	getContenu 		   () {return this.contenu		  ;}
 	public String  	getPosition 	   () {return this.position		  ;}
 	public boolean	getEstBonneReponse () {return this.estBonneReponse;}
 	public int  	getOrdre 		   () {return this.ordre		  ;}
-	public int	 	getCout			   () {return this.cout			  ;}
+	public double 	getCout			   () {return this.cout			  ;}
 
 	public TypeReponse 							getRepGauche  () {return this.repGauche		;}
 	public TypeReponse 							getRepDroite  () {return this.repDroite		;}
-	public ArrayList<TypeReponse> 				getLstLiaison () {return this.lstLiaisonRep1 ;}
 
 	public void ajouterLiaison(TypeReponse t) {this.lstLiaisonRep1.add(t);} 
 

@@ -6,24 +6,24 @@ import src.metier.reponse.*;
 
 public class Association implements Question
 {
-	private Notion notions;
-	private String text;
-	private int timer;
-	private double nbPoint;
-	private int difficulte;
-	private String explication;
+	private Notion                   notions;
+	private String                   text;
+	private int                      timer;
+	private double                   nbPoint;
+	private int                      difficulte;
+	private String                   explication;
 	private List<ReponseAssociation> lstReponseAsso;
 
 	public Association(Notion notion, String text, int timer, double nbPoint, int difficulte,
 			List<ReponseAssociation> lstReponseAsso, String explication)
 	{
-		this.notions = notion;
-		this.text = text;
-		this.timer = timer;
-		this.nbPoint = nbPoint;
-		this.difficulte = difficulte;
+		this.notions        = notion;
+		this.text           = text;
+		this.timer          = timer;
+		this.nbPoint        = nbPoint;
+		this.difficulte     = difficulte;
 		this.lstReponseAsso = lstReponseAsso;
-		this.explication = explication;
+		this.explication    = explication;
 	}
 
 	@Override
@@ -60,6 +60,11 @@ public class Association implements Question
 	public String getExplication()
 	{
 		return this.explication;
+	}
+
+	public List<ReponseAssociation> getLstReponses()
+	{
+		return this.lstReponseAsso;
 	}
 
 	@Override
@@ -107,4 +112,24 @@ public class Association implements Question
 	{
 		this.lstReponseAsso = lstReponseAsso;
 	}
+
+	public String getStringDifficulte()
+	{
+		String niveau;
+
+		switch(this.difficulte)
+		{
+			case 1 -> { niveau = "TF"; }
+			case 2 -> { niveau = "F" ; }
+			case 3 -> { niveau = "M" ; }
+			case 4 -> { niveau = "D" ; }
+			default   ->
+			{
+				niveau = "INVALIDE";
+			}
+		}
+
+		return niveau;
+	}
+
 }

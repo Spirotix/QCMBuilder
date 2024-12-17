@@ -1,25 +1,29 @@
 package src.ihm.question;
 
-import src.ihm.TypeReponse;
-import src.ihm.FrameExplication;
+import src.ihm.*;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+import src.Controleur;
 
 public class PanelCreerElim extends JPanel implements ActionListener 
 {
-	private PanelCreerQuestion panelQ;
-	private ArrayList<PanelCreerReponsesElim> reponsesPossibles;
-	private JTextArea question;
-	private JButton ajouterQ, explication, enreg;
-	private JPanel panelReponses;  
-	private String txtExplication;
+	private PanelCreerQuestion 					panelQ						;
+	private ArrayList<PanelCreerReponsesElim> 	reponsesPossibles			;
+	private JTextArea 							question					;
+	private JButton 							ajouterQ, explication, enreg;
+	private JPanel 								panelReponses				;  
+	private String 								txtExplication				;
+	private FrameCreerElimination				fr 							;
+	private Controleur							ctrl 						;
 
-	public PanelCreerElim(PanelCreerQuestion panelQ) 
+	public PanelCreerElim(PanelCreerQuestion panelQ, FrameCreerElimination fr, Controleur ctrl) 
 	{
 		this.panelQ = panelQ;
+		this.ctrl	= ctrl	;
+		this.fr 	= fr	;
 
 		this.reponsesPossibles = new ArrayList<>();
 		this.reponsesPossibles.add(new PanelCreerReponsesElim(this));
@@ -50,8 +54,8 @@ public class PanelCreerElim extends JPanel implements ActionListener
 
 		JPanel panelBoutons = new JPanel();
 
-		this.ajouterQ 	 = new JButton(new ImageIcon("img/ajouter.PNG"	));
-		this.explication = new JButton(new ImageIcon("img/modifier.PNG"	));
+		this.ajouterQ 	 = new JButton(new ImageIcon("../img/ajouter.PNG"	));
+		this.explication = new JButton(new ImageIcon("../img/modifier.PNG"	));
 		this.enreg 		 = new JButton("Enregistrer"		);
 
 
@@ -84,6 +88,9 @@ public class PanelCreerElim extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e) 
 	{
+		JOptionPane message 	= new JOptionPane()	;
+		boolean 	aUnBon		= false 			;
+
 		if (e.getSource() == this.ajouterQ) 
 		{
 			this.reponsesPossibles.add(new PanelCreerReponsesElim(this));
@@ -91,12 +98,43 @@ public class PanelCreerElim extends JPanel implements ActionListener
 		} 
 		if (e.getSource() == this.enreg) 
 		{
+
+			if (this.question.getText().equals(""))
+			{
+				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
+				return ;
+			}
+
+			for (PanelCreerReponsesElim p : this.reponsesPossibles)
+			{
+				if (p.getString().equals(""))
+				{
+					message.showMessageDialog(null, "Remplissez les champ de réponses", "Attention", JOptionPane.WARNING_MESSAGE);
+					return ;
+				}
+				if (p.getEstBonneReponse())
+					aUnBon = true;
+			}
+
+			if (!aUnBon)
+			{
+				message.showMessageDialog(null, "Choissisez au moins une bonne réponse", "Attention", JOptionPane.WARNING_MESSAGE);
+				return ;
+			}
+
 			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
 
 			for (PanelCreerReponsesElim p : this.reponsesPossibles)
 				reponses.add(new TypeReponse(p.getString(),p.getOrdre(), p.getCout(),p.getEstBonneReponse() ));
 
-			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
+			if (this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses))
+			{
+				this.fr.dispose();
+				new FrameMenu(this.ctrl);
+			}
+			else 
+				message.showMessageDialog(null, "Cette Question existe deja ", "Attention", JOptionPane.WARNING_MESSAGE);
+			
 		}
 		
 		

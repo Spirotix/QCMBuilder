@@ -59,11 +59,11 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 				this.lstTextField.add(rowFields);
 		}
 
-		this.nbTFS = new JLabel("0");
-		this.nbFS  = new JLabel("0");
-		this.nbMS  = new JLabel("0");
-		this.nbDS  = new JLabel("0");
-		this.nbTotal  = new JLabel("Total : ");
+		this.nbTFS 		 = new JLabel("0");
+		this.nbFS 		 = new JLabel("0");
+		this.nbMS 		 = new JLabel("0");
+		this.nbDS 		 = new JLabel("0");
+		this.nbTotal 	 = new JLabel("Total : ");
 
 		this.add(new JLabel("Nb questions/catégorie", SwingConstants.CENTER));
 		this.add(new JLabel("", SwingConstants.CENTER));
@@ -121,6 +121,8 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 
 	private int parseField(JTextField textField) 
 	{
+		JOptionPane message = new JOptionPane();
+
 		try 
 		{
 			String text = textField.getText();
@@ -128,7 +130,8 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 		} 
 		catch (NumberFormatException e) 
 		{
-			return 0; 
+			message.showMessageDialog(null, "Ne rentrez que des nombres entier", "Attention", JOptionPane.WARNING_MESSAGE);
+			return 0;
 		}
 	}
 

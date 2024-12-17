@@ -7,11 +7,11 @@ import src.Controleur;
 
 public class PanelCreerRessource extends JPanel implements ActionListener
 {
-	//private Controleur ctrl
 	private Controleur 	ctrl;
 	private PanelRessource 		panelR;
 	private PanelNotion 		panelN;
 	private JButton				btnAjouterR, btnAjouterN;
+	private JTextField 			textNumR, textNomR, textNomN;
 
 	public PanelCreerRessource (Controleur ctrl)
 	{
@@ -21,6 +21,8 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		JPanel panelHaut 	= new JPanel(new GridLayout(1,2));
 		JPanel panelMilieu 	= new JPanel(new GridLayout(1,2));
 		JPanel panelBas 	= new JPanel(new GridLayout(1,2));
+		JPanel panelBasG	= new JPanel(new FlowLayout(5,5,5));
+		JPanel panelBasD	= new JPanel(new FlowLayout(5,5,5));
 
 		panelHaut.add(new JLabel("Choix de la Ressource"));
 		panelHaut.add(new JLabel("Choix de la notion"	));
@@ -38,11 +40,27 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		this.btnAjouterR = new JButton("ajouter");
 		this.btnAjouterN = new JButton("ajouter");
 
+		this.textNumR = new JTextField();
+		this.textNumR.setColumns(5);
+
+		this.textNomR = new JTextField();
+		this.textNomR.setColumns(10);
+		this.textNomN = new JTextField();
+		this.textNomN.setColumns(10);
+
 		this.btnAjouterR.addActionListener(this);
 		this.btnAjouterN.addActionListener(this);
 
-		panelBas.add(this.btnAjouterR);
-		panelBas.add(this.btnAjouterN);
+		panelBasG.add(this.btnAjouterR);
+		panelBasG.add(this.textNumR);
+		panelBasG.add(this.textNomR);
+
+		panelBasD.add(this.btnAjouterN);
+		panelBasD.add(this.textNomN);
+
+
+		panelBas.add(panelBasG);
+		panelBas.add(panelBasD);
 
 		this.add(panelBas, BorderLayout.SOUTH);
 		this.setVisible(true);
@@ -50,11 +68,26 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e) 
 	{
+		JOptionPane message = new JOptionPane();
+
 		if (e.getSource().equals(this.btnAjouterN))
-			this.panelN.ajouter("blablabla");
+		{
+			if (this.textNomN.getText().equals(""))
+				message.showMessageDialog(null, "Rentrer tous les champs avant de créer une notion", "Attention", JOptionPane.WARNING_MESSAGE);
+			else 
+				this.ctrl.ajouterNotion( this.panelN.getRessource(),this.textNomN.getText());
+		}
 
 		if (e.getSource().equals(this.btnAjouterR))
-			this.panelR.ajouter("blablabla");
+		{
+			if (this.textNumR.getText().equals("") || this.textNumR.getText().equals(""))
+				message.showMessageDialog(null, "Rentrer tous les champs avant de créer une ressource", "Attention", JOptionPane.WARNING_MESSAGE);
+			else 
+				this.ctrl.ajouterRessource(this.textNumR.getText(), this.textNomR.getText());
+		}
+		this.panelR.Update();
+		this.panelN.Update(panelN.getRessource());
+		this.repaint();
 	}
 
 	public PanelRessource getPanelRessource	() {return this.panelR;}
