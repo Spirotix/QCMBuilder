@@ -46,11 +46,29 @@ public class Notion
 
 			while ( scInformations.hasNextLine() )
 			{
-				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "/complement" );
+				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + lstQuestions.size() + "/complement" );
 				dossierComplement.mkdirs();
 
-				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "/text_question.rtf" );
+				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + lstQuestions.size() + "/text_question.rtf" );
 				fileTextQuestion.getParentFile().mkdirs();
+
+				// Créer les répertoires non existants (ou ce trouve le rtf)
+				fileTextQuestion.getParentFile().mkdirs();
+
+				if (!fileTextQuestion.exists())
+				{
+					try
+					{
+						PrintWriter tmp = new PrintWriter( new FileWriter(fileTextQuestion) );
+					}
+					catch (IOException e)
+					{
+						e.printStackTrace();
+					}
+
+					System.out.println( "\tFICHIER text_question CREE" );
+				}
+
 
 				Scanner scTextQuestion   = new Scanner( fileTextQuestion );
 
@@ -70,15 +88,15 @@ public class Notion
 				}
 				String textQuestion   = lineTextQuestion;
 
-				String[] informations = lineInformations.split(";");
+				String[] informations = lineInformations.split(";"); // N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION
 
-				int      numQuestion  = Integer.parseInt  ( informations[0] );
-
-				double   nbPoint      = Double.parseDouble( informations[1] );
-				String   type         =                     informations[2];
-				String   sNiveau      =                     informations[3];
-				int      temps        = Integer.parseInt  ( informations[4] );
-				String   explication  =                     informations[5];
+				int       nReponse    = Integer.parseInt  ( informations[0] );
+				int       nbReponses  = Integer.parseInt  ( informations[1] );
+				double    nbPoint     = Double.parseDouble( informations[2] );
+				String    type        =                     informations[3];
+				String    sNiveau     =                     informations[4];
+				int       temps       = Integer.parseInt  ( informations[5] );
+				String    explication =                     informations[6];
 
 				int niveau;
 				switch(sNiveau)
@@ -99,18 +117,24 @@ public class Notion
 				{
 					List<ReponseAssociation> lstReponse = new ArrayList<>();
 
-					while (!lineTextQuestion.contains("\\par{Fin}"))
+					for ( int numReponse = 1 ; numReponse < nbReponses ; numReponse++ )
 					{
+						Scanner scReponse = new Scanner(
+							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "text_reponse_" + numReponse + ".rtf" )
+						);
+
+						String lineTextReponse = scReponse.nextLine();
+
 						ReponseAssociation reponseA;
-						String textReponseA = lineTextQuestion.substring(0, lineTextQuestion.indexOf("::"));
+						String textReponseA = lineTextReponse.substring(0, lineTextReponse.indexOf("::"));
 
 						ReponseAssociation reponseB;
-						String textReponseB = lineTextQuestion.substring(lineTextQuestion.indexOf("::") + 2);
+						String textReponseB = lineTextReponse.substring(lineTextReponse.indexOf("::") + 2);
 
-						// System.out.println(lineTextQuestion);
-						// System.out.println(textReponseA);
-						// System.out.println(textReponseB);
-						// System.out.println();
+						System.out.println(lineTextQuestion);
+						System.out.println(textReponseA);
+						System.out.println(textReponseB);
+						System.out.println();
 
 						reponseA = new ReponseAssociation(
 						                                  textReponseA,
@@ -124,10 +148,12 @@ public class Notion
 						                                  reponseA,
 						                                  false
 						                                 );
+
 						reponseA.setReponseAssocie( reponseB );
+
 						lstReponse.add( reponseB );
 
-						lineTextQuestion = scTextQuestion.nextLine();
+						scReponse.close();
 					}
 
 					Association question = new Association(this, textQuestion, temps, nbPoint, niveau, lstReponse, explication);
@@ -253,7 +279,7 @@ public class Notion
 			try
 			{
 				// Créer le répertoire de la question, avec un rtf pour le texte de la question formaté
-				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_question.rtf" );
+				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_question.rtf" );
 
 				// Créer les répertoires non existants (ou ce trouve le rtf)
 				fileTextQuestion.getParentFile().mkdirs();
@@ -271,7 +297,7 @@ public class Notion
 				}
 
 				// Créer le répertoire complément pour les images ou audios potentiels
-				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/complement" );
+				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/complement" );
 
 				// Créer les répertoires non existants et le répertoire complement
 				dossierComplement.mkdirs();
@@ -296,7 +322,7 @@ public class Notion
 							{
 								PrintWriter writerTextReponse = new PrintWriter(
 									new FileWriter(
-										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_reponse_" + indRep++ + ".rtf" ),
+										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_reponse_" + indRep++ + ".rtf" ),
 										false
 									)
 								);
@@ -318,7 +344,7 @@ public class Notion
 							{
 								PrintWriter writerTextReponse = new PrintWriter(
 									new FileWriter(
-										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_reponse_" + indRep++ + ".rtf" ),
+										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_reponse_" + indRep++ + ".rtf" ),
 										false
 									)
 								);
@@ -342,7 +368,7 @@ public class Notion
 								{
 									PrintWriter writerTextReponse = new PrintWriter(
 										new FileWriter(
-											new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_reponse_" + indRep++ + ".rtf" ),
+											new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_reponse_" + indRep++ + ".rtf" ),
 											false
 										)
 									);
