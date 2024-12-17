@@ -83,8 +83,11 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 			if (this.textNumR.getText().equals("") || this.textNumR.getText().equals(""))
 				message.showMessageDialog(null, "Rentrer tous les champs avant de créer une ressource", "Attention", JOptionPane.WARNING_MESSAGE);
 			else 
-				this.ctrl.ajouterRessource(this.textNumR.getText(), this.textNumR.getText());
+				this.ctrl.ajouterRessource(this.textNumR.getText(), this.textNomR.getText());
 		}
+		this.panelR.Update();
+		this.panelN.Update(panelN.getRessource());
+		this.repaint();
 	}
 
 	public PanelRessource getPanelRessource	() {return this.panelR;}

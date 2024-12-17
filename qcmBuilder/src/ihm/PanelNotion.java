@@ -6,20 +6,25 @@ import javax.swing.*;
 import java.util.*;
 import src.Controleur;
 
-public class PanelNotion extends JPanel 
+public class PanelNotion extends JPanel implements ActionListener
 {
 	private Controleur 	ctrl	;
 	private PanelCreerRessource panelC	;
 	private ArrayList<JLabel> 	lstLabel;
 	private String				ressource;
+	private ArrayList<JButton> 	lstSup	 ;
+	private ArrayList<JPanel>	lstPanel ;
 
 	public PanelNotion (Controleur ctrl, PanelCreerRessource panelC)
 	{
 		this.ctrl=ctrl;
 		this.panelC=panelC	;
 		this.ressource="";
+
 		
-		this.lstLabel = new ArrayList<JLabel>();
+		this.lstLabel 	= new ArrayList<JLabel>();
+		this.lstSup 	= new ArrayList<JButton>();
+		this.lstPanel 	= new ArrayList<JPanel> ();
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -29,27 +34,41 @@ public class PanelNotion extends JPanel
 	public void Update(String ressource)
 	{
 		this.ressource = ressource;
-		this.lstLabel = new ArrayList<JLabel>();
+		this.lstLabel	= new ArrayList<JLabel> ();
+		this.lstSup 	= new ArrayList<JButton>();
+		this.lstPanel 	= new ArrayList<JPanel> ();
 		this.removeAll();
 
-		for (String s : this.ctrl.getChoixNotion(this.ressource))
-			this.lstLabel.add(new JLabel(s));
-
-		for (JLabel j : lstLabel)
+		for (int i=0; i<this.ctrl.getChoixNotion(ressource).size(); i++)
 		{
-			j.addMouseListener(new MouseAdapter() 
+			this.lstLabel.add (new JLabel(this.ctrl.getChoixNotion(ressource).get(i)));
+			this.lstSup	 .add (new JButton("Supprimer")		);
+			this.lstPanel.add (new JPanel()					);
+			this.lstPanel.get (i).add(this.lstLabel	.get(i)	);
+			this.lstPanel.get (i).add(this.lstSup	.get(i)	);
+			this.lstSup	 .get (i).addActionListener(this	);
+		}
+			
+		for (int i=0; i<this.lstLabel.size(); i++)
+		{
+			JLabel temp = this.lstLabel.get(i);
+			this.lstLabel.get(i).addMouseListener(new MouseAdapter() 
 			{
 				@Override
 				public void mouseClicked(MouseEvent e) 
 				{
 					//JOptionPane.showMessageDialog(frame, "Label cliqué !");
-					System.out.println(j.getText());
+					System.out.println(e);
 				}
 			});
-			this.add(j);
+			this.add(this.lstPanel.get(i));
 		}
 		this.revalidate();
+	}
 
+	public void actionPerformed(ActionEvent e)
+	{
+		System.out.println(e);
 	}
 
 	public String getRessource() {return this.ressource;}
