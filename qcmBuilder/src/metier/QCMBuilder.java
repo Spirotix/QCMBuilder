@@ -2,6 +2,9 @@ package src.metier;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -63,9 +66,41 @@ public class QCMBuilder
 				ressource = r;
 		}
 
-		if ( ! lstRessources.contains(ressource))
+		if ( ! lstRessources.contains(ressource) )
 		{
-			lstRessources.add(ressource);
+			try
+			{
+				PrintWriter writer = new PrintWriter( new FileWriter("../data/ressources.csv", true) );
+
+				Scanner scanner = new Scanner(new File("../data/ressources.csv"));
+				scanner.nextLine();
+				while ( scanner.hasNextLine() )
+				{
+					String line = scanner.nextLine();
+					if ( line.equals( ressource.getCode() + ";" + ressource.getNom() ) )
+					{
+						System.out.println("La ligne existe déjà");
+						scanner.close();
+						writer .close();
+						return false;
+					}
+
+					System.out.println("Ligne : " + line);
+					System.out.println("Ajout : " + ressource.getCode() + ";" + ressource.getNom() + "\n");
+				}
+
+				lstRessources.add(ressource);
+
+				writer.println( ressource.getCode() + ";" + ressource.getNom() );
+
+				scanner.close();
+				writer .close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+
 			return true;
 		}
 		else
@@ -153,7 +188,7 @@ public class QCMBuilder
 				else
 					stringVrai = "Faux";
 
-				ReponseQCM reponse = new ReponseQCM( stringVrai, typeReponse.getContenu() );
+				ReponseQCM reponse = new ReponseQCM( typeReponse.getContenu(), stringVrai );
 
 				if ( ! lstReponses.contains(reponse) )
 					lstReponses.add(reponse);

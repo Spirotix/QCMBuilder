@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -433,7 +432,7 @@ public class Notion
 		}
 	}
 
-	public boolean supprimerQuestion (Question question)
+	public boolean supprimerQuestion(Question question)
 	{
 		if (question == null)
 			return false;
@@ -441,147 +440,82 @@ public class Notion
 		if (!lstQuestions.contains(question))
 			return false;
 
-		System.out.println("Supprimer2");
+		System.out.println("SupprimerN");
 
+		File fileCSV = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
+		File fileRep = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.indexOf(question) + 1));
 
-		File fileCSV = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv" );
-
-		Notion.supprimerLigne( fileCSV, lstQuestions.indexOf( question )+1 );
-
-		Notion.supprimerRepertoire( new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.indexOf( question )+1) ) );
+		// Supprimer la ligne et le répertoire
+		Notion.supprimerLigneEtRepertoire(lstQuestions.indexOf(question) + 1, fileCSV, fileRep);
 
 		lstQuestions.remove(question);
 		return true;
 	}
 
-	/*public static void supprimerLigneEtRepertoire(int valeur, File fichier, File repertoireQuestion)
+	public static void supprimerLigneEtRepertoire(int valeur, File fichier, File repertoireQuestion)
 	{
-		File fichierTemp = new File("fichier_temp.txt");
-
-		try (RandomAccessFile rafLecture = new RandomAccessFile(fichier, "r");
-			RandomAccessFile rafEcriture = new RandomAccessFile(fichierTemp, "rw"))
-			{
-
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.txt");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
+		{
+	
 			String ligne;
-
-			// Réécrire toutes les lignes sauf celle qui commence par "valeur"
-			while ((ligne = rafLecture.readLine()) != null)
+			boolean ligneSupprimee = false;
+	
+			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
+			while ((ligne = br.readLine()) != null)
 			{
-				if (!ligne.isEmpty() && ligne.charAt(0) == (char) (valeur + '0'))
+				String[] parts = ligne.split(";");
+				if (parts.length > 0 && parts[0].matches("\\d+"))
 				{
-					System.out.println("Ligne supprimée : " + ligne);
-					continue; // Ne pas écrire cette ligne
+					int numeroQuestion = Integer.parseInt(parts[0]);
+					if (numeroQuestion == valeur && !ligneSupprimee)
+					{
+						System.out.println("Ligne supprimée : " + ligne);
+						ligneSupprimee = true;
+						continue; // Ne pas écrire cette ligne
+					}
 				}
-				rafEcriture.writeBytes(ligne + System.lineSeparator());
+				bw.write(ligne);
+				bw.newLine();
 			}
-
-		} catch (IOException e)
+	
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 			return;
 		}
-
+	
 		// Remplacer le fichier original par le fichier temporaire
 		if (fichier.delete())
-		{
-			fichierTemp.renameTo(fichier);
-			System.out.println("Fichier mis à jour avec succès.");
-		}
-
-		// Supprimer le répertoire proprement
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
+		else
+			System.out.println("Impossible de supprimer le fichier original.");
+	
+		// Supprimer le répertoire
 		supprimerRepertoireRecursif(repertoireQuestion);
 	}
-
+	
 	private static void supprimerRepertoireRecursif(File dossier)
 	{
-		if (dossier.isDirectory())
+		if (dossier.exists())
 		{
-			File[] fichiers = dossier.listFiles();
-			if (fichiers != null) {
-				for (File fichier : fichiers)
-				{
-					supprimerRepertoireRecursif(fichier); // Appel récursif
-				}
-			}
-		}
-		if (dossier.delete())
-		{
-			System.out.println("Supprimé : " + dossier.getAbsolutePath());
-		}
-		else
-		{
-			System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());
-		}
-	}*/
-
-	public static void supprimerRepertoire(File repertoire)
-	{
-		// Vérifie si le répertoire existe
-		if (repertoire.exists())
-		{
-			// Si c'est un répertoire, on liste les fichiers et sous-répertoires
-			if (repertoire.isDirectory())
+			if (dossier.isDirectory())
 			{
-				File[] fichiers = repertoire.listFiles();
+				File[] fichiers = dossier.listFiles();
 				if (fichiers != null)
-				{
 					for (File fichier : fichiers)
-					{
-						// Appel récursif pour supprimer chaque fichier ou sous-répertoire
-						supprimerRepertoire(fichier);
-					}
-				}
+						supprimerRepertoireRecursif(fichier);
 			}
-			// Supprimer le fichier ou le répertoire (qui est désormais vide)
-			if (repertoire.delete())
-			{
-				System.out.println("Supprimé : " + repertoire.getAbsolutePath());
-			}
+			if (dossier.delete())
+				System.out.println("Supprimé : " + dossier.getAbsolutePath());
 			else
-			{
-				System.out.println("Impossible de supprimer : " + repertoire.getAbsolutePath());
-			}
-		}
-	}
-
-	public static void supprimerLigne(File fichier, int valeur)
-	{
-		List<String> lignes = new ArrayList<>();
-		
-		// lire toutes les lignes dans une liste, sauf la ligne cible
-		try (BufferedReader br = new BufferedReader(new FileReader(fichier)))
-		{
-			String ligne;
-			while ((ligne = br.readLine()) != null) {
-				// verifier si la ligne commence par la valeur entiere
-				if (!ligne.isEmpty() && ligne.charAt(0) == (char) (valeur + '0'))
-				{
-					System.out.println("Ligne supprimée : " + ligne);
-				}
-				else
-				{
-					lignes.add(ligne);
-				}
-			}
-		}
-		catch (IOException e)
-		{
-			System.out.println("Erreur de lecture : " + e.getMessage());
-			return;
-		}
-		
-		// reecrire le fichier avec les lignes restantes
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(fichier, false)))
-		{
-			for (String ligne : lignes)
-			{
-				bw.write(ligne);
-				bw.newLine();
-			}
-		}
-		catch (IOException e)
-		{
-			System.out.println("Erreur d'écriture : " + e.getMessage());
+				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());
 		}
 	}
 
