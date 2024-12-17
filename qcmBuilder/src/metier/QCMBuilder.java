@@ -20,19 +20,20 @@ public class QCMBuilder
 
 	private List<Ressource> lireRessources()
 	{
-		List<Ressource> ressources = new ArrayList<>();
+		List<Ressource> lstRessources = new ArrayList<>();
 		try
 		{
 			Scanner scannerRessource = new Scanner(new File("../data/ressources.csv"));
-			Scanner scannerNotion    = new Scanner(new File("../data/notions.csv"   ));
 			scannerRessource.nextLine();
 			while (scannerRessource.hasNextLine())
 			{
-				String   lineRessource = scannerRessource.nextLine();
-				String   lineNotion    = scannerRessource.nextLine();
+				String lineRessource = scannerRessource.nextLine();
 
-				String   codeRessource = lineRessource.substring(0, lineRessource.indexOf(";"));
-				String   nomRessource  = lineNotion   .substring(0, lineNotion   .indexOf(";"));
+				System.out.println();
+				System.out.println(lineRessource);
+
+				String codeRessource = lineRessource.substring( 0, lineRessource.indexOf(";") );
+				String nomRessource  = lineRessource.substring( lineRessource.indexOf(";") + 1 );
 
 				Ressource ressource = new Ressource(codeRessource, nomRessource);
 
@@ -46,11 +47,10 @@ public class QCMBuilder
 				lstRessources.add(ressource);
 			}
 			scannerRessource.close();
-			scannerNotion   .close(); // FAIRE CETTE PUTAIN DARBORESSENCE BLC COMMENT CA SECRIS FDP LE PC !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		} 
+		}
 		catch (FileNotFoundException e) { e.printStackTrace(); }
 
-		return ressources;
+		return lstRessources;
 	}
 
 	public List<Ressource> getRessources() { return lstRessources; }

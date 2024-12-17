@@ -32,7 +32,7 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
+			Scanner scanner = new Scanner(new File("../data/notions.csv"));
 
 			if( scanner.hasNextLine()) scanner.nextLine();
 
@@ -41,10 +41,27 @@ public class Ressource
 				String   line          = scanner.nextLine();
 				String[] parts         = line.split(";");
 				String   codeRessource = parts[0];
-				String   nomNotion     = parts[2];
+				String   nomNotion     = parts[1];
 
 				if ( codeRessource.equals(this.code) )
 				{
+					// Créer le fichier d'informations de toutes les questions
+					File fileInformations  = new File( "../data/questions_NOUVEAU/" + this.getCode() + "/" + nomNotion + "/" + nomNotion + ".csv" );
+
+					// Créer les répertoires non existants (ou ce trouve le csv)
+					fileInformations.getParentFile().mkdirs();
+
+					if ( !fileInformations.exists() )
+					{
+						try ( PrintWriter writerData = new PrintWriter( new FileWriter(fileInformations) ) )
+						{
+							writerData.println("N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION");
+						}
+						catch (IOException e) { e.printStackTrace(); }
+
+						System.out.println("FICHIER " + nomNotion + ".csv CREE");
+					}
+
 					Notion notion = new Notion(nomNotion, this);
 					notions.add(notion);
 				}
@@ -78,31 +95,31 @@ public class Ressource
 		{
 			try
 			{
-				PrintWriter writer = new PrintWriter( new FileWriter("../data/ressources_notions.csv", true) );
+				PrintWriter writer = new PrintWriter( new FileWriter("../data/notions.csv", true) );
 
-				Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
+				Scanner scanner = new Scanner(new File("../data/notions.csv"));
 				scanner.nextLine();
-				while (scanner.hasNextLine())
+				while ( scanner.hasNextLine() )
 				{
 					String line = scanner.nextLine();
-					if (line.equals(this.getCode() + ";" + this.getNom() + ";" + notion.getNom()))
+					if ( line.equals( this.getCode() + notion.getNom() ) )
 					{
 						System.out.println("La ligne existe déjà");
 						scanner.close();
-						writer.close();
+						writer .close();
 						return false;
 					}
 
 					System.out.println("Ligne : " + line);
-					System.out.println("Ajout : " + this.getCode() + ";" + this.getNom() + ";" + notion.getNom() + "\n");
+					System.out.println("Ajout : " + this.getCode() + ";" + notion.getNom() + "\n");
 				}
 
 				lstNotions.add(notion);
 
-				writer.println( this.getCode() + ";" + this.getNom() + ";" + notion.getNom() );
+				writer.println( this.getCode() + ";" + notion.getNom() );
 
 				scanner.close();
-				writer.close();
+				writer .close();
 			}
 			catch (IOException e)
 			{
@@ -117,7 +134,7 @@ public class Ressource
 
 			if ( !fileInformations.exists() )
 			{
-				try (PrintWriter writerData = new PrintWriter(new FileWriter(fileInformations)))
+				try ( PrintWriter writerData = new PrintWriter( new FileWriter(fileInformations) ) )
 				{
 					writerData.println("N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION");
 				}
