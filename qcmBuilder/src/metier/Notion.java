@@ -131,10 +131,10 @@ public class Notion
 						ReponseAssociation reponseB;
 						String textReponseB = lineTextReponse.substring(lineTextReponse.indexOf("::") + 2);
 
-						System.out.println(lineTextQuestion);
-						System.out.println(textReponseA);
-						System.out.println(textReponseB);
-						System.out.println();
+						// System.out.println(lineTextQuestion);
+						// System.out.println(textReponseA);
+						// System.out.println(textReponseB);
+						// System.out.println();
 
 						reponseA = new ReponseAssociation(
 						                                  textReponseA,
@@ -165,26 +165,32 @@ public class Notion
 
 					int nbIndice = 0;
 
-					while ( !lineTextQuestion.contains("\\par{Fin}") )
+					for ( int numReponse = 1 ; numReponse < nbReponses ; numReponse++ )
 					{
-						// System.out.println(lineTextQuestion);
-						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")));
-						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1, lineTextQuestion.indexOf("||")));
-						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/")));
-						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("/") + 1));
+						Scanner scReponse = new Scanner(
+							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "text_reponse_" + numReponse + ".rtf" )
+						);
+
+						String lineTextReponse = scReponse.nextLine();
+
+						// System.out.println(lineTextReponse);
+						// System.out.println(lineTextReponse.substring(lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf("|")));
+						// System.out.println(lineTextReponse.substring(lineTextReponse.indexOf("|") + 1, lineTextReponse.indexOf("||")));
+						// System.out.println(lineTextReponse.substring(lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")));
+						// System.out.println(lineTextReponse.substring(lineTextReponse.indexOf("/") + 1));
 						// System.out.println();
 
 						lstReponse.add(new ReponseElimination(
-						                                      lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")),
-						                                      lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1, lineTextQuestion.indexOf("||")),
-						                                      Integer.parseInt  (lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/"))),
-						                                      Double.parseDouble(lineTextQuestion.substring(lineTextQuestion.indexOf("/") + 1))
+						                                      lineTextReponse.substring(lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf("|")),
+						                                      lineTextReponse.substring(lineTextReponse.indexOf("|") + 1, lineTextReponse.indexOf("||")),
+						                                      Integer.parseInt  (lineTextReponse.substring(lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/"))),
+						                                      Double.parseDouble(lineTextReponse.substring(lineTextReponse.indexOf("/") + 1))
 						                                     ));
 
-						if ( nbIndice < Integer.parseInt( lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/")) ) )
-							nbIndice  = Integer.parseInt( lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/")) );
+						if ( nbIndice < Integer.parseInt( lineTextReponse.substring(lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")) ) )
+							nbIndice  = Integer.parseInt( lineTextReponse.substring(lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")) );
 
-						lineTextQuestion = scTextQuestion.nextLine();
+						scReponse.close();
 					}
 
 					Elimination question = new Elimination(this, textQuestion, temps, nbPoint, niveau, lstReponse, nbIndice, explication);
@@ -193,13 +199,20 @@ public class Notion
 				else if (type.equals("QCM"))
 				{
 					List<ReponseQCM> lstReponse = new ArrayList<>();
-					while (!lineTextQuestion.contains("\\par{Fin}"))
+
+					for ( int numReponse = 1 ; numReponse < nbReponses ; numReponse++ )
 					{
+						Scanner scReponse = new Scanner(
+							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "text_reponse_" + numReponse + ".rtf" )
+						);
+
+						String lineTextReponse = scReponse.nextLine();
+
 						lstReponse.add(new ReponseQCM(
-						                              lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")),
-						                              lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1)
+						                              lineTextReponse.substring(lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf("|")),
+						                              lineTextReponse.substring(lineTextReponse.indexOf("|") + 1)
 						                             ));
-						lineTextQuestion = scTextQuestion.nextLine();
+						scReponse.close();
 					}
 
 					QCM question = new QCM(this, textQuestion, temps, nbPoint, niveau, lstReponse, explication);
