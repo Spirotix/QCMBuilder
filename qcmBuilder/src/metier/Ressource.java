@@ -148,6 +148,11 @@ public class Ressource
 
 		System.out.println("SupprimerR");
 
+		for (Question q : notion.getQuestions())
+		{
+			notion.supprimerQuestion(q);
+		}
+
 		File fileCSV = new File("../data/notions.csv");
 
 		// Supprimer la ligne
@@ -159,23 +164,23 @@ public class Ressource
 
 	public static void supprimerLigne(Notion notion, File fichier)
 	{
-		File fichierTemp = new File(fichier.getParent(), "fichier_temp.txt");
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
 	
 		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
 			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
 		{
-	
 			String  ligne;
 			boolean ligneSupprimee = false;
-	
+
 			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
 			while ((ligne = br.readLine()) != null)
 			{
 				String[] parts = ligne.split(";");
-				if (parts.length > 1) // verifie que parts[1] contient uniquement des chiffres
+				if (parts.length > 1)
 				{
-					String codeNotion = parts[1];
-					if (codeNotion.equals(notion.getNom()) && !ligneSupprimee)
+					String codeRessource = parts[0];
+					String nomNotion     = parts[1];
+					if ( codeRessource.equals( notion.getRessource().getCode() ) && nomNotion.equals( notion.getNom() ) && ! ligneSupprimee )
 					{
 						System.out.println("Ligne supprimée : " + ligne);
 						ligneSupprimee = true;

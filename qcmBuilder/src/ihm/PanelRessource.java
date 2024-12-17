@@ -100,7 +100,12 @@ public class PanelRessource extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println(e);
+		for (int i=0; i<this.lstLabel.size(); i++)
+			if (e.getSource().equals(this.lstSup.get(i)))
+			{
+				this.ctrl.supprimerRessource(this.lstLabel.get(i).getText());
+				Update();
+			}
 	}
 
 	

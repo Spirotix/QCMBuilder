@@ -1,7 +1,10 @@
 package src.metier;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -111,22 +114,72 @@ public class QCMBuilder
 
 	public boolean supprimerRessource(Ressource ressource)
 	{
-		for (Ressource r : lstRessources)
+		if (ressource == null)
+			return false;
+
+		if (!lstRessources.contains(ressource))
+			return false;
+
+		System.out.println("SupprimerR");
+
+		for (Notion n : ressource.getNotions())
 		{
-			if ( r.getCode().equals(ressource.getCode()) )
-				ressource = r;
+			ressource.supprimerNotion(n);
 		}
 
-		if ( lstRessources.contains(ressource))
+		File fileCSV = new File("../data/ressources.csv");
+
+		// Supprimer la ligne
+		QCMBuilder.supprimerLigne(ressource, fileCSV);
+
+		lstRessources.remove(ressource);
+		return true;
+	}
+
+	public static void supprimerLigne(Ressource ressource, File fichier)
+	{
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
 		{
-			//ressource.supprimerAllNotion();
-			lstRessources.remove(ressource);
-			return true;
+			String  ligne;
+			boolean ligneSupprimee = false;
+
+			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
+			while ((ligne = br.readLine()) != null)
+			{
+				String[] parts = ligne.split(";");
+				if (parts.length > 1)
+				{
+					String codeRessource = parts[0];
+					String nomNotion     = parts[1];
+					if ( codeRessource.equals( ressource.getCode() ) && nomNotion.equals( ressource.getNom() ) && ! ligneSupprimee )
+					{
+						System.out.println("Ligne supprimée : " + ligne);
+						ligneSupprimee = true;
+						continue; // Ne pas écrire cette ligne
+					}
+				}
+				bw.write(ligne);
+				bw.newLine();
+			}
+
 		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+
+		// Remplacer le fichier original par le fichier temporaire
+		if (fichier.delete())
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
 		else
-		{
-			return false;
-		}
+			System.out.println("Impossible de supprimer le fichier original.");
 	}
 
 	public Ressource rechercherRessource(String code_nom)

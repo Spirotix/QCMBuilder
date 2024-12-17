@@ -467,7 +467,7 @@ public class Notion
 			while ((ligne = br.readLine()) != null)
 			{
 				String[] parts = ligne.split(";");
-				if (parts.length > 0 && parts[0].matches("\\d+"))
+				if (parts.length > 0 && parts[0].matches("\\d+")) // verifie que parts[1] contient uniquement des chiffres
 				{
 					int numeroQuestion = Integer.parseInt(parts[0]);
 					if (numeroQuestion == valeur && !ligneSupprimee)
@@ -521,18 +521,14 @@ public class Notion
 
 	public boolean supprimerAllQuestions ()
 	{
-		File fileTextQuestion = new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + ".rtf");
-		File fileInformations = new File("./data/questions/" + this.ressource.getCode() + "_" + this.ressource.getNom() + "_" + this.nom + "_data.rtf");
+		for (Question q : lstQuestions)
+		{
+			this.supprimerQuestion(q);
+		}
 
-		if (fileTextQuestion.exists()) { fileTextQuestion.delete(); }
-		else { return false; }
-
-		if (fileInformations.exists()) { fileInformations.delete(); }
-		else { return false; }
-		
 		return true;
-	
 	}
+
 	public Question rechercherQuestion (String text)
 	{
 		Question questionTrouvee = null;

@@ -44,11 +44,6 @@ public class Controleur
 		return ressources;
 	}
 
-	public boolean ajouterRessource(String code, String nom)
-	{
-		return qcmBuilder.ajouterRessource(new Ressource(code, nom));
-	}
-
 	public ArrayList<String> getQuestions(String ressource, String notion)
 	{
 		ArrayList<String> 	str = new ArrayList<String>()	;
@@ -88,10 +83,26 @@ public class Controleur
 		}
 	}
 
+	public boolean ajouterRessource(String code, String nom)
+	{
+		return qcmBuilder.ajouterRessource(new Ressource(code, nom));
+	}
+
 	public boolean ajouterNotion(String nomRessource, String nomNotion)
 	{
 		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
 		return r.ajouterNotion(new Notion(nomNotion, r));
+	}
+
+	public boolean supprimerNotion(String nomRessource, String nomNotion)
+	{
+		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
+		return r.supprimerNotion( r.rechercherNotion(nomNotion) );
+	}
+
+	public boolean supprimerRessource(String codeRessource)
+	{
+		return qcmBuilder.supprimerRessource( qcmBuilder.rechercherRessource(codeRessource) );
 	}
 
 	public boolean creerQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, ArrayList<TypeReponse> lstReponse, int difficulte)

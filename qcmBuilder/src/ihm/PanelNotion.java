@@ -15,6 +15,7 @@ public class PanelNotion extends JPanel implements ActionListener
 	private ArrayList<JButton> 	lstSup	 ;
 	private ArrayList<JPanel>	lstPanel ;
 
+	
 	public PanelNotion (Controleur ctrl, PanelCreerRessource panelC)
 	{
 		this.ctrl=ctrl;
@@ -70,7 +71,12 @@ public class PanelNotion extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println(e);
+		for (int i=0; i<this.lstLabel.size(); i++)
+		if (e.getSource().equals(this.lstSup.get(i)))
+		{
+			this.ctrl.supprimerNotion(this.ressource, this.lstLabel.get(i).getText());
+			Update(this.ressource);
+		}
 	}
 
 	public String getRessource() {return this.ressource;}
