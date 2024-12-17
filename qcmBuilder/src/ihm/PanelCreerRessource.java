@@ -11,7 +11,7 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 	private PanelRessource 		panelR;
 	private PanelNotion 		panelN;
 	private JButton				btnAjouterR, btnAjouterN;
-	private JTextField 			textNumR, textNumN, textNomR, textNomN;
+	private JTextField 			textNumR, textNomR, textNomN;
 
 	public PanelCreerRessource (Controleur ctrl)
 	{
@@ -42,8 +42,6 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 
 		this.textNumR = new JTextField();
 		this.textNumR.setColumns(5);
-		this.textNumN = new JTextField();
-		this.textNumN.setColumns(5);
 
 		this.textNomR = new JTextField();
 		this.textNomR.setColumns(10);
@@ -58,7 +56,6 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		panelBasG.add(this.textNomR);
 
 		panelBasD.add(this.btnAjouterN);
-		panelBasD.add(this.textNumN);
 		panelBasD.add(this.textNomN);
 
 
@@ -71,11 +68,23 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e) 
 	{
+		JOptionPane message = new JOptionPane();
+
 		if (e.getSource().equals(this.btnAjouterN))
-			this.panelN.ajouter("blablabla");
+		{
+			if (this.textNomN.getText().equals(""))
+				message.showMessageDialog(null, "Rentrer tous les champs avant de créer une notion", "Attention", JOptionPane.WARNING_MESSAGE);
+			else 
+				this.ctrl.ajouterNotion( this.panelN.getRessource(),this.textNomN.getText());
+		}
 
 		if (e.getSource().equals(this.btnAjouterR))
-			this.panelR.ajouter("blablabla");
+		{
+			if (this.textNumR.getText().equals("") || this.textNumR.getText().equals(""))
+				message.showMessageDialog(null, "Rentrer tous les champs avant de créer une ressource", "Attention", JOptionPane.WARNING_MESSAGE);
+			else 
+				this.ctrl.ajouterRessource(this.textNumR.getText(), this.textNumR.getText());
+		}
 	}
 
 	public PanelRessource getPanelRessource	() {return this.panelR;}

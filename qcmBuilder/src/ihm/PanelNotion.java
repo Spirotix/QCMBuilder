@@ -52,6 +52,8 @@ public class PanelNotion extends JPanel
 
 	}
 
+	public String getRessource() {return this.ressource;}
+
 	public void ajouter(String nomNotion)
 	{
 		//this.ctrl.ajouterNotion(nomNotion);

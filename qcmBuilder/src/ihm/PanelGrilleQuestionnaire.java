@@ -121,6 +121,8 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 
 	private int parseField(JTextField textField) 
 	{
+		JOptionPane message = new JOptionPane();
+
 		try 
 		{
 			String text = textField.getText();
@@ -128,7 +130,8 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 		} 
 		catch (NumberFormatException e) 
 		{
-			return 0; 
+			message.showMessageDialog(null, "Ne rentrez que des nombres entier", "Attention", JOptionPane.WARNING_MESSAGE);
+			return 0;
 		}
 	}
 
