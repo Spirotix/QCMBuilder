@@ -110,7 +110,6 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		JOptionPane message = new JOptionPane();
-		boolean 	estPossible = true;
 
 		if (e.getSource() == this.ajouterQ) 
 		{
@@ -123,7 +122,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 			if (this.question.getText().equals(""))
 			{
 				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
-				estPossible=false;
+				return ;
 			}
 				
 			
@@ -131,25 +130,23 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 				if (p.getContenuGauche().equals("") || p.getContenuDroite().equals(""))
 				{
 					message.showMessageDialog(null, "Remplissez tous les champs", "Attention", JOptionPane.WARNING_MESSAGE);
-					estPossible=false;
+					return ;
 				}
 			
-			if (estPossible)
-			{
-				// Enregistrer la question et les réponses
-				ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
-				TypeReponse 		repGauche,repDroite;
+			// Enregistrer la question et les réponses
+			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
+			TypeReponse 		repGauche,repDroite;
 
-				for (PanelReponseAsso p : this.reponsesPossibles)
-				{
-					repGauche = new TypeReponse(p.getContenuGauche(), "Gauche");
-					repDroite = new TypeReponse(p.getContenuDroite(),"Droite");
-					reponses.add(new TypeReponse(repGauche, repDroite));
-				}
-				this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
-				this.fr.dispose();
-				new FrameMenu(this.ctrl);
+			for (PanelReponseAsso p : this.reponsesPossibles)
+			{
+				repGauche = new TypeReponse(p.getContenuGauche(), "Gauche");
+				repDroite = new TypeReponse(p.getContenuDroite(),"Droite");
+				reponses.add(new TypeReponse(repGauche, repDroite));
 			}
+			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
+			this.fr.dispose();
+			new FrameMenu(this.ctrl);
+			
 		}
 		if (e.getSource().equals(this.explication))
 		{

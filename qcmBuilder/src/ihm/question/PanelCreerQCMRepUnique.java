@@ -92,7 +92,6 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e) 
 	{
-		boolean 	estPossible = true				;
 		boolean 	aUnBon		= false 			;
 		JOptionPane message 	= new JOptionPane()	;
 
@@ -106,7 +105,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 			if (this.question.getText().equals(""))
 			{
 				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
-				estPossible=false;
+				return ;
 			}
 
 			for (PanelReponse p : this.reponsesPossibles)
@@ -114,7 +113,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 				if (p.getString().equals(""))
 				{
 					message.showMessageDialog(null, "Remplissez les champ de réponses", "Attention", JOptionPane.WARNING_MESSAGE);
-					estPossible=false;
+					return ;
 				}
 				if (p.getEstBonneReponse())
 					aUnBon = true;
@@ -124,7 +123,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 			if (!aUnBon)
 			{
 				message.showMessageDialog(null, "Choissisez au moins une bonne réponse", "Attention", JOptionPane.WARNING_MESSAGE);
-				estPossible=false;
+				return ;
 			}
 
 			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();

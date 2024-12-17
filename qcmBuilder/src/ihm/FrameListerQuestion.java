@@ -36,7 +36,7 @@ public class FrameListerQuestion extends JFrame implements ActionListener
 		this.retour 	.addActionListener(this);
 		
 		this.setTitle   ("Liste des question");
-		this.setSize    ( 750,750  			 );
+		this.setSize    ( 750,350  			 );
 
 		this.panelC=new PanelListerQuestion(this.ctrl);
 

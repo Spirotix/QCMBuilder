@@ -37,7 +37,7 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 
 		this.panelMilieu = new JPanel(new GridLayout(1,2));
 
-		JPanel panelGauche = new JPanel(new GridLayout(4,1));
+		JPanel panelGauche = new JPanel(new GridLayout(5,1));
 		this.paq = new PanelAfficherQuestion(this.ctrl);
 		JPanel temp  = new JPanel();
 		JPanel temp2 = new JPanel();
@@ -54,6 +54,8 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 
 		this.panelMilieu.add(panelGauche);
 		this.panelMilieu.add(this.paq);
+
+		this.add(new JPanel());
 
 		this.add(this.panelMilieu, BorderLayout.CENTER);
 

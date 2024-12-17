@@ -129,7 +129,7 @@ public class PanelCreerElim extends JPanel implements ActionListener
 
 			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
 			this.fr.dispose();
-			new FrameMenu(this.ctrl);			
+			new FrameMenu(this.ctrl);
 		}
 		
 		
