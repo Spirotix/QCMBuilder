@@ -6,11 +6,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+import src.Controleur;
 
 public class PanelCreerQuestionAsso extends JPanel implements ActionListener 
 {
 	private PanelCreerQuestion 			panelQ						; // Référence au panneau principal
 	private ArrayList<PanelReponseAsso> reponsesPossibles			; // Liste des réponses possibles
+	private FrameCreerAssociation 		fr 							;
+	private Controleur					ctrl						;
 
 	private JTextArea 					question					; // Zone de texte pour la question
 	private JButton 					ajouterQ, explication, enreg; // Boutons pour ajouter une question, modifier l'explication et enregistrer
@@ -18,9 +21,11 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	private String 						txtExplication				; // Texte de l'explication
 	
 
-	public PanelCreerQuestionAsso(PanelCreerQuestion panelQ) 
+	public PanelCreerQuestionAsso(PanelCreerQuestion panelQ, FrameCreerAssociation fr, Controleur ctrl) 
 	{
 		this.panelQ = panelQ;
+		this.fr 	= fr 	;
+		this.ctrl = ctrl;
 
 		// Initialiser la liste des réponses possibles avec deux réponses vides
 		this.reponsesPossibles = new ArrayList<PanelReponseAsso>();
@@ -117,7 +122,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		{
 			if (this.question.getText().equals(""))
 			{
-				message.showMessageDialog(null, "Remplissez le champ de réponse", "Attention", JOptionPane.WARNING_MESSAGE);
+				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
 				estPossible=false;
 			}
 				
@@ -142,6 +147,8 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 					reponses.add(new TypeReponse(repGauche, repDroite));
 				}
 				this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
+				this.fr.dispose();
+				new FrameMenu(this.ctrl);
 			}
 		}
 		if (e.getSource().equals(this.explication))

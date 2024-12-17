@@ -9,6 +9,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
+import src.Controleur;
+import src.ihm.*;
 
 public class PanelCreerQCMRepUnique extends JPanel implements ActionListener 
 {
@@ -18,10 +20,14 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 	private JButton 				ajouterQ, explication, enreg;
 	private JPanel 					panelReponses				; 
 	private String 					txtExplication				;
+	private FrameCreerQCMRepUnique	fr 							;
+	private Controleur 				ctrl						;
 
-	public PanelCreerQCMRepUnique(PanelCreerQuestion panelQ) 
+	public PanelCreerQCMRepUnique(PanelCreerQuestion panelQ, FrameCreerQCMRepUnique fr, Controleur ctrl) 
 	{
 		this.panelQ = panelQ;
+		this.ctrl 	= ctrl	;
+		this.fr 	= fr	;
 
 		this.reponsesPossibles = new ArrayList<>();
 		this.reponsesPossibles.add(new PanelReponse(this));
@@ -87,6 +93,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		boolean 	estPossible = true				;
+		boolean 	aUnBon		= false 			;
 		JOptionPane message 	= new JOptionPane()	;
 
 		if (e.getSource() == this.ajouterQ) 
@@ -98,14 +105,28 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 		{
 			if (this.question.getText().equals(""))
 			{
-				message.showMessageDialog(null, "Remplissez le champ de réponse", "Attention", JOptionPane.WARNING_MESSAGE);
+				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
 				estPossible=false;
 			}
 
-			/*for (PanelReponse p : this.reponsesPossibles)
+			for (PanelReponse p : this.reponsesPossibles)
 			{
-				if (p.get)
-			}*/
+				if (p.getString().equals(""))
+				{
+					message.showMessageDialog(null, "Remplissez les champ de réponses", "Attention", JOptionPane.WARNING_MESSAGE);
+					estPossible=false;
+				}
+				if (p.getEstBonneReponse())
+					aUnBon = true;
+				
+			}
+			
+			if (!aUnBon)
+			{
+				message.showMessageDialog(null, "Choissisez au moins une bonne réponse", "Attention", JOptionPane.WARNING_MESSAGE);
+				estPossible=false;
+			}
+
 			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
 			for (PanelReponse p : this.reponsesPossibles)
 			{
@@ -114,6 +135,9 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 				
 
 			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
+
+			this.fr.dispose	(		  );
+			new FrameMenu	(this.ctrl);
 		}
 		
 		

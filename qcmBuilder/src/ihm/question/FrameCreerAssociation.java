@@ -9,7 +9,7 @@ public class FrameCreerAssociation extends JFrame implements ActionListener
 {
 	private PanelCreerQuestion 		panelQ		;
 	private PanelCreerQuestionAsso 	panel 		;
-	private Controleur 				ctrl 	;
+	private Controleur 				ctrl 		;
 
 	private JMenuItem 				retourMenu	;
 	private JMenuItem 				retour		;
@@ -38,9 +38,9 @@ public class FrameCreerAssociation extends JFrame implements ActionListener
 		this.retour 	.addActionListener(this);
 		
 		this.setTitle   ("Creation d'une Question par association");
-		this.setSize    ( 500,500  );
+		this.setSize    ( 750,500  );
 
-		this.panel=new PanelCreerQuestionAsso(this.panelQ);
+		this.panel=new PanelCreerQuestionAsso(this.panelQ, this, this.ctrl);
 
 		this.add (this.panel);
 

@@ -42,7 +42,7 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 		this.retour 	.addActionListener(this);
 
 
-		this.panel=new PanelCreerQCMRepUnique(this.panelQ);
+		this.panel=new PanelCreerQCMRepUnique(this.panelQ, this, this.ctrl);
 
 		this.add (this.panel);
 

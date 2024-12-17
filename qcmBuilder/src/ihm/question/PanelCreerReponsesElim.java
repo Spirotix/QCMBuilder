@@ -137,7 +137,7 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 		} 
 		catch (Exception ex) 
 		{
-			System.out.println("Ce n'est pas un entier (ordre)");
+			//System.out.println("Ce n'est pas un entier (ordre)");
 			return 0;
 		}
 	}
@@ -153,7 +153,7 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 		} 
 		catch (Exception ex) 
 		{
-			System.out.println("Ce n'est pas un entier (cout)");
+			//System.out.println("Ce n'est pas un entier (cout)");
 			return 0;
 		}
 	}

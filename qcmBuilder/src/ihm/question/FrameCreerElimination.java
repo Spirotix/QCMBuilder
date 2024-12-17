@@ -40,7 +40,7 @@ public class FrameCreerElimination extends JFrame implements ActionListener
 		this.setTitle   ("Creation d'une question à élimination");
 		this.setSize    ( 500,500  );
 
-		this.panel=new PanelCreerElim(this.panelQ);
+		this.panel=new PanelCreerElim(this.panelQ, this, this.ctrl);
 
 		this.add (this.panel);
 
