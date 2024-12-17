@@ -174,7 +174,7 @@ public class Notion
 					for ( int numReponse = 1 ; numReponse < nbReponses ; numReponse++ )
 					{
 						Scanner scReponse = new Scanner(
-							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "text_reponse_" + numReponse + ".rtf" )
+							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "/text_reponse_" + numReponse + ".rtf" )
 						);
 
 						String lineTextReponse = scReponse.nextLine();
@@ -209,7 +209,7 @@ public class Notion
 					for ( int numReponse = 1 ; numReponse < nbReponses ; numReponse++ )
 					{
 						Scanner scReponse = new Scanner(
-							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "text_reponse_" + numReponse + ".rtf" )
+							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "/text_reponse_" + numReponse + ".rtf" )
 						);
 
 						String lineTextReponse = scReponse.nextLine();
