@@ -67,9 +67,14 @@ QCMBuilder est une application permettant aux enseignants de l'IUT du Havre de c
 
 ### Pour les enseignants
 
-1. Lancez l'application Java pour créer ou modifier des questions.
-2. Générez une évaluation en sélectionnant les notions et niveaux souhaités.
-3. Partagez les fichiers HTML générés avec les étudiants.
+1. Lancez l'application Java en utilisant le run.sh ou run.bat
+2. utiliser les boutons de l'ihm pour sois créer/modifier des questions, créer des notions/ressource ou générer le questionnaire
+   ![menu d'accueil](https://github.com/user-attachments/assets/501c2bdb-43dc-4cbc-9193-d46f1ab6b815)
+3. Choisissez les options souhaitez pour créer votre question
+   ![Création question](https://github.com/user-attachments/assets/947fb6e1-e06b-449a-b986-8cc711f9021b)
+4. Générez une évaluation en sélectionnant les notions et niveaux souhaités.
+  ![image](https://github.com/user-attachments/assets/43bb378b-0232-4451-92e0-050180a32cab)
+5. Partagez les fichiers HTML générés avec les étudiants.
 
 ### Pour les étudiants
 
