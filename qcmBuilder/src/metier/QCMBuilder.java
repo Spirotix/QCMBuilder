@@ -140,8 +140,7 @@ public class QCMBuilder
 					lstReponses.add(reponse);
 			}
 
-			notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, explication) );
-			return true;
+			return notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, explication) );
 		}
 		else if ( type.equals("QCM") )
 		{
@@ -160,8 +159,8 @@ public class QCMBuilder
 					lstReponses.add(reponse);
 			}
 
-			notion.ajouterQuestion( new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
-			return true;
+			return notion.ajouterQuestion( new QCM(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
+		
 		}
 		else if ( type.equals("Association") )
 		{
@@ -190,8 +189,8 @@ public class QCMBuilder
 					lstReponses.add(reponseG);
 			}
 
-			notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
-			return true;
+			return notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
+			
 		}
 		else
 		{
