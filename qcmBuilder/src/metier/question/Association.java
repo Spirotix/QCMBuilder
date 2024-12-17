@@ -6,24 +6,24 @@ import src.metier.reponse.*;
 
 public class Association implements Question
 {
-	private Notion notions;
-	private String text;
-	private int timer;
-	private double nbPoint;
-	private int difficulte;
-	private String explication;
+	private Notion                   notions;
+	private String                   text;
+	private int                      timer;
+	private double                   nbPoint;
+	private int                      difficulte;
+	private String                   explication;
 	private List<ReponseAssociation> lstReponseAsso;
 
 	public Association(Notion notion, String text, int timer, double nbPoint, int difficulte,
 			List<ReponseAssociation> lstReponseAsso, String explication)
 	{
-		this.notions = notion;
-		this.text = text;
-		this.timer = timer;
-		this.nbPoint = nbPoint;
-		this.difficulte = difficulte;
+		this.notions        = notion;
+		this.text           = text;
+		this.timer          = timer;
+		this.nbPoint        = nbPoint;
+		this.difficulte     = difficulte;
 		this.lstReponseAsso = lstReponseAsso;
-		this.explication = explication;
+		this.explication    = explication;
 	}
 
 	@Override

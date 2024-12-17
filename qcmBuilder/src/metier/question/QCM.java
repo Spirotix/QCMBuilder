@@ -6,26 +6,25 @@ import src.metier.reponse.ReponseQCM;
 
 public class QCM implements Question
 {
-	private Notion notions;
-	private String text;
-	private int timer;
-	private double nbPoint;
-	private int difficulte;
-	private String explication;
-	private boolean estQCU;
+	private Notion           notions;
+	private String           text;
+	private int              timer;
+	private double           nbPoint;
+	private int              difficulte;
+	private String           explication;
+	private boolean          estQCU;
 	private List<ReponseQCM> lstReponses;
 
-	public QCM(Notion notion, String text, int timer, double nbPoint, int difficulte, List<ReponseQCM> lstReponses,
-			String explication)
+	public QCM (Notion notion, String text, int timer, double nbPoint, int difficulte, List<ReponseQCM> lstReponses, String explication)
 	{
-		this.notions = notion;
-		this.text = text;
-		this.timer = timer;
-		this.nbPoint = nbPoint;
-		this.difficulte = difficulte;
+		this.notions     = notion;
+		this.text        = text;
+		this.timer       = timer;
+		this.nbPoint     = nbPoint;
+		this.difficulte  = difficulte;
 		this.lstReponses = lstReponses;
 		this.explication = explication;
-		this.estQCU = this.estUnique();
+		this.estQCU      = this.estUnique();
 
 		int nbReponseVrai = 0;
 		for (ReponseQCM reponse : lstReponses)
