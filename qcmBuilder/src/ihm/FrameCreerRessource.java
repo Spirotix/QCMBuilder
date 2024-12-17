@@ -1,8 +1,7 @@
 package src.ihm;
 
-import javax.swing.*;
 import java.awt.event.*;
-import src.ihm.*;
+import javax.swing.*;
 import src.Controleur;
 
 public class FrameCreerRessource extends JFrame implements ActionListener

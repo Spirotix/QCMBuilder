@@ -1,7 +1,10 @@
 package src.metier;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +15,7 @@ import java.util.Scanner;
 import src.metier.question.Association;
 import src.metier.question.Elimination;
 import src.metier.question.QCM;
+import src.metier.question.Question;
 import src.metier.reponse.*;
 
 public class Ressource
@@ -126,21 +130,6 @@ public class Ressource
 				e.printStackTrace();
 			}
 
-			// Créer le fichier d'informations de toutes les questions
-			File fileInformations  = new File( "../data/questions_NOUVEAU/" + this.getCode() + "/" + notion.getNom() + "/" + notion.getNom() + ".csv" );
-
-			// Créer les répertoires non existants (ou ce trouve le csv)
-			fileInformations.getParentFile().mkdirs();
-
-			if ( !fileInformations.exists() )
-			{
-				try ( PrintWriter writerData = new PrintWriter( new FileWriter(fileInformations) ) )
-				{
-					writerData.println("N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION");
-				}
-				catch (IOException e) { e.printStackTrace(); }
-			}
-
 			return true;
 		}
 		else
@@ -153,10 +142,65 @@ public class Ressource
 	{
 		if (notion == null)
 			return false;
+
 		if (!lstNotions.contains(notion))
 			return false;
+
+		System.out.println("SupprimerR");
+
+		File fileCSV = new File("../data/notions.csv");
+
+		// Supprimer la ligne
+		Ressource.supprimerLigne(notion, fileCSV);
+
 		lstNotions.remove(notion);
 		return true;
+	}
+
+	public static void supprimerLigne(Notion notion, File fichier)
+	{
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.txt");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
+		{
+	
+			String  ligne;
+			boolean ligneSupprimee = false;
+	
+			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
+			while ((ligne = br.readLine()) != null)
+			{
+				String[] parts = ligne.split(";");
+				if (parts.length > 1) // verifie que parts[1] contient uniquement des chiffres
+				{
+					String codeNotion = parts[1];
+					if (codeNotion.equals(notion.getNom()) && !ligneSupprimee)
+					{
+						System.out.println("Ligne supprimée : " + ligne);
+						ligneSupprimee = true;
+						continue; // Ne pas écrire cette ligne
+					}
+				}
+				bw.write(ligne);
+				bw.newLine();
+			}
+	
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+	
+		// Remplacer le fichier original par le fichier temporaire
+		if (fichier.delete())
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
+		else
+			System.out.println("Impossible de supprimer le fichier original.");
 	}
 
 	public Notion rechercherNotion(String nom)
