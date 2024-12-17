@@ -119,20 +119,19 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		} 
 		if (e.getSource() == this.enreg) 
 		{
+			//Verification de la validité de la question
 			if (this.question.getText().equals(""))
 			{
 				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
 				return ;
 			}
 				
-			
 			for (PanelReponseAsso p : this.reponsesPossibles)
 				if (p.getContenuGauche().equals("") || p.getContenuDroite().equals(""))
 				{
 					message.showMessageDialog(null, "Remplissez tous les champs", "Attention", JOptionPane.WARNING_MESSAGE);
 					return ;
 				}
-			
 			// Enregistrer la question et les réponses
 			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
 			TypeReponse 		repGauche,repDroite;
@@ -143,9 +142,15 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 				repDroite = new TypeReponse(p.getContenuDroite(),"Droite");
 				reponses.add(new TypeReponse(repGauche, repDroite));
 			}
-			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
-			this.fr.dispose();
-			new FrameMenu(this.ctrl);
+
+			if (this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses))
+			{
+				this.fr.dispose();
+				new FrameMenu(this.ctrl);
+			}
+			else 
+				message.showMessageDialog(null, "Cette Question existe deja ", "Attention", JOptionPane.WARNING_MESSAGE);
+			
 			
 		}
 		if (e.getSource().equals(this.explication))
