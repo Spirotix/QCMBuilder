@@ -8,7 +8,7 @@ import src.Controleur;
 
 public class PanelNotion extends JPanel implements ActionListener
 {
-	private Controleur 	ctrl	;
+	private Controleur 			ctrl	;
 	private PanelCreerRessource panelC	;
 	private ArrayList<JLabel> 	lstLabel;
 	private String				ressource;

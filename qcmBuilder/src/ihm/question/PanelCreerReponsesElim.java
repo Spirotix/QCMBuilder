@@ -84,6 +84,8 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 			{
 				this.panelQ		.toutDecocher(		);
 				this.validation	.setSelected (true	);
+				this.cout .setEnabled(false);
+				this.ordre.setEnabled(false);
 			}
 		}
 
