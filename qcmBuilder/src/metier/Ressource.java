@@ -32,7 +32,7 @@ public class Ressource
 		List<Notion> notions = new ArrayList<>();
 		try 
 		{
-			Scanner scanner = new Scanner(new File("../data/ressources_notions.csv"));
+			Scanner scanner = new Scanner(new File("../data/notions.csv"));
 
 			if( scanner.hasNextLine()) scanner.nextLine();
 

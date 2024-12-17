@@ -99,7 +99,7 @@ public class Notion
 				{
 					List<ReponseAssociation> lstReponse = new ArrayList<>();
 
-					while ( < )
+					while (!lineTextQuestion.contains("\\par{Fin}"))
 					{
 						ReponseAssociation reponseA;
 						String textReponseA = lineTextQuestion.substring(0, lineTextQuestion.indexOf("::"));
