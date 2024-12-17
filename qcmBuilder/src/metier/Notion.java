@@ -46,28 +46,34 @@ public class Notion
 
 			while ( scInformations.hasNextLine() )
 			{
-				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + lstQuestions.size() + "/complement" );
-				dossierComplement.mkdirs();
+				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/complement" );
 
-				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + lstQuestions.size() + "/text_question.rtf" );
-				fileTextQuestion.getParentFile().mkdirs();
+				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_question.rtf" );
 
-				// Créer les répertoires non existants (ou ce trouve le rtf)
-				fileTextQuestion.getParentFile().mkdirs();
-
-				if (!fileTextQuestion.exists())
+				if ( ! fileTextQuestion.getPath().contains("question_0") )
 				{
-					try
-					{
-						PrintWriter tmp = new PrintWriter( new FileWriter(fileTextQuestion) );
-					}
-					catch (IOException e)
-					{
-						e.printStackTrace();
-					}
+					dossierComplement.mkdirs();
+					fileTextQuestion.getParentFile().mkdirs();
 
-					System.out.println( "\tFICHIER text_question CREE" );
+					// Créer les répertoires non existants (ou ce trouve le rtf)
+					fileTextQuestion.getParentFile().mkdirs();
+
+					if (!fileTextQuestion.exists())
+					{
+						try
+						{
+							PrintWriter tmp = new PrintWriter( new FileWriter(fileTextQuestion) );
+						}
+						catch (IOException e)
+						{
+							e.printStackTrace();
+						}
+
+						System.out.println( "\tFICHIER text_question CREE" );
+					}
 				}
+				else
+					break;
 
 
 				Scanner scTextQuestion   = new Scanner( fileTextQuestion );
@@ -287,12 +293,10 @@ public class Notion
 
 		if ( !lstQuestions.contains(question) )
 		{
-			lstQuestions.add(question);
-
 			try
 			{
 				// Créer le répertoire de la question, avec un rtf pour le texte de la question formaté
-				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_question.rtf" );
+				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_question.rtf" );
 
 				// Créer les répertoires non existants (ou ce trouve le rtf)
 				fileTextQuestion.getParentFile().mkdirs();
@@ -310,7 +314,7 @@ public class Notion
 				}
 
 				// Créer le répertoire complément pour les images ou audios potentiels
-				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/complement" );
+				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/complement" );
 
 				// Créer les répertoires non existants et le répertoire complement
 				dossierComplement.mkdirs();
@@ -335,7 +339,7 @@ public class Notion
 							{
 								PrintWriter writerTextReponse = new PrintWriter(
 									new FileWriter(
-										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_reponse_" + indRep++ + ".rtf" ),
+										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_reponse_" + indRep++ + ".rtf" ),
 										false
 									)
 								);
@@ -346,6 +350,8 @@ public class Notion
 							}
 							catch (Exception e) { e.printStackTrace(); }
 						}
+
+						lstQuestions.add( qcm );
 					}
 					else if (question.getClass().getSimpleName().equals("Elimination"))
 					{
@@ -357,7 +363,7 @@ public class Notion
 							{
 								PrintWriter writerTextReponse = new PrintWriter(
 									new FileWriter(
-										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_reponse_" + indRep++ + ".rtf" ),
+										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_reponse_" + indRep++ + ".rtf" ),
 										false
 									)
 								);
@@ -368,6 +374,8 @@ public class Notion
 							}
 							catch (Exception e) { e.printStackTrace(); }
 						}
+
+						lstQuestions.add( elimination );
 					}
 					else if (question.getClass().getSimpleName().equals("Association"))
 					{
@@ -381,7 +389,7 @@ public class Notion
 								{
 									PrintWriter writerTextReponse = new PrintWriter(
 										new FileWriter(
-											new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_reponse_" + indRep++ + ".rtf" ),
+											new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_reponse_" + indRep++ + ".rtf" ),
 											false
 										)
 									);
@@ -393,6 +401,8 @@ public class Notion
 								catch (Exception e) { e.printStackTrace(); }
 							}
 						}
+
+						lstQuestions.add( association );
 					}
 
 					writerData.println(
