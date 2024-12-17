@@ -127,9 +127,14 @@ public class PanelCreerElim extends JPanel implements ActionListener
 			for (PanelCreerReponsesElim p : this.reponsesPossibles)
 				reponses.add(new TypeReponse(p.getString(),p.getOrdre(), p.getCout(),p.getEstBonneReponse() ));
 
-			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
-			this.fr.dispose();
-			new FrameMenu(this.ctrl);
+			if (this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses))
+			{
+				this.fr.dispose();
+				new FrameMenu(this.ctrl);
+			}
+			else 
+				message.showMessageDialog(null, "Cette Question existe deja ", "Attention", JOptionPane.WARNING_MESSAGE);
+			
 		}
 		
 		

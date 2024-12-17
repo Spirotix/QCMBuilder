@@ -142,9 +142,15 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 				repDroite = new TypeReponse(p.getContenuDroite(),"Droite");
 				reponses.add(new TypeReponse(repGauche, repDroite));
 			}
-			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
-			this.fr.dispose();
-			new FrameMenu(this.ctrl);
+
+			if (this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses))
+			{
+				this.fr.dispose();
+				new FrameMenu(this.ctrl);
+			}
+			else 
+				message.showMessageDialog(null, "Cette Question existe deja ", "Attention", JOptionPane.WARNING_MESSAGE);
+			
 			
 		}
 		if (e.getSource().equals(this.explication))
