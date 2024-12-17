@@ -17,34 +17,35 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 
 	public FrameCreerQCMRepUnique (PanelCreerQuestion panelQ, Controleur ctrl, String type )
 	{
-		this.panelQ	= panelQ;
-		this.ctrl	= ctrl;
+		this.panelQ = panelQ;
+		this.ctrl   = ctrl;
 
-		this.setTitle   ("Creation d'un QCM a choix unique");
+		if  ( type.equals("Multiple")){ this.setTitle("Creation d'un QCM"); }
+		else                          { this.setTitle("Creation d'un QCU"); }
 		this.setSize    ( 500,500  );
 
 		JMenuBar menubMaBarre = new JMenuBar(		  );
-		JMenu 	 menuAcceuil  = new JMenu	("Accueil");
-		JMenu 	 menuRetour   = new JMenu	("Retour" );
+		JMenu 	 menuAcceuil  = new JMenu   ("Accueil");
+		JMenu 	 menuRetour   = new JMenu   ("Retour" );
 
 		this.retourMenu = new JMenuItem("Retour à l'accueil"		 );
-		this.retour		= new JMenuItem("Retour à la page précédente");
+		this.retour     = new JMenuItem("Retour à la page précédente");
 
-		menuAcceuil.add(this.retourMenu	);
-		menuRetour .add(this.retour		);
+		menuAcceuil.add(this.retourMenu );
+		menuRetour .add(this.retour     );
 
 		menubMaBarre.add(menuAcceuil);
 		menubMaBarre.add(menuRetour );
 
 		this.setJMenuBar( menubMaBarre );
 
-		this.retourMenu	.addActionListener(this);
-		this.retour 	.addActionListener(this);
+		this.retourMenu.addActionListener(this);
+		this.retour    .addActionListener(this);
 
 
 		this.panel=new PanelCreerQCMRepUnique(this.panelQ, this, this.ctrl, type);
 
-		this.add (this.panel);
+		this.add(this.panel);
 
 		this.setVisible(true);
 	}
@@ -63,7 +64,4 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 			this.dispose();
 		}
 	}
-			
-
-
 }

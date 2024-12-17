@@ -96,6 +96,7 @@ public class PanelCreerElim extends JPanel implements ActionListener
 			this.reponsesPossibles.add(new PanelCreerReponsesElim(this));
 			mettreAJourReponses();
 		} 
+
 		if (e.getSource() == this.enreg) 
 		{
 
@@ -141,6 +142,12 @@ public class PanelCreerElim extends JPanel implements ActionListener
 		if (e.getSource().equals(this.explication))
 			new FrameExplication(this);
 		
+	}
+
+	public void toutDecocher ()
+	{
+		for (PanelCreerReponsesElim p : this.reponsesPossibles)
+			p.decocher();
 	}
 
 	public void   setTxtExplication  (String expli)	{this.txtExplication=expli	;}

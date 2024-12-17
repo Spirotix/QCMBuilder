@@ -110,7 +110,7 @@ public class Controleur
 						for (Question q : n.getQuestions())
 							if (q.getText().equals(nomQuestion))
 							{
-								System.out.println("Supprimer1");
+								System.out.println("SupprimerC");
 								n.supprimerQuestion(q);
 							}
 		}

@@ -1,7 +1,13 @@
 package src.metier;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -98,9 +104,41 @@ public class QCMBuilder
 				ressource = r;
 		}
 
-		if (!lstRessources.contains(ressource))
+		if ( ! lstRessources.contains(ressource) )
 		{
-			lstRessources.add(ressource);
+			try
+			{
+				PrintWriter writer = new PrintWriter( new FileWriter("../data/ressources.csv", true) );
+
+				Scanner scanner = new Scanner(new File("../data/ressources.csv"));
+				scanner.nextLine();
+				while ( scanner.hasNextLine() )
+				{
+					String line = scanner.nextLine();
+					if ( line.equals( ressource.getCode() + ";" + ressource.getNom() ) )
+					{
+						System.out.println("La ligne existe déjà");
+						scanner.close();
+						writer .close();
+						return false;
+					}
+
+					System.out.println("Ligne : " + line);
+					System.out.println("Ajout : " + ressource.getCode() + ";" + ressource.getNom() + "\n");
+				}
+
+				lstRessources.add(ressource);
+
+				writer.println( ressource.getCode() + ";" + ressource.getNom() );
+
+				scanner.close();
+				writer .close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+
 			return true;
 		}
 		else
@@ -119,22 +157,72 @@ public class QCMBuilder
 	 */
 	public boolean supprimerRessource(Ressource ressource)
 	{
-		for (Ressource r : lstRessources)
+		if (ressource == null)
+			return false;
+
+		if (!lstRessources.contains(ressource))
+			return false;
+
+		System.out.println("SupprimerR");
+
+		for (Notion n : ressource.getNotions())
 		{
-			if (r.getCode().equals(ressource.getCode()))
-				ressource = r;
+			ressource.supprimerNotion(n);
 		}
 
-		if (lstRessources.contains(ressource))
+		File fileCSV = new File("../data/ressources.csv");
+
+		// Supprimer la ligne
+		QCMBuilder.supprimerLigne(ressource, fileCSV);
+
+		lstRessources.remove(ressource);
+		return true;
+	}
+
+	public static void supprimerLigne(Ressource ressource, File fichier)
+	{
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
 		{
-			// ressource.supprimerAllNotion();
-			lstRessources.remove(ressource);
-			return true;
+			String  ligne;
+			boolean ligneSupprimee = false;
+
+			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
+			while ((ligne = br.readLine()) != null)
+			{
+				String[] parts = ligne.split(";");
+				if (parts.length > 1)
+				{
+					String codeRessource = parts[0];
+					String nomNotion     = parts[1];
+					if ( codeRessource.equals( ressource.getCode() ) && nomNotion.equals( ressource.getNom() ) && ! ligneSupprimee )
+					{
+						System.out.println("Ligne supprimée : " + ligne);
+						ligneSupprimee = true;
+						continue; // Ne pas écrire cette ligne
+					}
+				}
+				bw.write(ligne);
+				bw.newLine();
+			}
+
 		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+
+		// Remplacer le fichier original par le fichier temporaire
+		if (fichier.delete())
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
 		else
-		{
-			return false;
-		}
+			System.out.println("Impossible de supprimer le fichier original.");
 	}
 
 	/**
@@ -240,7 +328,7 @@ public class QCMBuilder
 				else
 					stringVrai = "Faux";
 
-				ReponseQCM reponse = new ReponseQCM(stringVrai, typeReponse.getContenu());
+				ReponseQCM reponse = new ReponseQCM( typeReponse.getContenu(), stringVrai );
 
 				if (!lstReponses.contains(reponse))
 					lstReponses.add(reponse);

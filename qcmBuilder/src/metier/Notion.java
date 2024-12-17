@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -465,91 +464,82 @@ public class Notion
 			return false;
 		}
 
-		File fileCSV = new File(
-				"../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
+		System.out.println("SupprimerN");
 
-		Notion.supprimerLigne(fileCSV, lstQuestions.indexOf(question) + 1);
-		Notion.supprimerRepertoire(new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom
-				+ "/question_" + (lstQuestions.indexOf(question) + 1)));
+		File fileCSV = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
+		File fileRep = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.indexOf(question) + 1));
+
+		// Supprimer la ligne et le répertoire
+		Notion.supprimerLigneEtRepertoire(lstQuestions.indexOf(question) + 1, fileCSV, fileRep);
 
 		lstQuestions.remove(question);
 		return true;
 	}
 
-	/**
-	 * Supprime un répertoire et son contenu de manière récursive.
-	 * 
-	 * @param repertoire
-	 *            Le répertoire à supprimer.
-	 */
-	public static void supprimerRepertoire(File repertoire)
+	public static void supprimerLigneEtRepertoire(int valeur, File fichier, File repertoireQuestion)
 	{
-		if (repertoire.exists())
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.txt");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
 		{
-			if (repertoire.isDirectory())
-			{
-				File[] fichiers = repertoire.listFiles();
-				if (fichiers != null)
-				{
-					for (File fichier : fichiers)
-					{
-						supprimerRepertoire(fichier);
-					}
-				}
-			}
-			if (repertoire.delete())
-			{
-				System.out.println("Supprimé : " + repertoire.getAbsolutePath());
-			}
-			else
-			{
-				System.out.println("Impossible de supprimer : " + repertoire.getAbsolutePath());
-			}
-		}
-	}
-
-	/**
-	 * Supprime une ligne spécifique d'un fichier.
-	 * 
-	 * @param fichier
-	 *            Le fichier à modifier.
-	 * @param valeur
-	 *            La valeur de la ligne à supprimer.
-	 */
-	public static void supprimerLigne(File fichier, int valeur)
-	{
-		List<String> lignes = new ArrayList<>();
-
-		try (BufferedReader br = new BufferedReader(new FileReader(fichier)))
-		{
+	
 			String ligne;
+			boolean ligneSupprimee = false;
+	
+			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
 			while ((ligne = br.readLine()) != null)
 			{
-				if (!ligne.isEmpty() && ligne.charAt(0) == (char) (valeur + '0'))
+				String[] parts = ligne.split(";");
+				if (parts.length > 0 && parts[0].matches("\\d+")) // verifie que parts[1] contient uniquement des chiffres
 				{
-					System.out.println("Ligne supprimée : " + ligne);
+					int numeroQuestion = Integer.parseInt(parts[0]);
+					if (numeroQuestion == valeur && !ligneSupprimee)
+					{
+						System.out.println("Ligne supprimée : " + ligne);
+						ligneSupprimee = true;
+						continue; // Ne pas écrire cette ligne
+					}
 				}
-				else
-				{
-					lignes.add(ligne);
-				}
-			}
-		} catch (IOException e)
-		{
-			System.out.println("Erreur de lecture : " + e.getMessage());
-			return;
-		}
-
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(fichier, false)))
-		{
-			for (String ligne : lignes)
-			{
 				bw.write(ligne);
 				bw.newLine();
 			}
-		} catch (IOException e)
+	
+		}
+		catch (IOException e)
 		{
-			System.out.println("Erreur d'écriture : " + e.getMessage());
+			e.printStackTrace();
+			return;
+		}
+	
+		// Remplacer le fichier original par le fichier temporaire
+		if (fichier.delete())
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
+		else
+			System.out.println("Impossible de supprimer le fichier original.");
+	
+		// Supprimer le répertoire
+		supprimerRepertoireRecursif(repertoireQuestion);
+	}
+	
+	private static void supprimerRepertoireRecursif(File dossier)
+	{
+		if (dossier.exists())
+		{
+			if (dossier.isDirectory())
+			{
+				File[] fichiers = dossier.listFiles();
+				if (fichiers != null)
+					for (File fichier : fichiers)
+						supprimerRepertoireRecursif(fichier);
+			}
+			if (dossier.delete())
+				System.out.println("Supprimé : " + dossier.getAbsolutePath());
+			else
+				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());
 		}
 	}
 
@@ -561,27 +551,9 @@ public class Notion
 	 */
 	public boolean supprimerAllQuestions()
 	{
-		File fileTextQuestion = new File("./data/questions/" + this.ressource.getCode() + "_"
-				+ this.ressource.getNom() + "_" + this.nom + ".rtf");
-		File fileInformations = new File("./data/questions/" + this.ressource.getCode() + "_"
-				+ this.ressource.getNom() + "_" + this.nom + "_data.rtf");
-
-		if (fileTextQuestion.exists())
+		for (Question q : lstQuestions)
 		{
-			fileTextQuestion.delete();
-		}
-		else
-		{
-			return false;
-		}
-
-		if (fileInformations.exists())
-		{
-			fileInformations.delete();
-		}
-		else
-		{
-			return false;
+			this.supprimerQuestion(q);
 		}
 
 		return true;

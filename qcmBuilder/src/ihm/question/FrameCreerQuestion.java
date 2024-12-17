@@ -33,7 +33,7 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 		this.setBackground				(Color.LIGHT_GRAY		);
 
 
-		JMenuBar menubMaBarre = new JMenuBar(		  	);
+		JMenuBar menubMaBarre = new JMenuBar(			);
 		JMenu 	 menuAcceuil  = new JMenu	("Accueil"	);
 		JMenu 	 menuRetour   = new JMenu	("Retour" 	);
 		JMenu 	 menuImport   = new JMenu	("Importer" );
@@ -52,9 +52,9 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 
 		this.setJMenuBar( menubMaBarre );
 
-		this.retourMenu		.addActionListener(this);
-		this.retour 		.addActionListener(this);
-		this.importerImage	.addActionListener(this);
+		this.retourMenu   .addActionListener(this);
+		this.retour       .addActionListener(this);
+		this.importerImage.addActionListener(this);
 
 		this.panelQ=new PanelCreerQuestion(this.ctrl, this);
 
@@ -114,7 +114,7 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 				{
 					System.out.println("Erreur lors de la lecture ou de l'enregistrement de l'image : " + ex.getMessage());
 				}
-			} 
+			}
 			else
 				System.out.println("Aucune image sélectionnée.");
 

@@ -78,6 +78,18 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 			this.ordre.setEnabled(true);
 		}
 
+		if (e.getSource().equals(this.validation))
+		{
+			if (this.validation.isSelected())
+			{
+				this.panelQ		.toutDecocher(		);
+				this.validation	.setSelected (true	);
+				this.cout .setEnabled(false);
+				this.ordre.setEnabled(false);
+			}
+		}
+
+
 		if (e.getSource().equals(this.corbeille))
 		{
 			this.panelQ.supprimer(this);
@@ -164,6 +176,13 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 		if (lastDot > 0 && lastDot < fileName.length() - 1) 
 			return fileName.substring(lastDot + 1).toLowerCase();
 		return null;
+	}
+
+	public void decocher()
+	{
+		this.validation.setSelected(false);
+		this.cout .setEnabled(true);
+		this.ordre.setEnabled(true);
 	}
 
 	public boolean  getEstBonneReponse ( )	{return this.validation.isSelected();}

@@ -36,8 +36,6 @@ public class PanelRessource extends JPanel implements ActionListener
 			this.lstSup	 .get (i).addActionListener(this	);
 		}
 			
-		
-		
 		for (int i=0; i<this.lstLabel.size(); i++)
 		{
 			JLabel temp = this.lstLabel.get(i);
@@ -48,6 +46,7 @@ public class PanelRessource extends JPanel implements ActionListener
 				{
 					//JOptionPane.showMessageDialog(frame, "Label cliqué !");
 					panelC.getPanelNotion().Update(temp.getText());
+					Update();
 				}
 			});
 			this.add(this.lstPanel.get(i));
@@ -67,6 +66,12 @@ public class PanelRessource extends JPanel implements ActionListener
 		for (int i=0; i<this.ctrl.getChoixRessources().size(); i++)
 		{
 			this.lstLabel.add (new JLabel(this.ctrl.getChoixRessources().get(i)));
+
+			if (this.panelC.getPanelNotion().getRessource().equals(this.lstLabel.get(i).getText()))
+				this.lstLabel.get(i).setForeground(Color.RED);
+			else 
+				this.lstLabel.get(i).setForeground(Color.BLACK);
+
 			this.lstSup	 .add (new JButton("Supprimer")		);
 			this.lstPanel.add (new JPanel()					);
 			this.lstPanel.get (i).add(this.lstLabel	.get(i)	);
@@ -84,6 +89,7 @@ public class PanelRessource extends JPanel implements ActionListener
 				{
 					//JOptionPane.showMessageDialog(frame, "Label cliqué !");
 					panelC.getPanelNotion().Update(temp.getText());
+					Update();
 				}
 			});
 			this.add(this.lstPanel.get(i));
@@ -94,8 +100,15 @@ public class PanelRessource extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println(e);
+		for (int i=0; i<this.lstLabel.size(); i++)
+			if (e.getSource().equals(this.lstSup.get(i)))
+			{
+				this.ctrl.supprimerRessource(this.lstLabel.get(i).getText());
+				Update();
+			}
 	}
+
+	
 
 	public void ajouter(String nomRessource)
 	{

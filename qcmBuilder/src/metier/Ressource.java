@@ -1,7 +1,10 @@
 package src.metier;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +15,7 @@ import java.util.Scanner;
 import src.metier.question.Association;
 import src.metier.question.Elimination;
 import src.metier.question.QCM;
+import src.metier.question.Question;
 import src.metier.reponse.*;
 
 /**
@@ -202,8 +206,22 @@ public class Ressource
 	{
 		if (notion == null)
 			return false;
+
 		if (!lstNotions.contains(notion))
 			return false;
+
+		System.out.println("SupprimerR");
+
+		for (Question q : notion.getQuestions())
+		{
+			notion.supprimerQuestion(q);
+		}
+
+		File fileCSV = new File("../data/notions.csv");
+
+		// Supprimer la ligne
+		Ressource.supprimerLigne(notion, fileCSV);
+
 		lstNotions.remove(notion);
 		return true;
 	}
