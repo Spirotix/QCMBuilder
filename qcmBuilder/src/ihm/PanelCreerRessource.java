@@ -85,6 +85,9 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 			else 
 				this.ctrl.ajouterRessource(this.textNumR.getText(), this.textNumR.getText());
 		}
+		this.panelR.Update();
+		this.panelN.Update(panelN.getRessource());
+		this.repaint();
 	}
 
 	public PanelRessource getPanelRessource	() {return this.panelR;}
