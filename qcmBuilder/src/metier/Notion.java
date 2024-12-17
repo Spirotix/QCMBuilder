@@ -46,28 +46,34 @@ public class Notion
 
 			while ( scInformations.hasNextLine() )
 			{
-				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + lstQuestions.size() + "/complement" );
-				dossierComplement.mkdirs();
+				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "/complement" );
 
-				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + lstQuestions.size() + "/text_question.rtf" );
-				fileTextQuestion.getParentFile().mkdirs();
+				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "/text_question.rtf" );
 
-				// Créer les répertoires non existants (ou ce trouve le rtf)
-				fileTextQuestion.getParentFile().mkdirs();
-
-				if (!fileTextQuestion.exists())
+				if ( ! fileTextQuestion.getPath().contains("question_0") )
 				{
-					try
-					{
-						PrintWriter tmp = new PrintWriter( new FileWriter(fileTextQuestion) );
-					}
-					catch (IOException e)
-					{
-						e.printStackTrace();
-					}
+					dossierComplement.mkdirs();
+					fileTextQuestion.getParentFile().mkdirs();
 
-					System.out.println( "\tFICHIER text_question CREE" );
+					// Créer les répertoires non existants (ou ce trouve le rtf)
+					fileTextQuestion.getParentFile().mkdirs();
+
+					if (!fileTextQuestion.exists())
+					{
+						try
+						{
+							PrintWriter tmp = new PrintWriter( new FileWriter(fileTextQuestion) );
+						}
+						catch (IOException e)
+						{
+							e.printStackTrace();
+						}
+
+						System.out.println( "\tFICHIER text_question CREE" );
+					}
 				}
+				else
+					break;
 
 
 				Scanner scTextQuestion   = new Scanner( fileTextQuestion );
@@ -120,7 +126,7 @@ public class Notion
 					for ( int numReponse = 1 ; numReponse < nbReponses ; numReponse++ )
 					{
 						Scanner scReponse = new Scanner(
-							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "text_reponse_" + numReponse + ".rtf" )
+							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "/text_reponse_" + numReponse + ".rtf" )
 						);
 
 						String lineTextReponse = scReponse.nextLine();
@@ -131,10 +137,10 @@ public class Notion
 						ReponseAssociation reponseB;
 						String textReponseB = lineTextReponse.substring(lineTextReponse.indexOf("::") + 2);
 
-						System.out.println(lineTextQuestion);
-						System.out.println(textReponseA);
-						System.out.println(textReponseB);
-						System.out.println();
+						// System.out.println(lineTextQuestion);
+						// System.out.println(textReponseA);
+						// System.out.println(textReponseB);
+						// System.out.println();
 
 						reponseA = new ReponseAssociation(
 						                                  textReponseA,
@@ -165,26 +171,32 @@ public class Notion
 
 					int nbIndice = 0;
 
-					while ( !lineTextQuestion.contains("\\par{Fin}") )
+					for ( int numReponse = 1 ; numReponse < nbReponses ; numReponse++ )
 					{
-						// System.out.println(lineTextQuestion);
-						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")));
-						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1, lineTextQuestion.indexOf("||")));
-						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/")));
-						// System.out.println(lineTextQuestion.substring(lineTextQuestion.indexOf("/") + 1));
+						Scanner scReponse = new Scanner(
+							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "text_reponse_" + numReponse + ".rtf" )
+						);
+
+						String lineTextReponse = scReponse.nextLine();
+
+						// System.out.println(lineTextReponse);
+						// System.out.println(lineTextReponse.substring(lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf("|")));
+						// System.out.println(lineTextReponse.substring(lineTextReponse.indexOf("|") + 1, lineTextReponse.indexOf("||")));
+						// System.out.println(lineTextReponse.substring(lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")));
+						// System.out.println(lineTextReponse.substring(lineTextReponse.indexOf("/") + 1));
 						// System.out.println();
 
 						lstReponse.add(new ReponseElimination(
-						                                      lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")),
-						                                      lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1, lineTextQuestion.indexOf("||")),
-						                                      Integer.parseInt  (lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/"))),
-						                                      Double.parseDouble(lineTextQuestion.substring(lineTextQuestion.indexOf("/") + 1))
+						                                      lineTextReponse.substring(lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf("|")),
+						                                      lineTextReponse.substring(lineTextReponse.indexOf("|") + 1, lineTextReponse.indexOf("||")),
+						                                      Integer.parseInt  (lineTextReponse.substring(lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/"))),
+						                                      Double.parseDouble(lineTextReponse.substring(lineTextReponse.indexOf("/") + 1))
 						                                     ));
 
-						if ( nbIndice < Integer.parseInt( lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/")) ) )
-							nbIndice  = Integer.parseInt( lineTextQuestion.substring(lineTextQuestion.indexOf("||") + 2, lineTextQuestion.indexOf("/")) );
+						if ( nbIndice < Integer.parseInt( lineTextReponse.substring(lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")) ) )
+							nbIndice  = Integer.parseInt( lineTextReponse.substring(lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")) );
 
-						lineTextQuestion = scTextQuestion.nextLine();
+						scReponse.close();
 					}
 
 					Elimination question = new Elimination(this, textQuestion, temps, nbPoint, niveau, lstReponse, nbIndice, explication);
@@ -193,13 +205,20 @@ public class Notion
 				else if (type.equals("QCM"))
 				{
 					List<ReponseQCM> lstReponse = new ArrayList<>();
-					while (!lineTextQuestion.contains("\\par{Fin}"))
+
+					for ( int numReponse = 1 ; numReponse < nbReponses ; numReponse++ )
 					{
+						Scanner scReponse = new Scanner(
+							new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size()+1) + "text_reponse_" + numReponse + ".rtf" )
+						);
+
+						String lineTextReponse = scReponse.nextLine();
+
 						lstReponse.add(new ReponseQCM(
-						                              lineTextQuestion.substring(lineTextQuestion.indexOf("} ") + 2, lineTextQuestion.indexOf("|")),
-						                              lineTextQuestion.substring(lineTextQuestion.indexOf("|") + 1)
+						                              lineTextReponse.substring(lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf("|")),
+						                              lineTextReponse.substring(lineTextReponse.indexOf("|") + 1)
 						                             ));
-						lineTextQuestion = scTextQuestion.nextLine();
+						scReponse.close();
 					}
 
 					QCM question = new QCM(this, textQuestion, temps, nbPoint, niveau, lstReponse, explication);
@@ -274,12 +293,10 @@ public class Notion
 
 		if ( !lstQuestions.contains(question) )
 		{
-			lstQuestions.add(question);
-
 			try
 			{
 				// Créer le répertoire de la question, avec un rtf pour le texte de la question formaté
-				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_question.rtf" );
+				File fileTextQuestion  = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_question.rtf" );
 
 				// Créer les répertoires non existants (ou ce trouve le rtf)
 				fileTextQuestion.getParentFile().mkdirs();
@@ -297,7 +314,7 @@ public class Notion
 				}
 
 				// Créer le répertoire complément pour les images ou audios potentiels
-				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/complement" );
+				File dossierComplement = new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/complement" );
 
 				// Créer les répertoires non existants et le répertoire complement
 				dossierComplement.mkdirs();
@@ -322,7 +339,7 @@ public class Notion
 							{
 								PrintWriter writerTextReponse = new PrintWriter(
 									new FileWriter(
-										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_reponse_" + indRep++ + ".rtf" ),
+										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_reponse_" + indRep++ + ".rtf" ),
 										false
 									)
 								);
@@ -333,6 +350,8 @@ public class Notion
 							}
 							catch (Exception e) { e.printStackTrace(); }
 						}
+
+						lstQuestions.add( qcm );
 					}
 					else if (question.getClass().getSimpleName().equals("Elimination"))
 					{
@@ -344,7 +363,7 @@ public class Notion
 							{
 								PrintWriter writerTextReponse = new PrintWriter(
 									new FileWriter(
-										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_reponse_" + indRep++ + ".rtf" ),
+										new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_reponse_" + indRep++ + ".rtf" ),
 										false
 									)
 								);
@@ -355,6 +374,8 @@ public class Notion
 							}
 							catch (Exception e) { e.printStackTrace(); }
 						}
+
+						lstQuestions.add( elimination );
 					}
 					else if (question.getClass().getSimpleName().equals("Association"))
 					{
@@ -368,7 +389,7 @@ public class Notion
 								{
 									PrintWriter writerTextReponse = new PrintWriter(
 										new FileWriter(
-											new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + this.lstQuestions.size() + "/text_reponse_" + indRep++ + ".rtf" ),
+											new File( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size()+1) + "/text_reponse_" + indRep++ + ".rtf" ),
 											false
 										)
 									);
@@ -380,6 +401,8 @@ public class Notion
 								catch (Exception e) { e.printStackTrace(); }
 							}
 						}
+
+						lstQuestions.add( association );
 					}
 
 					writerData.println(
