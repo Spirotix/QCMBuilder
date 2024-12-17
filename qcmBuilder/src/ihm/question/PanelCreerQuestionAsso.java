@@ -104,6 +104,9 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	// Gérer les actions des boutons
 	public void actionPerformed(ActionEvent e) 
 	{
+		JOptionPane message = new JOptionPane();
+		boolean 	estPossible = true;
+
 		if (e.getSource() == this.ajouterQ) 
 		{
 			// Ajouter une nouvelle réponse et mettre à jour le panneau
@@ -112,16 +115,34 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		} 
 		if (e.getSource() == this.enreg) 
 		{
-			// Enregistrer la question et les réponses
-			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
-			TypeReponse 		repGauche,repDroite;
-			for (PanelReponseAsso p : this.reponsesPossibles)
+			if (this.question.getText().equals(""))
 			{
-				repGauche = new TypeReponse(p.getContenuGauche(), "Gauche");
-				repDroite = new TypeReponse(p.getContenuDroite(),"Droite");
-				reponses.add(new TypeReponse(repGauche, repDroite));
+				message.showMessageDialog(null, "Remplissez le champ de réponse", "Attention", JOptionPane.WARNING_MESSAGE);
+				estPossible=false;
 			}
-			this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
+				
+			
+			for (PanelReponseAsso p : this.reponsesPossibles)
+				if (p.getContenuGauche().equals("") || p.getContenuDroite().equals(""))
+				{
+					message.showMessageDialog(null, "Remplissez tous les champs", "Attention", JOptionPane.WARNING_MESSAGE);
+					estPossible=false;
+				}
+			
+			if (estPossible)
+			{
+				// Enregistrer la question et les réponses
+				ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
+				TypeReponse 		repGauche,repDroite;
+
+				for (PanelReponseAsso p : this.reponsesPossibles)
+				{
+					repGauche = new TypeReponse(p.getContenuGauche(), "Gauche");
+					repDroite = new TypeReponse(p.getContenuDroite(),"Droite");
+					reponses.add(new TypeReponse(repGauche, repDroite));
+				}
+				this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses);
+			}
 		}
 		if (e.getSource().equals(this.explication))
 		{
