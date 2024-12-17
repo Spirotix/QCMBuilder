@@ -16,10 +16,13 @@ public class PanelReponse extends JPanel implements ActionListener
 	private JTextField			contenu				;
 	private JCheckBox			validation 			;
 	private JFileChooser 		jfc 				;
+	private String 				type 				;
 
-	public PanelReponse (PanelCreerQCMRepUnique panelQ)
+	public PanelReponse (PanelCreerQCMRepUnique panelQ, String type)
 	{
 		this.panelQ = panelQ;
+		this.type 	= type 	;
+
 		this.setLayout(new GridLayout(1,3));
 		this.jfc  = new JFileChooser();
 
@@ -55,6 +58,18 @@ public class PanelReponse extends JPanel implements ActionListener
 		if (e.getSource().equals(this.corbeille))
 		{
 			this.panelQ.supprimer(this);
+		}
+
+		if (e.getSource().equals(this.validation))
+		{
+			if (this.type.equals("Unique"))
+			{
+				if (this.validation.isSelected())
+				{
+					this.panelQ		.toutDecocher(		);
+					this.validation	.setSelected (true	);
+				}
+			}
 		}
 
 		if (e.getSource().equals(this.importer))
@@ -97,6 +112,11 @@ public class PanelReponse extends JPanel implements ActionListener
 			else
 				System.out.println("Aucune image sélectionnée.");
 		}
+	}
+
+	public void decocher()
+	{
+		this.validation.setSelected(false);
 	}
 
 	private static String getExtension(String fileName) 

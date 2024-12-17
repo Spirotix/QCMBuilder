@@ -313,8 +313,11 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 			if (peutCreer) 
 			{
-				if (this.btnChoixMult.isSelected() || this.btnChoixUnique.isSelected())
-					new FrameCreerQCMRepUnique(this, this.ctrl);
+				if (this.btnChoixMult.isSelected())
+					new FrameCreerQCMRepUnique(this, this.ctrl, "Mult");
+					
+				if (this.btnChoixUnique.isSelected())
+					new FrameCreerQCMRepUnique(this, this.ctrl, "Unique");
 
 				if (this.btnAsso.isSelected())
 					new FrameCreerAssociation(this, this.ctrl);
