@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import src.Controleur;
 
-public class PanelListerQuestion extends JPanel implements ActionListener, ItemListener 
+public class PanelListerQuestion extends JPanel implements  ItemListener 
 {
 	private Controleur 	ctrl;
 	private Choice		choixRessource, choixNotion;
@@ -57,10 +57,6 @@ public class PanelListerQuestion extends JPanel implements ActionListener, ItemL
 
 		this.add(this.panelMilieu, BorderLayout.CENTER);
 
-	}
-
-	public void actionPerformed(ActionEvent e) 
-	{
 	}
 
 	public void majIHM ()
