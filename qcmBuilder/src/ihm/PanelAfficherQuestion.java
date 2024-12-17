@@ -35,7 +35,7 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 	{
 		this.ressource  = ressource	;
 		this.notion		= notion 	;
-		JPanel temp;
+		JPanel temp,temp2, tempBas;
 		System.out.println("test");
 
 		this.lstPanel = new ArrayList<JPanel> ();
@@ -46,19 +46,26 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 
 		for (int i=0; i<this.ctrl.getQuestions(this.ressource, this.notion).size(); i++)
 		{
-			temp = new JPanel ();
+			temp  = new JPanel ();
+			temp2 = new JPanel ();
+			temp.setLayout(new BorderLayout());
 			this.lstLabel.add(new JLabel(this.ctrl.getQuestions(this.ressource, this.notion).get(i)));
-			temp.add(this.lstLabel.get(i));
+			temp.add(this.lstLabel.get(i),BorderLayout.CENTER);
 
+			tempBas = new JPanel ();
 			this.btnModif.add(new JButton("Modifier"));
 			this.btnModif.get(i).addActionListener(this);
-			temp.add(this.btnModif.get(i));
+			tempBas.add(this.btnModif.get(i));
 
+			
 			this.btnSup.add(new JButton("Supprimer"));
 			this.btnSup.get(i).addActionListener(this);
-			temp.add(this.btnSup.get(i));
+			tempBas.add(this.btnSup.get(i));
 
-			this.lstPanel.add(temp);
+			temp.add(tempBas,BorderLayout.SOUTH );
+			temp2.add(temp);
+
+			this.lstPanel.add(temp2);
 			this.add(this.lstPanel.get(i));
 		}
 
