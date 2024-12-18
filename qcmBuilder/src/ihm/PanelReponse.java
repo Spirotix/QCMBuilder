@@ -50,6 +50,7 @@ public class PanelReponse extends JPanel implements ActionListener
 		JPanel panelDroite	 	= new JPanel (new BorderLayout());
 		JPanel panelDroiteHaut 	= new JPanel ();
 		this.panelImage	= new JPanel ();
+		this.panelImage.setPreferredSize(new Dimension(75, 75));
 		
 		panelDroiteHaut	.add (this.validation						);
 		panelDroiteHaut	.add (this.importer							);
