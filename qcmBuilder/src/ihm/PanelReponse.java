@@ -37,7 +37,7 @@ public class PanelReponse extends JPanel implements ActionListener
 		this.corbeille 	= new JButton(new ImageIcon("../img/poubelle.PNG"	));
 		this.importer	= new JButton(new ImageIcon("../img/inserer.PNG"	));
 
-		this.contenu 	= new JTextField ();
+		this.contenu 	= new TextFieldPerso ("contenu");
 		this.validation = new JCheckBox  ();
 
 		//Insertion
