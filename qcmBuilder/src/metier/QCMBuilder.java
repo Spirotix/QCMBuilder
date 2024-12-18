@@ -204,8 +204,8 @@ public class QCMBuilder
 				if (parts.length > 1)
 				{
 					String codeRessource = parts[0];
-					String nomNotion     = parts[1];
-					if ( codeRessource.equals( ressource.getCode() ) && nomNotion.equals( ressource.getNom() ) && ! ligneSupprimee )
+					String nomRessource  = parts[1];
+					if ( codeRessource.equals( ressource.getCode() ) && nomRessource.equals( ressource.getNom() ) && ! ligneSupprimee )
 					{
 						System.out.println("Ligne supprimée : " + ligne);
 						ligneSupprimee = true;
@@ -286,9 +286,57 @@ public class QCMBuilder
 	{
 		if (ressource == null)
 			return false;
-		if (!lstRessources.contains(ressource))
+
+	//	if (!lstRessources.contains(ressource))
+	//		return false;
+
+		File fichier     = new File("../data/ressources.csv");
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
+		{
+			String  ligne;
+			boolean ligneModifiee = false;
+
+			// Parcourir le fichier et écrire toutes les lignes
+			while ((ligne = br.readLine()) != null)
+			{
+				String[] parts = ligne.split(";");
+				if (parts.length > 1)
+				{
+					String codeRessource = parts[0];
+					String nomRessource  = parts[1];
+					if ( codeRessource.equals( ressource.getCode() ) && nomRessource.equals( ressource.getNom() ) && ! ligneModifiee )
+					{
+						bw.write( codeRessource + ";" + nouveauNom );
+						System.out.println("Ligne modifiee : " + ligne + "\n" +
+						                   "                 " + codeRessource + ";" + nouveauNom);
+						ligneModifiee = true;
+					}
+				}
+				bw.write(ligne);
+				bw.newLine();
+			}
+
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 			return false;
+		}
+
+		// Remplacer le fichier original par le fichier temporaire
+		if (fichier.delete())
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
+		else
+			System.out.println("Impossible de supprimer le fichier original.");
+
 		ressource.setNom(nouveauNom);
+
 		return true;
 	}
 

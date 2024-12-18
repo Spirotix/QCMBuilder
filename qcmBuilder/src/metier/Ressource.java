@@ -249,6 +249,73 @@ public class Ressource
 		return notionTrouvee;
 	}
 
+		/**
+	 * Modifie le nom d'une ressource.
+	 * 
+	 * @param notion
+	 *            La notion à modifier.
+	 * @param nouveauNom
+	 *            Le nouveau nom de la notion.
+	 * @return true si la notion a été modifiée, false sinon.
+	 */
+	public boolean modifierRessource(Notion notion, String nouveauNom)
+	{
+		if (notion == null)
+			return false;
+
+	//	if (!lstRessources.contains(ressource))
+	//		return false;
+
+		File fichier     = new File("../data/notions.csv");
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
+		{
+			String  ligne;
+			boolean ligneModifiee = false;
+
+			// Parcourir le fichier et écrire toutes les lignes
+			while ((ligne = br.readLine()) != null)
+			{
+				String[] parts = ligne.split(";");
+				if (parts.length > 1)
+				{
+					String codeRessource = parts[0];
+					String nomNotion     = parts[1];
+					if ( codeRessource.equals( notion.getRessource().getCode() ) && nomNotion.equals( notion.getNom() ) && ! ligneModifiee )
+					{
+						bw.write( codeRessource + ";" + nouveauNom );
+						System.out.println("Ligne modifiee : " + ligne + "\n" +
+						                   "                 " + codeRessource + ";" + nouveauNom);
+						ligneModifiee = true;
+					}
+				}
+				bw.write(ligne);
+				bw.newLine();
+			}
+
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+
+		// Remplacer le fichier original par le fichier temporaire
+		if (fichier.delete())
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
+		else
+			System.out.println("Impossible de supprimer le fichier original.");
+
+		notion.setNom(nouveauNom);
+
+		return true;
+	}
+
 	public static void main(String[] args)
 	{
 		Ressource r = new Ressource("R1.11", "Bases de la communication");
