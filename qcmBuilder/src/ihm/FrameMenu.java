@@ -32,7 +32,7 @@ public class FrameMenu extends JFrame implements ActionListener
 		this.creerQuestion 			= new JButton("Créer Question"			);
 		this.genererQuestionnaire 	= new JButton("Générer Questionnaire"	);
 		this.creerResNot			= new JButton("Créer Ressource/Notion"	);
-		this.modifierUneQuestion	= new JButton("Modifier une question"	);
+		this.modifierUneQuestion	= new JButton("Editez les questions"	);
 
 		this.creerQuestion			.setFont(new Font("Arial", Font.PLAIN, 14));
 		this.genererQuestionnaire	.setFont(new Font("Arial", Font.PLAIN, 14));
