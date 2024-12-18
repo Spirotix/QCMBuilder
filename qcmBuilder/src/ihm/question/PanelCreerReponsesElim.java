@@ -15,23 +15,35 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 	private JTextField			ordre, cout, contenu;
 	private JCheckBox			validation 			; 
 	private FileHandler 		fileHandler			;
+	private File 				fileChoisi 			;
+	private int 				indice				;
+	private JPanel 				panelImage 			;
+	private JLabel 				imageImporter		;
+
 
 	public PanelCreerReponsesElim (PanelCreerElim panelQ, int indice)
 	{
 		this.panelQ = panelQ;
-		this.fileHandler = new FileHandler("fichier_reponse"+indice);
+		this.indice = indice ;
+
+		this.imageImporter 	= new JLabel	  (							);
+		this.fileHandler 	= new FileHandler ("fichier_reponse"+indice );
+
 		this.setLayout(new GridLayout(1,4));
 
 		//Initialisation
-		this.corbeille = new JButton(new ImageIcon("../img/poubelle.PNG"));
+		this.corbeille 	= new JButton(new ImageIcon("../img/poubelle.PNG"));
 		this.importer	= new JButton(new ImageIcon("../img/inserer.PNG"	));
 		this.contenu 	= new JTextField ();
 		this.ordre 		= new JTextField ();
 		this.cout 		= new JTextField ();
-		this.validation = new JCheckBox();
+		this.validation = new JCheckBox  ();
 
 		//Insertion
-		this.add (this.corbeille );
+		JPanel panelGauche = new JPanel ();
+		panelGauche.add(this.corbeille);
+
+		this.add(panelGauche);
 		this.add (this.contenu	 );
 
 		this.ordre.setColumns(10);
@@ -40,14 +52,22 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 		JPanel temp = new JPanel();
 		temp.setLayout(new GridLayout(2,1));
 		
-		temp.add (this.ordre	 );
-		temp.add (this.cout);
+		temp.add (this.ordre);
+		temp.add (this.cout );
 
 		this.add(temp);
-		JPanel panelDroite = new JPanel ();
-		panelDroite.add (this.validation );
-		panelDroite.add (this.importer	 );
-		this.add (panelDroite);
+		JPanel panelDroite	 	= new JPanel (new BorderLayout());
+		JPanel panelDroiteHaut 	= new JPanel ();
+		this.panelImage	= new JPanel ();
+		this.panelImage.setPreferredSize(new Dimension(75, 75));
+		
+		panelDroiteHaut	.add (this.validation						);
+		panelDroiteHaut	.add (this.importer							);
+		panelDroite		.add (panelDroiteHaut, BorderLayout.NORTH	);
+		this.panelImage .add (this.imageImporter					);
+		panelDroite		.add (this.panelImage, BorderLayout.CENTER	);
+
+		this.add(panelDroite);
 		
 
 		//ActionListener / itemListener
@@ -64,6 +84,7 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
+		this.updateImage();
 		if (this.validation.isSelected())
 		{
 			this.cout .setText("");
@@ -98,14 +119,34 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 		{
 			try 
 			{
-				File selectedFile = fileHandler.chooseFile();
-				fileHandler.handleFile(selectedFile);
+				this.fileChoisi = fileHandler.chooseFile();
+				fileHandler.handleFile(this.fileChoisi);
+				this.updateImage();
 			} 
 			catch (IOException ex) 
 			{
 				System.out.println("Erreur lors du traitement du fichier : " + ex.getMessage());
 			}
 		}
+	}
+
+	public void updateImage()
+	{
+		if (this.fileChoisi==null)
+			return ;
+		try 
+		{
+			Image image 		 = ImageIO.read(new File("../data/questions_NOUVEAU/temp/fichier_reponse"+this.indice+"."+this.fileHandler.getExtension(this.fileChoisi.getName())));
+			Image imageRetaillee = image.getScaledInstance( this.panelImage.getHeight(), this.panelImage.getHeight(), Image.SCALE_AREA_AVERAGING);
+
+			this.imageImporter.setIcon(new ImageIcon(imageRetaillee));
+			System.out.println(this.imageImporter.getIcon());
+		} 
+		catch (IOException ex) 
+		{
+			System.out.println("Erreur lors du traitement du fichier : " + ex.getMessage());
+		}
+		this.repaint();
 	}
 
 	public String getString(){return this.contenu.getText();}
