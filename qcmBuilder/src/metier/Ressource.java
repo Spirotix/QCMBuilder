@@ -18,33 +18,19 @@ import src.metier.question.QCM;
 import src.metier.question.Question;
 import src.metier.reponse.*;
 
-/**
- * La classe Ressource représente une ressource avec un code, un nom et une liste de notions.
- */
 public class Ressource
 {
-	private String code;
-	private String nom;
+	private String       code;
+	private String       nom;
 	private List<Notion> lstNotions;
 
-	/**
-	 * Constructeur de la classe Ressource.
-	 * 
-	 * @param code Le code de la ressource.
-	 * @param nom Le nom de la ressource.
-	 */
 	public Ressource(String code, String nom)
 	{
-		this.code = code;
-		this.nom = nom;
+		this.code       = code;
+		this.nom        = nom;
 		this.lstNotions = lireNotions();
 	}
 
-	/**
-	 * Lit les notions à partir d'un fichier CSV et les ajoute à la liste des notions.
-	 * 
-	 * @return La liste des notions lues.
-	 */
 	private List<Notion> lireNotions()
 	{
 		List<Notion> notions = new ArrayList<>();
@@ -52,26 +38,26 @@ public class Ressource
 		{
 			Scanner scanner = new Scanner(new File("../data/notions.csv"));
 
-			if (scanner.hasNextLine()) scanner.nextLine();
+			if( scanner.hasNextLine()) scanner.nextLine();
 
 			while (scanner.hasNextLine())
 			{
-				String line = scanner.nextLine();
-				String[] parts = line.split(";");
-				String codeRessource = parts[0];
-				String nomNotion = parts[1];
+				String   line          = scanner.nextLine();
+				String[] parts         = line.split(";");
+				String   codeRessource = parts[0];
+				String   nomNotion     = parts[1];
 
-				if (codeRessource.equals(this.code))
+				if ( codeRessource.equals(this.code) )
 				{
 					// Créer le fichier d'informations de toutes les questions
-					File fileInformations = new File("../data/questions_NOUVEAU/" + this.getCode() + "/" + nomNotion + "/" + nomNotion + ".csv");
+					File fileInformations  = new File( "../data/questions_NOUVEAU/" + this.getCode() + "/" + nomNotion + "/" + nomNotion + ".csv" );
 
 					// Créer les répertoires non existants (ou ce trouve le csv)
 					fileInformations.getParentFile().mkdirs();
 
-					if (!fileInformations.exists())
+					if ( !fileInformations.exists() )
 					{
-						try (PrintWriter writerData = new PrintWriter(new FileWriter(fileInformations)))
+						try ( PrintWriter writerData = new PrintWriter( new FileWriter(fileInformations) ) )
 						{
 							writerData.println("N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION");
 						}
@@ -91,69 +77,40 @@ public class Ressource
 		return notions;
 	}
 
-	/**
-	 * Retourne le code de la ressource.
-	 * 
-	 * @return Le code de la ressource.
-	 */
-	public String getCode() { return this.code; }
-
-	/**
-	 * Retourne le nom de la ressource.
-	 * 
-	 * @return Le nom de la ressource.
-	 */
-	public String getNom() { return this.nom; }
-
-	/**
-	 * Retourne la liste des notions de la ressource.
-	 * 
-	 * @return La liste des notions.
-	 */
+	public String       getCode()    { return this.code;       }
+	public String       getNom()     { return this.nom;        }
 	public List<Notion> getNotions() { return this.lstNotions; }
 
-	/**
-	 * Modifie le nom de la ressource.
-	 * 
-	 * @param nom Le nouveau nom de la ressource.
-	 * @return true si le nom a été modifié avec succès, false sinon.
-	 */
 	public boolean setNom(String nom)
 	{ 
 		this.nom = nom;
 		return true;
 	}
 
-	/**
-	 * Ajoute une notion à la liste des notions de la ressource.
-	 * 
-	 * @param notion La notion à ajouter.
-	 * @return true si la notion a été ajoutée avec succès, false sinon.
-	 */
 	public boolean ajouterNotion(Notion notion)
 	{
-		for (Notion n : lstNotions)
+		for ( Notion n : lstNotions )
 		{
-			if (n.getNom().equals(notion.getNom()))
+			if ( n.getNom().equals(notion.getNom()) )
 				notion = n;
 		}
 
-		if (!lstNotions.contains(notion))
+		if ( ! lstNotions.contains(notion) )
 		{
 			try
 			{
-				PrintWriter writer = new PrintWriter(new FileWriter("../data/notions.csv", true));
+				PrintWriter writer = new PrintWriter( new FileWriter("../data/notions.csv", true) );
 
 				Scanner scanner = new Scanner(new File("../data/notions.csv"));
 				scanner.nextLine();
-				while (scanner.hasNextLine())
+				while ( scanner.hasNextLine() )
 				{
 					String line = scanner.nextLine();
-					if (line.equals(this.getCode() + notion.getNom()))
+					if ( line.equals( this.getCode() + notion.getNom() ) )
 					{
 						System.out.println("La ligne existe déjà");
 						scanner.close();
-						writer.close();
+						writer .close();
 						return false;
 					}
 
@@ -163,29 +120,14 @@ public class Ressource
 
 				lstNotions.add(notion);
 
-				writer.println(this.getCode() + ";" + notion.getNom());
+				writer.println( this.getCode() + ";" + notion.getNom() );
 
 				scanner.close();
-				writer.close();
+				writer .close();
 			}
 			catch (IOException e)
 			{
 				e.printStackTrace();
-			}
-
-			// Créer le fichier d'informations de toutes les questions
-			File fileInformations = new File("../data/questions_NOUVEAU/" + this.getCode() + "/" + notion.getNom() + "/" + notion.getNom() + ".csv");
-
-			// Créer les répertoires non existants (ou ce trouve le csv)
-			fileInformations.getParentFile().mkdirs();
-
-			if (!fileInformations.exists())
-			{
-				try (PrintWriter writerData = new PrintWriter(new FileWriter(fileInformations)))
-				{
-					writerData.println("N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION");
-				}
-				catch (IOException e) { e.printStackTrace(); }
 			}
 
 			return true;
@@ -196,12 +138,6 @@ public class Ressource
 		}
 	}
 
-	/**
-	 * Supprime une notion de la liste des notions de la ressource.
-	 * 
-	 * @param notion La notion à supprimer.
-	 * @return true si la notion a été supprimée avec succès, false sinon.
-	 */
 	public boolean supprimerNotion(Notion notion)
 	{
 		if (notion == null)
@@ -226,12 +162,52 @@ public class Ressource
 		return true;
 	}
 
-	/**
-	 * Recherche une notion par son nom dans la liste des notions de la ressource.
-	 * 
-	 * @param nom Le nom de la notion à rechercher.
-	 * @return La notion trouvée, ou null si aucune notion ne correspond.
-	 */
+	public static void supprimerLigne(Notion notion, File fichier)
+	{
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
+		{
+			String  ligne;
+			boolean ligneSupprimee = false;
+
+			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
+			while ((ligne = br.readLine()) != null)
+			{
+				String[] parts = ligne.split(";");
+				if (parts.length > 1)
+				{
+					String codeRessource = parts[0];
+					String nomNotion     = parts[1];
+					if ( codeRessource.equals( notion.getRessource().getCode() ) && nomNotion.equals( notion.getNom() ) && ! ligneSupprimee )
+					{
+						System.out.println("Ligne supprimée : " + ligne);
+						ligneSupprimee = true;
+						continue; // Ne pas écrire cette ligne
+					}
+				}
+				bw.write(ligne);
+				bw.newLine();
+			}
+	
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+	
+		// Remplacer le fichier original par le fichier temporaire
+		if (fichier.delete())
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
+		else
+			System.out.println("Impossible de supprimer le fichier original.");
+	}
+
 	public Notion rechercherNotion(String nom)
 	{
 		Notion notionTrouvee = null;
@@ -243,33 +219,28 @@ public class Ressource
 		return notionTrouvee;
 	}
 
-	/**
-	 * Méthode principale pour tester la classe Ressource.
-	 * 
-	 * @param args Les arguments de la ligne de commande.
-	 */
 	public static void main(String[] args)
 	{
 		Ressource r = new Ressource("R1.11", "Bases de la communication");
 
-		Notion n = new Notion("George", r);
+		Notion    n = new Notion("George", r);
 
-		r.ajouterNotion(n);
+		r.ajouterNotion( n );
 
 		List<ReponseQCM> lstQCM = new ArrayList<>();
-		lstQCM.add(new ReponseQCM("Vrai", "REPONSE 1"));
-		lstQCM.add(new ReponseQCM("Faux", "REPONSE 2"));
+		lstQCM.add( new ReponseQCM("Vrai", "REPONSE 1") );
+		lstQCM.add( new ReponseQCM("Faux", "REPONSE 2") );
 		List<ReponseElimination> lstEli = new ArrayList<>();
-		lstEli.add(new ReponseElimination("Vrai", "REPONSE 1", 0, 0));
-		lstEli.add(new ReponseElimination("Faux", "REPONSE 2", 1, 0.5));
+		lstEli.add( new ReponseElimination("Vrai", "REPONSE 1", 0, 0) );
+		lstEli.add( new ReponseElimination("Faux", "REPONSE 2", 1, 0.5) );
 		List<ReponseAssociation> lstAss = new ArrayList<>();
-		lstAss.add(new ReponseAssociation("REPONSE 1", new ReponseAssociation("REPONSE 11", null, false), true));
-		lstAss.add(new ReponseAssociation("REPONSE 2", new ReponseAssociation("REPONSE 22", null, false), true));
+		lstAss.add( new ReponseAssociation("REPONSE 1", new ReponseAssociation("REPONSE 11", null, false), true) );
+		lstAss.add( new ReponseAssociation("REPONSE 2", new ReponseAssociation("REPONSE 22", null, false), true) );
 
-		n.ajouterQuestion(new QCM(n, "Question hohoo", 0, 2.23, 1, lstQCM, "yeehaw"));
-		n.ajouterQuestion(new Elimination(n, "Question hohoooo", 10, 5.5, 3, lstEli, 2, "mmmmmmmmmm"));
-		n.ajouterQuestion(new Association(n, "Question hohoooooo", 30, 10.87, 4, lstAss, "la plus longue"));
+		n.ajouterQuestion( new QCM        (n, "Question hohoo", 0, 2.23, 1, lstQCM, "yeehaw") );
+		n.ajouterQuestion( new Elimination(n, "Question hohoooo", 10, 5.5, 3, lstEli, 2, "mmmmmmmmmm") );
+		n.ajouterQuestion( new Association(n, "Question hohoooooo", 30, 10.87, 4, lstAss, "la plus longue") );
 
-		// n.ajouterQuestion(new Elimination(n, "Question TESTTTTTTTTTT", 10, 5.5, 3, lstEli, 2, "")); // à ajouter apres les 3 autres
+	//	n.ajouterQuestion( new Elimination(n, "Question TESTTTTTTTTTT", 10, 5.5, 3, lstEli, 2, "") ); // à ajouter apres les 3 autres
 	}
 }
