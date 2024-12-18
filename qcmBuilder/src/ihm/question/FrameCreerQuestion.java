@@ -18,12 +18,12 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 	private JMenuItem 	 retourMenu		;
 	private JMenuItem 	 retour			;
 	private JMenuItem 	 importerImage	;
-	private JFileChooser jfc 			;
+	private FileHandler fileHandler		;
 
 	public FrameCreerQuestion (Controleur ctrl)
 	{
 		this.ctrl = ctrl;
-		this.jfc  = new JFileChooser();
+		this.fileHandler = new FileHandler("fichier_question");
 
 		this.setTitle   				("Creation de question"	);
 		this.setSize    				( 730,500  				);
@@ -31,7 +31,6 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 		this.setDefaultCloseOperation	(JFrame.EXIT_ON_CLOSE	);
 		this.setResizable				(false					);
 		this.setBackground				(Color.LIGHT_GRAY		);
-
 
 		JMenuBar menubMaBarre = new JMenuBar(			);
 		JMenu 	 menuAcceuil  = new JMenu	("Accueil"	);
@@ -78,55 +77,19 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 			this.dispose();
 		}
 
-		if (e.getSource().equals(this.importerImage))
+		if (e.getSource().equals(this.importerImage)) 
 		{
-			this.jfc.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Fichiers Image", "jpg", "jpeg", "png", "bmp", "gif"));
-
-			int response = this.jfc.showOpenDialog(null);
-
-			if (response == JFileChooser.APPROVE_OPTION) 
+			try 
 			{
-				try 
-				{
-					File selectedFile = this.jfc.getSelectedFile();
-
-					BufferedImage image = ImageIO.read(selectedFile);
-					if (image == null) 
-					{
-						System.out.println("Le fichier sélectionné n'est pas une image valide.");
-						return;
-					}
-
-					File targetDirectory = new File("imagesQuestion");
-					if (!targetDirectory.exists()) 
-						targetDirectory.mkdirs();
-
-					File outputFile = new File(targetDirectory, selectedFile.getName());
-
-					String formatName = getExtension(selectedFile.getName());
-					if (formatName == null)
-						formatName = "png"; 
-
-					ImageIO.write(image, formatName, outputFile);
-					System.out.println("Image enregistrée avec succès dans : " + outputFile.getAbsolutePath());
-				} 
-				catch (IOException ex) 
-				{
-					System.out.println("Erreur lors de la lecture ou de l'enregistrement de l'image : " + ex.getMessage());
-				}
+				File selectedFile = fileHandler.chooseFile();
+				fileHandler.handleFile(selectedFile);
+			} 
+			catch (IOException ex) 
+			{
+				System.out.println("Erreur lors du traitement du fichier : " + ex.getMessage());
 			}
-			else
-				System.out.println("Aucune image sélectionnée.");
-
 		}
 	}
 
-	private static String getExtension(String fileName) 
-	{
-		int lastDot = fileName.lastIndexOf('.');
-		if (lastDot > 0 && lastDot < fileName.length() - 1) 
-			return fileName.substring(lastDot + 1).toLowerCase();
-		return null;
-	}
 	public PanelCreerQuestion getPanelCreerQuestion () {return this.panelQ;}
 }

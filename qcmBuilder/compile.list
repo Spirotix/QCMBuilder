@@ -22,6 +22,7 @@
 ./src/ihm/FrameListerQuestion.java
 ./src/ihm/FrameMenu.java
 ./src/ihm/question/PanelCreerElim.java
+./src/ihm/question/FileHandler.java
 ./src/ihm/question/PanelCreerQCMRepUnique.java
 ./src/ihm/question/PanelCreerQuestion.java
 ./src/ihm/question/PanelCreerQuestionAsso.java

@@ -52,8 +52,12 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 		temp2.add (this.choixNotion);
 		panelGauche.add (temp2);
 
+		JScrollPane scrollPane=new JScrollPane (this.paq);
+		scrollPane.setVerticalScrollBarPolicy(scrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
 		this.panelMilieu.add(panelGauche);
-		this.panelMilieu.add(this.paq);
+		//this.panelMilieu.add(this.paq);
+		this.panelMilieu.add(scrollPane);
 
 		this.add(new JPanel());
 

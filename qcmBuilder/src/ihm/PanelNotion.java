@@ -21,7 +21,6 @@ public class PanelNotion extends JPanel implements ActionListener
 		this.ctrl=ctrl;
 		this.panelC=panelC	;
 		this.ressource="";
-
 		
 		this.lstLabel 	= new ArrayList<JLabel>();
 		this.lstSup 	= new ArrayList<JButton>();
@@ -39,6 +38,7 @@ public class PanelNotion extends JPanel implements ActionListener
 		this.lstSup 	= new ArrayList<JButton>();
 		this.lstPanel 	= new ArrayList<JPanel> ();
 		this.removeAll();
+
 
 		for (int i=0; i<this.ctrl.getChoixNotion(ressource).size(); i++)
 		{

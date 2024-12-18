@@ -23,6 +23,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 	private FrameCreerQCMRepUnique	fr 							;
 	private Controleur 				ctrl						;
 	private String 					type 						;
+	private int 					indiceReponse 				;
 
 	public PanelCreerQCMRepUnique(PanelCreerQuestion panelQ, FrameCreerQCMRepUnique fr, Controleur ctrl, String type) 
 	{
@@ -30,10 +31,11 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 		this.ctrl 	= ctrl	;
 		this.fr 	= fr	;
 		this.type	= type	;
+		this.indiceReponse = 1;
 
 		this.reponsesPossibles = new ArrayList<>();
-		this.reponsesPossibles.add(new PanelReponse(this, this.type));
-		this.reponsesPossibles.add(new PanelReponse(this, this.type));
+		this.reponsesPossibles.add(new PanelReponse(this, this.type,this.indiceReponse++));
+		this.reponsesPossibles.add(new PanelReponse(this, this.type,this.indiceReponse++));
 
 		this.setLayout(new BorderLayout());
 
@@ -105,7 +107,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 
 		if (e.getSource() == this.ajouterQ) 
 		{
-			this.reponsesPossibles.add(new PanelReponse(this, this.type));
+			this.reponsesPossibles.add(new PanelReponse(this, this.type,this.indiceReponse++));
 			mettreAJourReponses();
 		} 
 		if (e.getSource() == this.enreg) 

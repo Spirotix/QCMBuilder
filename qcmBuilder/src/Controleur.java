@@ -104,12 +104,25 @@ public class Controleur
 		}
 	}
 
+	/**
+	 * Supprime une notion existante à une ressource donnée.
+	 *
+	 * @param nomRessource Le nom de la ressource.
+	 * @param nomNotion Le nom de la notion.
+	 * @return true si la notion a été supprimée avec succès, false sinon.
+	 */
 	public boolean supprimerNotion(String nomRessource, String nomNotion)
 	{
 		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
 		return r.supprimerNotion( r.rechercherNotion(nomNotion) );
 	}
 
+	/**
+	 * Supprime une ressource donnée.
+	 *
+	 * @param codeRessource Le code de la ressource.
+	 * @return true si la ressource a été supprimée avec succès, false sinon.
+	 */
 	public boolean supprimerRessource(String codeRessource)
 	{
 		return qcmBuilder.supprimerRessource( qcmBuilder.rechercherRessource(codeRessource) );
