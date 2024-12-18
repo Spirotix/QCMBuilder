@@ -8,7 +8,6 @@ import src.Controleur;
 
 public class PanelRessource extends JPanel implements ActionListener
 {
-	//private Controleur ctrl
 	private Controleur 			ctrl	 ;
 	private PanelCreerRessource panelC	 ;
 	private ArrayList<JLabel> 	lstLabel ;
@@ -56,7 +55,6 @@ public class PanelRessource extends JPanel implements ActionListener
 			this.add(this.lstPanel.get(i));
 		}
 		this.setVisible(true);
-
 	}
 
 	public void Update()
@@ -72,7 +70,14 @@ public class PanelRessource extends JPanel implements ActionListener
 		for (int i=0; i<this.ctrl.getChoixRessources().size(); i++)
 		{
 			tempP = new JPanel();
+			
 			this.lstLabel	.add (new JLabel(this.ctrl.getChoixRessources().get(i))	);
+
+			if (this.panelC.getPanelNotion().getRessource().equals(this.lstLabel.get(i).getText()))
+				this.lstLabel.get(i).setForeground(Color.RED);
+			else 
+				this.lstLabel.get(i).setForeground(Color.BLACK);
+			
 			this.lstSup	 	.add (new JButton("Supprimer")							);
 			this.lstPanel	.add (new JPanel(new BorderLayout())					);
 			this.lstPanel	.get (i).add(this.lstLabel	.get(i), BorderLayout.CENTER);
@@ -97,7 +102,6 @@ public class PanelRessource extends JPanel implements ActionListener
 			this.add(this.lstPanel.get(i));
 		}
 		this.revalidate();
-
 	}
 
 	public void actionPerformed(ActionEvent e)
@@ -109,9 +113,7 @@ public class PanelRessource extends JPanel implements ActionListener
 				Update();
 			}
 	}
-
 	
-
 	public void ajouter(String nomRessource)
 	{
 		//this.ctrl.ajouterRessource(nomRessource);

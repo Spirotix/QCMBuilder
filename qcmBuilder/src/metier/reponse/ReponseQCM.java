@@ -36,15 +36,25 @@ public class ReponseQCM implements Reponse
 	 */
 	public void setEstVrai(boolean estVrai) { this.estVrai = estVrai; }
 
+	/**
+	 * Retourne le texte de la réponse.
+	 * 
+	 * @return Le texte de la réponse.
+	 */
 	@Override
 	public String getText()
 	{
 		return textReponse;
 	}
 
+	/**
+	 * Définit si le texte de la réponse.
+	 * 
+	 * @param textReponse Le texte de la réponse.
+	 */
 	@Override
-	public void setText(String text)
+	public void setText(String textReponse)
 	{
-		this.textReponse = text;
+		this.textReponse = textReponse;
 	}
 }

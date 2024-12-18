@@ -7,13 +7,13 @@ import src.Controleur;
 
 public class PanelGenererQuestionnaire extends JPanel implements ActionListener, ItemListener
 {
-	private Controleur 			ctrl			;
-	private Choice 				choixRessource	;
-	private ButtonGroup			grpOuiNon		;
-	private JRadioButton		btnChronoOui, btnChronoNon	;
-	private JPanel 				ligne1, fin		;
-	private PanelGrilleQuestionnaire grille 	;
-	private JButton 			generer			;
+	private Controleur 				 ctrl						;
+	private Choice 					 choixRessource				;
+	private ButtonGroup				 grpOuiNon					;
+	private JRadioButton			 btnChronoOui, btnChronoNon	;
+	private JPanel 					 ligne1, fin				;
+	private PanelGrilleQuestionnaire grille 					;
+	private JButton 				 generer					;
 
 	public PanelGenererQuestionnaire (Controleur ctrl)
 	{

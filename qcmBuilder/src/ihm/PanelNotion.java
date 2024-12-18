@@ -8,9 +8,9 @@ import src.Controleur;
 
 public class PanelNotion extends JPanel implements ActionListener
 {
-	private Controleur 			ctrl	;
-	private PanelCreerRessource panelC	;
-	private ArrayList<JLabel> 	lstLabel;
+	private Controleur 			ctrl	 ;
+	private PanelCreerRessource panelC	 ;
+	private ArrayList<JLabel> 	lstLabel ;
 	private String				ressource;
 	private ArrayList<JButton> 	lstSup	 ;
 	private ArrayList<JPanel>	lstPanel ;
@@ -18,11 +18,11 @@ public class PanelNotion extends JPanel implements ActionListener
 	
 	public PanelNotion (Controleur ctrl, PanelCreerRessource panelC)
 	{
-		this.ctrl=ctrl;
-		this.panelC=panelC	;
-		this.ressource="";
+		this.ctrl		= ctrl	 ;
+		this.panelC		= panelC ;
+		this.ressource	= ""	 ;
 		
-		this.lstLabel 	= new ArrayList<JLabel>();
+		this.lstLabel 	= new ArrayList<JLabel> ();
 		this.lstSup 	= new ArrayList<JButton>();
 		this.lstPanel 	= new ArrayList<JPanel> ();
 
@@ -33,7 +33,7 @@ public class PanelNotion extends JPanel implements ActionListener
 
 	public void Update(String ressource)
 	{
-		this.ressource = ressource;
+		this.ressource  = ressource				  ;
 		this.lstLabel	= new ArrayList<JLabel> ();
 		this.lstSup 	= new ArrayList<JButton>();
 		this.lstPanel 	= new ArrayList<JPanel> ();
