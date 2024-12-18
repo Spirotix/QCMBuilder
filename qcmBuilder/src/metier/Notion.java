@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 import src.metier.question.*;
 import src.metier.reponse.*;
+import java.nio.file.*;
 
 /**
  * Classe représentant une notion avec un nom, une ressource et une liste de
@@ -425,6 +426,33 @@ public class Notion
 								}
 							}
 						}
+						try 
+						{
+							Path sourceDir = Paths.get("../data/questions_NOUVEAU/temp");
+							Path destDir = Paths.get("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/"
+								+ this.nom + "/question_" + (this.lstQuestions.size() + 1)+"/complement");
+
+							if (!Files.exists(sourceDir) || !Files.isDirectory(sourceDir)) 
+								throw new IllegalArgumentException("Le répertoire source n'existe pas ou n'est pas un répertoire.");
+										
+							Files.list(sourceDir).forEach(sourceFile -> 
+							{
+								try 
+								{
+									Path destFile = destDir.resolve(sourceFile.getFileName());
+									Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
+									System.out.println("Fichier copié : " + sourceFile + " -> " + destFile);
+								} 
+								catch (IOException e) 
+								{
+									System.out.println("Erreur lors de la copie du fichier : " + sourceFile + " - " + e.getMessage());
+								}
+							});
+						} 
+						catch (IOException e) 
+						{
+							System.out.println("Erreur lors de la copie des fichiers : " + e.getMessage());
+						}
 
 						lstQuestions.add(association);
 					}
@@ -437,6 +465,8 @@ public class Notion
 			{
 				e.printStackTrace();
 			}
+
+
 			return true;
 		}
 		else

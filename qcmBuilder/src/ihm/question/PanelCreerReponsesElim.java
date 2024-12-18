@@ -10,16 +10,16 @@ import javax.swing.*;
 
 public class PanelCreerReponsesElim extends JPanel implements ActionListener
 {
-	private PanelCreerElim 		panelQ;
-	private JButton				corbeille, importer;
-	private JTextField			ordre, cout, contenu	;
-	private JCheckBox			validation ; 
-	private JFileChooser 		jfc;
+	private PanelCreerElim 		panelQ				;
+	private JButton				corbeille, importer ;
+	private JTextField			ordre, cout, contenu;
+	private JCheckBox			validation 			; 
+	private FileHandler 		fileHandler			;
 
-	public PanelCreerReponsesElim (PanelCreerElim panelQ)
+	public PanelCreerReponsesElim (PanelCreerElim panelQ, int indice)
 	{
 		this.panelQ = panelQ;
-		this.jfc  = new JFileChooser();
+		this.fileHandler = new FileHandler("fichier_reponse"+indice);
 		this.setLayout(new GridLayout(1,4));
 
 		//Initialisation
@@ -89,51 +89,22 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 			}
 		}
 
-
 		if (e.getSource().equals(this.corbeille))
 		{
 			this.panelQ.supprimer(this);
 		}
 
-		if (e.getSource().equals(this.importer))
+		if (e.getSource().equals(this.importer)) 
 		{
-			this.jfc.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Fichiers Image", "jpg", "jpeg", "png", "bmp", "gif"));
-
-			int response = this.jfc.showOpenDialog(null);
-
-			if (response == JFileChooser.APPROVE_OPTION) 
+			try 
 			{
-				try 
-				{
-					File selectedFile = this.jfc.getSelectedFile();
-
-					BufferedImage image = ImageIO.read(selectedFile);
-					if (image == null) 
-					{
-						System.out.println("Le fichier sélectionné n'est pas une image valide.");
-						return;
-					}
-
-					File targetDirectory = new File("imagesReponseElim");
-					if (!targetDirectory.exists()) 
-						targetDirectory.mkdirs();
-
-					File outputFile = new File(targetDirectory, selectedFile.getName());
-
-					String formatName = getExtension(selectedFile.getName());
-					if (formatName == null)
-						formatName = "png"; 
-
-					ImageIO.write(image, formatName, outputFile);
-					System.out.println("Image enregistrée avec succès dans : " + outputFile.getAbsolutePath());
-				} 
-				catch (IOException ex) 
-				{
-					System.out.println("Erreur lors de la lecture ou de l'enregistrement de l'image : " + ex.getMessage());
-				}
+				File selectedFile = fileHandler.chooseFile();
+				fileHandler.handleFile(selectedFile);
 			} 
-			else
-				System.out.println("Aucune image sélectionnée.");
+			catch (IOException ex) 
+			{
+				System.out.println("Erreur lors du traitement du fichier : " + ex.getMessage());
+			}
 		}
 	}
 
@@ -168,14 +139,6 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 			//System.out.println("Ce n'est pas un entier (cout)");
 			return 0;
 		}
-	}
-
-	private static String getExtension(String fileName) 
-	{
-		int lastDot = fileName.lastIndexOf('.');
-		if (lastDot > 0 && lastDot < fileName.length() - 1) 
-			return fileName.substring(lastDot + 1).toLowerCase();
-		return null;
 	}
 
 	public void decocher()

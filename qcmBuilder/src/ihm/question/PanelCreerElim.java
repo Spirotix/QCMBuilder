@@ -18,16 +18,18 @@ public class PanelCreerElim extends JPanel implements ActionListener
 	private String 								txtExplication				;
 	private FrameCreerElimination				fr 							;
 	private Controleur							ctrl 						;
+	private int 								indiceReponse 				;
 
 	public PanelCreerElim(PanelCreerQuestion panelQ, FrameCreerElimination fr, Controleur ctrl) 
 	{
-		this.panelQ = panelQ;
-		this.ctrl	= ctrl	;
-		this.fr 	= fr	;
+		this.panelQ 		= panelQ;
+		this.ctrl			= ctrl	;
+		this.fr 			= fr	;
+		this.indiceReponse 	= 1		;
 
 		this.reponsesPossibles = new ArrayList<>();
-		this.reponsesPossibles.add(new PanelCreerReponsesElim(this));
-		this.reponsesPossibles.add(new PanelCreerReponsesElim(this));
+		this.reponsesPossibles.add(new PanelCreerReponsesElim(this,this.indiceReponse++));
+		this.reponsesPossibles.add(new PanelCreerReponsesElim(this,this.indiceReponse++));
 
 		this.setLayout(new BorderLayout());
 
@@ -93,7 +95,7 @@ public class PanelCreerElim extends JPanel implements ActionListener
 
 		if (e.getSource() == this.ajouterQ) 
 		{
-			this.reponsesPossibles.add(new PanelCreerReponsesElim(this));
+			this.reponsesPossibles.add(new PanelCreerReponsesElim(this,this.indiceReponse++));
 			mettreAJourReponses();
 		} 
 
