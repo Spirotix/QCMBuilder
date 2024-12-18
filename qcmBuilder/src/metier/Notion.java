@@ -426,40 +426,46 @@ public class Notion
 								}
 							}
 						}
-						try 
+
+						try
 						{
-							Path sourceDir = Paths.get("../data/questions_NOUVEAU/temp");
-							Path destDir = Paths.get("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/"
-								+ this.nom + "/question_" + (this.lstQuestions.size() + 1)+"/complement");
+							Path sourceDir = Paths.get( "../data/questions_NOUVEAU/temp" );
+							Path destDir   = Paths.get( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/"
+								                        + this.nom + "/question_" + (this.lstQuestions.size() + 1)+"/complement" );
 
 							if (!Files.exists(sourceDir) || !Files.isDirectory(sourceDir)) 
 								throw new IllegalArgumentException("Le répertoire source n'existe pas ou n'est pas un répertoire.");
-										
-							Files.list(sourceDir).forEach(sourceFile -> 
+
+							Files.list(sourceDir).forEach(sourceFile ->
 							{
-								try 
+								try
 								{
 									Path destFile = destDir.resolve(sourceFile.getFileName());
 									Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
-									System.out.println("Fichier copié : " + sourceFile + " -> " + destFile);
-								} 
-								catch (IOException e) 
+									System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
+								}
+								catch (IOException e)
 								{
-									System.out.println("Erreur lors de la copie du fichier : " + sourceFile + " - " + e.getMessage());
+									System.out.println( "Erreur lors de la copie du fichier : " + sourceFile + " - " + e.getMessage() );
 								}
 							});
-						} 
-						catch (IOException e) 
+						}
+						catch (IOException e)
 						{
-							System.out.println("Erreur lors de la copie des fichiers : " + e.getMessage());
+							System.out.println( "Erreur lors de la copie des fichiers : " + e.getMessage() );
 						}
 
 						lstQuestions.add(association);
 					}
 
-					writerData.println(this.lstQuestions.size() + ";" + (indRep - 1) + ";" + question.getNbPoint()
-							+ ";" + question.getClass().getSimpleName() + ";" + question.getStringDifficulte() + ";"
-							+ question.getTimer() + ";" + question.getExplication());
+					writerData.println(this.lstQuestions.size() + ";" +
+							(indRep - 1)                        + ";" +
+							question.getNbPoint()               + ";" +
+							question.getClass().getSimpleName() + ";" +
+							question.getStringDifficulte()      + ";" +
+							question.getTimer()                 + ";" +
+							question.getExplication()
+					);
 				}
 			} catch (IOException e)
 			{
