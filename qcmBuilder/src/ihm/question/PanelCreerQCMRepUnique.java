@@ -87,8 +87,12 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 	private void mettreAJourReponses() 
 	{
 		panelReponses.removeAll();
-		for (PanelReponse p : this.reponsesPossibles) 
+		for (PanelReponse p : this.reponsesPossibles)
+		{
 			panelReponses.add(p);
+			p.updateImage();
+		} 
+			
 		
 		panelReponses.revalidate();
 		panelReponses.repaint();

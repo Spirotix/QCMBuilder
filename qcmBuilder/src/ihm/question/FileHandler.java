@@ -14,8 +14,8 @@ public class FileHandler
 
 	public FileHandler(String nomFichier) 
 	{
-		this.nomFichier	 = nomFichier;
-		this.fileChooser = new JFileChooser();
+		this.nomFichier	 = nomFichier			;
+		this.fileChooser = new JFileChooser()	;
 		this.fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
 			"Fichiers autorisés (Images, MP3, MP4, PDF)",
 			"jpg", "jpeg", "png", "bmp", "gif", "mp3", "mp4", "pdf"));
@@ -46,14 +46,14 @@ public class FileHandler
 		switch (extension) 
 		{
 			case "jpg": case "jpeg": case "png": case "bmp": case "gif":
-				gererImage(file, extension);
-				break;
+				gererImage	(file, extension); break;
+
 			case "mp3": case "m34":
-				gererAudio(file, extension);
-				break;
+				gererAudio	(file, extension); break;
+
 			case "pdf":
-				gererPDF(file, extension);
-				break;
+				gererPDF	(file, extension); break;
+
 			default:
 				System.out.println("Type de fichier non supporté.");
 		}
@@ -82,7 +82,7 @@ public class FileHandler
 	{
 		File targetDirectory = new File("../data/questions_NOUVEAU/temp");
 		if (!targetDirectory.exists()) 
-			targetDirectory.mkdirs();
+			 targetDirectory.mkdirs();
 
 		File outputFile = new File(targetDirectory, renommerFichier(extension));
 		if (!file.renameTo(outputFile))
@@ -95,7 +95,7 @@ public class FileHandler
 	{
 		File targetDirectory = new File("../data/questions_NOUVEAU/temp");
 		if (!targetDirectory.exists()) 
-			targetDirectory.mkdirs();
+			 targetDirectory.mkdirs();
 
 		File outputFile = new File(targetDirectory, renommerFichier(extension));
 		if (!file.renameTo(outputFile))
@@ -104,7 +104,7 @@ public class FileHandler
 			System.out.println("Fichier PDF enregistré avec succès dans : " + outputFile.getAbsolutePath());
 	}
 
-	private String getExtension(String fileName) 
+	public String getExtension(String fileName) 
 	{
 		int lastDot = fileName.lastIndexOf('.');
 		if (lastDot > 0 && lastDot < fileName.length() - 1) 
