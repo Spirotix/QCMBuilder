@@ -13,8 +13,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import src.ihm.*;
-import src.metier.reponse.*;
 import src.metier.question.*;
+import src.metier.reponse.*;
 
 /**
  * La classe QCMBuilder est responsable de la gestion des ressources et de la
@@ -608,7 +608,7 @@ public class QCMBuilder
 	 * "\t<div class=\"container question-multiple\">\n" + //
 	 * "\t\t<div class=\"informations\">\n" + //
 	 * "\t\t\t<p class=\"question-number\">Question numéro : <span class=\"question-number-data\">1</span></p>\n"
-	 * + //
+	 * + //                                                                                                                                                                                              
 	 * "\t\t\t<p class=\"notion\">Notion : <span class=\"notion-data\">Notion 1</span></p>\n"
 	 * + //
 	 * "\t\t\t<p class=\"difficulty\">Difficulté : <span class=\"difficulty-data\">Facile</span></p>\n"
