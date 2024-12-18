@@ -1,17 +1,22 @@
 package src.metier;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 import src.metier.question.Association;
 import src.metier.question.Elimination;
 import src.metier.question.QCM;
+import src.metier.question.Question;
 import src.metier.reponse.*;
 
 public class Ressource
@@ -114,6 +119,9 @@ public class Ressource
 					System.out.println("Ajout : " + this.getCode() + ";" + notion.getNom() + "\n");
 				}
 
+				File fileRep = new File( "../data/questions_NOUVEAU/" + this.getCode() + "/" + notion.getNom() );
+				fileRep.mkdirs();
+
 				lstNotions.add(notion);
 
 				writer.println( this.getCode() + ";" + notion.getNom() );
@@ -124,21 +132,6 @@ public class Ressource
 			catch (IOException e)
 			{
 				e.printStackTrace();
-			}
-
-			// Créer le fichier d'informations de toutes les questions
-			File fileInformations  = new File( "../data/questions_NOUVEAU/" + this.getCode() + "/" + notion.getNom() + "/" + notion.getNom() + ".csv" );
-
-			// Créer les répertoires non existants (ou ce trouve le csv)
-			fileInformations.getParentFile().mkdirs();
-
-			if ( !fileInformations.exists() )
-			{
-				try ( PrintWriter writerData = new PrintWriter( new FileWriter(fileInformations) ) )
-				{
-					writerData.println("N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION");
-				}
-				catch (IOException e) { e.printStackTrace(); }
 			}
 
 			return true;
@@ -153,10 +146,96 @@ public class Ressource
 	{
 		if (notion == null)
 			return false;
-		if (!lstNotions.contains(notion))
-			return false;
+
+	//	if (!lstNotions.contains(notion))
+	//		return false;
+
+		System.out.println("SupprimerR");
+
+		Iterator<Question> iterator = notion.getQuestions().iterator();
+		while (iterator.hasNext())
+		{
+			Question q = iterator.next();
+			iterator.remove(); // Supprime en passant par l'itérateur
+			notion.supprimerQuestion(q);
+		}
+
+		File fileCSV = new File("../data/notions.csv");
+		File fileRep = new File("../data/questions_NOUVEAU/" + this.getCode() + "/" + notion.getNom());
+
+		// Supprimer la ligne
+		Ressource.supprimerLigneEtRepertoire(notion, fileCSV, fileRep);
+
 		lstNotions.remove(notion);
 		return true;
+	}
+
+	public static void supprimerLigneEtRepertoire(Notion notion, File fichier, File repertoireNotion)
+	{
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
+		{
+			String  ligne;
+			boolean ligneSupprimee = false;
+
+			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
+			while ((ligne = br.readLine()) != null)
+			{
+				System.out.println(ligne);
+				String[] parts = ligne.split(";");
+				if (parts.length > 1)
+				{
+					String codeRessource = parts[0];
+					String nomNotion     = parts[1];
+					if ( codeRessource.equals( notion.getRessource().getCode() ) && nomNotion.equals( notion.getNom() ) && ! ligneSupprimee )
+					{
+						System.out.println("Ligne supprimée : " + ligne);
+						ligneSupprimee = true;
+						continue; // Ne pas écrire cette ligne
+					}
+				}
+				bw.write(ligne);
+				bw.newLine();
+			}
+	
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return;
+		}
+	
+		// Remplacer le fichier original par le fichier temporaire
+		if (fichier.delete())
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
+		else
+			System.out.println("Impossible de supprimer le fichier original.");
+
+			// Supprimer le répertoire
+		supprimerRepertoireRecursif(repertoireNotion);
+	}
+
+	private static void supprimerRepertoireRecursif(File dossier)
+	{
+		if (dossier.exists())
+		{
+			if (dossier.isDirectory())
+			{
+				File[] fichiers = dossier.listFiles();
+				if (fichiers != null)
+					for (File fichier : fichiers)
+						supprimerRepertoireRecursif(fichier);
+			}
+			if (dossier.delete())
+				System.out.println("Supprimé : " + dossier.getAbsolutePath());
+			else
+				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());
+		}
 	}
 
 	public Notion rechercherNotion(String nom)
@@ -168,6 +247,73 @@ public class Ressource
 				notionTrouvee = notion;
 		}
 		return notionTrouvee;
+	}
+
+	/**
+	 * Modifie le nom d'une notion.
+	 * 
+	 * @param notion
+	 *            La notion à modifier.
+	 * @param nouveauNom
+	 *            Le nouveau nom de la notion.
+	 * @return true si la notion a été modifiée, false sinon.
+	 */
+	public boolean modifierNotion(Notion notion, String nouveauNom)
+	{
+		if (notion == null)
+			return false;
+
+	//	if (!lstRessources.contains(ressource))
+	//		return false;
+
+		File fichier     = new File("../data/notions.csv");
+		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
+	
+		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
+			 BufferedWriter bw = new BufferedWriter(new FileWriter(fichierTemp)))
+		{
+			String  ligne;
+			boolean ligneModifiee = false;
+
+			// Parcourir le fichier et écrire toutes les lignes
+			while ((ligne = br.readLine()) != null)
+			{
+				String[] parts = ligne.split(";");
+				if (parts.length > 1)
+				{
+					String codeRessource = parts[0];
+					String nomNotion     = parts[1];
+					if ( codeRessource.equals( notion.getRessource().getCode() ) && nomNotion.equals( notion.getNom() ) && ! ligneModifiee )
+					{
+						bw.write( codeRessource + ";" + nouveauNom );
+						System.out.println("Ligne modifiee : " + ligne + "\n" +
+						                   "                 " + codeRessource + ";" + nouveauNom);
+						ligneModifiee = true;
+					}
+				}
+				bw.write(ligne);
+				bw.newLine();
+			}
+
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+
+		// Remplacer le fichier original par le fichier temporaire
+		if (fichier.delete())
+			if (!fichierTemp.renameTo(fichier))
+				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			else
+				System.out.println("Fichier mis à jour avec succès.");
+		else
+			System.out.println("Impossible de supprimer le fichier original.");
+
+		notion.setNom(nouveauNom);
+
+		return true;
 	}
 
 	public static void main(String[] args)

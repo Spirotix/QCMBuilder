@@ -7,11 +7,11 @@ import src.Controleur;
 
 public class PanelListerQuestion extends JPanel implements  ItemListener 
 {
-	private Controleur 	ctrl;
-	private Choice		choixRessource, choixNotion;
-	private String 		ressourceQuestion;
-	private PanelAfficherQuestion paq;
-	private JPanel 		panelMilieu;
+	private Controleur 			  ctrl						  ;
+	private Choice				  choixRessource, choixNotion ;
+	private String 				  ressourceQuestion			  ;
+	private PanelAfficherQuestion paq						  ;
+	private JPanel 			 	  panelMilieu				  ;
 
 	public PanelListerQuestion (Controleur ctrl)
 	{
@@ -52,8 +52,12 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 		temp2.add (this.choixNotion);
 		panelGauche.add (temp2);
 
+		JScrollPane scrollPane=new JScrollPane (this.paq);
+		scrollPane.setVerticalScrollBarPolicy(scrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
 		this.panelMilieu.add(panelGauche);
-		this.panelMilieu.add(this.paq);
+		//this.panelMilieu.add(this.paq);
+		this.panelMilieu.add(scrollPane);
 
 		this.add(new JPanel());
 
@@ -86,7 +90,7 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 		{
 			this.paq.Update(this.choixRessource.getSelectedItem(), this.choixNotion.getSelectedItem());
 			this.repaint();
-			this.majIHM();
+			this.majIHM ();
 		}
 	}
 

@@ -9,17 +9,17 @@ import src.ihm.question.*;
 
 public class PanelAfficherQuestion extends JPanel implements ActionListener
 {
-	private Controleur 	ctrl	;
-	private ArrayList<JPanel> 	lstPanel;
-	private String				ressource, notion;
-	private ArrayList<JButton> 	btnModif, btnSup;
-	private ArrayList<JLabel>	lstLabel ;
+	private Controleur 			ctrl				;
+	private ArrayList<JPanel> 	lstPanel			;
+	private String				ressource, notion	;
+	private ArrayList<JButton> 	btnModif, btnSup	;
+	private ArrayList<JLabel>	lstLabel 			;
 
 	public PanelAfficherQuestion (Controleur ctrl)
 	{
-		this.ctrl=ctrl;
-		this.ressource="";
-		this.notion="";
+		this.ctrl		= ctrl	;
+		this.ressource	= ""	;
+		this.notion		= ""	;
 		
 		this.lstPanel = new ArrayList<JPanel> ();
 		this.btnModif = new ArrayList<JButton>();
@@ -53,8 +53,8 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 			temp.add(this.lstLabel.get(i),BorderLayout.CENTER);
 
 			tempBas = new JPanel ();
-			this.btnModif.add(new JButton("Modifier"));
-			this.btnModif.get(i).addActionListener(this);
+			this.btnModif.add (new JButton("Modifier")  );
+			this.btnModif.get (i).addActionListener(this);
 			tempBas.add(this.btnModif.get(i));
 
 			
@@ -62,8 +62,8 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 			this.btnSup.get(i).addActionListener(this);
 			tempBas.add(this.btnSup.get(i));
 
-			temp.add(tempBas,BorderLayout.SOUTH );
-			temp2.add(temp);
+			temp .add(tempBas,BorderLayout.SOUTH );
+			temp2.add(temp						 );
 
 			this.lstPanel.add(temp2);
 			this.add(this.lstPanel.get(i));
@@ -71,8 +71,8 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 		//JScrollPane scrollPane = new JScrollPane(this, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 
-		this.revalidate();
-		this.repaint();
+		this.revalidate	();
+		this.repaint	();
 
 	}
 
@@ -89,11 +89,9 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 
 			if (e.getSource().equals(this.btnModif.get(i)))
 			{
-				System.out.println("modif");
-				FrameCreerQuestion fr =new FrameCreerQuestion(this.ctrl);
-				PanelCreerQuestion panel = new PanelCreerQuestion(this.ctrl, fr); 
+				FrameCreerQuestion fr	 = new FrameCreerQuestion(this.ctrl		);
+				PanelCreerQuestion panel = new PanelCreerQuestion(this.ctrl, fr	); 
 
-				System.out.println("modif2");
 				panel.setValeur("10","7,5","Initiation au developpement","TP1","1" );
 				return;
 			}

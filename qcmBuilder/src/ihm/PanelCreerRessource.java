@@ -7,20 +7,20 @@ import src.Controleur;
 
 public class PanelCreerRessource extends JPanel implements ActionListener
 {
-	private Controleur 	ctrl;
-	private PanelRessource 		panelR;
-	private PanelNotion 		panelN;
-	private JButton				btnAjouterR, btnAjouterN;
+	private Controleur 			ctrl						;
+	private PanelRessource 		panelR						;
+	private PanelNotion 		panelN						;
+	private JButton				btnAjouterR, btnAjouterN	;
 	private JTextField 			textNumR, textNomR, textNomN;
 
 	public PanelCreerRessource (Controleur ctrl)
 	{
-		this.ctrl=ctrl;
+		this.ctrl = ctrl;
 		this. setLayout (new BorderLayout(30,30));
 
-		JPanel panelHaut 	= new JPanel(new GridLayout(1,2));
-		JPanel panelMilieu 	= new JPanel(new GridLayout(1,2));
-		JPanel panelBas 	= new JPanel(new GridLayout(1,2));
+		JPanel panelHaut 	= new JPanel(new GridLayout(1,2  ));
+		JPanel panelMilieu 	= new JPanel(new GridLayout(1,2  ));
+		JPanel panelBas 	= new JPanel(new GridLayout(1,2	 ));
 		JPanel panelBasG	= new JPanel(new FlowLayout(5,5,5));
 		JPanel panelBasD	= new JPanel(new FlowLayout(5,5,5));
 
@@ -32,8 +32,15 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		this.panelR = new PanelRessource (ctrl, this);
 		this.panelN = new PanelNotion 	 (ctrl, this);
 
-		panelMilieu.add (this.panelR);
-		panelMilieu.add (this.panelN);
+		JScrollPane scrollPaneR = new JScrollPane (this.panelR);
+		scrollPaneR.setVerticalScrollBarPolicy	(scrollPaneR.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPaneR.setHorizontalScrollBarPolicy(scrollPaneR.HORIZONTAL_SCROLLBAR_NEVER	 );
+
+		JScrollPane scrollPaneN = new JScrollPane (this.panelN);
+		scrollPaneN.setVerticalScrollBarPolicy(scrollPaneN.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		panelMilieu.add (scrollPaneR);
+		panelMilieu.add (scrollPaneN);
 
 		this.add(panelMilieu, BorderLayout.CENTER);
 
@@ -41,22 +48,22 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		this.btnAjouterN = new JButton("ajouter");
 
 		this.textNumR = new JTextField();
-		this.textNumR.setColumns(5);
-
 		this.textNomR = new JTextField();
-		this.textNomR.setColumns(10);
 		this.textNomN = new JTextField();
+
+		this.textNumR.setColumns(5 );
+		this.textNomR.setColumns(10);
 		this.textNomN.setColumns(10);
 
 		this.btnAjouterR.addActionListener(this);
 		this.btnAjouterN.addActionListener(this);
 
 		panelBasG.add(this.btnAjouterR);
-		panelBasG.add(this.textNumR);
-		panelBasG.add(this.textNomR);
+		panelBasG.add(this.textNumR   );
+		panelBasG.add(this.textNomR   );
 
 		panelBasD.add(this.btnAjouterN);
-		panelBasD.add(this.textNomN);
+		panelBasD.add(this.textNomN   );
 
 
 		panelBas.add(panelBasG);

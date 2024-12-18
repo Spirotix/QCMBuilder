@@ -93,8 +93,8 @@ public class TestCreerQuestion
 
 	public void creerQuestion (String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint/*/, int nbIndiceUtilise*/, ArrayList<TypeReponse> lstReponse, int difficulte)
 	{
-		String str=""; 
-		int cpt=0;
+		String 	str = "" ; 
+		int 	cpt = 0  ;
 
 		str+="Question de type : "+type+" du chapitre : "+nomNotion+" de la matière : "+nomRessource;
 		str+="\nintitule : "+text ;

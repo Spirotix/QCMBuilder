@@ -7,7 +7,22 @@ if [[ -f "arg.list" && -f "compile.list" ]]; then
 
 	# Vérifie si la compilation a réussi
 	if [[ $? -eq 0 ]]; then
-		echo "Compilation réussie. Exécution de src/Controleur..."
+		echo "Compilation réussie."
+
+	#	# Générer la Javadoc
+	#	echo "Génération de la Javadoc..."
+	#	mkdir -p ../doc
+	#	javadoc -d ../doc @compile.list
+
+	#	if [[ $? -eq 0 ]]; then
+	#		echo "Javadoc générée avec succès dans le dossier 'doc'."
+	#	else
+	#		echo "Erreur : La génération de la Javadoc a échoué."
+	#		exit 1
+	#	fi
+
+		# Exécution de la classe principale
+		echo "Exécution de src/Controleur..."
 		cd class
 		java src/Controleur
 	else

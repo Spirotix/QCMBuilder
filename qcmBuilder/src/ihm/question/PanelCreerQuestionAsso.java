@@ -19,18 +19,20 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	private JButton 					ajouterQ, explication, enreg; // Boutons pour ajouter une question, modifier l'explication et enregistrer
 	private JPanel 						panelReponses				; // Composant personnalisé pour afficher les réponses
 	private String 						txtExplication				; // Texte de l'explication
+	private int 						indiceReponse 				;
 	
 
 	public PanelCreerQuestionAsso(PanelCreerQuestion panelQ, FrameCreerAssociation fr, Controleur ctrl) 
 	{
 		this.panelQ = panelQ;
 		this.fr 	= fr 	;
-		this.ctrl = ctrl;
+		this.ctrl 	= ctrl	;
+		this.indiceReponse = 1;
 
 		// Initialiser la liste des réponses possibles avec deux réponses vides
 		this.reponsesPossibles = new ArrayList<PanelReponseAsso>();
-		this.reponsesPossibles.add(new PanelReponseAsso(this));
-		this.reponsesPossibles.add(new PanelReponseAsso(this));
+		this.reponsesPossibles.add(new PanelReponseAsso(this,this.indiceReponse++));
+		this.reponsesPossibles.add(new PanelReponseAsso(this,this.indiceReponse++));
 
 		this.setLayout(new BorderLayout());
 
@@ -114,7 +116,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		if (e.getSource() == this.ajouterQ) 
 		{
 			// Ajouter une nouvelle réponse et mettre à jour le panneau
-			this.reponsesPossibles.add(new PanelReponseAsso(this));
+			this.reponsesPossibles.add(new PanelReponseAsso(this,this.indiceReponse++));
 			mettreAJourReponses();
 		} 
 		if (e.getSource() == this.enreg) 
