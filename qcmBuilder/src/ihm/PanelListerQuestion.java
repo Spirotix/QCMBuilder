@@ -7,11 +7,11 @@ import src.Controleur;
 
 public class PanelListerQuestion extends JPanel implements  ItemListener 
 {
-	private Controleur 	ctrl;
-	private Choice		choixRessource, choixNotion;
-	private String 		ressourceQuestion;
-	private PanelAfficherQuestion paq;
-	private JPanel 		panelMilieu;
+	private Controleur 			  ctrl						  ;
+	private Choice				  choixRessource, choixNotion ;
+	private String 				  ressourceQuestion			  ;
+	private PanelAfficherQuestion paq						  ;
+	private JPanel 			 	  panelMilieu				  ;
 
 	public PanelListerQuestion (Controleur ctrl)
 	{
@@ -90,7 +90,7 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 		{
 			this.paq.Update(this.choixRessource.getSelectedItem(), this.choixNotion.getSelectedItem());
 			this.repaint();
-			this.majIHM();
+			this.majIHM ();
 		}
 	}
 

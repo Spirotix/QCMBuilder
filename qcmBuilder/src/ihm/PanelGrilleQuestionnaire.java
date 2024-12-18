@@ -9,17 +9,18 @@ import src.Controleur;
 
 public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 {
-	private Controleur 					ctrl;
-	private ArrayList<JCheckBox> 				lstBox;
-	private int 								nbTF, nbF, nbM , nbD ;
-	private ArrayList<ArrayList<JTextField>> 	lstTextField;
+	private Controleur 						 	ctrl							;
+	private ArrayList<JCheckBox> 				lstBox							;
+	private int 								nbTF, nbF, nbM , nbD 			;
+	private ArrayList<ArrayList<JTextField>> 	lstTextField					;
 	private JLabel 								nbTFS, nbFS, nbMS, nbDS, nbTotal;
-	private String								ressource;
+	private String								ressource						;
 
 	public PanelGrilleQuestionnaire(Controleur ctrl, String ressource) 
 	{
-		this.ctrl = ctrl;
-		this.ressource = ressource;
+		this.ctrl 		= ctrl		;
+		this.ressource 	= ressource	;
+
 		this.lstBox 		= new ArrayList<JCheckBox>();
 		this.lstTextField 	= new ArrayList<ArrayList<JTextField>>();
 
@@ -59,15 +60,15 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 				this.lstTextField.add(rowFields);
 		}
 
-		this.nbTFS 		 = new JLabel("0");
-		this.nbFS 		 = new JLabel("0");
-		this.nbMS 		 = new JLabel("0");
-		this.nbDS 		 = new JLabel("0");
+		this.nbTFS 		 = new JLabel("0"		);
+		this.nbFS 		 = new JLabel("0"		);
+		this.nbMS 		 = new JLabel("0"		);
+		this.nbDS 		 = new JLabel("0"		);
 		this.nbTotal 	 = new JLabel("Total : ");
 
 		this.add(new JLabel("Nb questions/catégorie", SwingConstants.CENTER));
 		this.add(new JLabel("", SwingConstants.CENTER));
-		this.add(this.nbTFS	);
+		this.add(this.nbTFS	 );
 		this.add(this.nbFS	 );
 		this.add(this.nbMS	 );
 		this.add(this.nbDS	 );

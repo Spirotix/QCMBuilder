@@ -106,6 +106,4 @@ public class FrameExplication extends JFrame implements ActionListener
 			this.dispose();
 		}
 	}
-
-
 }

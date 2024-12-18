@@ -1,13 +1,13 @@
 package src.ihm;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.*					;
+import java.awt.event.*				;
+import javax.swing.*				;
 import javax.imageio.ImageIO		;
 import java.awt.image.BufferedImage	;
 import java.io.File					;
 import java.io.IOException			;
-import src.ihm.question.*;
+import src.ihm.question.*			;
 
 public class PanelReponse extends JPanel implements ActionListener
 {
@@ -20,8 +20,8 @@ public class PanelReponse extends JPanel implements ActionListener
 
 	public PanelReponse (PanelCreerQCMRepUnique panelQ, String type, int indice)
 	{
-		this.panelQ = panelQ;
-		this.type 	= type 	;
+		this.panelQ = panelQ ;
+		this.type 	= type 	 ;
 		this.fileHandler = new FileHandler("fichier_reponse"+indice);
 
 		this.setLayout(new GridLayout(1,3));
@@ -31,7 +31,7 @@ public class PanelReponse extends JPanel implements ActionListener
 		this.importer	= new JButton(new ImageIcon("../img/inserer.PNG"	));
 
 		this.contenu 	= new JTextField ();
-		this.validation = new JCheckBox();
+		this.validation = new JCheckBox  ();
 
 		//Insertion
 		this.add (this.corbeille );
