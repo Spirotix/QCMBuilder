@@ -8,22 +8,22 @@ IF EXIST "arg.list" IF EXIST "compile.list" (
 	IF %ERRORLEVEL% EQU 0 (
 		echo Compilation reussie.
 
-		REM Générer la Javadoc
-		IF EXIST "javadoc.list" (
-			echo Generation de la Javadoc...
-			IF NOT EXIST "doc" mkdir doc
-			javadoc -d doc @javadoc.list
+	REM	REM Générer la Javadoc
+	REM	IF EXIST "javadoc.list" (
+	REM		echo Generation de la Javadoc...
+	REM		IF NOT EXIST "../doc" mkdir ../doc
+	REM		javadoc -d ../doc @javadoc.list
 
-			IF %ERRORLEVEL% EQU 0 (
-				echo Javadoc generee avec succes dans le dossier 'doc'.
-			) ELSE (
-				echo Erreur : La generation de la Javadoc a echoue.
-				EXIT /B 1
-			)
-		) ELSE (
-			echo Erreur : Le fichier javadoc.list est manquant.
-			EXIT /B 1
-		)
+	REM		IF %ERRORLEVEL% EQU 0 (
+	REM			echo Javadoc generee avec succes dans le dossier 'doc'.
+	REM		) ELSE (
+	REM			echo Erreur : La generation de la Javadoc a echoue.
+	REM			EXIT /B 1
+	REM		)
+	REM	) ELSE (
+	REM		echo Erreur : Le fichier javadoc.list est manquant.
+	REM		EXIT /B 1
+	REM	)
 
 		REM Execution de la classe principale
 		echo Execution de src/Controleur...
