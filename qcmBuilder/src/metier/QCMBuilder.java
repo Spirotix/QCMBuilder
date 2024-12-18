@@ -163,7 +163,7 @@ public class QCMBuilder
 		if (!lstRessources.contains(ressource))
 			return false;
 
-		System.out.println("SupprimerR");
+		System.out.println("SupprimerQCMBuilder");
 
 		for (Notion n : ressource.getNotions())
 		{

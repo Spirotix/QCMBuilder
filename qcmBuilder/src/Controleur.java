@@ -57,18 +57,6 @@ public class Controleur
 	}
 
 	/**
-	 * Ajoute une nouvelle ressource.
-	 *
-	 * @param code Le code de la ressource.
-	 * @param nom Le nom de la ressource.
-	 * @return true si la ressource a été ajoutée avec succès, false sinon.
-	 */
-	public boolean ajouterRessource(String code, String nom)
-	{
-		return qcmBuilder.ajouterRessource(new Ressource(code, nom));
-	}
-
-	/**
 	 * Récupère les questions associées à une ressource et une notion données.
 	 *
 	 * @param ressource Le nom de la ressource.
@@ -116,6 +104,17 @@ public class Controleur
 		}
 	}
 
+	public boolean supprimerNotion(String nomRessource, String nomNotion)
+	{
+		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
+		return r.supprimerNotion( r.rechercherNotion(nomNotion) );
+	}
+
+	public boolean supprimerRessource(String codeRessource)
+	{
+		return qcmBuilder.supprimerRessource( qcmBuilder.rechercherRessource(codeRessource) );
+	}
+
 	/**
 	 * Ajoute une nouvelle notion à une ressource donnée.
 	 *
@@ -127,6 +126,18 @@ public class Controleur
 	{
 		Ressource r = qcmBuilder.rechercherRessource(nomRessource);
 		return r.ajouterNotion(new Notion(nomNotion, r));
+	}
+
+	/**
+	 * Ajoute une nouvelle ressource.
+	 *
+	 * @param code Le code de la ressource.
+	 * @param nom Le nom de la ressource.
+	 * @return true si la ressource a été ajoutée avec succès, false sinon.
+	 */
+	public boolean ajouterRessource(String code, String nom)
+	{
+		return qcmBuilder.ajouterRessource(new Ressource(code, nom));
 	}
 
 	/**
