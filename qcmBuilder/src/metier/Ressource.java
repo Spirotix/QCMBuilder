@@ -144,8 +144,8 @@ public class Ressource
 		if (notion == null)
 			return false;
 
-		if (!lstNotions.contains(notion))
-			return false;
+	//	if (!lstNotions.contains(notion))
+	//		return false;
 
 		System.out.println("SupprimerR");
 
@@ -180,6 +180,7 @@ public class Ressource
 			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
 			while ((ligne = br.readLine()) != null)
 			{
+				System.out.println(ligne);
 				String[] parts = ligne.split(";");
 				if (parts.length > 1)
 				{
