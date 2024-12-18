@@ -4,10 +4,11 @@ package src.metier.reponse;
  * Classe ReponseAssociation représentant une réponse associée dans un QCM.
  * Hérite de la classe Reponse.
  */
-public class ReponseAssociation extends Reponse
+public class ReponseAssociation implements Reponse
 {
 	private ReponseAssociation reponseAssocie;
 	private boolean aGauche;
+	private String textReponse;
 
 	/**
 	 * Constructeur de la classe ReponseAssociation.
@@ -18,7 +19,7 @@ public class ReponseAssociation extends Reponse
 	 */
 	public ReponseAssociation(String textReponse, ReponseAssociation reponseAssocie, boolean aGauche)
 	{
-		super(textReponse);
+		this.textReponse = textReponse;
 
 		this.reponseAssocie = reponseAssocie;
 		this.aGauche = aGauche;
@@ -51,4 +52,16 @@ public class ReponseAssociation extends Reponse
 	 * @param aGauche true si la réponse est à gauche, false sinon.
 	 */
 	public void setAGauche(boolean aGauche) { this.aGauche = aGauche; }
+
+	@Override
+	public String getText()
+	{
+		return textReponse;
+	}
+
+	@Override
+	public void setText(String text)
+	{
+		this.textReponse = text;
+	}
 }
