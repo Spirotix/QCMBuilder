@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import src.ihm.*;
@@ -165,21 +166,25 @@ public class QCMBuilder
 
 		System.out.println("SupprimerQCMBuilder");
 
-		for (Notion n : ressource.getNotions())
+		Iterator<Notion> iterator = ressource.getNotions().iterator();
+		while (iterator.hasNext())
 		{
+			Notion n = iterator.next();
+			iterator.remove(); // Supprime en passant par l'itérateur
 			ressource.supprimerNotion(n);
 		}
 
 		File fileCSV = new File("../data/ressources.csv");
+		File fileRep = new File("../data/questions_NOUVEAU/" + ressource.getCode());
 
 		// Supprimer la ligne
-		QCMBuilder.supprimerLigne(ressource, fileCSV);
+		QCMBuilder.supprimerLigneEtRepertoire(ressource, fileCSV, fileRep);
 
 		lstRessources.remove(ressource);
 		return true;
 	}
 
-	public static void supprimerLigne(Ressource ressource, File fichier)
+	public static void supprimerLigneEtRepertoire(Ressource ressource, File fichier, File repertoireRessource)
 	{
 		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
 	
@@ -223,6 +228,27 @@ public class QCMBuilder
 				System.out.println("Fichier mis à jour avec succès.");
 		else
 			System.out.println("Impossible de supprimer le fichier original.");
+
+			// Supprimer le répertoire
+			supprimerRepertoireRecursif(repertoireRessource);
+		}
+
+	private static void supprimerRepertoireRecursif(File dossier)
+	{
+		if (dossier.exists())
+		{
+			if (dossier.isDirectory())
+			{
+				File[] fichiers = dossier.listFiles();
+				if (fichiers != null)
+					for (File fichier : fichiers)
+						supprimerRepertoireRecursif(fichier);
+			}
+			if (dossier.delete())
+				System.out.println("Supprimé : " + dossier.getAbsolutePath());
+			else
+				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());
+		}
 	}
 
 	/**
