@@ -460,6 +460,6 @@ public class QCMBuilder
 		nomsNotions.add("Les tableaux à deux dimensions");
 	}
 	
-	public void 
+	
 
 }
