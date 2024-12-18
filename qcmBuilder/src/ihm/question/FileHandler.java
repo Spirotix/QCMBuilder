@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.nio.file.*;
 import java.io.IOException;
 
 public class FileHandler 
@@ -45,20 +46,20 @@ public class FileHandler
 		switch (extension) 
 		{
 			case "jpg": case "jpeg": case "png": case "bmp": case "gif":
-				handleImage(file, extension);
+				gererImage(file, extension);
 				break;
 			case "mp3": case "m34":
-				handleAudio(file, extension);
+				gererAudio(file, extension);
 				break;
 			case "pdf":
-				handlePdf(file, extension);
+				gererPDF(file, extension);
 				break;
 			default:
 				System.out.println("Type de fichier non supporté.");
 		}
 	}
 
-	private void handleImage(File file, String extension) throws IOException 
+	private void gererImage(File file, String extension) throws IOException 
 	{
 		BufferedImage image = ImageIO.read(file);
 		if (image == null) 
@@ -71,32 +72,32 @@ public class FileHandler
 		if (!targetDirectory.exists()) 
 			targetDirectory.mkdirs();
 
-		File outputFile = new File(targetDirectory, getRenamedFile(extension));
+		File outputFile = new File(targetDirectory, renommerFichier(extension));
 		ImageIO.write(image, extension, outputFile);
 
 		System.out.println("Image enregistrée avec succès dans : " + outputFile.getAbsolutePath());
 	}
 
-	private void handleAudio(File file, String extension) throws IOException 
+	private void gererAudio(File file, String extension) throws IOException 
 	{
 		File targetDirectory = new File("../data/questions_NOUVEAU/temp");
 		if (!targetDirectory.exists()) 
 			targetDirectory.mkdirs();
 
-		File outputFile = new File(targetDirectory, getRenamedFile(extension));
+		File outputFile = new File(targetDirectory, renommerFichier(extension));
 		if (!file.renameTo(outputFile))
 			System.out.println("Erreur lors de la copie du fichier audio.");
 		else 
 			System.out.println("Fichier audio enregistré avec succès dans : " + outputFile.getAbsolutePath());
 	}
 
-	private void handlePdf(File file, String extension) throws IOException 
+	private void gererPDF(File file, String extension) throws IOException 
 	{
 		File targetDirectory = new File("../data/questions_NOUVEAU/temp");
 		if (!targetDirectory.exists()) 
 			targetDirectory.mkdirs();
 
-		File outputFile = new File(targetDirectory, getRenamedFile(extension));
+		File outputFile = new File(targetDirectory, renommerFichier(extension));
 		if (!file.renameTo(outputFile))
 			System.out.println("Erreur lors de la copie du fichier PDF.");
 		else 
@@ -112,7 +113,35 @@ public class FileHandler
 		return null;
 	}
 
-	private String getRenamedFile(String extension) 
+	public static void supprimerFichiersTemp()
+	{
+		Path dir = Paths.get("../data/questions_NOUVEAU/temp");
+
+		try 
+		{
+			Files.list(dir).forEach(file -> 
+			{
+				try 
+				{
+					if (Files.isRegularFile(file)) 
+					{
+						Files.delete(file);
+						System.out.println("Fichier supprimé : " + file);
+					}
+				} 
+				catch (IOException e) 
+				{
+					System.out.println("Erreur lors de la suppression du fichier : " + file + " - " + e.getMessage());
+				}
+			});
+		} 
+		catch (IOException e) 
+		{
+			System.out.println("Erreur lors de la suppression des fichiers : " + e.getMessage());
+		}
+	}
+
+	private String renommerFichier(String extension) 
 	{
 		return this.nomFichier+"." + extension;
 	}

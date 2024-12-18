@@ -35,6 +35,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.ctrl = ctrl;
 		this.fr   = fr	;
 
+		FileHandler.supprimerFichiersTemp();
+
 		this.setLayout		(new GridBagLayout());
 		this.setBackground	(Color.LIGHT_GRAY	);
 
