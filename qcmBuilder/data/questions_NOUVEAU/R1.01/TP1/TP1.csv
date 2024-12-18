@@ -3,3 +3,4 @@ N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION
 2;2;5.0;Elimination;F;10;null
 7;2;5.0;Association;F;10;null
 1;2;5.0;Association;M;10;null
+1;2;5.0;QCM;F;10;null

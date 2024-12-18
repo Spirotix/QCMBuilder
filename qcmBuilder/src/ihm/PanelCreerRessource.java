@@ -32,8 +32,15 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		this.panelR = new PanelRessource (ctrl, this);
 		this.panelN = new PanelNotion 	 (ctrl, this);
 
-		panelMilieu.add (this.panelR);
-		panelMilieu.add (this.panelN);
+		JScrollPane scrollPaneR = new JScrollPane (this.panelR);
+		scrollPaneR.setVerticalScrollBarPolicy	(scrollPaneR.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPaneR.setHorizontalScrollBarPolicy(scrollPaneR.HORIZONTAL_SCROLLBAR_NEVER	 );
+
+		JScrollPane scrollPaneN = new JScrollPane (this.panelN);
+		scrollPaneN.setVerticalScrollBarPolicy(scrollPaneN.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+		panelMilieu.add (scrollPaneR);
+		panelMilieu.add (scrollPaneN);
 
 		this.add(panelMilieu, BorderLayout.CENTER);
 
