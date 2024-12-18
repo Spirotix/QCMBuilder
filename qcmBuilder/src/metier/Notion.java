@@ -550,11 +550,11 @@ public class Notion
 				System.out.println("Fichier mis à jour avec succès.");
 		else
 			System.out.println("Impossible de supprimer le fichier original.");
-	
+
 		// Supprimer le répertoire
 		supprimerRepertoireRecursif(repertoireQuestion);
 	}
-	
+
 	private static void supprimerRepertoireRecursif(File dossier)
 	{
 		if (dossier.exists())
