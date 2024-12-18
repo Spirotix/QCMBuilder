@@ -266,8 +266,7 @@ public class QCMBuilder
 		Ressource ressourceTrouvee = null;
 		for (Ressource ressource : lstRessources)
 		{
-			if ((ressource.getCode() + "_" + ressource.getNom()).equals(code_nom)
-					|| (ressource.getCode()).equals(code_nom))
+			if ((ressource.getCode() + "_" + ressource.getNom()).equals(code_nom) || (ressource.getCode()).equals(code_nom))
 				ressourceTrouvee = ressource;
 		}
 		return ressourceTrouvee;

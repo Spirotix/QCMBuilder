@@ -249,8 +249,8 @@ public class Ressource
 		return notionTrouvee;
 	}
 
-		/**
-	 * Modifie le nom d'une ressource.
+	/**
+	 * Modifie le nom d'une notion.
 	 * 
 	 * @param notion
 	 *            La notion à modifier.
@@ -258,7 +258,7 @@ public class Ressource
 	 *            Le nouveau nom de la notion.
 	 * @return true si la notion a été modifiée, false sinon.
 	 */
-	public boolean modifierRessource(Notion notion, String nouveauNom)
+	public boolean modifierNotion(Notion notion, String nouveauNom)
 	{
 		if (notion == null)
 			return false;
