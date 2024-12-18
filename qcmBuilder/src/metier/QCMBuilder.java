@@ -128,6 +128,9 @@ public class QCMBuilder
 					System.out.println("Ajout : " + ressource.getCode() + ";" + ressource.getNom() + "\n");
 				}
 
+				File fileRep = new File( "../data/questions_NOUVEAU/" + ressource.getCode() );
+				fileRep.mkdirs();
+
 				lstRessources.add(ressource);
 
 				writer.println( ressource.getCode() + ";" + ressource.getNom() );

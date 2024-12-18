@@ -119,6 +119,9 @@ public class Ressource
 					System.out.println("Ajout : " + this.getCode() + ";" + notion.getNom() + "\n");
 				}
 
+				File fileRep = new File( "../data/questions_NOUVEAU/" + this.getCode() + "/" + notion.getNom() );
+				fileRep.mkdirs();
+
 				lstNotions.add(notion);
 
 				writer.println( this.getCode() + ";" + notion.getNom() );
