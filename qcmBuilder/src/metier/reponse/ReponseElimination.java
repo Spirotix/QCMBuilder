@@ -5,12 +5,13 @@ package src.metier.reponse;
  * Elle contient un texte de réponse, un ordre d'indice, un indicateur de visibilité,
  * un indicateur si la réponse est vraie ou fausse, et un nombre de points perdus.
  */
-public class ReponseElimination extends Reponse
+public class ReponseElimination implements Reponse
 {
 	private int     ordreIndice;
 	private boolean estVisible;
 	private boolean estVrai;
 	private double  nbPointPerdu;
+	private String  textReponse;
 
 	/**
 	 * Constructeur de la classe ReponseElimination.
@@ -22,7 +23,7 @@ public class ReponseElimination extends Reponse
 	 */
 	public ReponseElimination(String estVrai, String textReponse, int ordreIndice, double nbPointPerdu )
 	{
-		super(textReponse);
+		this.textReponse  = textReponse;
 		this.ordreIndice  = ordreIndice;
 		this.estVisible   = true;
 		this.estVrai      = estVrai.equals("Vrai");
@@ -70,4 +71,16 @@ public class ReponseElimination extends Reponse
 	 * @return Le nombre de points perdus.
 	 */
 	public double getNbPointPerdu() { return nbPointPerdu; }
+
+	@Override
+	public String getText()
+	{
+		return textReponse;
+	}
+
+	@Override
+	public void setText(String text)
+	{
+		this.textReponse = text;
+	}
 }

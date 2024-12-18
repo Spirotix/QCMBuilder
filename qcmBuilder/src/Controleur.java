@@ -154,6 +154,34 @@ public class Controleur
 	}
 
 	/**
+	 * Modifie le nom d'une ressource.
+	 * 
+	 * @param ressource
+	 *            La ressource à modifier.
+	 * @param nouveauNom
+	 *            Le nouveau nom de la ressource.
+	 * @return true si la ressource a été modifiée, false sinon.
+	 */
+	public boolean modifierRessource(Ressource ressource, String nouveauNom)
+	{
+		return qcmBuilder.modifierRessource(ressource, nouveauNom);
+	}
+
+	/**
+	 * Modifie le nom d'une notion.
+	 * 
+	 * @param notion
+	 *            La notion à modifier.
+	 * @param nouveauNom
+	 *            Le nouveau nom de la notion.
+	 * @return true si la notion a été modifiée, false sinon.
+	 */
+	public boolean modifierNotion(Notion notion, String nouveauNom)
+	{
+		return notion.getRessource().modifierNotion(notion, nouveauNom);
+	}
+
+	/**
 	 * Crée une nouvelle question.
 	 *
 	 * @param type Le type de la question.
