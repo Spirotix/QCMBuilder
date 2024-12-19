@@ -1,4 +1,5 @@
 ./src/Controleur.java
+./src/TypeQuestionnaire.java
 
 ./src/metier/question/Association.java
 ./src/metier/question/Elimination.java
@@ -21,6 +22,7 @@
 ./src/ihm/FrameCreerRessource.java
 ./src/ihm/FrameListerQuestion.java
 ./src/ihm/FrameMenu.java
+./src/ihm/FrameAlerte.java
 ./src/ihm/TextFieldPerso.java
 ./src/ihm/question/PanelCreerElim.java
 ./src/ihm/question/FileHandler.java
@@ -34,7 +36,6 @@
 ./src/ihm/PanelCreerRessource.java
 ./src/ihm/PanelListerQuestion.java
 ./src/ihm/PanelAfficherQuestion.java
-./src/ihm/TypeQuestionnaire.java
 ./src/ihm/PanelReponse.java
 ./src/ihm/PanelNotion.java
 ./src/ihm/PanelRessource.java

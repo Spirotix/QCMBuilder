@@ -32,7 +32,7 @@ public class FrameMenu extends JFrame implements ActionListener
 		this.creerQuestion 			= new JButton("Créer Question"			);
 		this.genererQuestionnaire 	= new JButton("Générer Questionnaire"	);
 		this.creerResNot			= new JButton("Créer Ressource/Notion"	);
-		this.modifierUneQuestion	= new JButton("Editez les questions"	);
+		this.modifierUneQuestion	= new JButton("Editer les questions"	);
 
 		this.creerQuestion			.setFont(new Font("Arial", Font.PLAIN, 14));
 		this.genererQuestionnaire	.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -68,10 +68,10 @@ public class FrameMenu extends JFrame implements ActionListener
 		this.creerResNot			.addActionListener(this);
 		this.modifierUneQuestion	.addActionListener(this);
 
+		this.panel.add(this.creerResNot			);
 		this.panel.add(this.creerQuestion		);
 		this.panel.add(this.genererQuestionnaire);
-		this.panel.add(this.creerResNot			);
-		this.panel.add(this.modifierUneQuestion			);
+		this.panel.add(this.modifierUneQuestion	);
 
 		JPanel southPanel = new JPanel();
 		southPanel.setBackground(Color.LIGHT_GRAY);

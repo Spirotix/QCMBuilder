@@ -74,9 +74,18 @@ public class PanelNotion extends JPanel implements ActionListener
 		for (int i=0; i<this.lstLabel.size(); i++)
 		if (e.getSource().equals(this.lstSup.get(i)))
 		{
-			this.ctrl.supprimerNotion(this.ressource, this.lstLabel.get(i).getText());
+			if (this.ctrl.getQuestions(this.ressource, this.lstLabel.get(i).getText()).size()>0)
+				new FrameAlerte(this.ctrl, this, this.lstLabel.get(i).getText());
+			else 
+				this.ctrl.supprimerNotion(this.ressource, this.lstLabel.get(i).getText());
 			Update(this.ressource);
 		}
+	}
+
+	public void supprimerNotion (String nomNotion)
+	{
+		this.ctrl.supprimerNotion(this.ressource, nomNotion);
+		this.Update(this.ressource);
 	}
 
 	public String getRessource() {return this.ressource;}
