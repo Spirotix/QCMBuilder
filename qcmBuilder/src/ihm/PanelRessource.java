@@ -74,9 +74,16 @@ public class PanelRessource extends JPanel implements ActionListener
 			this.lstLabel	.add (new JLabel(this.ctrl.getChoixRessources().get(i))	);
 
 			if (this.panelC.getPanelNotion().getRessource().equals(this.lstLabel.get(i).getText()))
+			{
 				this.lstLabel.get(i).setForeground(Color.RED);
+				this.lstLabel.get(i).setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+			}
+				
 			else 
+			{
 				this.lstLabel.get(i).setForeground(Color.BLACK);
+				this.lstLabel.get(i).setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
+			}
 			
 			this.lstSup	 	.add (new JButton("Supprimer")							);
 			this.lstPanel	.add (new JPanel(new BorderLayout())					);
