@@ -460,7 +460,7 @@ public class QCMBuilder
 		nomsNotions.add("Les tableaux à deux dimensions");
 	}
 	
-	public void genererQuestionnaire(String nomRessource, boolean chrono, List<TypeQuestionnaire> lstTypeQuestionnaire, String nomFichier)
+	public void genererQuestionnaire(String nomRessource, boolean chrono, List<TypeQuestionnaire> lstTypeQuestionnaire, String nomRepertoire)
 	{
 		// TODO
 	}

@@ -52,7 +52,7 @@ QCMBuilder est une application permettant aux enseignants de l'IUT du Havre de c
 
 1. Clonez le répertoire :
    ```bash
-   git clone https://github.com/<votre-utilisateur>/QCMBuilder.git
+   git clone https://github.com/ThaoDujardin/Equipe2_QCMBuilder.git
    ```
 
 2. Assurez-vous que vous avez Java installé pour exécuter l'application de création.
