@@ -68,6 +68,11 @@ public class FrameMenu extends JFrame implements ActionListener
 		this.creerResNot			.addActionListener(this);
 		this.modifierUneQuestion	.addActionListener(this);
 
+		this.ajouterPassageSouris(creerQuestion);
+		this.ajouterPassageSouris(genererQuestionnaire);
+		this.ajouterPassageSouris(creerResNot);
+		this.ajouterPassageSouris(modifierUneQuestion);
+
 		this.panel.add(this.creerResNot			);
 		this.panel.add(this.creerQuestion		);
 		this.panel.add(this.genererQuestionnaire);
@@ -118,5 +123,23 @@ public class FrameMenu extends JFrame implements ActionListener
 			new FrameListerQuestion(this.ctrl);
 			this.dispose();
 		}
+	}
+
+	private void ajouterPassageSouris(JButton button)
+	{
+		button.setOpaque(true);
+		button.addMouseListener(new MouseAdapter()
+		{
+			public void mouseEntered(MouseEvent e)
+			{
+				button.setBackground(button.getBackground().darker());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+				button.setBackground(Color.WHITE);
+			}
+		});
 	}
 }
