@@ -18,20 +18,26 @@ public class GenererQuestionnaire
 			new TypeQuestionnaire("Notion 2", 1, 7, 1, 1),
 			new TypeQuestionnaire("Notion 3", 1, 1, 5, 1)
 		);
-		GenererQuestionnaire gq = new GenererQuestionnaire("R1.01_Apagnan", true,lstTypeQuestionnaires,"questionnaire");
+
+		List<Question> lstQuestions = List.of(
+			
+		);
+		GenererQuestionnaire gq = new GenererQuestionnaire("R1.01_Apagnan", true,"questionnaire",lstTypeQuestionnaires, lstQuestions);
 	}
 
 	private String nomRessource;
 	private String script;
 	private String nomRepertoire;
 	private List<TypeQuestionnaire> lstTypeQuestionnaire;
+	private List<Question> lstQuestions;
 
-	public GenererQuestionnaire (String nomRessource, boolean chrono,List<TypeQuestionnaire> lstTypeQuestionnaires, String nomQuestionnaire)
+	public GenererQuestionnaire (String nomRessource, boolean chrono, String nomQuestionnaire, List<TypeQuestionnaire> lstTypeQuestionnaires, List<Question> lstQuestions)
 	{
 		this.nomRessource = nomRessource;
 		this.script = "";
 		this.nomRepertoire = nomQuestionnaire;
 		this.lstTypeQuestionnaire = lstTypeQuestionnaires;
+		this.lstQuestions = lstQuestions;
 
 		try {
 			String tempNomQuestionnaire = nomQuestionnaire;
