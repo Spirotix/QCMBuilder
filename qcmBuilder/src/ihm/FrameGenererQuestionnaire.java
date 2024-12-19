@@ -2,7 +2,6 @@ package src.ihm;
 
 import javax.swing.*;
 import java.awt.event.*;
-import src.ihm.*;
 import src.Controleur;
 
 public class FrameGenererQuestionnaire extends JFrame implements ActionListener

@@ -5,7 +5,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import src.Controleur;
-import src.ihm.*;
 import src.ihm.question.FrameCreerQuestion;
 
 public class FrameMenu extends JFrame implements ActionListener 
