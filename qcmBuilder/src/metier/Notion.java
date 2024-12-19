@@ -584,11 +584,23 @@ public class Notion
 				if (parts.length > 0 && parts[0].matches("\\d+")) // verifie que parts[1] contient uniquement des chiffres
 				{
 					int numeroQuestion = Integer.parseInt(parts[0]);
-					if (numeroQuestion == valeur && !ligneSupprimee)
+					if ( ligneSupprimee )
+					{
+						System.out.println( "\t\t" + repertoireQuestion.getPath());
+						System.out.println( "\t\t" + repertoireQuestion.getParent() + "/question_" + Integer.toString(numeroQuestion) );
+
+						File fileTmp = new File( repertoireQuestion.getParent() + "/question_" + Integer.toString(numeroQuestion) ); // RENOMMER
+						fileTmp.renameTo(repertoireQuestion);
+
+						bw.write( (numeroQuestion - 1) + ligne.substring(1) );
+						bw.newLine();
+						continue;
+					}
+					else if (numeroQuestion == valeur && !ligneSupprimee)
 					{
 						System.out.println("Ligne supprimée : " + ligne);
 						ligneSupprimee = true;
-						continue; // Ne pas écrire cette ligne
+						continue; // Directement nouvelle itération du while, sans faire le reste
 					}
 				}
 				bw.write(ligne);

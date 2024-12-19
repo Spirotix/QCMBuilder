@@ -4,6 +4,7 @@ import javax.imageio.ImageIO		;
 import java.awt.image.BufferedImage	;
 import java.io.File					;
 import java.io.IOException			;
+import src.ihm.*					;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -32,11 +33,11 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 		this.setLayout(new GridLayout(1,4));
 
 		//Initialisation
-		this.corbeille 	= new JButton(new ImageIcon("../img/poubelle.PNG"));
-		this.importer	= new JButton(new ImageIcon("../img/inserer.PNG"	));
-		this.contenu 	= new JTextField ();
-		this.ordre 		= new JTextField ();
-		this.cout 		= new JTextField ();
+		this.corbeille 	= new JButton(new ImageIcon("../img/poubelle.PNG")	);
+		this.importer	= new JButton(new ImageIcon("../img/inserer.PNG")	);
+		this.contenu 	= new TextFieldPerso ("contenu"						);
+		this.ordre 		= new TextFieldPerso ("ordre d'élimination"			);
+		this.cout 		= new TextFieldPerso ("points perdus"				);
 		this.validation = new JCheckBox  ();
 
 		//Insertion
