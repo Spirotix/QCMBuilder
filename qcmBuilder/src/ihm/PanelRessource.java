@@ -116,9 +116,19 @@ public class PanelRessource extends JPanel implements ActionListener
 		for (int i=0; i<this.lstLabel.size(); i++)
 			if (e.getSource().equals(this.lstSup.get(i)))
 			{
-				this.ctrl.supprimerRessource(this.lstLabel.get(i).getText());
+				if (this.ctrl.getChoixNotion(this.lstLabel.get(i).getText()).size()>0)
+					new FrameAlerte(this.ctrl, this, this.lstLabel.get(i).getText());
+				else 
+					this.ctrl.supprimerRessource(this.lstLabel.get(i).getText());
 				Update();
 			}
+	}
+
+	public void supprimerRessource(String nomRessource)
+	{
+		this.ctrl.supprimerRessource(nomRessource);
+		this.Update();
+		panelC.getPanelNotion().Update("");
 	}
 	
 	public void ajouter(String nomRessource)

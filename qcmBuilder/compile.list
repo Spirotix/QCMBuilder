@@ -22,6 +22,7 @@
 ./src/ihm/FrameCreerRessource.java
 ./src/ihm/FrameListerQuestion.java
 ./src/ihm/FrameMenu.java
+./src/ihm/FrameAlerte.java
 ./src/ihm/TextFieldPerso.java
 ./src/ihm/question/PanelCreerElim.java
 ./src/ihm/question/FileHandler.java
