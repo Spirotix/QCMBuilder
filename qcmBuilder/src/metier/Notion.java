@@ -111,25 +111,25 @@ public class Notion
 				{
 					lineTextQuestion += scTextQuestion.nextLine();
 				}
-				String textQuestion = lineTextQuestion;
+				String textQuestion   = lineTextQuestion;
 
 				String[] informations = lineInformations.split(";");
 
-				int nReponse = Integer.parseInt(informations[0]);
-				int nbReponses = Integer.parseInt(informations[1]);
-				double nbPoint = Double.parseDouble(informations[2]);
-				String type = informations[3];
-				String sNiveau = informations[4];
-				int temps = Integer.parseInt(informations[5]);
-				String explication = informations[6];
+				int    nReponse    = Integer.parseInt  (informations[0]);
+				int    nbReponses  = Integer.parseInt  (informations[1]);
+				double nbPoint     = Double.parseDouble(informations[2]);
+				String type        =                    informations[3];
+				String sNiveau     =                    informations[4];
+				int    temps       = Integer.parseInt  (informations[5]);
+				String explication =                    informations[6];
 
 				int niveau;
 				switch (sNiveau)
 				{
 				case "TF" -> niveau = 1;
-				case "F" -> niveau = 2;
-				case "M" -> niveau = 3;
-				case "D" -> niveau = 4;
+				case "F"  -> niveau = 2;
+				case "M"  -> niveau = 3;
+				case "D"  -> niveau = 4;
 				default -> {
 					scTextQuestion.close();
 					scInformations.close();
