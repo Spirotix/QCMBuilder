@@ -1,4 +1,4 @@
-package src.ihm;
+package src;
 
 public class TypeQuestionnaire 
 {

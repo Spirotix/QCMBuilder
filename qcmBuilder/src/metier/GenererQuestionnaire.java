@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import src.TypeQuestionnaire;
 import src.metier.question.Question;
 
 
@@ -12,16 +13,25 @@ public class GenererQuestionnaire
 {
 	public static void main(String[] args)
 	{
-		GenererQuestionnaire gq = new GenererQuestionnaire("R1.01_Apagnan",true,"questionnaire");
+		List<TypeQuestionnaire> lstTypeQuestionnaires = List.of(
+			new TypeQuestionnaire("Notion 1", 2, 1, 1, 1),
+			new TypeQuestionnaire("Notion 2", 1, 7, 1, 1),
+			new TypeQuestionnaire("Notion 3", 1, 1, 5, 1)
+		);
+		GenererQuestionnaire gq = new GenererQuestionnaire("R1.01_Apagnan", true,lstTypeQuestionnaires,"questionnaire");
 	}
 
 	private String nomRessource;
 	private String script;
+	private String nomRepertoire;
+	private List<TypeQuestionnaire> lstTypeQuestionnaire;
 
-	public GenererQuestionnaire (String nomRessource, boolean chrono, String nomQuestionnaire)
+	public GenererQuestionnaire (String nomRessource, boolean chrono,List<TypeQuestionnaire> lstTypeQuestionnaires, String nomQuestionnaire)
 	{
 		this.nomRessource = nomRessource;
 		this.script = "";
+		this.nomRepertoire = nomQuestionnaire;
+		this.lstTypeQuestionnaire = lstTypeQuestionnaires;
 
 		try {
 			String tempNomQuestionnaire = nomQuestionnaire;
@@ -64,14 +74,17 @@ public class GenererQuestionnaire
 			if (chrono) {
 				this.script = "<script src=\"./script/indexTimed.js\"></script>";
 				Files.copy(Paths.get("../data/web/script/indexTimed.js"       ),
-						   Paths.get("../"+nomQuestionnaire+"/script/indexTimed.js"  ),
+						   Paths.get("../"+tempNomQuestionnaire+"/script/indexTimed.js"  ),
 						   StandardCopyOption.REPLACE_EXISTING);
 			} else {
 				this.script = "<script src=\"./script/indexNoTimed.js\"></script>";
 				Files.copy(Paths.get("../data/web/script/indexNoTimed.js"       ),
-						   Paths.get("../"+nomQuestionnaire+"/script/indexNoTimed.js"  ),
+						   Paths.get("../"+tempNomQuestionnaire+"/script/indexNoTimed.js"  ),
 						   StandardCopyOption.REPLACE_EXISTING);
 			}
+
+			Files.write(Paths.get("../"+tempNomQuestionnaire+"/index.html"  ), getIndexHtml().getBytes());
+			Files.write(Paths.get("../"+tempNomQuestionnaire+"/fin.html"    ), getFinHtml().getBytes());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -152,13 +165,19 @@ public class GenererQuestionnaire
 
 	private String getIndexHtml()
 	{
-		return "<!DOCTYPE html>\n" + //
+		int nbQuestion = 0;
+		int nbTf       = 0;
+		int nbF        = 0;
+		int nbM        = 0;
+		int nbD        = 0;
+
+		String sRet = "<!DOCTYPE html>\n" + //
 				"<html lang=\"fr\">\n" + //
 				"\t<head>\n" + //
 				"\t\t<meta charset=\"UTF-8\">\n" + //
 				"\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" + //
 				"\t\t<link rel=\"stylesheet\" href=\"./css/index.css\">\n" + //
-				"\t\t<title>Accueil Questionnaire</title>\n" + //
+				"\t\t<title>"+nomRepertoire+"</title>\n" + //
 				"\t</head>\n" + //
 				"\t\t<!-- Précise que c'est l'index -->\n" + //
 				"\t\t<body class=\"index\" value=\"0\">\n" + //
@@ -168,7 +187,7 @@ public class GenererQuestionnaire
 				"\n" + //
 				"\t\t<!-- Informations du quesionnaire -->\n" + //
 				"\t\t<section class=\"informations\">\n" + //
-				//"\t\t\t<p class=\"estimated-time\">Temps estimé :         <span class=\"estimated-time-data\">20h  </span></p>\n" + //
+				"\t\t\t<p class=\"estimated-time\">Temps estimé :         <span class=\"estimated-time-data\">Poulet</span></p>\n" + //
 				"\t\t\t<p class=\"resource\"      >Ressources concernée : <span class=\"resource-data\"      >"+nomRessource+"</span></p>\n" + //
 				"\t\t\t<p class=\"chrono\"        >Chronomètre :          <span class=\"chrono-data\"        >     </span></p>\n" + //
 				"\n" + //
@@ -185,39 +204,37 @@ public class GenererQuestionnaire
 				"\t\t\t\t\t\t\t<th>Total</th>\n" + //
 				"\t\t\t\t\t</tr>\n" + //
 				"\t\t\t\t</thead>\n" + //
-				"\t\t\t\t<tbody> <!-- Les données en fonction des notions -->\n" + //
-				//"\t\t\t\t\t<tr>\n" + //
-				//"\t\t\t\t\t\t<td>Notion 1</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">0</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">1</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">2</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">1</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"notion-total\">4</td>\n" + //
-				//"\t\t\t\t\t</tr>\n" + //
-				//"\t\t\t\t\t<tr>\n" + //
-				//"\t\t\t\t\t\t<td>Notion 2</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">0</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">1</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">1</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">1</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"notion-total\">3</td>\n" + //
-				//"\t\t\t\t\t</tr>\n" + //
-				//"\t\t\t\t\t<tr>\n" + //
-				//"\t\t\t\t\t\t<td>Notion 3</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">0</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">1</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">1</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-item-data\">1</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"notion-total\">3</td>\n" + //
-				//"\t\t\t\t\t</tr>\n" + //
-				"\t\t\t\t\t<!-- Les totaux en fonction des difficultés et global -->\n" + //
+				"\t\t\t\t<tbody> <!-- Les données en fonction des notions -->\n"; //
+				for(TypeQuestionnaire tq : lstTypeQuestionnaire)
+				{
+					String notion = tq.getNotion();
+					int nbTfNotion = tq.getNbTf();
+					int nbFNotion = tq.getNbF();
+					int nbMNotion = tq.getNbM();
+					int nbDNotion = tq.getNbD();
+					int total = nbTf + nbF + nbM + nbD;
+					sRet += "\t\t\t\t\t<tr>\n" + //
+							"\t\t\t\t\t\t<td>"+notion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"difficulty-item-data very-easy\">"+nbTfNotion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"difficulty-item-data easy\">"+nbFNotion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"difficulty-item-data medium\">"+nbMNotion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"difficulty-item-data hard\">"+nbDNotion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"notion-total\">"+total+"</td>\n" + //
+							"\t\t\t\t\t</tr>\n"; //
+					nbQuestion += total;
+					nbTf       += nbTfNotion;
+					nbF        += nbFNotion;
+					nbM        += nbMNotion;
+					nbD        += nbDNotion;
+				}
+				sRet += "\t\t\t\t\t<!-- Les totaux en fonction des difficultés et global -->\n" + //
 				"\t\t\t\t\t<tr>\n" + //
 				"\t\t\t\t\t\t<td>Total</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-total\">0</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-total\">3</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-total\">4</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"difficulty-total\">3</td>\n" + //
-				//"\t\t\t\t\t\t<td class=\"grand-total\">10</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"difficulty-total\">"+nbTf+"</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"difficulty-total\">"+nbF+"</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"difficulty-total\">"+nbM+"</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"difficulty-total\">"+nbD+"</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"grand-total\">"+nbQuestion+"</td>\n" + //
 				"\t\t\t\t\t</tr>\n" + //
 				"\t\t\t\t</tbody>\n" + //
 				"\t\t\t</table>\n" + //
@@ -235,11 +252,19 @@ public class GenererQuestionnaire
 				"\t\t" + this.script + "\n" + //
 				"\t</body>\n" + //
 				"</html>\n";
+
+		return sRet;
 	}
 
 	private String getFinHtml()
 	{
-		return "<!DOCTYPE html>\n" + //
+		int nbQuestion = 0;
+		int nbTf       = 0;
+		int nbF        = 0;
+		int nbM        = 0;
+		int nbD        = 0;
+
+		String sRet = "<!DOCTYPE html>\n" + //
 				"<html lang=\"fr\">\n" + //
 				"<head>\n" + //
 				"\t<meta charset=\"UTF-8\">\n" + //
@@ -269,40 +294,38 @@ public class GenererQuestionnaire
 				"\t\t\t\t\t\t<th>Total</th>\n" + //
 				"\t\t\t\t</tr>\n" + //
 				"\t\t\t</thead>\n" + //
-				"\t\t\t<tbody> <!-- Les données en fonction des notions -->\n" +//
-				//"\t\t\t\t<tr>\n" + //
-				//"\t\t\t\t\t<td>Notion 1</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data very-easy\">1</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data easy\">1</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data medium\">0</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data hard\">0</td>\n" + //
-				//"\t\t\t\t\t<td class=\"notion-total\">2</td>\n" + //
-				//"\t\t\t\t</tr>\n" + //
-				//"\t\t\t\t<tr>\n" + //
-				//"\t\t\t\t\t<td>Notion 2</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data very-easy\">0</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data easy\">0</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data medium\">1</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data hard\">0</td>\n" + //
-				//"\t\t\t\t\t<td class=\"notion-total\">1</td>\n" + //
-				//"\t\t\t\t</tr>\n" + //
-				//"\t\t\t\t<tr>\n" + //
-				//"\t\t\t\t\t<td>Notion 3</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data very-easy\">0</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data easy\">0</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data medium\">0</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-item-data hard\">1</td>\n" + //
-				//"\t\t\t\t\t<td class=\"notion-total\">1</td>\n" + //
-				//"\t\t\t\t</tr>\n" + //
-				//"\t\t\t\t<!-- Les totaux en fonction des difficultés et global -->\n" + //
-				//"\t\t\t\t<tr> \n" + //
-				//"\t\t\t\t\t<td>Total</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-total very-easy\">1</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-total easy\">1</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-total medium\">1</td>\n" + //
-				//"\t\t\t\t\t<td class=\"difficulty-total hard\">1</td>\n" + //
-				//"\t\t\t\t\t<td class=\"grand-total\">4</td>\n" + //
-				//"\t\t\t\t</tr>\n" + //
+				"\t\t\t<tbody> <!-- Les données en fonction des notions -->\n";//
+				for(TypeQuestionnaire tq : lstTypeQuestionnaire)
+				{
+					String notion = tq.getNotion();
+					int nbTfNotion = tq.getNbTf();
+					int nbFNotion = tq.getNbF();
+					int nbMNotion = tq.getNbM();
+					int nbDNotion = tq.getNbD();
+					int total = nbTf + nbF + nbM + nbD;
+					sRet += "\t\t\t\t\t<tr>\n" + //
+							"\t\t\t\t\t\t<td>"+notion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"difficulty-item-data very-easy\">"+nbTfNotion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"difficulty-item-data easy\">"+nbFNotion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"difficulty-item-data medium\">"+nbMNotion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"difficulty-item-data hard\">"+nbDNotion+"</td>\n" + //
+							"\t\t\t\t\t\t<td class=\"notion-total\">"+total+"</td>\n" + //
+							"\t\t\t\t\t</tr>\n"; //
+					nbQuestion += total;
+					nbTf       += nbTfNotion;
+					nbF        += nbFNotion;
+					nbM        += nbMNotion;
+					nbD        += nbDNotion;
+				}
+				sRet += "\t\t\t\t\t<!-- Les totaux en fonction des difficultés et global -->\n" + //
+				"\t\t\t\t\t<tr>\n" + //
+				"\t\t\t\t\t\t<td>Total</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"difficulty-total\">"+nbTf+"</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"difficulty-total\">"+nbF+"</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"difficulty-total\">"+nbM+"</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"difficulty-total\">"+nbD+"</td>\n" + //
+				"\t\t\t\t\t\t<td class=\"grand-total\">"+nbQuestion+"</td>\n" + //
+				"\t\t\t\t\t</tr>\n" + //
 				"\t\t\t</tbody>\n" + //
 				"\t\t</table>\n" + //
 				"\n" + //
@@ -323,6 +346,8 @@ public class GenererQuestionnaire
 				"\t</section>\n" + //
 				"</body>\n" + //
 				"</html>";
+
+		return sRet;
 	}
 
 
