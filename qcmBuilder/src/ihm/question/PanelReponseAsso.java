@@ -1,4 +1,3 @@
-//package src.ihm;
 package src.ihm.question;
 
 import java.awt.*;
@@ -8,17 +7,18 @@ import javax.imageio.ImageIO		;
 import java.awt.image.BufferedImage	;
 import java.io.File					;
 import java.io.IOException			;
+import src.ihm.*;
 
 public class PanelReponseAsso extends JPanel implements ActionListener
 {
-	private PanelCreerQuestionAsso 			panelQ;
-	private JButton							corbeille, importerGauche, importerDroite;
-	private JLabel 					imageImporterG, imageImporterD		;
-	private JTextArea						contenuGauche  , contenuDroite	;
-	private FileHandler 					fileHandlerG,fileHandlerD 		;
-	private File 					fileChoisiG, fileChoisiD 			;
-	private int 					indice				;
-	private JPanel 					panelImageG,panelImageD 			;
+	private PanelCreerQuestionAsso 	panelQ										;
+	private JButton					corbeille, importerGauche, importerDroite	;
+	private JLabel 					imageImporterG, imageImporterD				;
+	private TextFieldPerso			contenuGauche  , contenuDroite				;
+	private FileHandler 			fileHandlerG,fileHandlerD 					;
+	private File 					fileChoisiG, fileChoisiD 					;
+	private int 					indice										;
+	private JPanel 					panelImageG,panelImageD 					;
 
 	public PanelReponseAsso (PanelCreerQuestionAsso panelQc, int indice)
 	{
@@ -34,11 +34,13 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 		JPanel panelGauche = new JPanel();
 		JPanel panelDroite = new JPanel();
 
-		this.corbeille		= new JButton(new ImageIcon("../img/poubelle.PNG"));
-		this.importerGauche	= new JButton(new ImageIcon("../img/inserer.PNG" ));
-		this.importerDroite	= new JButton(new ImageIcon("../img/inserer.PNG" ));
-		this.contenuGauche 	= new JTextArea (2,15);
-		this.contenuDroite 	= new JTextArea (2,15);
+		this.corbeille		= new JButton(new ImageIcon("../img/poubelle.PNG")	);
+		this.importerGauche	= new JButton(new ImageIcon("../img/inserer.PNG" )	);
+		this.importerDroite	= new JButton(new ImageIcon("../img/inserer.PNG" )	);
+		this.contenuGauche 	= new TextFieldPerso ("contenu"						);
+		this.contenuGauche.setColumns(15);
+		this.contenuDroite 	= new TextFieldPerso ("contenu"						);
+		this.contenuDroite.setColumns(15);
 
 		this.panelImageG = new JPanel ();
 		this.panelImageG.setPreferredSize(new Dimension(75, 75));

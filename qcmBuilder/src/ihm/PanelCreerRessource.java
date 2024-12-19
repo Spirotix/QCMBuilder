@@ -47,9 +47,9 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		this.btnAjouterR = new JButton("ajouter");
 		this.btnAjouterN = new JButton("ajouter");
 
-		this.textNumR = new JTextField();
-		this.textNomR = new JTextField();
-		this.textNomN = new JTextField();
+		this.textNumR = new TextFieldPerso("Code"				);
+		this.textNomR = new TextFieldPerso("nom de la ressource");
+		this.textNomN = new TextFieldPerso("nom de la notion"	);
 
 		this.textNumR.setColumns(5 );
 		this.textNomR.setColumns(10);

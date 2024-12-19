@@ -6,7 +6,7 @@ import java.util.*					;
 import javax.swing.*				;
 import javax.swing.border.LineBorder;
 import src.Controleur				;
-import src.ihm.TypeReponse			;
+import src.ihm.*					;
 
 public class PanelCreerQuestion extends JPanel implements ActionListener, ItemListener 
 {
@@ -45,8 +45,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		gbc.fill	= GridBagConstraints.HORIZONTAL		 ;
 
 		// Initialisation
-		this.nbPoints 	 = new JTextField("5" , 5);
-		this.tpsReponses = new JTextField("10", 5);
+		this.nbPoints 	 = new TextFieldPerso("ex : 4.5");
+		this.tpsReponses = new TextFieldPerso("ex : 1 ; 30");
 
 		this.choixRessource = new Choice(	);
 		this.choixRessource.add			(" ");
