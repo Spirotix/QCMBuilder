@@ -690,4 +690,26 @@ public class Notion
 		}
 		return null;
 	}
+
+	public int rechercherNbQuestionDifficulte(int difficulte)
+	{
+		int nb = 0;
+		for ( Question q : lstQuestions)
+		{
+			if ( q.getDifficulte() == difficulte) nb++;
+		}
+
+		return nb;
+	}
+
+	public List<Question> rechercherQuestionsDifficulte(int difficulte)
+	{
+		List<Question> lst = new ArrayList<>();
+		for ( Question q : lstQuestions)
+		{
+			if ( q.getDifficulte() == difficulte) lst.add(q);
+		}
+
+		return lst;
+	}
 }
