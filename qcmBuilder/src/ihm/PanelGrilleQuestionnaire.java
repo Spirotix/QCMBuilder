@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.awt.event.*;
 
 import src.Controleur;
+import src.TypeQuestionnaire;
 
 public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 {

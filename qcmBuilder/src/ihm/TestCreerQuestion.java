@@ -2,6 +2,8 @@ package src.ihm;
 
 import java.util.*;
 
+import src.TypeQuestionnaire;
+
 public class TestCreerQuestion 
 {
 	private ArrayList<String> lstNotion		;
