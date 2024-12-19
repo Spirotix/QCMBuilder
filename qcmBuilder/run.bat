@@ -8,7 +8,7 @@ IF EXIST "arg.list" IF EXIST "compile.list" (
 	IF %ERRORLEVEL% EQU 0 (
 		echo Compilation reussie.
 
-	REM	REM Générer la Javadoc
+		REM Générer la Javadoc
 	REM	IF EXIST "javadoc.list" (
 	REM		echo Generation de la Javadoc...
 	REM		IF NOT EXIST "../doc" mkdir ../doc
