@@ -89,7 +89,6 @@ public class QCMBuilder
 	{
 		return lstRessources;
 	}
-
 	/**
 	 * Ajoute une ressource à la liste des ressources.
 	 * 
@@ -445,6 +444,118 @@ public class QCMBuilder
 		}
 	}
 
+	public boolean genererQuestionnaire(String nomRessource, boolean chrono,
+			List<TypeQuestionnaire> lstTypeQuestionnaire, String nomFichier)
+	{
+		Ressource ressource = this.rechercherRessource(nomRessource);
+		if (ressource == null)
+		{
+			System.out.println("La ressource " + nomRessource + " n'existe pas.");
+			return false;
+		}
+
+		for (TypeQuestionnaire tq : lstTypeQuestionnaire)
+		{
+			if (!(ressource.rechercherNotion(tq.getNotion()) != null))
+			{
+				System.out.println("La notion " + tq.getNotion() + " n'existe pas dans la ressource " + nomRessource);
+				return false;
+			}
+		}
+		for (TypeQuestionnaire tq : lstTypeQuestionnaire)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				switch (i)
+				{
+				case 1:
+					int nbTf = ressource.rechercherNotion(tq.getNotion()).rechercherNbQuestionDifficulte(1);
+					if (tq.getNbTf() > nbTf)
+					{
+						System.out.println(
+								"Il n'y a pas assez de questions très facile pour la notion " + tq.getNotion());
+						return false;
+					}
+					break;
+				case 2:
+					int nbF = ressource.rechercherNotion(tq.getNotion()).rechercherNbQuestionDifficulte(2);
+					if (tq.getNbF() > nbF)
+					{
+						System.out.println("Il n'y a pas assez de questions facile pour la notion " + tq.getNotion());
+						return false;
+					}
+					break;
+				case 3:
+					int nbM = ressource.rechercherNotion(tq.getNotion()).rechercherNbQuestionDifficulte(3);
+					if (tq.getNbM() > nbM)
+					{
+						System.out.println("Il n'y a pas assez de questions moyenne pour la notion " + tq.getNotion());
+						return false;
+					}
+					break;
+				case 4:
+					int nbD = ressource.rechercherNotion(tq.getNotion()).rechercherNbQuestionDifficulte(4);
+					if (tq.getNbD() > nbD)
+					{
+						System.out
+								.println("Il n'y a pas assez de questions difficile pour la notion " + tq.getNotion());
+						return false;
+					}
+					break;
+				}
+			}
+		}
+		List<Question> lstQuestions = new ArrayList<>();
+		List<Question> lstQuestionsNotion = new ArrayList<>();
+		for (TypeQuestionnaire tq : lstTypeQuestionnaire)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				switch (i)
+				{
+					case 1 -> 
+					{
+						lstQuestionsNotion = ressource.rechercherNotion(tq.getNotion()).rechercherQuestionsDifficulte(1);
+						for (int j = 0; j < tq.getNbTf(); j++)
+						{
+							int alea = (int) (Math.random() * lstQuestionsNotion.size());
+							lstQuestions.add(lstQuestionsNotion.remove(alea));
+						}
+					}
+					case 2 ->
+					{
+						lstQuestionsNotion = ressource.rechercherNotion(tq.getNotion()).rechercherQuestionsDifficulte(2);
+						for (int j = 0; j < tq.getNbF(); j++)
+						{
+							int alea = (int) (Math.random() * lstQuestionsNotion.size());
+							lstQuestions.add(lstQuestionsNotion.remove(alea));
+						}
+					}
+					case 3 ->
+					{
+						lstQuestionsNotion = ressource.rechercherNotion(tq.getNotion()).rechercherQuestionsDifficulte(3);
+						for (int j = 0; j < tq.getNbM(); j++)
+						{
+							int alea = (int) (Math.random() * lstQuestionsNotion.size());
+							lstQuestions.add(lstQuestionsNotion.remove(alea));
+						}
+					}
+					case 4 ->
+					{
+						lstQuestionsNotion = ressource.rechercherNotion(tq.getNotion()).rechercherQuestionsDifficulte(4);
+						for (int j = 0; j < tq.getNbD(); j++)
+						{
+							int alea = (int) (Math.random() * lstQuestionsNotion.size());
+							lstQuestions.add(lstQuestionsNotion.remove(alea));
+						}
+					}
+				}
+			}
+		}
+		new GenererQuestionnaire(nomRessource, chrono, nomFichier, lstQuestions);
+		return false;
+	}
+
 	/**
 	 * Point d'entrée principal de l'application.
 	 * 
@@ -460,9 +571,5 @@ public class QCMBuilder
 		nomsNotions.add("Les tableaux à deux dimensions");
 	}
 	
-	public void genererQuestionnaire(String nomRessource, boolean chrono, List<TypeQuestionnaire> lstTypeQuestionnaire, String nomFichier)
-	{
-		// TODO
-	}
 
-}                                                          
+}

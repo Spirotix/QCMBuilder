@@ -12,13 +12,13 @@ public class GenererQuestionnaire
 {
 	public static void main(String[] args)
 	{
-		GenererQuestionnaire gq = new GenererQuestionnaire("R1.01_Apagnan",true,"questionnaire");
+		GenererQuestionnaire gq = new GenererQuestionnaire("R1.01_Apagnan",true,"questionnaire", null);
 	}
 
 	private String nomRessource;
 	private String script;
 
-	public GenererQuestionnaire (String nomRessource, boolean chrono, String nomQuestionnaire)
+	public GenererQuestionnaire (String nomRessource, boolean chrono, String nomQuestionnaire, List<Question> lstQuestions)
 	{
 		this.nomRessource = nomRessource;
 		this.script = "";
