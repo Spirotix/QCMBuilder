@@ -568,6 +568,9 @@ public class Notion
 
 	public static void supprimerLigneEtRepertoire(int valeur, File fichier, File repertoireQuestion)
 	{
+		// Supprimer le répertoire
+		supprimerRepertoireRecursif(repertoireQuestion);
+
 		File fichierTemp = new File(fichier.getParent(), "fichier_temp.txt");
 	
 		try (BufferedReader br = new BufferedReader(new FileReader(fichier));
@@ -584,11 +587,32 @@ public class Notion
 				if (parts.length > 0 && parts[0].matches("\\d+")) // verifie que parts[1] contient uniquement des chiffres
 				{
 					int numeroQuestion = Integer.parseInt(parts[0]);
-					if (numeroQuestion == valeur && !ligneSupprimee)
+					if (ligneSupprimee)
+					{
+						File oldDir = new File( repertoireQuestion.getParent() + "/question_" + Integer.toString(numeroQuestion)   );
+						File newDir = new File( repertoireQuestion.getParent() + "/question_" + Integer.toString(numeroQuestion-1) );
+
+						// Renommer le répertoire si besoin
+						if (oldDir.exists() && !oldDir.equals(newDir))
+						{
+							if (newDir.exists())
+								System.out.println("Erreur : le répertoire cible existe déjà : " + newDir.getPath());
+							else
+								if (oldDir.renameTo(newDir))
+									System.out.println("Renommé : " + oldDir.getPath() + " en " + newDir.getPath());
+								else
+									System.out.println("Erreur lors du renommage de : " + oldDir.getPath());
+						}
+
+						bw.write((numeroQuestion - 1) + ligne.substring(ligne.indexOf(";")));
+						bw.newLine();
+						continue;
+					}
+					else if (numeroQuestion == valeur)
 					{
 						System.out.println("Ligne supprimée : " + ligne);
 						ligneSupprimee = true;
-						continue; // Ne pas écrire cette ligne
+						continue; // Directement nouvelle itération du while, sans faire le reste
 					}
 				}
 				bw.write(ligne);
@@ -610,9 +634,6 @@ public class Notion
 				System.out.println("Fichier mis à jour avec succès.");
 		else
 			System.out.println("Impossible de supprimer le fichier original.");
-
-		// Supprimer le répertoire
-		supprimerRepertoireRecursif(repertoireQuestion);
 	}
 
 	private static void supprimerRepertoireRecursif(File dossier)

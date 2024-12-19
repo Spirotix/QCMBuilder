@@ -84,10 +84,11 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 		this.panelReponses.removeAll();
 		for (PanelReponseAsso p : this.reponsesPossibles) 
 		{
-			this.panelReponses.add(p);
-			this.panelReponses.add(p);
-
-		}
+			panelReponses.add(p);
+			panelReponses.add(p);
+			p.updateImageG();
+			p.updateImageD();
+		} 
 		
 		this.panelReponses.revalidate	();
 		this.panelReponses.repaint		();

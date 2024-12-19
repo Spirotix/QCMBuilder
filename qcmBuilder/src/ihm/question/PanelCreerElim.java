@@ -76,7 +76,10 @@ public class PanelCreerElim extends JPanel implements ActionListener
 	{
 		panelReponses.removeAll();
 		for (PanelCreerReponsesElim p : this.reponsesPossibles) 
+		{
 			panelReponses.add(p);
+			p.updateImage();
+		} 
 		
 		panelReponses.revalidate();
 		panelReponses.repaint();
