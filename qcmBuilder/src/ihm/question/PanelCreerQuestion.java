@@ -46,7 +46,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 		// Initialisation
 		this.nbPoints 	 = new TextFieldPerso("ex : 4.5");
-		this.tpsReponses = new TextFieldPerso("ex : 1 ; 30");
+		this.tpsReponses = new TextFieldPerso("ex : 1:30");
 
 		this.choixRessource = new Choice(	);
 		this.choixRessource.add			(" ");
@@ -135,7 +135,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		this.add(new JLabel("Temps de réponse")	, gbc);
+		this.add(new JLabel("Temps de réponse (m:s)")	, gbc);
 		gbc.gridx = 1;
 		this.add(this.tpsReponses				, gbc);
 
@@ -267,13 +267,18 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 			{
 				try 
 				{
-					this.tempsQuestion = Integer.parseInt(this.tpsReponses.getText());
+					int minute, seconde;
+
+					minute  = Integer.parseInt(this.tpsReponses.getText().substring (0,this.tpsReponses.getText().indexOf(':')));
+					seconde = Integer.parseInt(this.tpsReponses.getText().substring (  this.tpsReponses.getText().indexOf(':')+1));
+
+					this.tempsQuestion = minute*60 + seconde;
 					this.msgErrTpsRep.setText("");
 				} 
 				catch (Exception ex) 
 				{
 					this.msgErrTpsRep.setForeground	(Color.RED												  );
-					this.msgErrTpsRep.setText		("Vous devez rentrer un entier pour le temps des réponses");
+					this.msgErrTpsRep.setText		("Vous devez respecter le format demandé");
 					peutCreer = false;
 				}
 			}
