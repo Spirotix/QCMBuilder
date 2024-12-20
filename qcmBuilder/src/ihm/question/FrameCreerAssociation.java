@@ -18,6 +18,7 @@ public class FrameCreerAssociation extends JFrame implements ActionListener
 	{
 		this.panelQ=panelQ;
 		this.ctrl=ctrl;
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menubMaBarre = new JMenuBar(		  );
 		JMenu 	 menuAcceuil  = new JMenu	("Accueil");
