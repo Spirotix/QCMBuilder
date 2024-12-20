@@ -207,9 +207,9 @@ public class Controleur
 	 * @param chrono Indique si le questionnaire est chronométré.
 	 * @param questions La liste des types de questions à inclure dans le questionnaire.
 	 */
-	public void genererQuestionnaire(String ressource, boolean chrono, ArrayList<TypeQuestionnaire> questions)
+	public void genererQuestionnaire(String ressource, boolean chrono, ArrayList<TypeQuestionnaire> questions, String nomQuestionnaire)
 	{
-		// qcmBuilder.genererQuestionnaire(ressource, chrono, questions);
+		qcmBuilder.genererQuestionnaire(ressource, chrono, questions, nomQuestionnaire);
 	}
 
 	/**

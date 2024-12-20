@@ -14,6 +14,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 	private JPanel 					 ligne1, fin				;
 	private PanelGrilleQuestionnaire grille 					;
 	private JButton 				 generer					;
+	private JTextField				 nomQuestionnaire			;
 
 	public PanelGenererQuestionnaire (Controleur ctrl)
 	{
@@ -37,7 +38,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 		
 		this.generer = new JButton ("generer questionnaire");
 
-		
+		this.nomQuestionnaire = new JTextField();
 		/*this.grille = new PanelGrilleQuestionnaire(this.ctrl,"Test");
 		JScrollPane scrollPane = new JScrollPane(this.grille);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Disposition verticale
@@ -105,7 +106,10 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 	public void actionPerformed(ActionEvent e) 
 	{
 		if (e.getSource().equals(this.generer))
-			this.ctrl.genererQuestionnaire(this.choixRessource.getSelectedItem(),this.btnChronoOui.isSelected(),this.grille.getSelectionner());
+		{
+
+			this.ctrl.genererQuestionnaire(this.choixRessource.getSelectedItem(),this.btnChronoOui.isSelected(),this.grille.getSelectionner(), "test");
+		}
 	}
 
 	public void itemStateChanged(ItemEvent e) 
