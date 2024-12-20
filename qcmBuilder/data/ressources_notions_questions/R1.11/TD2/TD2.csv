@@ -1,8 +1,1 @@
 N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION
-<<<<<<< HEAD
-1;2;2.0;Elimination;M;85;CECI est l'explication
-=======
-1;2;1.0;Association;M;90;null
-2;2;1.0;Elimination;M;80;null
-3;4;2.0;Association;M;10;null
->>>>>>> 6731db7e35194e0751a012e1b5ce08eab887463b
