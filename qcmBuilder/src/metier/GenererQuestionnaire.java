@@ -644,7 +644,7 @@ public class GenererQuestionnaire
 					int nbFNotion = tq.getNbF();
 					int nbMNotion = tq.getNbM();
 					int nbDNotion = tq.getNbD();
-					int total = nbTf + nbF + nbM + nbD;
+					int total = nbTfNotion + nbFNotion + nbMNotion + nbDNotion;
 					sRet += String.format("""
 										<tr>
 											<td>%s</td>
