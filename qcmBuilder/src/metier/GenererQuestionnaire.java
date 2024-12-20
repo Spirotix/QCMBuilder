@@ -34,22 +34,24 @@ public class GenererQuestionnaire
 
 		ReponseAssociation ra1 = new ReponseAssociation("GaucheA",null, true );
 		ReponseAssociation ra2 = new ReponseAssociation("GaucheB",null,  true);
-		ReponseAssociation ra3 = new ReponseAssociation("DroiteA",ra1, false);
-		ReponseAssociation ra4 = new ReponseAssociation("DroiteB",ra2, false);
+		ReponseAssociation ra3 = new ReponseAssociation("GaucheC",null, false);
+		ReponseAssociation ra4 = new ReponseAssociation("DroiteA",ra1, false);
+		ReponseAssociation ra5 = new ReponseAssociation("DroiteB",ra2, false);
+		ReponseAssociation ra6 = new ReponseAssociation("DroiteC",ra3, false);
 
 		ra1.setReponseAssocie(ra3);
 		ra2.setReponseAssocie(ra4);
+		ra3.setReponseAssocie(ra5);
 
 		List<ReponseAssociation> lstReponseAsso = List.of(
-			ra1, ra2, ra3, ra4
+			ra1, ra2, ra3, ra4, ra5, ra6
 		);
 
 		List<ReponseElimination> lstReponseEliminations = List.of(
 			new ReponseElimination("Vrai","La bonne"        ,0,   0),
 			new ReponseElimination("Faux","Pas ça"          ,0,   0),
-			new ReponseElimination("Faux","non plus"        ,3,   6),
-			new ReponseElimination("Faux","il me semble pas",1,   7),
-			new ReponseElimination("Faux","je crois pas"    ,2, 1.5)
+			new ReponseElimination("Faux","non plus"        ,2,   6),
+			new ReponseElimination("Faux","il me semble pas",1,   7)
 		);
 
 
