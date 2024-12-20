@@ -591,7 +591,7 @@ public class GenererQuestionnaire
 							{
 								sRet += String.format("""
 										\t["%d","%d"]""", lstReponses.indexOf(r), lstReponses.indexOf(r.getReponseAssocie()));
-								if ( i < lstReponses.size() - 2 ) {
+								if ( i < lstReponses.size() ) {
 									sRet += ", ";
 								}
 								sRet += "\n\t";
