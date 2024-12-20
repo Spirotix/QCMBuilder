@@ -1,5 +1,6 @@
 package src.metier.question;
 
+import java.util.Collections;
 import java.util.List;
 import src.metier.Notion;
 import src.metier.reponse.ReponseElimination;
@@ -271,6 +272,11 @@ public class Elimination implements Question
 		return niveau;
 	}
 
+	public void melanger()
+	{
+		Collections.shuffle(lstReponses);
+	}
+	
 	public String toString()
 	{
 		String sRet = "Question de type élimination : " + this.text + " " + this.difficulte + " " + this.nbPoint + " " + this.timer + " " + this.explication + "\n";

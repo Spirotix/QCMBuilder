@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import src.TypeQuestionnaire;
 import src.metier.question.Association;
@@ -136,12 +137,14 @@ public class GenererQuestionnaire
 
 			Files.write(Paths.get("../"+tempNomQuestionnaire+"/index.html"  ), getIndexHtml().getBytes());
 			Files.write(Paths.get("../"+tempNomQuestionnaire+"/fin.html"    ), getFinHtml().getBytes());
-			Files.write(Paths.get("../"+tempNomQuestionnaire+"/script/data.js"), getDataJs().getBytes());
+			
 
 			for (Question q : lstQuestions)
 			{
 				Files.write(Paths.get("../"+tempNomQuestionnaire+"/pages/question"+(lstQuestions.indexOf(q)+1)+".html"), getQuestionHtml(q).getBytes());
 			}
+
+			Files.write(Paths.get("../" + tempNomQuestionnaire + "/script/data.js"), getDataJs().getBytes());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -294,10 +297,10 @@ public class GenererQuestionnaire
 	private String getQuestionHtml(Question q)
 	{
 		String sRet = getQuestionHeader(q);
-
 		if (q instanceof QCM)
 		{
 			QCM qcm = (QCM) q;
+			qcm.melanger();
 			List<ReponseQCM> lstReponses = qcm.getLstReponses();
 			sRet += String.format("""
 					<!-- Question et réponses -->
@@ -342,6 +345,7 @@ public class GenererQuestionnaire
 		if (q instanceof Elimination)
 		{
 			Elimination elim = (Elimination) q;
+			elim.melanger();
 			List<ReponseElimination> lstReponses = elim.getLstReponses();
 			sRet += String.format("""
 					<!-- Question et réponses -->
@@ -379,6 +383,10 @@ public class GenererQuestionnaire
 		if (q instanceof Association)
 		{
 			Association asso = (Association) q;
+			
+			for (int i = 0; i<50; i++)
+				asso.melanger();
+
 			List<ReponseAssociation> lstReponses = asso.getLstReponses();
 			sRet += String.format("""
 					<!-- Question et réponses -->

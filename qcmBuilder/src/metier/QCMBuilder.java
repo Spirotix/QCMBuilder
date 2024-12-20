@@ -551,55 +551,11 @@ public class QCMBuilder
 				}
 			}
 		}
-		for (Question q : lstQuestions)
+		/*for (Question q : lstQuestions)
 		{
 			System.out.println(q.toString());
-		}
+		}*/
 
-		for ( Question q : lstQuestions )
-		{
-			int rand1;
-			int rand2;
-			if ( q instanceof Association)
-			{
-				for ( int i = 0; i < 100; i++)
-				{
-					rand1 = (int)Math.random() * ((Association) q).getLstReponses().size();
-					rand2 = (int)Math.random() * ((Association) q).getLstReponses().size();
-
-					ReponseAssociation temp = ((Association) q).getLstReponses().get(rand1);
-					((Association) q).getLstReponses().set(rand1, ((Association) q).getLstReponses().get(rand2));
-					((Association) q).getLstReponses().set(rand2, temp);
-				}
-			}
-
-			if ( q instanceof Elimination)
-			{
-				for ( int i = 0; i < 100; i++)
-				{
-					rand1 = (int)Math.random() * ((Elimination) q).getLstReponses().size();
-					rand2 = (int)Math.random() * ((Elimination) q).getLstReponses().size();
-
-					ReponseElimination temp = ((Elimination) q).getLstReponses().get(rand1);
-					((Elimination) q).getLstReponses().set(rand1, ((Elimination) q).getLstReponses().get(rand2));
-					((Elimination) q).getLstReponses().set(rand2, temp);
-				}
-			}
-
-			if ( q instanceof QCM)
-			{
-				for ( int i = 0; i < 100; i++)
-				{
-					rand1 = (int)Math.random() * ((QCM) q).getLstReponses().size();
-					rand2 = (int)Math.random() * ((QCM) q).getLstReponses().size();
-
-					ReponseQCM temp = ((QCM) q).getLstReponses().get(rand1);
-					((QCM) q).getLstReponses().set(rand1, ((QCM) q).getLstReponses().get(rand2));
-					((QCM) q).getLstReponses().set(rand2, temp);
-				}
-			}
-			
-		}
 		new GenererQuestionnaire(nomRessource, chrono, nomQuestionnaire, lstTypeQuestionnaire, lstQuestions);
 		return false;
 	}

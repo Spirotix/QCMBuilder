@@ -1,5 +1,6 @@
 package src.metier.question;
 
+import java.util.Collections;
 import java.util.List;
 import src.metier.Notion;
 import src.metier.reponse.*;
@@ -225,6 +226,11 @@ public class Association implements Question
 		}
 
 		return niveau;
+	}
+
+	public void melanger()
+	{
+		Collections.shuffle(lstReponseAsso);
 	}
 
 }

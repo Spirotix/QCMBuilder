@@ -1,5 +1,6 @@
 package src.metier.question;
 
+import java.util.Collections;
 import java.util.List;
 import src.metier.Notion;
 import src.metier.reponse.ReponseQCM;
@@ -238,6 +239,11 @@ public class QCM implements Question
 	public int getNbReponseVrai()
 	{
 		return nbReponseVrai;
+	}
+
+	public void melanger()
+	{
+		Collections.shuffle(lstReponses);
 	}
 
 	/**
