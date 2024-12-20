@@ -93,4 +93,9 @@ public class ReponseElimination implements Reponse
 	{
 		this.textReponse = textReponse;
 	}
+
+	public String toString()
+	{
+		return textReponse + " " + estVrai + " " + ordreIndice + " " + nbPointPerdu;
+	}
 }
