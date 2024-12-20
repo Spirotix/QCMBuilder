@@ -23,7 +23,6 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 		this.ctrl = ctrl;
 		this.fileHandler = new FileHandler("fichier_question");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
 
 		this.setTitle   				("Creation de question"	);
 		this.setSize    				( 730,500  				);
