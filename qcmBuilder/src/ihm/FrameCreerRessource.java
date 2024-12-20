@@ -15,6 +15,7 @@ public class FrameCreerRessource extends JFrame implements ActionListener
 	public FrameCreerRessource (Controleur ctrl)
 	{
 		this.ctrl=ctrl;
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JMenuBar menubMaBarre = new JMenuBar(		  );
 		JMenu 	 menuAcceuil  = new JMenu	("Accueil");

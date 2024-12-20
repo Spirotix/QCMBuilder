@@ -2,7 +2,6 @@ package src.ihm;
 
 import javax.swing.*;
 import java.awt.event.*;
-import src.ihm.*;
 import src.Controleur;
 
 public class FrameListerQuestion extends JFrame implements ActionListener
@@ -16,6 +15,8 @@ public class FrameListerQuestion extends JFrame implements ActionListener
 	public FrameListerQuestion (Controleur ctrl)
 	{
 		this.ctrl=ctrl;
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 		JMenuBar menubMaBarre = new JMenuBar(		  );
 		JMenu 	 menuAcceuil  = new JMenu	("Accueil");

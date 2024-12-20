@@ -31,18 +31,19 @@ public class PanelRessource extends JPanel implements ActionListener
 		{
 			tempP = new JPanel();
 			this.lstLabel	.add (new JLabel(this.ctrl.getChoixRessources().get(i))	);
-			this.lstSup	 	.add (new JButton("Supprimer")							);
+			this.lstSup	 	.add (new JButton("Supprimer")						);
 			this.lstPanel	.add (new JPanel(new BorderLayout())					);
 			this.lstPanel	.get (i).add(this.lstLabel	.get(i), BorderLayout.CENTER);
 			tempP			.add (this.lstSup.get(i)								);
 			this.lstPanel	.get (i).add(tempP, BorderLayout.SOUTH					);
 			this.lstSup	 	.get (i).addActionListener(this							);
 		}
-			
-		for (int i=0; i<this.lstLabel.size(); i++)
+		
+		int cpt = 0;
+		for (JLabel label : lstLabel)
 		{
-			JLabel temp = this.lstLabel.get(i);
-			this.lstLabel.get(i).addMouseListener(new MouseAdapter() 
+			JLabel temp = label;
+			label.addMouseListener(new MouseAdapter() 
 			{
 				@Override
 				public void mouseClicked(MouseEvent e) 
@@ -52,8 +53,10 @@ public class PanelRessource extends JPanel implements ActionListener
 					Update();
 				}
 			});
-			this.add(this.lstPanel.get(i));
+			ajouterPassageSouris(label);
+			this.add(this.lstPanel.get(cpt++));
 		}
+
 		this.setVisible(true);
 	}
 
@@ -93,21 +96,24 @@ public class PanelRessource extends JPanel implements ActionListener
 			this.lstSup	 	.get (i).addActionListener(this							);
 		}
 			
-		for (int i=0; i<this.lstLabel.size(); i++)
+		int cpt = 0;
+		for (JLabel label : lstLabel)
 		{
-			JLabel temp = this.lstLabel.get(i);
-			this.lstLabel.get(i).addMouseListener(new MouseAdapter() 
+			JLabel temp = label;
+			label.addMouseListener(new MouseAdapter()
 			{
 				@Override
-				public void mouseClicked(MouseEvent e) 
+				public void mouseClicked(MouseEvent e)
 				{
-					//JOptionPane.showMessageDialog(frame, "Label cliqué !");
+					// JOptionPane.showMessageDialog(frame, "Label cliqué !");
 					panelC.getPanelNotion().Update(temp.getText());
 					Update();
 				}
 			});
-			this.add(this.lstPanel.get(i));
+			ajouterPassageSouris(label);
+			this.add(this.lstPanel.get(cpt++));
 		}
+
 		this.revalidate();
 	}
 
@@ -135,5 +141,22 @@ public class PanelRessource extends JPanel implements ActionListener
 	{
 		//this.ctrl.ajouterRessource(nomRessource);
 		this.Update();
+	}
+
+	private void ajouterPassageSouris(JLabel label)
+	{
+		label.addMouseListener(new MouseAdapter()
+		{
+			public void mouseEntered(MouseEvent e)
+			{
+				label.setForeground(Color.RED);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+				label.setForeground(Color.BLACK);
+			}
+		});
 	}
 }

@@ -6,8 +6,8 @@ import src.TypeQuestionnaire;
 
 public class TestCreerQuestion 
 {
-	private ArrayList<String> lstNotion		;
-	private ArrayList<String> lstRessource	;
+	private ArrayList<String> lstNotion   ;
+	private ArrayList<String> lstRessource;
 
 	public TestCreerQuestion ()
 	{
@@ -17,11 +17,11 @@ public class TestCreerQuestion
 		this.lstRessource.add("ressource3");
 		this.lstRessource.add("ressource4");
 
-		this.lstNotion = new ArrayList<String>();
-		this.lstNotion.add("notion1");
-		this.lstNotion.add("notion2");
-		this.lstNotion.add("notion3");
-		this.lstNotion.add("notion4");
+		this.lstNotion    = new ArrayList<String>();
+		this.lstNotion   .add("notion1");
+		this.lstNotion   .add("notion2");
+		this.lstNotion   .add("notion3");
+		this.lstNotion   .add("notion4");
 
 		// new FrameMenu(this);
 	}
@@ -95,35 +95,35 @@ public class TestCreerQuestion
 
 	public void creerQuestion (String type, String nomRessource, String nomNotion, String text, String explication, int timer, int nbPoint/*/, int nbIndiceUtilise*/, ArrayList<TypeReponse> lstReponse, int difficulte)
 	{
-		String 	str = "" ; 
-		int 	cpt = 0  ;
+		String str = "";
+		int    cpt =  0;
 
-		str+="Question de type : "+type+" du chapitre : "+nomNotion+" de la matière : "+nomRessource;
-		str+="\nintitule : "+text ;
-		str += "\nexplication : "+explication;
-		str+="\ntemps : "+timer + " nmbres de points : "+nbPoint +" difficulte : "+difficulte;
+		str += "Question de type : " + type + " du chapitre : " + nomNotion + " de la matière : " + nomRessource;
+		str += "\nintitule : " + text ;
+		str += "\nexplication : " + explication;
+		str += "\ntemps : " + timer + " nmbres de points : " + nbPoint + " difficulte : " + difficulte;
 		for (TypeReponse s : lstReponse)
-			str+="\nReponse "+ ++cpt+": "+s.toString(type) ;
-		
+			str += "\nReponse "+ (++cpt) +": "+s.toString(type);
+
 		System.out.println(str);
 	}
 
 	public void creerQuestionnaire (String ressource, boolean estChrono, ArrayList<TypeQuestionnaire> lstType)
 	{
-		String str=""; 
+		String str = "";
 
 
 		str += "Questionnaire sur la ressource : "+ ressource;
-		
+
 		if (estChrono)
-			str+="   //Il est chronometré";
+			str += "   //Il est chronometré";
 		else 
-			str+="    //Il nest pas chronometré";
-		
+			str += "    //Il nest pas chronometré";
+
 		str += "\nLes ressources : ";
 		for (TypeQuestionnaire t : lstType)
-			str+="\n"+t.getNotion()+"_"+t.getNbTf()+"_"+t.getNbF()+"_"+t.getNbM()+"_"+t.getNbD();
-		
+			str += "\n" + t.getNotion() + "_" + t.getNbTf() + "_" + t.getNbF() + "_" + t.getNbM() + "_" + t.getNbD();
+
 		System.out.println(str);
 	}
 

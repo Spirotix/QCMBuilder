@@ -2,28 +2,28 @@ package src.ihm;
 
 import java.util.ArrayList;
 
-public class TypeReponse 
+public class TypeReponse
 {
-	private String 					contenu				;
-	private boolean 				estBonneReponse		;
-	private TypeReponse  			repGauche,repDroite ;
-	private ArrayList<TypeReponse> 	lstLiaisonRep1		;
-	private int 					ordre				;
-	private double					cout 				;
-	private String 					position 			;
-	private static int 				nbG, nbD 			;
-	public int 						cptG, cptD			;
+	private String                  contenu            ;
+	private boolean                 estBonneReponse    ;
+	private TypeReponse             repGauche,repDroite;
+	private ArrayList<TypeReponse> 	lstLiaisonRep1     ;
+	private int                     ordre              ;
+	private double                  cout               ;
+	private String                  position           ;
+	private static int              nbG , nbD          ;
+	public int                      cptG, cptD         ;
 
 	public TypeReponse(String contenu, boolean estBonneReponse)
 	{
-		this.contenu		 = contenu 			;
-		this.estBonneReponse = estBonneReponse	;
+		this.contenu         = contenu        ;
+		this.estBonneReponse = estBonneReponse;
 	}
 
 	public TypeReponse(String contenu, String position)
 	{
-		this.contenu  = contenu  ;
-		this.position = position ;
+		this.contenu  = contenu ;
+		this.position = position;
 
 		if (this.position.equals("Gauche"))
 			this.cptG = ++ TypeReponse.nbG;
@@ -36,7 +36,7 @@ public class TypeReponse
 
 	public TypeReponse(TypeReponse gauche, TypeReponse droite)
 	{
-		this.repGauche=gauche;
+		this.repGauche = gauche;
 		this.repDroite = droite;
 	}
 
@@ -51,20 +51,20 @@ public class TypeReponse
 	}
 	public TypeReponse(String contenu, int ordre, double cout, boolean estBonneReponse)
 	{
-		this.contenu		 = contenu			;
-		this.ordre 			 = ordre			;
-		this.cout 			 = cout 			;
-		this.estBonneReponse = estBonneReponse	;
+		this.contenu         = contenu        ;
+		this.ordre           = ordre          ;
+		this.cout            = cout           ;
+		this.estBonneReponse = estBonneReponse;
 	}
 
-	public String  	getContenu 		   () {return this.contenu		  ;}
-	public String  	getPosition 	   () {return this.position		  ;}
-	public boolean	getEstBonneReponse () {return this.estBonneReponse;}
-	public int  	getOrdre 		   () {return this.ordre		  ;}
-	public double 	getCout			   () {return this.cout			  ;}
+	public String      getContenu         () {return this.contenu         ;}
+	public String      getPosition        () {return this.position        ;}
+	public boolean     getEstBonneReponse () {return this.estBonneReponse ;}
+	public int         getOrdre           () {return this.ordre           ;}
+	public double      getCout            () {return this.cout            ;}
 
-	public TypeReponse 							getRepGauche  () {return this.repGauche		;}
-	public TypeReponse 							getRepDroite  () {return this.repDroite		;}
+	public TypeReponse getRepGauche       () {return this.repGauche       ;}
+	public TypeReponse getRepDroite       () {return this.repDroite       ;}
 
 	public void ajouterLiaison(TypeReponse t) {this.lstLiaisonRep1.add(t);} 
 
@@ -72,9 +72,9 @@ public class TypeReponse
 	{
 		String str ="";
 
-		str +=this.contenu ; 
+		str +=this.contenu;
 		
-		if (type.equals("Elimination") )
+		if ( type.equals("Elimination") )
 		{
 			if (this.estBonneReponse)
 				str += " : OUI";
@@ -83,24 +83,20 @@ public class TypeReponse
 
 			str+= " /ordre : " +this.ordre + "  points en moins : "+this.cout;
 		}
-		if (type.equals("QCM") )
+		else if ( type.equals("QCM") )
 		{
 			if (this.estBonneReponse)
 				str += " : OUI";
 			else 
 				str += " : NON";
-
 		}
-		if (type.equals("Association") )
+		else if ( type.equals("Association") )
 		{
 			str+=" : "+this.getPosition();
 			if (this.getPosition().equals("Gauche"))
 				for (TypeReponse tpRep : this.lstLiaisonRep1)
 					str+=tpRep.getContenu()+"_";
-			
-		}	
+		}
 		return str;
-		
-		
 	}
 }

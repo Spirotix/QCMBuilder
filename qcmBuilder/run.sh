@@ -9,7 +9,7 @@ if [[ -f "arg.list" && -f "compile.list" ]]; then
 	if [[ $? -eq 0 ]]; then
 		echo "Compilation réussie."
 
-	#	# Générer la Javadoc
+		# Générer la Javadoc
 	#	echo "Génération de la Javadoc..."
 	#	mkdir -p ../doc
 	#	javadoc -d ../doc @compile.list
