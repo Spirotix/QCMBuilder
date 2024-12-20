@@ -463,7 +463,7 @@ public class QCMBuilder
 		}
 		for (TypeQuestionnaire tq : lstTypeQuestionnaire)
 		{
-			for (int i = 0; i < 4; i++)
+			for (int i = 1; i <= 4; i++)
 			{
 				switch (i)
 				{
@@ -508,7 +508,7 @@ public class QCMBuilder
 		List<Question> lstQuestionsNotion = new ArrayList<>();
 		for (TypeQuestionnaire tq : lstTypeQuestionnaire)
 		{
-			for (int i = 0; i < 4; i++)
+			for (int i = 1; i <= 4; i++)
 			{
 				switch (i)
 				{
