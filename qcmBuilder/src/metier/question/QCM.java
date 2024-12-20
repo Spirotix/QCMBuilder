@@ -1,5 +1,7 @@
 package src.metier.question;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import src.metier.Notion;
 import src.metier.reponse.ReponseQCM;
@@ -40,7 +42,8 @@ public class QCM implements Question
 		this.timer       = timer;
 		this.nbPoint     = nbPoint;
 		this.difficulte  = difficulte;
-		this.lstReponses = lstReponses;
+		this.lstReponses = new ArrayList<>(lstReponses);
+		Collections.shuffle(this.lstReponses);
 		this.explication = explication;
 		this.estQCU      = this.estUnique();
 		this.urlImage    = "";
