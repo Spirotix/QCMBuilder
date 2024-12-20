@@ -20,6 +20,7 @@ public class FrameExplication extends JFrame implements ActionListener
 	public FrameExplication (PanelCreerQCMRepUnique panelQCM)
 	{
 		this.panelQCM=panelQCM;
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		
 		this.setTitle   ("Creation d'une explications");

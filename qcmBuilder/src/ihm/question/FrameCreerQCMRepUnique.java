@@ -19,6 +19,7 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 	{
 		this.panelQ = panelQ;
 		this.ctrl   = ctrl;
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		if  ( type.equals("Multiple")){ this.setTitle("Creation d'un QCM"); }
 		else                          { this.setTitle("Creation d'un QCU"); }

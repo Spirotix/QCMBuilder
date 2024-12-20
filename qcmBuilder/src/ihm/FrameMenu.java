@@ -7,7 +7,7 @@ import javax.swing.border.LineBorder;
 import src.Controleur;
 import src.ihm.question.FrameCreerQuestion;
 
-public class FrameMenu extends JFrame implements ActionListener 
+public class FrameMenu extends JFrame implements ActionListener
 {
 	private JButton creerQuestion, genererQuestionnaire, creerResNot, modifierUneQuestion;
 	private JLabel title;
@@ -18,15 +18,14 @@ public class FrameMenu extends JFrame implements ActionListener
 	{
 		this.ctrl = ctrl;
 
-		this.setLayout          (new BorderLayout()                                                   );
-		this.panel = new JPanel (new GridLayout(4, 1, 10, 10)                     );
-		this.panel.setBorder    (BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		this.panel.setBackground(Color.LIGHT_GRAY                                                     );
-		
+		this.setLayout          (new BorderLayout()                                );
+		this.panel = new JPanel (new GridLayout(4, 1, 10, 10)                      );
+		this.panel.setBorder    (BorderFactory.createEmptyBorder(20, 20, 20, 20)   );
+		this.panel.setBackground(Color.LIGHT_GRAY                                  );
 
-		this.setTitle                ("Menu principal");
-		this.setSize                 (400, 400 );
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE  );
+		this.setTitle                (    "Menu principal");
+		this.setSize                 (      400,       400);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo   (null                );
 
 		this.title                = new JLabel ("QCMBuilder"            );
@@ -41,39 +40,39 @@ public class FrameMenu extends JFrame implements ActionListener
 		this.creerResNot         .setFont(new Font("Arial", Font.PLAIN, 14));
 		this.modifierUneQuestion .setFont(new Font("Arial", Font.PLAIN, 14));
 
-		this.creerQuestion.setOpaque           (false             );
-		this.creerQuestion.setContentAreaFilled(false                    );
+		this.creerQuestion.setOpaque           (false                      );
+		this.creerQuestion.setContentAreaFilled(false                      );
 		this.creerQuestion.setBorder           (new LineBorder(Color.BLACK));
-		this.creerQuestion.setFocusPainted     (false                    );
+		this.creerQuestion.setFocusPainted     (false                      );
 		this.creerQuestion.setForeground       (Color.BLACK                );
 
-		this.genererQuestionnaire.setOpaque           (false             );
-		this.genererQuestionnaire.setContentAreaFilled(false                    );
+		this.genererQuestionnaire.setOpaque           (false                      );
+		this.genererQuestionnaire.setContentAreaFilled(false                      );
 		this.genererQuestionnaire.setBorder           (new LineBorder(Color.BLACK));
-		this.genererQuestionnaire.setFocusPainted     (false                    );
+		this.genererQuestionnaire.setFocusPainted     (false                      );
 		this.genererQuestionnaire.setForeground       (Color.BLACK                );
 
-		this.creerResNot.setOpaque           (false);
-		this.creerResNot.setContentAreaFilled(false);
+		this.creerResNot.setOpaque           (false                      );
+		this.creerResNot.setContentAreaFilled(false                      );
 		this.creerResNot.setBorder           (new LineBorder(Color.BLACK));
-		this.creerResNot.setFocusPainted     (false);
-		this.creerResNot.setForeground       (Color.BLACK);
+		this.creerResNot.setFocusPainted     (false                      );
+		this.creerResNot.setForeground       (Color.BLACK                );
 
-		this.modifierUneQuestion.setOpaque           (false);
-		this.modifierUneQuestion.setContentAreaFilled(false);
+		this.modifierUneQuestion.setOpaque           (false                      );
+		this.modifierUneQuestion.setContentAreaFilled(false                      );
 		this.modifierUneQuestion.setBorder           (new LineBorder(Color.BLACK));
-		this.modifierUneQuestion.setFocusPainted     (false);
-		this.modifierUneQuestion.setForeground       (Color.BLACK);
+		this.modifierUneQuestion.setFocusPainted     (false                      );
+		this.modifierUneQuestion.setForeground       (Color.BLACK                );
 
 		this.creerQuestion       .addActionListener(this);
 		this.genererQuestionnaire.addActionListener(this);
 		this.creerResNot         .addActionListener(this);
 		this.modifierUneQuestion .addActionListener(this);
 
-		this.ajouterPassageSouris(creerQuestion);
+		this.ajouterPassageSouris(creerQuestion       );
 		this.ajouterPassageSouris(genererQuestionnaire);
-		this.ajouterPassageSouris(creerResNot);
-		this.ajouterPassageSouris(modifierUneQuestion);
+		this.ajouterPassageSouris(creerResNot         );
+		this.ajouterPassageSouris(modifierUneQuestion );
 
 		
 		this.panel.add(this.creerResNot         );
@@ -92,8 +91,10 @@ public class FrameMenu extends JFrame implements ActionListener
 		this.setVisible(true);
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource().equals(this.creerQuestion)) {
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getSource().equals(this.creerQuestion))
+		{
 			new FrameCreerQuestion(this.ctrl);
 			this.dispose();
 		}
