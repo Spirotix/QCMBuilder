@@ -113,7 +113,6 @@ public class Notion
 
 				String[] informations = lineInformations.split(";");
 
-				int    nReponse    = Integer.parseInt  (informations[0]);
 				int    nbReponses  = Integer.parseInt  (informations[1]);
 				double nbPoint     = Double.parseDouble(informations[2]);
 				String type        =                    informations[3];
