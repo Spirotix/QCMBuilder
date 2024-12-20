@@ -29,6 +29,9 @@ document.addEventListener("DOMContentLoaded", function ()
 			}
 		});
 
+		const progressBarPercentage = document.querySelector(".progress-percentage");
+		progressBarPercentage.textContent = (currentQuestion / totalQuestions * 100).toFixed(0) + '%';
+
 		// On récupère le bouton précédent
 		const previousQuestionButton = document.querySelector(".previous-button");
 		previousQuestionButton.style.display = 'none';

@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function ()
 		});
 
 		const progressBarPercentage = document.querySelector(".progress-percentage");
-		progressBarPercentage.textContent = currentQuestion / totalQuestions * 100 + '%';
+		progressBarPercentage.textContent = (currentQuestion / totalQuestions * 100).toFixed(0) + '%';
 
 
 		// si on est sur la première question on cache le bouton précédent
