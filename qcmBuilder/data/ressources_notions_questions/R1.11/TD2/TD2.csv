@@ -1,1 +1,4 @@
 N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION
+1;2;1.0;Association;M;90;null
+2;2;1.0;Elimination;M;80;null
+3;4;2.0;Association;M;10;null
