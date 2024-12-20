@@ -270,4 +270,15 @@ public class Elimination implements Question
 		}
 		return niveau;
 	}
+
+	public String toString()
+	{
+		String sRet = "Question de type élimination : " + this.text + " " + this.difficulte + " " + this.nbPoint + " " + this.timer + " " + this.explication + "\n";
+		for (ReponseElimination reponse : lstReponses)
+		{
+			sRet += reponse.toString() + "\n";
+		}
+
+		return sRet;
+	}
 }

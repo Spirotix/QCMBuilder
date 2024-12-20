@@ -138,7 +138,7 @@ public class Notion
 				{
 					List<ReponseAssociation> lstReponse = new ArrayList<>();
 
-					for (int numReponse = 1; numReponse < nbReponses; numReponse++)
+					for (int numReponse = 1; numReponse <= nbReponses; numReponse++)
 					{
 						Scanner scReponse = new Scanner(new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
 
@@ -150,7 +150,7 @@ public class Notion
 						ReponseAssociation reponseB;
 						String textReponseB = lineTextReponse.substring(lineTextReponse.indexOf("::") + 2);
 
-						reponseA = new ReponseAssociation(textReponseA, null, false);
+						reponseA = new ReponseAssociation(textReponseA, null, true);
 						lstReponse.add(reponseA);
 
 						reponseB = new ReponseAssociation(textReponseB, reponseA, false);
@@ -170,14 +170,14 @@ public class Notion
 
 					int nbIndice = 0;
 
-					for (int numReponse = 1; numReponse < nbReponses; numReponse++)
+					for (int numReponse = 1; numReponse <= nbReponses; numReponse++)
 					{
 						Scanner scReponse = new Scanner(new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
 
 						String lineTextReponse = scReponse.nextLine();
 
 						lstReponse.add(new ReponseElimination(
-						                                      lineTextReponse.substring( lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf( "|") ),
+						                                      lineTextReponse.substring( lineTextReponse.indexOf("} ") + 1, lineTextReponse.indexOf( "|") ),
 						                                      lineTextReponse.substring( lineTextReponse.indexOf( "|") + 1, lineTextReponse.indexOf("||") ),
 						                  Integer.parseInt   (lineTextReponse.substring( lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")) ),
 						                  Double .parseDouble(lineTextReponse.substring( lineTextReponse.indexOf( "/") + 1 )                                  )
@@ -199,7 +199,7 @@ public class Notion
 				{
 					List<ReponseQCM> lstReponse = new ArrayList<>();
 
-					for (int numReponse = 1; numReponse < nbReponses; numReponse++)
+					for (int numReponse = 1; numReponse <= nbReponses; numReponse++)
 					{
 						Scanner scReponse = new Scanner(new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
 
