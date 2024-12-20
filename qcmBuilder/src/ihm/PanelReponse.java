@@ -14,7 +14,8 @@ public class PanelReponse extends JPanel implements ActionListener
 	private JButton					corbeille, importer	;
 	private JLabel 					imageImporter		;
 	private JTextField				contenu				;
-	private JCheckBox				validation 			;
+	private JCheckBox				validation			;
+	private JRadioButton			validationU			;
 	private String 					type 				;
 	private FileHandler 			fileHandler			;
 	private File 					fileChoisi 			;
@@ -37,7 +38,12 @@ public class PanelReponse extends JPanel implements ActionListener
 		this.importer	= new JButton(new ImageIcon("../img/inserer.PNG"	));
 
 		this.contenu 	= new TextFieldPerso ("contenu");
-		this.validation = new JCheckBox  ();
+		
+		
+		//if ( this.type.equals("Unique") )
+		//	this.validationU = new JRadioButton();
+		//else
+			this.validation = new JCheckBox();
 
 		//Insertion
 		JPanel panelGauche = new JPanel ();
@@ -50,7 +56,13 @@ public class PanelReponse extends JPanel implements ActionListener
 		JPanel panelDroiteHaut 	= new JPanel ();
 		this.panelImage	= new JPanel ();
 		this.panelImage.setPreferredSize(new Dimension(75, 75));
-		
+
+		//if ( this.type.equals("Unique") )
+		//	this.validationU = new JRadioButton();
+		//else
+		//	this.validationM = new JCheckBox();                                                                 // TODODODODODODODODODODODODODODODODODODODODODODODODODODODODODODODODODODODODO
+
+
 		panelDroiteHaut	.add (this.validation						);
 		panelDroiteHaut	.add (this.importer							);
 		panelDroite		.add (panelDroiteHaut, BorderLayout.NORTH	);
