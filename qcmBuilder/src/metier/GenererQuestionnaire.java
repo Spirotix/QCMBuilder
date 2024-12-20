@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import src.TypeQuestionnaire;
 import src.metier.question.Association;
@@ -62,7 +61,7 @@ public class GenererQuestionnaire
 			new QCM        (n3, "Question 3", 50, 5, 3, List.of(new ReponseQCM("Bonne réponse 1", "Vrai"), new ReponseQCM("Bonne réponse 2", "Vrai"), new ReponseQCM("Pas bonne réponse 3", "Faux")), "Eh oui, c'est ça la réponse !"), 
 			new QCM        (n1, "Question 4", 50, 5, 4, List.of(new ReponseQCM("Bonne réponse", "Vrai"), new ReponseQCM("poulet", "Faux")), "Eh oui, c'est ça la réponse !")
 		);
-		GenererQuestionnaire gq = new GenererQuestionnaire("R1.01_Apagnan", true,"TEST",lstTypeQuestionnaires, lstQuestions);
+		GenererQuestionnaire gq = new GenererQuestionnaire("R1.01_Apagnan", true,"ouioui",lstTypeQuestionnaires, lstQuestions);
 	}
 
 	private String nomRessource;
@@ -230,7 +229,9 @@ public class GenererQuestionnaire
 
 					<!-- Barre de progression des questions -->
 					<section class="progress-bar">
-						<div class="progress-bar-fill"></div>
+						<div class="progress-bar-fill">
+							<p class="progress-percentage"></p>
+						</div>
 					</section>
 
 					<!-- Compteur de temps -->
