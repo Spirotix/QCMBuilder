@@ -130,7 +130,7 @@ public class Notion
 					default -> {
 						scTextQuestion.close();
 						scInformations.close();
-						throw new IllegalArgumentException( "Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
+						throw new IllegalArgumentException( "Le niveau doit appartenir aux options suivantes : 'TF','F','M','D'");
 					}
 				}
 
@@ -181,7 +181,7 @@ public class Notion
 						                                      lineTextReponse.substring( lineTextReponse.indexOf( "|") + 1, lineTextReponse.indexOf("||") ),
 						                  Integer.parseInt   (lineTextReponse.substring( lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")) ),
 						                  Double .parseDouble(lineTextReponse.substring( lineTextReponse.indexOf( "/") + 1 )                                  )
-						                                    )
+						                                     )
 						              );
 
 						if ( nbIndice < Integer.parseInt(lineTextReponse.substring( lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/") )) )
@@ -220,7 +220,7 @@ public class Notion
 				{
 					scTextQuestion.close();
 					scInformations.close();
-					throw new IllegalArgumentException( "Le type doit être appartenir aux options suivantes : 'Association','Elimination','QCM'");
+					throw new IllegalArgumentException( "Le type doit appartenir aux options suivantes : 'Association','Elimination','QCM'");
 				}
 				scTextQuestion.close();
 			}
@@ -348,7 +348,7 @@ public class Notion
 							try
 							{
 								PrintWriter writerTextReponse = new PrintWriter(new FileWriter( new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_reponse_" + indRep++ + ".rtf"), false));
-								writerTextReponse.println(r.getText() + "|" + (r.estVrai() ? "Vrai" : "Faux"));
+								writerTextReponse.println( r.getText() + "|" + (r.estVrai() ? "Vrai" : "Faux") );
 								writerTextReponse.close();
 							}
 							catch (Exception e)
@@ -394,7 +394,7 @@ public class Notion
 							try
 							{
 								PrintWriter writerTextReponse = new PrintWriter(new FileWriter( new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_reponse_" + indRep++ + ".rtf"), false));
-								writerTextReponse.println((r.estVrai() ? "Vrai" : "Faux") + "|" + r.getText() + "||" + r.getOrdreIndice() + "/" + r.getNbPointPerdu());
+								writerTextReponse.println( (r.estVrai() ? "Vrai" : "Faux") + "|" + r.getText() + "||" + r.getOrdreIndice() + "/" + r.getNbPointPerdu() );
 								writerTextReponse.close();
 							}
 							catch (Exception e)
@@ -496,7 +496,6 @@ public class Notion
 				e.printStackTrace();
 			}
 
-
 			return true;
 		}
 		else
@@ -523,8 +522,6 @@ public class Notion
 		{
 			return false;
 		}
-
-		System.out.println("SupprimerN");
 
 		File fileCSV = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
 		File fileRep = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.indexOf(question) + 1));

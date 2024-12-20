@@ -167,8 +167,6 @@ public class QCMBuilder
 		if (!lstRessources.contains(ressource))
 			return false;
 
-		System.out.println("SupprimerQCMBuilder");
-
 		Iterator<Notion> iterator = ressource.getNotions().iterator();
 		while (iterator.hasNext())
 		{

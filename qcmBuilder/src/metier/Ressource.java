@@ -147,8 +147,6 @@ public class Ressource
 	//	if (!lstNotions.contains(notion))
 	//		return false;
 
-		System.out.println("SupprimerR");
-
 		Iterator<Question> iterator = notion.getQuestions().iterator();
 		while (iterator.hasNext())
 		{
