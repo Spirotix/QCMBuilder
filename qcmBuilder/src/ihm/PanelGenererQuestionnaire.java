@@ -65,7 +65,8 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 		this.ligne1.add(gauche);
 		this.ligne1.add(droite2);
 
-		this.fin = new JPanel (); 
+		this.fin = new JPanel ( new GridLayout(2,1)); 
+		this.fin. add (this.nomQuestionnaire);
 		this.fin. add (this.generer);
 
 		/*
@@ -108,7 +109,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 		if (e.getSource().equals(this.generer))
 		{
 
-			this.ctrl.genererQuestionnaire(this.choixRessource.getSelectedItem(),this.btnChronoOui.isSelected(),this.grille.getSelectionner(), "test");
+			this.ctrl.genererQuestionnaire(this.choixRessource.getSelectedItem(),this.btnChronoOui.isSelected(),this.grille.getSelectionner(), this.nomQuestionnaire.getText());
 		}
 	}
 

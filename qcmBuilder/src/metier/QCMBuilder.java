@@ -551,6 +551,10 @@ public class QCMBuilder
 				}
 			}
 		}
+		for (Question q : lstQuestions)
+		{
+			System.out.println(q.toString());
+		}
 		new GenererQuestionnaire(nomRessource, chrono, nomQuestionnaire, lstTypeQuestionnaire, lstQuestions);
 		return false;
 	}
