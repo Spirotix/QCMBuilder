@@ -4,4 +4,5 @@ public interface Reponse
 {
 	String getText();
 	void setText(String text);
+	String getUrlImage();
 }

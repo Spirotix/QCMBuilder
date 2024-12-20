@@ -240,7 +240,11 @@ public class GenererQuestionnaire
 						<p class="countdown-data">%d</p>
 					</section>
 
-						""",css, type, lstQuestions.indexOf(q)+1, q.getNbPoint(), type, id, lstQuestions.indexOf(q)+1, q.getNotions().getNom(), difficulte, q.getTimer(), q.getNbPoint(), q.getTimer());
+					<figure>
+						<img src="%s" alt="%s" class="question-image">
+					</figure>
+
+						""",css, type, lstQuestions.indexOf(q)+1, q.getNbPoint(), type, id, lstQuestions.indexOf(q)+1, q.getNotions().getNom(), difficulte, q.getTimer(), q.getNbPoint(), q.getTimer(), q.getUrlImage(), q.getUrlImage());
 
 		return sRet;
 	}
@@ -403,9 +407,18 @@ public class GenererQuestionnaire
 			{
 				if (r.estAGauche())
 				{
-					sRet += String.format("""
+					if (!r.getUrlImage().equals(""))
+					{
+						sRet += String.format("""
+								<p class="association-item" data-id="%d"><img src="%s" alt="%s"></p>
+		""", lstReponses.indexOf(r), r.getUrlImage(), r.getText());
+					}
+					else
+					{
+						sRet += String.format("""
 								<p class="association-item" data-id="%d">%s</p>
 		""", lstReponses.indexOf(r), r.getText());
+					}
 				}
 			}
 

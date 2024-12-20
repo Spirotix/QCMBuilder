@@ -97,4 +97,18 @@ public interface Question
 	 * @param explication L'explication de la question.
 	 */
 	void setExplication(String explication);
+
+	/**
+	 * Retourne l'URL de l'image associée à la question.
+	 * 
+	 * @return L'URL de l'image associée à la question.
+	 */
+	String getUrlImage();
+
+	/**
+	 * Définit l'URL de l'image associée à la question.
+	 * 
+	 * @param urlImage L'URL de l'image associée à la question.
+	 */
+	void setUrlImage(String urlImage);
 }

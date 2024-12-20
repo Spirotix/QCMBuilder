@@ -1,9 +1,9 @@
 package src.ihm.question;
 
-import javax.swing.*;
 import java.awt.event.*;
-import src.ihm.*;
+import javax.swing.*;
 import src.Controleur;
+import src.ihm.*;
 
 public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 {
@@ -20,6 +20,7 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 		this.panelQ = panelQ;
 		this.ctrl   = ctrl;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 
 		if  ( type.equals("Multiple")){ this.setTitle("Creation d'un QCM"); }
 		else                          { this.setTitle("Creation d'un QCU"); }

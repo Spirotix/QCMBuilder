@@ -2,13 +2,11 @@ package src.ihm.question;
 
 import java.awt.*					;
 import java.awt.event.*				;
-import javax.swing.*				;
+import java.io.File				;
+import java.io.IOException					;
+import javax.swing.*		;
+import src.Controleur	;
 import src.ihm.*					;
-import javax.imageio.ImageIO		;
-import java.awt.image.BufferedImage	;
-import java.io.File					;
-import java.io.IOException			;
-import src.Controleur				;
 
 public class FrameCreerQuestion extends JFrame implements ActionListener
 {
@@ -25,6 +23,7 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 		this.ctrl = ctrl;
 		this.fileHandler = new FileHandler("fichier_question");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 
 		this.setTitle   				("Creation de question"	);
 		this.setSize    				( 730,500  				);
