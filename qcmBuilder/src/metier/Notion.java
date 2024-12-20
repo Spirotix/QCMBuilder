@@ -177,7 +177,7 @@ public class Notion
 						String lineTextReponse = scReponse.nextLine();
 
 						lstReponse.add(new ReponseElimination(
-						                                      lineTextReponse.substring( lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf( "|") ),
+						                                      lineTextReponse.substring( lineTextReponse.indexOf("} ") + 1, lineTextReponse.indexOf( "|") ),
 						                                      lineTextReponse.substring( lineTextReponse.indexOf( "|") + 1, lineTextReponse.indexOf("||") ),
 						                  Integer.parseInt   (lineTextReponse.substring( lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")) ),
 						                  Double .parseDouble(lineTextReponse.substring( lineTextReponse.indexOf( "/") + 1 )                                  )

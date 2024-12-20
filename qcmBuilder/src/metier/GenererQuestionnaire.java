@@ -518,6 +518,7 @@ public class GenererQuestionnaire
 						sRet += "\t[";
 						for (ReponseElimination r : lstReponses)
 						{
+							System.out.println(r.estVrai());
 							if (r.estVrai())
 							{
 								sRet += String.format("""
@@ -566,13 +567,13 @@ public class GenererQuestionnaire
 							{
 								sRet += String.format("""
 										\t["%d","%d"]""", lstReponses.indexOf(r), lstReponses.indexOf(r.getReponseAssocie()));
-								if (i < lstReponses.size()/2 - 1) {
+								if ( i < lstReponses.size() - 2 ) {
 									sRet += ", ";
 								}
 								sRet += "\n\t";
 							}
 						}
-						if (lstQuestions.indexOf(q) != lstQuestions.size() - 1)
+						if (lstQuestions.indexOf(q) != lstQuestions.size())
 							sRet += "],\n\n\t";
 						else
 							sRet += "]\n";
