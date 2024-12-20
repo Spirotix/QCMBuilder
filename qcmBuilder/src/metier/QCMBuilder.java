@@ -128,7 +128,7 @@ public class QCMBuilder
 					System.out.println("Ajout : " + ressource.getCode() + ";" + ressource.getNom() + "\n");
 				}
 
-				File fileRep = new File( "../data/questions_NOUVEAU/" + ressource.getCode() );
+				File fileRep = new File( "../data/ressources_notions_questions/" + ressource.getCode() );
 				fileRep.mkdirs();
 
 				lstRessources.add(ressource);
@@ -178,7 +178,7 @@ public class QCMBuilder
 		}
 
 		File fileCSV = new File("../data/ressources.csv");
-		File fileRep = new File("../data/questions_NOUVEAU/" + ressource.getCode());
+		File fileRep = new File("../data/ressources_notions_questions/" + ressource.getCode());
 
 		// Supprimer la ligne
 		QCMBuilder.supprimerLigneEtRepertoire(ressource, fileCSV, fileRep);

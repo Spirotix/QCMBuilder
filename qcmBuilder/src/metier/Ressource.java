@@ -48,7 +48,7 @@ public class Ressource
 				if ( codeRessource.equals(this.code) )
 				{
 					// Créer le fichier d'informations de toutes les questions
-					File fileInformations  = new File( "../data/questions_NOUVEAU/" + this.getCode() + "/" + nomNotion + "/" + nomNotion + ".csv" );
+					File fileInformations  = new File( "../data/ressources_notions_questions/" + this.getCode() + "/" + nomNotion + "/" + nomNotion + ".csv" );
 
 					// Créer les répertoires non existants (ou ce trouve le csv)
 					fileInformations.getParentFile().mkdirs();
@@ -116,7 +116,7 @@ public class Ressource
 					System.out.println("Ajout : " + this.getCode() + ";" + notion.getNom() + "\n");
 				}
 
-				File fileRep = new File( "../data/questions_NOUVEAU/" + this.getCode() + "/" + notion.getNom() );
+				File fileRep = new File( "../data/ressources_notions_questions/" + this.getCode() + "/" + notion.getNom() );
 				fileRep.mkdirs();
 
 				lstNotions.add(notion);
@@ -158,7 +158,7 @@ public class Ressource
 		}
 
 		File fileCSV = new File("../data/notions.csv");
-		File fileRep = new File("../data/questions_NOUVEAU/" + this.getCode() + "/" + notion.getNom());
+		File fileRep = new File("../data/ressources_notions_questions/" + this.getCode() + "/" + notion.getNom());
 
 		// Supprimer la ligne
 		Ressource.supprimerLigneEtRepertoire(notion, fileCSV, fileRep);

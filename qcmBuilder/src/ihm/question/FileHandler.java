@@ -101,7 +101,7 @@ public class FileHandler
 			return;
 		}
 
-		File targetDirectory = new File("../data/questions_NOUVEAU/temp");
+		File targetDirectory = new File("../data/ressources_notions_questions/temp");
 		if (!targetDirectory.exists()) 
 			targetDirectory.mkdirs();
 
@@ -120,7 +120,7 @@ public class FileHandler
 	 */
 	private void gererAudio(File file, String extension) throws IOException 
 	{
-		File targetDirectory = new File("../data/questions_NOUVEAU/temp");
+		File targetDirectory = new File("../data/ressources_notions_questions/temp");
 		if (!targetDirectory.exists()) 
 			 targetDirectory.mkdirs();
 
@@ -140,7 +140,7 @@ public class FileHandler
 	 */
 	private void gererPDF(File file, String extension) throws IOException 
 	{
-		File targetDirectory = new File("../data/questions_NOUVEAU/temp");
+		File targetDirectory = new File("../data/ressources_notions_questions/temp");
 		if (!targetDirectory.exists()) 
 			 targetDirectory.mkdirs();
 
@@ -171,7 +171,7 @@ public class FileHandler
 	 */
 	public static void supprimerFichiersTemp()
 	{
-		Path dir = Paths.get("../data/questions_NOUVEAU/temp");
+		Path dir = Paths.get("../data/ressources_notions_questions/temp");
 
 		try 
 		{
