@@ -4,7 +4,6 @@ import java.awt.*					;
 import java.awt.event.*				;
 import javax.swing.*				;
 import javax.imageio.ImageIO		;
-import java.awt.image.BufferedImage	;
 import java.io.File					;
 import java.io.IOException			;
 import src.ihm.question.*			;
@@ -113,7 +112,7 @@ public class PanelReponse extends JPanel implements ActionListener
 			return ;
 		try 
 		{
-			Image image 		 = ImageIO.read(new File("../data/questions_NOUVEAU/temp/fichier_reponse"+this.indice+"."+this.fileHandler.getExtension(this.fileChoisi.getName())));
+			Image image 		 = ImageIO.read(new File("../data/ressources_notions_questions/temp/fichier_reponse"+this.indice+"."+this.fileHandler.getExtension(this.fileChoisi.getName())));
 			Image imageRetaillee = image.getScaledInstance( this.panelImage.getHeight(), this.panelImage.getHeight(), Image.SCALE_AREA_AVERAGING);
 
 			this.imageImporter.setIcon(new ImageIcon(imageRetaillee));

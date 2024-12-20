@@ -1,8 +1,11 @@
 package src.metier.question;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import src.metier.Notion;
 import src.metier.reponse.ReponseElimination;
+
 
 /**
  * La classe Elimination représente une question de type élimination.
@@ -20,6 +23,7 @@ public class Elimination implements Question
 	private int                      nbIndice;
 	private int                      nbIndiceUtilise;
 	private List<ReponseElimination> lstReponses;
+	private String                   urlImage;
 
 	/**
 	 * Constructeur de la classe Elimination.
@@ -32,18 +36,22 @@ public class Elimination implements Question
 	 * @param lstReponses La liste des réponses de type élimination.
 	 * @param nbIndice Le nombre d'indices disponibles.
 	 * @param explication L'explication de la question.
+	 * @param urlImage L'URL de l'image associée à la question.
 	 */
-	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<ReponseElimination> lstReponses, int nbIndice, String explication)
+	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, 
+	List<ReponseElimination> lstReponses, int nbIndice, String explication)
 	{
 		this.notions         = notion;
 		this.text            = text;
 		this.timer           = timer;
 		this.nbPoint         = nbPoint;
 		this.difficulte      = difficulte;
-		this.lstReponses     = lstReponses;
+		this.lstReponses     = new ArrayList<>(lstReponses);
+		Collections.shuffle(this.lstReponses);
 		this.nbIndice        = nbIndice;
 		this.explication     = explication;
 		this.nbIndiceUtilise = 0;
+		this.urlImage        = "";
 	}
 
 	/**
@@ -229,6 +237,16 @@ public class Elimination implements Question
 	}
 
 	/**
+	 * Retourne le nombre d'indices disponibles.
+	 * 
+	 * @return Le nombre d'indices disponibles.
+	 */
+	public int getNbIndice()
+	{
+		return this.nbIndice;
+	}
+
+	/**
 	 * Retourne la liste des réponses de type élimination.
 	 * 
 	 * @return La liste des réponses de type élimination.
@@ -258,5 +276,41 @@ public class Elimination implements Question
 			}
 		}
 		return niveau;
+	}
+
+	public void melanger()
+	{
+		Collections.shuffle(lstReponses);
+	}
+	
+	public String toString()
+	{
+		String sRet = "Question de type élimination : " + this.text + " " + this.difficulte + " " + this.nbPoint + " " + this.timer + " " + this.explication + "\n";
+		for (ReponseElimination reponse : lstReponses)
+		{
+			sRet += reponse.toString() + "\n";
+		}
+
+		return sRet;
+	}
+	
+	/**
+	 * Définit l'URL de l'image associée à la question.
+	 *
+	 * @param urlImage L'URL de l'image associée à la question.
+	 */
+	public void setUrlImage(String urlImage)
+	{
+		this.urlImage = urlImage;
+	}
+
+	/**
+	 * Retourne l'URL de l'image associée à la question.
+	 *
+	 * @return L'URL de l'image associée à la question.
+	 */
+	public String getUrlImage()
+	{
+		return this.urlImage;
 	}
 }

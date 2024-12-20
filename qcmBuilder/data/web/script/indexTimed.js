@@ -29,6 +29,9 @@ document.addEventListener("DOMContentLoaded", function ()
 			}
 		});
 
+		const progressBarPercentage = document.querySelector(".progress-percentage");
+		progressBarPercentage.textContent = (currentQuestion / totalQuestions * 100).toFixed(0) + '%';
+
 		// On récupère le bouton précédent
 		const previousQuestionButton = document.querySelector(".previous-button");
 		previousQuestionButton.style.display = 'none';
@@ -144,10 +147,9 @@ document.addEventListener("DOMContentLoaded", function ()
 	// Afficher les indices quand on clique sur le bouton "Indice"
 	if(document.querySelector('.hint-button')) 
 	{
-		document.querySelector('.hint-button').addEventListener('click', function() 
-		{
-			showHint();
-		});
+		document.querySelector('.hint-button').addEventListener('click', function() { showHint();});
+		const hintPoint = document.querySelector('.hint-point');
+		hintPoint.textContent = '-' + correctAnswers[currentQuestion-1][1][usedHint][1];
 	}
 
 	// Gérer les éléments d'association
@@ -257,36 +259,50 @@ document.addEventListener("DOMContentLoaded", function ()
 		// Réinitialiser les classes 'selected' des éléments d'association
 		document.querySelectorAll('.association-item').forEach(item => item.classList.remove('selected'));
 	}
-
-	// Dessiner une ligne entre deux éléments
-	function drawLine(startElement, endElement) 
-	{
-		const startRect = startElement.getBoundingClientRect();
-		const endRect   = endElement.getBoundingClientRect();
-
-		// Coordonnées de départ : bord droit de la div de gauche
-		const startX = startRect.right + window.scrollX;
-		const startY = startRect.top   + startRect.height / 2 + window.scrollY;
-
-		// Coordonnées d'arrivée : bord gauche de la div de droite
-		const endX = endRect.left + window.scrollX;
-		const endY = endRect.top  + endRect.height / 2 + window.scrollY;
-
-		const length = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
-		const angle  = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
-
-		// Créer une div pour la ligne
-		const line = document.createElement('div');
-		line.classList.add('line');
-		line.style.width     =         `${length}px`;
-		line.style.height    =                 '2px'; // Assurez-vous que la hauteur est définie pour voir la ligne
-		line.style.transform = `rotate(${angle}deg)`;
-		line.style.left      =         `${startX}px`;
-		line.style.top       =         `${startY}px`;
-
-		document.querySelector('.line-container').appendChild(line);
-	}
 });
+
+// Dessiner une ligne entre deux éléments
+function drawLine(startElement, endElement, correct = 'F') 
+{
+	const startRect = startElement.getBoundingClientRect();
+	const endRect   = endElement.getBoundingClientRect();
+
+	// Coordonnées de départ : bord droit de la div de gauche
+	const startX = startRect.right + window.scrollX;
+	const startY = startRect.top   + startRect.height / 2 + window.scrollY;
+
+	// Coordonnées d'arrivée : bord gauche de la div de droite
+	const endX = endRect.left + window.scrollX;
+	const endY = endRect.top  + endRect.height / 2 + window.scrollY;
+
+	const length = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
+	const angle  = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+
+	// Créer une div pour la ligne
+	const line = document.createElement('div');
+	line.classList.add('line');
+	line.style.width     =         `${length}px`;
+	line.style.height    =                 '2px'; // Assurez-vous que la hauteur est définie pour voir la ligne
+	line.style.transform = `rotate(${angle}deg)`;
+	line.style.left      =         `${startX}px`;
+	line.style.top       =         `${startY}px`;
+
+	line.classList.add(startElement.getAttribute('data-id'));
+	line.classList.add(endElement.getAttribute('data-id'));
+
+	if (correct === 'G')
+	{
+		line.style.backgroundColor = '#00561b';
+		line.style.height = '4px';
+	}
+	else if (correct === 'R')
+	{
+		line.style.backgroundColor = '#a80000';
+		line.style.height = '1px';
+	}
+
+	document.querySelector('.line-container').appendChild(line);
+}
 
 // Validation d'une question
 function validateQuestion() 
@@ -400,6 +416,20 @@ function validateMultipleQuestion(questionPoints)
 	reponses.forEach((input) => 
 	{
 		input.disabled = true;
+		if(correctAnswers[currentQuestion-1].includes(input.id)) 
+		{
+			input.parentElement.style.color = '#00561b';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (correct)'; 
+		}
+		else if (selectedAnswers.includes(input.id))
+		{
+			input.parentElement.style.color = '#a80000';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (incorrect)'; 
+		}
 	});
 }
 
@@ -432,6 +462,20 @@ function validateUniqueQuestion(questionPoints)
 	reponses.querySelectorAll('input').forEach((input) => 
 	{
 		input.disabled = true;
+		if(input.id === correctAnswers[currentQuestion-1][0]) 
+			{
+				input.parentElement.style.color = '#00561b';
+				input.parentElement.style.fontWeight = 'bold';
+				const label = document.querySelector(`label[for="${input.id}"]`);
+				label.textContent = label.textContent + ' (correct)';
+			}
+			else if (selectedAnswer && selectedAnswer.id === input.id)
+			{
+				input.parentElement.style.color = '#a80000';
+				input.parentElement.style.fontWeight = 'bold';
+				const label = document.querySelector(`label[for="${input.id}"]`);
+				label.textContent = label.textContent + ' (incorrect)'; 
+			}
 	});
 }
 
@@ -466,6 +510,20 @@ function validateEliminateQuestion(questionPoints)
 	reponses.forEach((input) => 
 	{
 		input.disabled = true;
+		if(input.id === correctAnswers[currentQuestion-1][0][0]) 
+		{
+			input.parentElement.style.color = '#00561b';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (correct)';
+		}
+		else if (selectedAnswer && selectedAnswer.id === input.id)
+		{
+			input.parentElement.style.color = '#a80000';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (incorrect)'; 
+		}
 	});
 
 	// Cacher le bouton d'indice
@@ -488,35 +546,60 @@ function validateAssociationQuestion(questionPoints)
 	deleteLineButton.style.display = 'none';
 	
 	// Vérifier si le nombre de paires sélectionnées est correct
+	let suite = true;
 	if (selectedItems.length !== correctItems.length) 
 	{
 		// Si le nombre de paires est incorrect, afficher un message d'erreur
 		titre.classList.add('incorrect');
 		titre.textContent = "Dommage, ce n'est pas la bonne réponse.";
-		return;
+		suite = false;
 	}
 	
 	// Vérifier si toutes les paires sélectionnées sont correctes
-	const correct = selectedItems.every(pair => 
+	if(suite)
 	{
-		const correctPair = correctItems.find(correctPair => correctPair[0] === pair[0] && correctPair[1] === pair[1]);
-		return !!correctPair;
-	});
-	
-	if (correct) 
-	{
-		// Si toutes les paires sont correctes, afficher un message de succès
-		titre.classList.add('correct');
-		titre.textContent = "Bravo, c'est la bonne réponse !";
-		// Ajouter les points de la question aux points accumulés
-		point += questionPoints;
-	} 
-	else 
-	{
-		// Si une ou plusieurs paires sont incorrectes, afficher un message d'erreur
-		titre.classList.add('incorrect');
-		titre.textContent = "Dommage, ce n'est pas la bonne réponse.";
+		const correct = selectedItems.every(pair => 
+		{
+			const correctPair = correctItems.find(correctPair => correctPair[0] === pair[0] && correctPair[1] === pair[1]);
+			return !!correctPair;
+		});
+		
+		if (correct) 
+		{
+			// Si toutes les paires sont correctes, afficher un message de succès
+			titre.classList.add('correct');
+			titre.textContent = "Bravo, c'est la bonne réponse !";
+
+			// Ajouter les points de la question aux points accumulés
+			point += questionPoints;
+		} 
+		else 
+		{
+			// Si une ou plusieurs paires sont incorrectes, afficher un message d'erreur
+			titre.classList.add('incorrect');
+			titre.textContent = "Dommage, ce n'est pas la bonne réponse.";
+		}
 	}
+
+	// Parcours les pairs sélectionnées pour les mettre en rouge
+	selectedItems.forEach(pair => 
+		{
+			const startElement = document.querySelector(`.left-column .association-item[data-id="${pair[0]}"]`);
+			const endElement   = document.querySelector(`.right-column .association-item[data-id="${pair[1]}"]`);
+			if (!correctItems.find(correctPair => correctPair[0] === pair[0] && correctPair[1] === pair[1]))
+			{
+				drawLine(startElement, endElement,'R');
+			}
+		});
+
+	// Parcours les bonne pairs pour les mettre en vert
+	correctItems.forEach(pair => 
+	{
+
+		const startElement = document.querySelector(`.left-column .association-item[data-id="${pair[0]}"]`);
+		const endElement   = document.querySelector(`.right-column .association-item[data-id="${pair[1]}"]`);
+		drawLine(startElement, endElement,'G');
+	});
 
 	// Désactiver tous les éléments d'association pour empêcher de changer les réponses après validation
 	const associatedItems = document.querySelectorAll('.association-item');
@@ -558,5 +641,17 @@ function showHint()
 		// Afficher le nombre d'indices utilisés et le nombre total d'indices
 		hintCurrentData.textContent = usedHint;
 		hintTotalData.textContent   = correctAnswers[currentQuestion-1][1].length;
+
+		// Affiche le nombre de point perdus par indices
+		if(usedHint < correctAnswers[currentQuestion-1][1].length)
+		{
+			const hintPointElement = document.querySelector('.hint-point');
+			hintPointElement.textContent = '-' + correctAnswers[currentQuestion-1][1][usedHint][1];
+		}
+		else
+		{
+			const hintButton = document.querySelector('.hint-button');
+			hintButton.textContent = 'Total : ' + hintPoint;
+		}
 	}
 }

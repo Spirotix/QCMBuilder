@@ -51,7 +51,7 @@ public class Notion
 		List<Question> lstQuestions = new ArrayList<>();
 		try
 		{
-			File    fileInformations = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
+			File    fileInformations = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
 			Scanner scInformations   = new Scanner(fileInformations);
 
 			if (!scInformations.hasNextLine())
@@ -66,8 +66,8 @@ public class Notion
 
 			while (scInformations.hasNextLine())
 			{
-				File dossierComplement = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/complement");
-				File fileTextQuestion  = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_question.rtf");
+				File dossierComplement = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/complement");
+				File fileTextQuestion  = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_question.rtf");
 
 				if (!fileTextQuestion.getPath().contains("question_0"))
 				{
@@ -113,7 +113,6 @@ public class Notion
 
 				String[] informations = lineInformations.split(";");
 
-				int    nReponse    = Integer.parseInt  (informations[0]);
 				int    nbReponses  = Integer.parseInt  (informations[1]);
 				double nbPoint     = Double.parseDouble(informations[2]);
 				String type        =                    informations[3];
@@ -131,7 +130,7 @@ public class Notion
 					default -> {
 						scTextQuestion.close();
 						scInformations.close();
-						throw new IllegalArgumentException( "Le niveau doit être appartenir aux options suivantes : 'TF','F','M','D'");
+						throw new IllegalArgumentException( "Le niveau doit appartenir aux options suivantes : 'TF','F','M','D'");
 					}
 				}
 
@@ -139,9 +138,9 @@ public class Notion
 				{
 					List<ReponseAssociation> lstReponse = new ArrayList<>();
 
-					for (int numReponse = 1; numReponse < nbReponses; numReponse++)
+					for (int numReponse = 1; numReponse <= nbReponses; numReponse++)
 					{
-						Scanner scReponse = new Scanner(new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
+						Scanner scReponse = new Scanner(new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
 
 						String lineTextReponse = scReponse.nextLine();
 
@@ -151,7 +150,7 @@ public class Notion
 						ReponseAssociation reponseB;
 						String textReponseB = lineTextReponse.substring(lineTextReponse.indexOf("::") + 2);
 
-						reponseA = new ReponseAssociation(textReponseA, null, false);
+						reponseA = new ReponseAssociation(textReponseA, null, true);
 						lstReponse.add(reponseA);
 
 						reponseB = new ReponseAssociation(textReponseB, reponseA, false);
@@ -171,18 +170,18 @@ public class Notion
 
 					int nbIndice = 0;
 
-					for (int numReponse = 1; numReponse < nbReponses; numReponse++)
+					for (int numReponse = 1; numReponse <= nbReponses; numReponse++)
 					{
-						Scanner scReponse = new Scanner(new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
+						Scanner scReponse = new Scanner(new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
 
 						String lineTextReponse = scReponse.nextLine();
 
 						lstReponse.add(new ReponseElimination(
-						                                      lineTextReponse.substring( lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf( "|") ),
+						                                      lineTextReponse.substring( lineTextReponse.indexOf("} ") + 1, lineTextReponse.indexOf( "|") ),
 						                                      lineTextReponse.substring( lineTextReponse.indexOf( "|") + 1, lineTextReponse.indexOf("||") ),
 						                  Integer.parseInt   (lineTextReponse.substring( lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/")) ),
 						                  Double .parseDouble(lineTextReponse.substring( lineTextReponse.indexOf( "/") + 1 )                                  )
-						                                    )
+						                                     )
 						              );
 
 						if ( nbIndice < Integer.parseInt(lineTextReponse.substring( lineTextReponse.indexOf("||") + 2, lineTextReponse.indexOf("/") )) )
@@ -200,9 +199,9 @@ public class Notion
 				{
 					List<ReponseQCM> lstReponse = new ArrayList<>();
 
-					for (int numReponse = 1; numReponse < nbReponses; numReponse++)
+					for (int numReponse = 1; numReponse <= nbReponses; numReponse++)
 					{
-						Scanner scReponse = new Scanner(new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
+						Scanner scReponse = new Scanner(new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
 
 						String lineTextReponse = scReponse.nextLine();
 
@@ -221,7 +220,7 @@ public class Notion
 				{
 					scTextQuestion.close();
 					scInformations.close();
-					throw new IllegalArgumentException( "Le type doit être appartenir aux options suivantes : 'Association','Elimination','QCM'");
+					throw new IllegalArgumentException( "Le type doit appartenir aux options suivantes : 'Association','Elimination','QCM'");
 				}
 				scTextQuestion.close();
 			}
@@ -313,7 +312,7 @@ public class Notion
 		{
 			try
 			{
-				File fileTextQuestion = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_question.rtf");
+				File fileTextQuestion = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_question.rtf");
 				fileTextQuestion.getParentFile().mkdirs();
 
 				if (!fileTextQuestion.exists())
@@ -328,10 +327,10 @@ public class Notion
 					}
 				}
 
-				File dossierComplement = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/complement");
+				File dossierComplement = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/complement");
 				dossierComplement.mkdirs();
 
-				File fileData = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
+				File fileData = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
 
 				try ( PrintWriter writerTextQuestion = new PrintWriter(new FileWriter(fileTextQuestion, false));
 				      PrintWriter writerData         = new PrintWriter(new FileWriter(fileData        ,  true)))
@@ -348,8 +347,8 @@ public class Notion
 						{
 							try
 							{
-								PrintWriter writerTextReponse = new PrintWriter(new FileWriter( new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_reponse_" + indRep++ + ".rtf"), false));
-								writerTextReponse.println(r.getText() + "|" + (r.estVrai() ? "Vrai" : "Faux"));
+								PrintWriter writerTextReponse = new PrintWriter(new FileWriter( new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_reponse_" + indRep++ + ".rtf"), false));
+								writerTextReponse.println( r.getText() + "|" + (r.estVrai() ? "Vrai" : "Faux") );
 								writerTextReponse.close();
 							}
 							catch (Exception e)
@@ -359,8 +358,8 @@ public class Notion
 						}
 						try
 						{
-							Path sourceDir = Paths.get( "../data/questions_NOUVEAU/temp" );
-							Path destDir   = Paths.get( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1)+"/complement" );
+							Path sourceDir = Paths.get( "../data/ressources_notions_questions/temp" );
+							Path destDir   = Paths.get( "../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1)+"/complement" );
 
 							if (!Files.exists(sourceDir) || !Files.isDirectory(sourceDir)) 
 								throw new IllegalArgumentException("Le répertoire source n'existe pas ou n'est pas un répertoire.");
@@ -394,8 +393,8 @@ public class Notion
 						{
 							try
 							{
-								PrintWriter writerTextReponse = new PrintWriter(new FileWriter( new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_reponse_" + indRep++ + ".rtf"), false));
-								writerTextReponse.println((r.estVrai() ? "Vrai" : "Faux") + "|" + r.getText() + "||" + r.getOrdreIndice() + "/" + r.getNbPointPerdu());
+								PrintWriter writerTextReponse = new PrintWriter(new FileWriter( new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_reponse_" + indRep++ + ".rtf"), false));
+								writerTextReponse.println( (r.estVrai() ? "Vrai" : "Faux") + "|" + r.getText() + "||" + r.getOrdreIndice() + "/" + r.getNbPointPerdu() );
 								writerTextReponse.close();
 							}
 							catch (Exception e)
@@ -405,8 +404,8 @@ public class Notion
 						}
 						try
 						{
-							Path sourceDir = Paths.get( "../data/questions_NOUVEAU/temp" );
-							Path destDir   = Paths.get( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1)+"/complement" );
+							Path sourceDir = Paths.get( "../data/ressources_notions_questions/temp" );
+							Path destDir   = Paths.get( "../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1)+"/complement" );
 
 							if (!Files.exists(sourceDir) || !Files.isDirectory(sourceDir))
 								throw new IllegalArgumentException("Le répertoire source n'existe pas ou n'est pas un répertoire.");
@@ -442,7 +441,7 @@ public class Notion
 							{
 								try
 								{
-									PrintWriter writerTextReponse = new PrintWriter(new FileWriter( new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_reponse_" + indRep++ + ".rtf"), false));
+									PrintWriter writerTextReponse = new PrintWriter(new FileWriter( new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/text_reponse_" + indRep++ + ".rtf"), false));
 									writerTextReponse.println(r.getText() + "::" + r.getReponseAssocie().getText());
 									writerTextReponse.close();
 								}
@@ -455,8 +454,8 @@ public class Notion
 
 						try
 						{
-							Path sourceDir = Paths.get( "../data/questions_NOUVEAU/temp" );
-							Path destDir   = Paths.get( "../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1)+"/complement" );
+							Path sourceDir = Paths.get( "../data/ressources_notions_questions/temp" );
+							Path destDir   = Paths.get( "../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1)+"/complement" );
 
 							if (!Files.exists(sourceDir) || !Files.isDirectory(sourceDir)) 
 								throw new IllegalArgumentException("Le répertoire source n'existe pas ou n'est pas un répertoire.");
@@ -497,7 +496,6 @@ public class Notion
 				e.printStackTrace();
 			}
 
-
 			return true;
 		}
 		else
@@ -525,10 +523,8 @@ public class Notion
 			return false;
 		}
 
-		System.out.println("SupprimerN");
-
-		File fileCSV = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
-		File fileRep = new File("../data/questions_NOUVEAU/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.indexOf(question) + 1));
+		File fileCSV = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
+		File fileRep = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.indexOf(question) + 1));
 
 		// Supprimer la ligne et le répertoire
 		Notion.supprimerLigneEtRepertoire(lstQuestions.indexOf(question) + 1, fileCSV, fileRep);

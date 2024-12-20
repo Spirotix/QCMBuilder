@@ -1,5 +1,7 @@
 package src.metier.question;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import src.metier.Notion;
 import src.metier.reponse.ReponseQCM;
@@ -19,6 +21,8 @@ public class QCM implements Question
 	private String           explication;
 	private boolean          estQCU;
 	private List<ReponseQCM> lstReponses;
+	private int 			 nbReponseVrai;
+	private String           urlImage;
 
 	/**
 	 * Constructeur de la classe QCM.
@@ -38,20 +42,22 @@ public class QCM implements Question
 		this.timer       = timer;
 		this.nbPoint     = nbPoint;
 		this.difficulte  = difficulte;
-		this.lstReponses = lstReponses;
+		this.lstReponses = new ArrayList<>(lstReponses);
+		Collections.shuffle(this.lstReponses);
 		this.explication = explication;
 		this.estQCU      = this.estUnique();
+		this.urlImage    = "";
 
-		int nbReponseVrai = 0;
+		this.nbReponseVrai = 0;
 		for (ReponseQCM reponse : lstReponses)
 		{
 			if (reponse.estVrai())
 			{
-				nbReponseVrai++;
+				this.nbReponseVrai++;
 			}
 		}
 
-		if (nbReponseVrai > 1)
+		if (this.nbReponseVrai > 1)
 			this.estQCU = false;
 		else
 			this.estQCU = true;
@@ -230,6 +236,21 @@ public class QCM implements Question
 	}
 
 	/**
+	 * Retourne le nombre de réponses vraies.
+	 * 
+	 * @return Le nombre de réponses vraies.
+	 */
+	public int getNbReponseVrai()
+	{
+		return nbReponseVrai;
+	}
+
+	public void melanger()
+	{
+		Collections.shuffle(lstReponses);
+	}
+
+	/**
 	 * Retourne la difficulté de la question sous forme de chaîne de caractères.
 	 * 
 	 * @return La difficulté de la question sous forme de chaîne de caractères.
@@ -251,5 +272,25 @@ public class QCM implements Question
 		}
 
 		return niveau;
+	}
+
+	/**
+	 * Définit l'URL de l'image associée à la question.
+	 *
+	 * @param urlImage L'URL de l'image associée à la question.
+	 */
+	public void setUrlImage(String urlImage)
+	{
+		this.urlImage = urlImage;
+	}
+
+	/**
+	 * Retourne l'URL de l'image associée à la question.
+	 *
+	 * @return L'URL de l'image associée à la question.
+	 */
+	public String getUrlImage()
+	{
+		return this.urlImage;
 	}
 }

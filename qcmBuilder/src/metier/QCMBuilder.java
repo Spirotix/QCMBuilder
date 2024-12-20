@@ -128,7 +128,7 @@ public class QCMBuilder
 					System.out.println("Ajout : " + ressource.getCode() + ";" + ressource.getNom() + "\n");
 				}
 
-				File fileRep = new File( "../data/questions_NOUVEAU/" + ressource.getCode() );
+				File fileRep = new File( "../data/ressources_notions_questions/" + ressource.getCode() );
 				fileRep.mkdirs();
 
 				lstRessources.add(ressource);
@@ -167,8 +167,6 @@ public class QCMBuilder
 		if (!lstRessources.contains(ressource))
 			return false;
 
-		System.out.println("SupprimerQCMBuilder");
-
 		Iterator<Notion> iterator = ressource.getNotions().iterator();
 		while (iterator.hasNext())
 		{
@@ -178,7 +176,7 @@ public class QCMBuilder
 		}
 
 		File fileCSV = new File("../data/ressources.csv");
-		File fileRep = new File("../data/questions_NOUVEAU/" + ressource.getCode());
+		File fileRep = new File("../data/ressources_notions_questions/" + ressource.getCode());
 
 		// Supprimer la ligne
 		QCMBuilder.supprimerLigneEtRepertoire(ressource, fileCSV, fileRep);
@@ -465,7 +463,7 @@ public class QCMBuilder
 		}
 		for (TypeQuestionnaire tq : lstTypeQuestionnaire)
 		{
-			for (int i = 0; i < 4; i++)
+			for (int i = 1; i <= 4; i++)
 			{
 				switch (i)
 				{
@@ -510,7 +508,7 @@ public class QCMBuilder
 		List<Question> lstQuestionsNotion = new ArrayList<>();
 		for (TypeQuestionnaire tq : lstTypeQuestionnaire)
 		{
-			for (int i = 0; i < 4; i++)
+			for (int i = 1; i <= 4; i++)
 			{
 				switch (i)
 				{
@@ -553,6 +551,11 @@ public class QCMBuilder
 				}
 			}
 		}
+		/*for (Question q : lstQuestions)
+		{
+			System.out.println(q.toString());
+		}*/
+
 		new GenererQuestionnaire(nomRessource, chrono, nomQuestionnaire, lstTypeQuestionnaire, lstQuestions);
 		return false;
 	}
