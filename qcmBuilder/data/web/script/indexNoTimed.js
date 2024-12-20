@@ -50,8 +50,7 @@ document.addEventListener("DOMContentLoaded", function ()
 		});
 
 		const progressBarPercentage = document.querySelector(".progress-percentage");
-		progressBarPercentage.textContent = (currentQuestion / totalQuestions * 100).toFixed(0) + '%';
-
+		progressBarPercentage.textContent = currentQuestion / totalQuestions * 100 + '%';
 
 		// si on est sur la première question on cache le bouton précédent
 		if(currentQuestion === 1)
@@ -59,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function ()
 			const previousButton = document.querySelector('.previous-button');
 			previousButton.style.display = 'none';
 		}
-
 
 		// si la question a déjà été répondu on cache le bouton valider et on affiche le bouton de feedback 
 		if(answeredQuestions[currentQuestion-1])
