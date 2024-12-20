@@ -1,5 +1,6 @@
 package src.metier.question;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import src.metier.Notion;
@@ -18,6 +19,7 @@ public class Association implements Question
 	private int                      difficulte;
 	private String                   explication;
 	private List<ReponseAssociation> lstReponseAsso;
+	private String                   urlImage;
 
 	/**
 	 * Constructeur de la classe Association.
@@ -38,8 +40,10 @@ public class Association implements Question
 		this.timer          = timer;
 		this.nbPoint        = nbPoint;
 		this.difficulte     = difficulte;
-		this.lstReponseAsso = lstReponseAsso;
+		this.lstReponseAsso = new ArrayList<>(lstReponseAsso);
+		Collections.shuffle(this.lstReponseAsso);
 		this.explication    = explication;
+		this.urlImage       = "";
 	}
 
 	/**

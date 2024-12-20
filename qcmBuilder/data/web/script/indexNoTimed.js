@@ -49,6 +49,9 @@ document.addEventListener("DOMContentLoaded", function ()
 			}
 		});
 
+		const progressBarPercentage = document.querySelector(".progress-percentage");
+		progressBarPercentage.textContent = currentQuestion / totalQuestions * 100 + '%';
+
 
 		// si on est sur la première question on cache le bouton précédent
 		if(currentQuestion === 1)
@@ -259,8 +262,8 @@ document.addEventListener("DOMContentLoaded", function ()
 			document.querySelectorAll('.line').forEach(line => line.remove());
 			associateItems.forEach(pair =>
 			{
-				const startElement = document.querySelector(`.association-item[data-id="${pair[0]}"]`);
-				const endElement = document.querySelector(`.association-item[data-id="${pair[1]}"]`);
+				const startElement = document.querySelector(`.left-column .association-item[data-id="${pair[0]}"]`);
+				const endElement = document.querySelector(`.right-column .association-item[data-id="${pair[1]}"]`);
 				drawLine(startElement, endElement);
 			});
 		});
@@ -292,6 +295,25 @@ document.addEventListener("DOMContentLoaded", function ()
 		// Désactiver les réponses
 		reponses.querySelectorAll('input').forEach((input) => { input.disabled = true; });
 
+		// Afficher les réponses correctes
+		reponses.querySelectorAll('input').forEach((input) =>
+		{
+			if(correctAnswers[currentQuestion-1].includes(input.id))
+			{
+				input.parentElement.style.color = '#00561b';
+				input.parentElement.style.fontWeight = 'bold';
+				const label = document.querySelector(`label[for="${input.id}"]`);
+				label.textContent = label.textContent + ' (correct)';
+			}
+			else if (selectedAnswers.includes(input.id))
+			{
+				input.parentElement.style.color = '#a80000';
+				input.parentElement.style.fontWeight = 'bold';
+				const label = document.querySelector(`label[for="${input.id}"]`);
+				label.textContent = label.textContent + ' (incorrect)';
+			}
+		});
+
 		// Afficher les points obtenus dans le feedback
 		const feedbackPoint = document.querySelector('.feedback-point');
 		feedbackPoint.textContent = `${pointAnsweredQuestions[currentQuestion-1]} points`;
@@ -313,6 +335,25 @@ document.addEventListener("DOMContentLoaded", function ()
 		reponses.querySelectorAll('input').forEach((input) =>
 		{
 			input.disabled = true;
+		});
+
+		// Afficher les réponses correctes
+		reponses.querySelectorAll('input').forEach((input) =>
+		{
+			if(input.id === correctAnswers[currentQuestion-1][0])
+			{
+				input.parentElement.style.color = '#00561b';
+				input.parentElement.style.fontWeight = 'bold';
+				const label = document.querySelector(`label[for="${input.id}"]`);
+				label.textContent = label.textContent + ' (correct)';
+			}
+			else if (answeredQuestionsResponse[currentQuestion-1] === input.id)
+			{
+				input.parentElement.style.color = '#a80000';
+				input.parentElement.style.fontWeight = 'bold';
+				const label = document.querySelector(`label[for="${input.id}"]`);
+				label.textContent = label.textContent + ' (incorrect)';
+			}
 		});
 
 		// Afficher les points obtenus dans le feedback
@@ -338,6 +379,25 @@ document.addEventListener("DOMContentLoaded", function ()
 		const hint = document.querySelector(".hint");
 		hint.style.display = 'none';
 
+		// Afficher les réponses correctes
+		reponses.querySelectorAll('input').forEach((input) =>
+		{
+			if(correctAnswers[currentQuestion-1][0][0].includes(input.id))
+			{
+				input.parentElement.style.color = '#00561b';
+				input.parentElement.style.fontWeight = 'bold';
+				const label = document.querySelector(`label[for="${input.id}"]`);
+				label.textContent = label.textContent + ' (correct)';
+			}
+			else if (answeredQuestionsResponse[currentQuestion-1].includes(input.id))
+			{
+				input.parentElement.style.color = '#a80000';
+				input.parentElement.style.fontWeight = 'bold';
+				const label = document.querySelector(`label[for="${input.id}"]`);
+				label.textContent = label.textContent + ' (incorrect)';
+			}
+		});
+
 		// Afficher les points obtenus dans le feedback
 		const feedbackPoint = document.querySelector('.feedback-point');
 		feedbackPoint.textContent = `${pointAnsweredQuestions[currentQuestion-1]} points`;
@@ -346,13 +406,19 @@ document.addEventListener("DOMContentLoaded", function ()
 	// Gestion des questions d'association
 	if(document.querySelector('.association-question') && answeredQuestions[currentQuestion-1])
 	{
+		const correctItems = correctAnswers[currentQuestion-1];
+
 		associateItems = answeredQuestionsResponse[currentQuestion-1];
 		associateItems.forEach(pair =>
 		{
 			// Dessiner les lignes entre les éléments associés
-			const startElement = document.querySelector(`.association-item[data-id="${pair[0]}"]`);
-			const endElement   = document.querySelector(`.association-item[data-id="${pair[1]}"]`);
-			drawLine(startElement, endElement);
+			const startElement = document.querySelector(`.left-column .association-item[data-id="${pair[0]}"]`);
+			const endElement   = document.querySelector(`.right-column .association-item[data-id="${pair[1]}"]`);
+
+			if (!correctItems.find(correctPair => correctPair[0] === pair[0] && correctPair[1] === pair[1]))
+			{
+				drawLine(startElement, endElement,'R');
+			}
 		});
 
 		// Désactiver le bouton de suppression des lignes
@@ -368,41 +434,62 @@ document.addEventListener("DOMContentLoaded", function ()
 			item.style.pointerEvents = 'none';
 		});
 
+		// Afficher les réponses correctes
+		correctItems.forEach(pair =>
+		{
+			const startElement = document.querySelector(`.left-column .association-item[data-id="${pair[0]}"]`);
+			const endElement   = document.querySelector(`.right-column .association-item[data-id="${pair[1]}"]`);
+			drawLine(startElement, endElement,'G');
+		});
+
 		// Afficher les points obtenus dans le feedback
 		const feedbackPoint = document.querySelector('.feedback-point');
 		feedbackPoint.textContent = `${pointAnsweredQuestions[currentQuestion-1]} points`;
 
 	}
-
-	// Dessiner les lignes entre les éléments associés
-	function drawLine(startElement, endElement)
-	{
-		const startRect = startElement.getBoundingClientRect();
-		const endRect = endElement.getBoundingClientRect();
-
-		// Coordonnées de départ : bord droit de la div de gauche
-		const startX = startRect.right + window.scrollX;
-		const startY = startRect.top + startRect.height / 2 + window.scrollY;
-
-		// Coordonnées d'arrivée : bord gauche de la div de droite
-		const endX = endRect.left + window.scrollX;
-		const endY = endRect.top + endRect.height / 2 + window.scrollY;
-
-		const length = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
-		const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
-
-		const line = document.createElement('div');
-		line.classList.add('line');
-		line.style.width = `${length}px`;
-		line.style.height = '2px';
-		line.style.transform = `rotate(${angle}deg)`;
-		line.style.left = `${startX}px`;
-		line.style.top = `${startY}px`;
-
-		document.querySelector('.line-container').appendChild(line);
-	}
 });
+// Dessiner une ligne entre deux éléments
+function drawLine(startElement, endElement, correct = 'F') 
+{
+	const startRect = startElement.getBoundingClientRect();
+	const endRect   = endElement.getBoundingClientRect();
 
+	// Coordonnées de départ : bord droit de la div de gauche
+	const startX = startRect.right + window.scrollX;
+	const startY = startRect.top   + startRect.height / 2 + window.scrollY;
+
+	// Coordonnées d'arrivée : bord gauche de la div de droite
+	const endX = endRect.left + window.scrollX;
+	const endY = endRect.top  + endRect.height / 2 + window.scrollY;
+
+	const length = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
+	const angle  = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+
+	// Créer une div pour la ligne
+	const line = document.createElement('div');
+	line.classList.add('line');
+	line.style.width     =         `${length}px`;
+	line.style.height    =                 '2px'; // Assurez-vous que la hauteur est définie pour voir la ligne
+	line.style.transform = `rotate(${angle}deg)`;
+	line.style.left      =         `${startX}px`;
+	line.style.top       =         `${startY}px`;
+
+	line.classList.add(startElement.getAttribute('data-id'));
+	line.classList.add(endElement.getAttribute('data-id'));
+
+	if (correct === 'G')
+	{
+		line.style.backgroundColor = '#00561b';
+		line.style.height = '4px';
+	}
+	else if (correct === 'R')
+	{
+		line.style.backgroundColor = '#a80000';
+		line.style.height = '1px';
+	}
+
+	document.querySelector('.line-container').appendChild(line);
+}
 
 // Validation d'une question
 function validateQuestion()
@@ -479,7 +566,24 @@ function validateMultipleQuestion(questionPoints)
 
 	// Désactiver les réponses
 	const reponses = document.querySelectorAll('input');
-	reponses.forEach((input) => { input.disabled = true; });
+	reponses.forEach((input) => 
+	{
+		input.disabled = true;
+		if(correctAnswers[currentQuestion-1].includes(input.id)) 
+		{
+			input.parentElement.style.color = '#00561b';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (correct)'; 
+		}
+		else if (selectedAnswers.includes(input.id))
+		{
+			input.parentElement.style.color = '#a80000';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (incorrect)'; 
+		}
+	});
 }
 
 // Pour les questions à choix unique
@@ -507,9 +611,26 @@ function validateUniqueQuestion(questionPoints)
 		titre.textContent = "Dommage, ce n'est pas la bonne réponse.";
 	}
 
-	// Désactiver les réponses
-	const reponses = document.querySelector('.answers');
-	reponses.querySelectorAll('input').forEach((input) => { input.disabled = true; });
+// Désactiver toutes les options de réponse pour empêcher de changer les réponses après validation
+const reponses = document.querySelector('.answers');
+reponses.querySelectorAll('input').forEach((input) => 
+{
+	input.disabled = true;
+	if(input.id === correctAnswers[currentQuestion-1][0]) 
+		{
+			input.parentElement.style.color = '#00561b';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (correct)';
+		}
+		else if (selectedAnswer && selectedAnswer.id === input.id)
+		{
+			input.parentElement.style.color = '#a80000';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (incorrect)'; 
+		}
+});
 }
 
 // Pour les questions à élimination
@@ -530,19 +651,36 @@ function validateEliminateQuestion(questionPoints)
 		// Ajouter les points de la question aux points accumulés
 		point += questionPoints;
 		pointAnsweredQuestions[currentQuestion-1] = questionPoints
+
+		point += hintPoint;
+		pointAnsweredQuestions[currentQuestion-1] += hintPoint;
 	}
 	else // Si la réponse sélectionnée n'est pas correcte
 	{
 		titre.classList.add('incorrect');
 		titre.textContent = "Dommage, ce n'est pas la bonne réponse.";
 	}
-	// Prendre en compte les indices utilisés
-	point += hintPoint;
-	pointAnsweredQuestions[currentQuestion-1] += hintPoint;
 
-	// Désactiver les réponses
+	// Désactiver toutes les options de réponse pour empêcher de changer les réponses après validation
 	const reponses = document.querySelectorAll('input');
-	reponses.forEach((input) => { input.disabled = true; });
+	reponses.forEach((input) => 
+	{
+		input.disabled = true;
+		if(input.id === correctAnswers[currentQuestion-1][0][0]) 
+		{
+			input.parentElement.style.color = '#00561b';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (correct)';
+		}
+		else if (selectedAnswer && selectedAnswer.id === input.id)
+		{
+			input.parentElement.style.color = '#a80000';
+			input.parentElement.style.fontWeight = 'bold';
+			const label = document.querySelector(`label[for="${input.id}"]`);
+			label.textContent = label.textContent + ' (incorrect)'; 
+		}
+	});
 
 	// Désactiver le bouton d'indice
 	const hint = document.querySelector(".hint");
@@ -564,35 +702,59 @@ function validateAssociationQuestion(questionPoints)
 	answeredQuestionsResponse[currentQuestion-1] = selectedItems || null;
 	
 	// Vérifier si le nombre de paires sélectionnées est correct
+	let suite = true;
 	if (selectedItems.length !== correctItems.length)
 	{
 		titre.classList.add('incorrect');
 		titre.textContent = "Dommage, ce n'est pas la bonne réponse.";
-		return;
+		suite = false;
 	}
 
 	// Vérifier si les paires sélectionnées sont correctes
-	const correct = selectedItems.every(pair =>
+	if(suite)
 	{
-		const correctPair = correctItems.find(correctPair => correctPair[0] === pair[0] && correctPair[1] === pair[1]);
-		return !!correctPair;
+		const correct = selectedItems.every(pair =>
+		{
+			const correctPair = correctItems.find(correctPair => correctPair[0] === pair[0] && correctPair[1] === pair[1]);
+			return !!correctPair;
+		});
+
+		// Dans le cas où toutes les paires sont correctes
+		if (correct)
+		{
+			titre.classList.add('correct');
+			titre.textContent = "Bravo, c'est la bonne réponse !";
+
+			// Ajouter les points de la question aux points accumulés
+			point += questionPoints;
+			pointAnsweredQuestions[currentQuestion-1] = questionPoints;
+		}
+		else // Dans tout n'est pas correct
+		{
+			titre.classList.add('incorrect');
+			titre.textContent = "Dommage, ce n'est pas la bonne réponse.";
+		}
+	}
+
+	// Parcours les pairs sélectionnées pour les mettre en rouge
+	selectedItems.forEach(pair => 
+		{
+			const startElement = document.querySelector(`.left-column .association-item[data-id="${pair[0]}"]`);
+			const endElement   = document.querySelector(`.right-column .association-item[data-id="${pair[1]}"]`);
+			if (!correctItems.find(correctPair => correctPair[0] === pair[0] && correctPair[1] === pair[1]))
+			{
+				drawLine(startElement, endElement,'R');
+			}
+		});
+
+	// Parcours les bonne pairs pour les mettre en vert
+	correctItems.forEach(pair => 
+	{
+
+		const startElement = document.querySelector(`.left-column .association-item[data-id="${pair[0]}"]`);
+		const endElement   = document.querySelector(`.right-column .association-item[data-id="${pair[1]}"]`);
+		drawLine(startElement, endElement,'G');
 	});
-
-	// Dans le cas où toutes les paires sont correctes
-	if (correct)
-	{
-		titre.classList.add('correct');
-		titre.textContent = "Bravo, c'est la bonne réponse !";
-
-		// Ajouter les points de la question aux points accumulés
-		point += questionPoints;
-		pointAnsweredQuestions[currentQuestion-1] = questionPoints;
-	}
-	else // Dans tout n'est pas correct
-	{
-		titre.classList.add('incorrect');
-		titre.textContent = "Dommage, ce n'est pas la bonne réponse.";
-	}
 
 	// Désactiver les éléments associés
 	const associatedItems = document.querySelectorAll('.association-item');
@@ -631,5 +793,17 @@ function showHint()
 		// Mettre à jour les indices utilisés
 		hintCurrentData.textContent = usedHint;
 		hintTotalData.textContent = correctAnswers[currentQuestion-1][1].length;
+
+		// Affiche le nombre de point perdus par indices
+		if(usedHint < correctAnswers[currentQuestion-1][1].length)
+		{
+			const hintPointElement = document.querySelector('.hint-point');
+			hintPointElement.textContent = '-' + correctAnswers[currentQuestion-1][1][usedHint][1];
+		}
+		else
+		{
+			const hintButton = document.querySelector('.hint-button');
+			hintButton.textContent = 'Total : ' + hintPoint;
+		}
 	}
 }

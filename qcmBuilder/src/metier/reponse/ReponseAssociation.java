@@ -9,6 +9,7 @@ public class ReponseAssociation implements Reponse
 	private ReponseAssociation reponseAssocie;
 	private boolean aGauche;
 	private String textReponse;
+	private String urlImage;
 
 	/**
 	 * Constructeur de la classe ReponseAssociation.
@@ -23,6 +24,7 @@ public class ReponseAssociation implements Reponse
 
 		this.reponseAssocie = reponseAssocie;
 		this.aGauche = aGauche;
+		this.urlImage = "";
 	}
 
 	/**
@@ -73,5 +75,25 @@ public class ReponseAssociation implements Reponse
 	public void setText(String textReponse)
 	{
 		this.textReponse = textReponse;
+	}
+
+	/**
+	 * Définit l'URL de l'image associée à la question.
+	 *
+	 * @param urlImage L'URL de l'image associée à la question.
+	 */
+	public void setUrlImage(String urlImage)
+	{
+		this.urlImage = urlImage;
+	}
+
+	/**
+	 * Retourne l'URL de l'image associée à la question.
+	 *
+	 * @return L'URL de l'image associée à la question.
+	 */
+	public String getUrlImage()
+	{
+		return this.urlImage;
 	}
 }
