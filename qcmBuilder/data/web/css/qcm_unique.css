@@ -160,7 +160,6 @@ body {
 }
 
 .progress-bar-fill {
-	width: 0;
 	height: 20px;
 	background-color: #395cce;
 	transition: width 0.3s ease;
@@ -169,7 +168,21 @@ body {
 	justify-content: center;
 	color: white;
 	font-weight: bold;
+	padding: 0 10px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.progress-percentage {
+	position: absolute;
+	width: 100%;
 	text-align: center;
+	color: white;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	z-index: 0;
 }
 
 .question-image {

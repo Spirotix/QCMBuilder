@@ -19,6 +19,7 @@ public class QCM implements Question
 	private String           explication;
 	private boolean          estQCU;
 	private List<ReponseQCM> lstReponses;
+	private int 			 nbReponseVrai;
 
 	/**
 	 * Constructeur de la classe QCM.
@@ -42,16 +43,16 @@ public class QCM implements Question
 		this.explication = explication;
 		this.estQCU      = this.estUnique();
 
-		int nbReponseVrai = 0;
+		this.nbReponseVrai = 0;
 		for (ReponseQCM reponse : lstReponses)
 		{
 			if (reponse.estVrai())
 			{
-				nbReponseVrai++;
+				this.nbReponseVrai++;
 			}
 		}
 
-		if (nbReponseVrai > 1)
+		if (this.nbReponseVrai > 1)
 			this.estQCU = false;
 		else
 			this.estQCU = true;
@@ -227,6 +228,16 @@ public class QCM implements Question
 	public List<ReponseQCM> getlstReponses()
 	{
 		return lstReponses;
+	}
+
+	/**
+	 * Retourne le nombre de réponses vraies.
+	 * 
+	 * @return Le nombre de réponses vraies.
+	 */
+	public int getNbReponseVrai()
+	{
+		return nbReponseVrai;
 	}
 
 	/**

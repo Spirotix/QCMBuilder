@@ -33,7 +33,8 @@ public class Elimination implements Question
 	 * @param nbIndice Le nombre d'indices disponibles.
 	 * @param explication L'explication de la question.
 	 */
-	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, List<ReponseElimination> lstReponses, int nbIndice, String explication)
+	public Elimination(Notion notion, String text, int timer, double nbPoint, int difficulte, 
+	List<ReponseElimination> lstReponses, int nbIndice, String explication)
 	{
 		this.notions         = notion;
 		this.text            = text;
@@ -226,6 +227,16 @@ public class Elimination implements Question
 				reponse.setEstVisible(false);
 			}
 		}
+	}
+
+	/**
+	 * Retourne le nombre d'indices disponibles.
+	 * 
+	 * @return Le nombre d'indices disponibles.
+	 */
+	public int getNbIndice()
+	{
+		return this.nbIndice;
 	}
 
 	/**
