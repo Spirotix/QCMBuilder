@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.geom.RoundRectangle2D;
 
 public class TextFieldPerso extends JTextField 
 {
@@ -13,6 +14,8 @@ public class TextFieldPerso extends JTextField
 	public TextFieldPerso(String chaine)
 	{
 		this.chaine = chaine;
+		setOpaque(false);
+		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		this.addFocusListener(new FocusAdapter()
 		{
@@ -37,16 +40,28 @@ public class TextFieldPerso extends JTextField
 	{
 		super.paintComponent(g);
 
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		// Background
+		g2.setColor(getBackground());
+		g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
+
+		// Placeholder text
 		if (getText().isEmpty() && !isFocusOwner())
 		{
-			Graphics2D g2 = (Graphics2D) g;
-
-			g2.setRenderingHint (RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			g2.setColor         (Color.GRAY);
-			g2.setFont          (getFont().deriveFont(Font.ITALIC));
-
-			Insets insets = getInsets();
-			g2.drawString(this.chaine, insets.left, getHeight() / 2 + g2.getFontMetrics().getAscent() / 2 - 2);
+			g2.setColor(Color.GRAY);
+			g2.setFont(getFont().deriveFont(Font.ITALIC));
+			g2.drawString(chaine, getInsets().left, g.getFontMetrics().getMaxAscent() + getInsets().top);
 		}
+	}
+
+	@Override
+	protected void paintBorder(Graphics g)
+	{
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setColor(Color.LIGHT_GRAY);
+		g2.draw(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
 	}
 }
