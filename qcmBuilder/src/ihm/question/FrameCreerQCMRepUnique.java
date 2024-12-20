@@ -20,11 +20,12 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 		this.panelQ = panelQ;
 		this.ctrl   = ctrl;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
+		
 
 		if  ( type.equals("Multiple")){ this.setTitle("Creation d'un QCM"); }
 		else                          { this.setTitle("Creation d'un QCU"); }
 		this.setSize    ( 500,500  );
+		this.setLocationRelativeTo(null);
 
 		JMenuBar menubMaBarre = new JMenuBar(		  );
 		JMenu 	 menuAcceuil  = new JMenu   ("Accueil");
