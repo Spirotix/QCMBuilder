@@ -20,6 +20,7 @@ public class QCM implements Question
 	private boolean          estQCU;
 	private List<ReponseQCM> lstReponses;
 	private int 			 nbReponseVrai;
+	private String           urlImage;
 
 	/**
 	 * Constructeur de la classe QCM.
@@ -42,6 +43,7 @@ public class QCM implements Question
 		this.lstReponses = lstReponses;
 		this.explication = explication;
 		this.estQCU      = this.estUnique();
+		this.urlImage    = "";
 
 		this.nbReponseVrai = 0;
 		for (ReponseQCM reponse : lstReponses)
@@ -262,5 +264,25 @@ public class QCM implements Question
 		}
 
 		return niveau;
+	}
+
+	/**
+	 * Définit l'URL de l'image associée à la question.
+	 *
+	 * @param urlImage L'URL de l'image associée à la question.
+	 */
+	public void setUrlImage(String urlImage)
+	{
+		this.urlImage = urlImage;
+	}
+
+	/**
+	 * Retourne l'URL de l'image associée à la question.
+	 *
+	 * @return L'URL de l'image associée à la question.
+	 */
+	public String getUrlImage()
+	{
+		return this.urlImage;
 	}
 }

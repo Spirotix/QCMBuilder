@@ -17,6 +17,7 @@ public class Association implements Question
 	private int                      difficulte;
 	private String                   explication;
 	private List<ReponseAssociation> lstReponseAsso;
+	private String                   urlImage;
 
 	/**
 	 * Constructeur de la classe Association.
@@ -39,6 +40,7 @@ public class Association implements Question
 		this.difficulte     = difficulte;
 		this.lstReponseAsso = lstReponseAsso;
 		this.explication    = explication;
+		this.urlImage       = "";
 	}
 
 	/**
@@ -225,6 +227,26 @@ public class Association implements Question
 		}
 
 		return niveau;
+	}
+
+	/**
+	 * Définit l'URL de l'image associée à la question.
+	 *
+	 * @param urlImage L'URL de l'image associée à la question.
+	 */
+	public void setUrlImage(String urlImage)
+	{
+		this.urlImage = urlImage;
+	}
+
+	/**
+	 * Retourne l'URL de l'image associée à la question.
+	 *
+	 * @return L'URL de l'image associée à la question.
+	 */
+	public String getUrlImage()
+	{
+		return this.urlImage;
 	}
 
 }

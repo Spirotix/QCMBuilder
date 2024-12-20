@@ -13,6 +13,7 @@ public class ReponseElimination implements Reponse
 	private double  nbPointPerdu;
 	private String  textReponse;
 
+
 	/**
 	 * Constructeur de la classe ReponseElimination.
 	 * 
@@ -98,4 +99,5 @@ public class ReponseElimination implements Reponse
 	{
 		return textReponse + " " + estVrai + " " + ordreIndice + " " + nbPointPerdu;
 	}
+
 }
