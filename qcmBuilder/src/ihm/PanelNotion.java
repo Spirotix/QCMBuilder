@@ -39,7 +39,6 @@ public class PanelNotion extends JPanel implements ActionListener
 		this.removeAll();
 
 
-
 		for (int i=0; i<this.ctrl.getChoixNotion(ressource).size(); i++)
 		{
 			this.lstLabel.add (new JLabel(this.ctrl.getChoixNotion(ressource).get(i)));
@@ -66,7 +65,10 @@ public class PanelNotion extends JPanel implements ActionListener
 		}
 
 		if ( this.ctrl.getChoixNotion(ressource).size() == 0 )
+		{
 			this.removeAll();
+			this.repaint();
+		}
 
 		this.revalidate();
 	}
