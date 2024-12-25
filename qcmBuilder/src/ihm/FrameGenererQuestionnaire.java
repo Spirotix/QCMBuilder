@@ -1,7 +1,7 @@
 package src.ihm;
 
-import javax.swing.*;
 import java.awt.event.*;
+import javax.swing.*;
 import src.Controleur;
 
 public class FrameGenererQuestionnaire extends JFrame implements ActionListener
@@ -16,6 +16,8 @@ public class FrameGenererQuestionnaire extends JFrame implements ActionListener
 	{
 		this.ctrl=ctrl;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(500,600);
+		this.setLocationRelativeTo(null);
 
 		JMenuBar menubMaBarre = new JMenuBar(		  );
 		JMenu 	 menuAcceuil  = new JMenu	("Accueil");

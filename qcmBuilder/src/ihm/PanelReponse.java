@@ -14,7 +14,8 @@ public class PanelReponse extends JPanel implements ActionListener
 	private JButton					corbeille, importer	;
 	private JLabel 					imageImporter		;
 	private JTextField				contenu				;
-	private JCheckBox				validation 			;
+	private JCheckBox 				validationM 		;
+	private JRadioButton 			validationU 		;
 	private String 					type 				;
 	private FileHandler 			fileHandler			;
 	private File 					fileChoisi 			;
@@ -37,7 +38,12 @@ public class PanelReponse extends JPanel implements ActionListener
 		this.importer	= new JButton(new ImageIcon("../img/inserer.PNG"	));
 
 		this.contenu 	= new TextFieldPerso ("contenu");
-		this.validation = new JCheckBox  ();
+		
+		
+		if ( this.type.equals("Unique") )
+			this.validationU = new JRadioButton();
+		else
+			this.validationM = new JCheckBox();
 
 		//Insertion
 		JPanel panelGauche = new JPanel ();
@@ -50,19 +56,29 @@ public class PanelReponse extends JPanel implements ActionListener
 		JPanel panelDroiteHaut 	= new JPanel ();
 		this.panelImage	= new JPanel ();
 		this.panelImage.setPreferredSize(new Dimension(75, 75));
-		
-		panelDroiteHaut	.add (this.validation						);
-		panelDroiteHaut	.add (this.importer							);
-		panelDroite		.add (panelDroiteHaut, BorderLayout.NORTH	);
-		this.panelImage .add (this.imageImporter					);
-		panelDroite		.add (this.panelImage, BorderLayout.CENTER	);
+
+		if ( this.type.equals("Unique") )
+			panelDroiteHaut.add ( this.validationU );
+		else
+			panelDroiteHaut.add ( this.validationM );
+
+
+		panelDroiteHaut.add (this.importer                       );
+		panelDroite	   .add (panelDroiteHaut, BorderLayout.NORTH );
+		this.panelImage.add (this.imageImporter                  );
+		panelDroite	   .add (this.panelImage, BorderLayout.CENTER);
 
 		this.add(panelDroite);
 
 		//ActionListener / itemListener
 		this.corbeille  .addActionListener(this);
 		this.contenu	.addActionListener(this);
-		this.validation .addActionListener(this);
+
+		if ( this.type.equals("Unique") )
+			this.validationU.addActionListener(this);
+		else
+			this.validationM.addActionListener(this);
+
 		this.importer	.addActionListener(this);
 
 		this.setVisible(true);
@@ -78,15 +94,12 @@ public class PanelReponse extends JPanel implements ActionListener
 		
 		this.updateImage();
 
-		if (e.getSource().equals(this.validation))
+		if (e.getSource().equals(this.validationU))
 		{
-			if (this.type.equals("Unique"))
+			if (this.validationU.isSelected())
 			{
-				if (this.validation.isSelected())
-				{
-					this.panelQ		.toutDecocher(		);
-					this.validation	.setSelected (true	);
-				}
+				this.panelQ     .toutDecocher(    );
+				this.validationU.setSelected (true);
 			}
 		}
 
@@ -98,7 +111,7 @@ public class PanelReponse extends JPanel implements ActionListener
 				fileHandler.handleFile(this.fileChoisi);
 				this.updateImage();
 			} 
-			catch (IOException ex) 
+			catch (IOException ex)
 			{
 				System.out.println("Erreur lors du traitement du fichier : " + ex.getMessage());
 			}
@@ -127,12 +140,21 @@ public class PanelReponse extends JPanel implements ActionListener
 
 	public void decocher()
 	{
-		this.validation.setSelected(false);
+		if ( this.type.equals("Unique") )
+			this.validationU.setSelected(false);
+		else
+			this.validationM.setSelected(false);
 	}
 
 
-	public boolean  getEstBonneReponse ( )	{return this.validation.isSelected();}
-	
+	public boolean  getEstBonneReponse ()
+	{
+		if ( this.type.equals("Unique") )
+			return this.validationU.isSelected();
+		else
+			return this.validationM.isSelected();
+	}
+
 
 	public String getString(){return this.contenu.getText();}
 }

@@ -1,7 +1,9 @@
 package src.ihm;
 
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import src.Controleur;
 
 public class FrameCreerRessource extends JFrame implements ActionListener
@@ -14,48 +16,48 @@ public class FrameCreerRessource extends JFrame implements ActionListener
 
 	public FrameCreerRessource (Controleur ctrl)
 	{
-		this.ctrl=ctrl;
+		this.ctrl = ctrl;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(750, 750);
+		this.setLocationRelativeTo(null);
+		this.setTitle("Création de Ressource et de Notion");
 
-		JMenuBar menubMaBarre = new JMenuBar(		  );
-		JMenu 	 menuAcceuil  = new JMenu	("Accueil");
-		JMenu 	 menuRetour   = new JMenu	("Retour" );
+		// Create menu bar
+		JMenuBar menuBar = new JMenuBar();
+		JMenu menuAcceuil = new JMenu("Accueil");
+		JMenu menuRetour = new JMenu("Retour");
 
-		this.retourMenu = new JMenuItem("Retour à l'accueil"		 );
-		this.retour		= new JMenuItem("Retour à la page précédente");
+		this.retourMenu = new JMenuItem("Retour à l'accueil");
+		this.retour = new JMenuItem("Retour à la page précédente");
 
-		menuAcceuil.add(this.retourMenu	);
-		menuRetour .add(this.retour		);
+		menuAcceuil.add(this.retourMenu);
+		menuRetour.add(this.retour);
 
-		menubMaBarre.add(menuAcceuil);
-		menubMaBarre.add(menuRetour );
+		menuBar.add(menuAcceuil);
+		menuBar.add(menuRetour);
 
-		this.setJMenuBar( menubMaBarre );
+		this.setJMenuBar(menuBar);
 
-		this.retourMenu	.addActionListener(this);
-		this.retour 	.addActionListener(this);
-		
-		this.setTitle   ("Creation de Ressource et de Notion"	);
-		this.setSize    ( 750,750  								);
+		this.retourMenu.addActionListener(this);
+		this.retour.addActionListener(this);
 
-		this.panelC=new PanelCreerRessource(this.ctrl);
+		// Create main panel with border and layout
+		JPanel mainPanel = new JPanel(new BorderLayout());
+		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-		this.add (this.panelC);
+		this.panelC = new PanelCreerRessource(this.ctrl);
+		mainPanel.add(this.panelC, BorderLayout.CENTER);
+
+		this.add(mainPanel);
 
 		this.setVisible(true);
 	}
 
-	public void actionPerformed ( ActionEvent e )
+	public void actionPerformed(ActionEvent e)
 	{
-		if (e.getSource().equals(this.retourMenu))
+		if (e.getSource().equals(this.retourMenu) || e.getSource().equals(this.retour))
 		{
-			new FrameMenu (this.ctrl);
-			this.dispose();
-		}
-
-		if (e.getSource().equals(this.retour))
-		{
-			new FrameMenu (this.ctrl);
+			new FrameMenu(this.ctrl);
 			this.dispose();
 		}
 	}

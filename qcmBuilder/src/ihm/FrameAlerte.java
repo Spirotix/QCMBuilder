@@ -25,6 +25,8 @@ public class FrameAlerte extends JFrame implements ActionListener
 		this.setTitle	("Attention");
 		this.setSize	( 500,350	);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(500,600);
+		this.setLocationRelativeTo(null);
 
 		this.ctrl	= ctrl  ;
 		this.panelR = panelR;

@@ -1,9 +1,9 @@
 package src.ihm.question;
 
-import javax.swing.*;
 import java.awt.event.*;
-import src.ihm.*;
+import javax.swing.*;
 import src.Controleur;
+import src.ihm.*;
 
 public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 {
@@ -20,10 +20,12 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 		this.panelQ = panelQ;
 		this.ctrl   = ctrl;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 
-		if  ( type.equals("Multiple")){ this.setTitle("Creation d'un QCM"); }
-		else                          { this.setTitle("Creation d'un QCU"); }
+		if  ( type.equals("Unique")){ this.setTitle("Creation d'un QCU"); }
+		else                                 { this.setTitle("Creation d'un QCM"); }
 		this.setSize    ( 500,500  );
+		this.setLocationRelativeTo(null);
 
 		JMenuBar menubMaBarre = new JMenuBar(		  );
 		JMenu 	 menuAcceuil  = new JMenu   ("Accueil");

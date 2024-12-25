@@ -63,8 +63,13 @@ public class PanelNotion extends JPanel implements ActionListener
 			});
 			this.add(this.lstPanel.get(i));
 		}
-		if (this.ctrl.getChoixNotion(ressource).size()==0)
+
+		if ( this.ctrl.getChoixNotion(ressource).size() == 0 )
+		{
 			this.removeAll();
+			this.repaint();
+		}
+
 		this.revalidate();
 	}
 

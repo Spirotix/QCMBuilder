@@ -2,13 +2,13 @@ package src.ihm.question;
 
 import java.awt.*					;
 import java.awt.event.*				;
-import javax.swing.*				;
+import java.io.File				;
+import java.io.IOException					;
+import javax.swing.*		;
+import javax.swing.border.EmptyBorder;
+
+import src.Controleur	;
 import src.ihm.*					;
-import javax.imageio.ImageIO		;
-import java.awt.image.BufferedImage	;
-import java.io.File					;
-import java.io.IOException			;
-import src.Controleur				;
 
 public class FrameCreerQuestion extends JFrame implements ActionListener
 {
@@ -32,6 +32,15 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 		this.setDefaultCloseOperation	(JFrame.EXIT_ON_CLOSE	);
 		this.setResizable				(false					);
 		this.setBackground				(Color.LIGHT_GRAY		);
+
+		JPanel titrePanel = new JPanel();
+		titrePanel.setLayout(new BorderLayout());
+		titrePanel.setBorder(new EmptyBorder(10,10,10,10));
+		JLabel titreLabel = new JLabel("Création de question", JLabel.CENTER);
+		titreLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		titrePanel.add(titreLabel, BorderLayout.CENTER);
+		titrePanel.setBackground(Color.lightGray);
+		this.add(titrePanel, BorderLayout.NORTH);
 
 		JMenuBar menubMaBarre = new JMenuBar(			);
 		JMenu 	 menuAcceuil  = new JMenu	("Accueil"	);
