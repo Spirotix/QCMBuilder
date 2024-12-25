@@ -141,8 +141,8 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 
 			for (PanelReponseAsso p : this.reponsesPossibles)
 			{
-				repGauche = new TypeReponse(p.getContenuGauche(), "Gauche");
-				repDroite = new TypeReponse(p.getContenuDroite(),"Droite");
+				repGauche = new TypeReponse(p.getContenuGauche(), "Gauche", p.getCheminG());
+				repDroite = new TypeReponse(p.getContenuDroite(),"Droite", p.getCheminD());
 				reponses.add(new TypeReponse(repGauche, repDroite));
 			}
 

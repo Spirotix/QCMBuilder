@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class TypeReponse
 {
+	private String                  cheminImage        ;
 	private String                  contenu            ;
 	private boolean                 estBonneReponse    ;
 	private TypeReponse             repGauche,repDroite;
@@ -20,7 +21,7 @@ public class TypeReponse
 		this.estBonneReponse = estBonneReponse;
 	}
 
-	public TypeReponse(String contenu, String position)
+	public TypeReponse(String contenu, String position, String cheminImage)
 	{
 		this.contenu  = contenu ;
 		this.position = position;
@@ -31,6 +32,7 @@ public class TypeReponse
 		if (this.position.equals("Droite"))
 			this.cptD = ++ TypeReponse.nbD;
 
+		this.cheminImage = cheminImage;
 		this.lstLiaisonRep1 = new ArrayList<TypeReponse>();
 	}
 

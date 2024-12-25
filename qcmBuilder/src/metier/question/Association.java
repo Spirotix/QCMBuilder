@@ -19,7 +19,7 @@ public class Association implements Question
 	private int                      difficulte;
 	private String                   explication;
 	private List<ReponseAssociation> lstReponseAsso;
-	private String                   urlImage;
+	private String                   cheminImage;
 
 	/**
 	 * Constructeur de la classe Association.
@@ -42,7 +42,7 @@ public class Association implements Question
 		this.difficulte     = difficulte;
 		this.lstReponseAsso = new ArrayList<>(lstReponseAsso);
 		this.explication    = explication;
-		this.urlImage       = "";
+		this.cheminImage    = "";
 	}
 
 	/**
