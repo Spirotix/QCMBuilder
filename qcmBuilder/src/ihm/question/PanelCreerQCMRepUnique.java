@@ -33,6 +33,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 		this.setLayout(new BorderLayout());
 
 		JPanel panelQuestion = new JPanel(new BorderLayout());
+		panelQuestion.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panelQuestion.add(new JLabel("Question : "), BorderLayout.NORTH);
 
 		this.question = new JTextArea(5, 30);
@@ -47,6 +48,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 
 		panelReponses = new JPanel();
 		panelReponses.setLayout(new BoxLayout(panelReponses, BoxLayout.Y_AXIS));
+		panelReponses.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		mettreAJourReponses();
 
 		JScrollPane scrollPaneReponses = new JScrollPane(panelReponses);
@@ -54,10 +56,16 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 		this.add(scrollPaneReponses, BorderLayout.CENTER);
 
 		JPanel panelBoutons = new JPanel();
+		panelBoutons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		this.ajouterQ = new JButton(new ImageIcon("../img/ajouter.PNG"));
 		this.explication = new JButton(new ImageIcon("../img/modifier.PNG"));
 		this.enreg = new JButton("Enregistrer");
+
+		// Style des boutons
+		ajouterQ.setBackground(Color.LIGHT_GRAY);
+		explication.setBackground(Color.LIGHT_GRAY);
+		enreg.setBackground(Color.LIGHT_GRAY);
 
 		panelBoutons.add(this.ajouterQ);
 		panelBoutons.add(this.explication);
@@ -80,7 +88,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 		panelReponses.removeAll();
 		for (PanelReponse p : this.reponsesPossibles) {
 			panelReponses.add(p);
-			p.updateImage();
+			p.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY)); // Bordure entre les réponses
 		}
 		panelReponses.revalidate();
 		panelReponses.repaint();
