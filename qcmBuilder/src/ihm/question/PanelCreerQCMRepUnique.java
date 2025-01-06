@@ -112,7 +112,6 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		boolean aUnBon = false;
-		JOptionPane message = new JOptionPane();
 
 		if (e.getSource() == this.ajouterQ) {
 			this.reponsesPossibles.add(new PanelReponse(this, this.type, this.indiceReponse++));
@@ -120,13 +119,13 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == this.enreg) {
 			if (this.question.getText().isEmpty()) {
-				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 
 			for (PanelReponse p : this.reponsesPossibles) {
 				if (p.getString().isEmpty()) {
-					message.showMessageDialog(null, "Remplissez les champ de réponses", "Attention", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Remplissez les champ de réponses", "Attention", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				if (p.getEstBonneReponse()) {
@@ -135,7 +134,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 			}
 
 			if (!aUnBon) {
-				message.showMessageDialog(null, "Choissisez au moins une bonne réponse", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Choissisez au moins une bonne réponse", "Attention", JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 
@@ -148,7 +147,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 				this.fr.dispose();
 				new FrameMenu(this.ctrl);
 			} else {
-				message.showMessageDialog(null, "Cette Question existe deja", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Cette Question existe deja", "Attention", JOptionPane.WARNING_MESSAGE);
 			}
 		}
 

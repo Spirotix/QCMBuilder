@@ -61,7 +61,7 @@ public class GenererQuestionnaire
 			new QCM        (n3, "Question 3", 50, 5, 3, List.of(new ReponseQCM("Bonne réponse 1", "Vrai"), new ReponseQCM("Bonne réponse 2", "Vrai"), new ReponseQCM("Pas bonne réponse 3", "Faux")), "Eh oui, c'est ça la réponse !"), 
 			new QCM        (n1, "Question 4", 50, 5, 4, List.of(new ReponseQCM("Bonne réponse", "Vrai"), new ReponseQCM("poulet", "Faux")), "Eh oui, c'est ça la réponse !")
 		);
-		GenererQuestionnaire gq = new GenererQuestionnaire("R1.01_Apagnan", true,"ouioui",lstTypeQuestionnaires, lstQuestions);
+		new GenererQuestionnaire("R1.01_Apagnan", true,"ouioui",lstTypeQuestionnaires, lstQuestions);
 	}
 
 	private String nomRessource;

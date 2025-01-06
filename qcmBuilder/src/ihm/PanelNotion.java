@@ -8,17 +8,15 @@ import src.Controleur;
 public class PanelNotion extends JPanel implements ActionListener
 {
 	private Controleur 			ctrl	 ;
-	private PanelCreerRessource panelC	 ;
 	private ArrayList<JLabel> 	lstLabel ;
 	private String				ressource;
 	private ArrayList<JButton> 	lstSup	 ;
 	private ArrayList<JPanel>	lstPanel ;
 
 	
-	public PanelNotion (Controleur ctrl, PanelCreerRessource panelC)
+	public PanelNotion (Controleur ctrl)
 	{
 		this.ctrl		= ctrl	 ;
-		this.panelC		= panelC ;
 		this.ressource	= ""	 ;
 		
 		this.lstLabel 	= new ArrayList<JLabel> ();
@@ -51,7 +49,6 @@ public class PanelNotion extends JPanel implements ActionListener
 			
 		for (int i=0; i<this.lstLabel.size(); i++)
 		{
-			JLabel temp = this.lstLabel.get(i);
 			this.lstLabel.get(i).addMouseListener(new MouseAdapter() 
 			{
 				@Override

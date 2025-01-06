@@ -1,7 +1,6 @@
 package src.ihm.question;
 
 import javax.imageio.ImageIO		;
-import java.awt.image.BufferedImage	;
 import java.io.File					;
 import java.io.IOException			;
 import src.ihm.*					;

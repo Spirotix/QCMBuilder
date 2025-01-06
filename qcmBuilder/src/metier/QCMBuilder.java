@@ -568,7 +568,7 @@ public class QCMBuilder
 	 */
 	public static void main(String[] args)
 	{
-		QCMBuilder qcmBuilder = new QCMBuilder();
+		new QCMBuilder();
 		List<String> nomsNotions = new ArrayList<>();
 		nomsNotions.add("Les types de bases");
 		nomsNotions.add("Les tableaux à 1 dimension");
