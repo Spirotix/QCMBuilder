@@ -1,0 +1,205 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f9;
+	color: #333;
+	margin: 0;
+	padding: 20px;
+}
+
+h1.evaluation-title {
+	color: #395cce;
+	text-align: center;
+	margin-bottom: 20px;
+	font-size: 3em;
+}
+
+h2.app-name {
+	text-align: center;
+	margin-bottom: 20px;
+	font-size: 2em;
+}
+
+.informations {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	max-width: 600px;
+	margin: 20px auto;
+}
+
+p.estimated-time,
+p.resource,
+p.notions-title,
+p.questions-count {
+	font-size: 1.2em;
+	margin: 10px 0;
+}
+
+ul.notions-list,
+ul.difficulty-list {
+	list-style-type: none;
+	padding: 0;
+	margin-left: 5%;
+	margin-right: 10%;
+	word-wrap: break-word;
+}
+
+ul.notions-list li.notion-item,
+ul.difficulty-list li.difficulty-item {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 5px 0;
+}
+
+ul.difficulty-list li.difficulty-item.very-easy {
+	border-left: 5px solid #8BC34A;
+}
+
+ul.difficulty-list li.difficulty-item.easy {
+	border-left: 5px solid #4CAF50;
+}
+
+ul.difficulty-list li.difficulty-item.medium {
+	border-left: 5px solid #FFEB3B;
+}
+
+ul.difficulty-list li.difficulty-item.hard {
+	border-left: 5px solid #FF5722;
+}
+
+span.estimated-time-data,
+span.resource-data,
+span.notions-item-data,
+span.questions-count-data,
+span.difficulty-item-data {
+	font-weight: bold;
+}
+
+.start-button {
+	display: block;
+	width: 200px;
+	margin: 20px auto;
+	padding: 10px 20px;
+	background-color: #395cce;
+	color: white;
+	text-align: center;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 1.2em;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: background-color 0.3s ease;
+	}
+
+	.start-button:hover {
+		background-color: #4772ff;
+}
+
+.difficulty-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 20px 0;
+}
+
+.difficulty-table th, .difficulty-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+
+.difficulty-table th {
+	font-weight: bold;
+}
+
+.difficulty-table td {
+	background-color: #fff;
+}
+
+.difficulty-table .notion-total, .difficulty-table .difficulty-total, .difficulty-table .grand-total {
+	font-weight: bold;
+	background-color: #f9f9f9;
+}
+
+.very-easy {
+	background-color: #77d17f95;
+}
+
+.easy {
+	background-color: #6a80d395;
+}
+
+.medium {
+	background-color: #e81a1f95;
+}
+
+.hard {
+	background-color: #7e7f8495;
+}
+
+p.score {
+	font-size: 2em;
+	text-align: center;
+	margin-top: 20px;
+}
+
+p.estimated-time,
+p.resource,
+p.notions-title,
+p.questions-count,
+p.chrono,
+p.score {
+	font-size: 1.2em;
+	margin: 10px 0;
+}
+
+.restart-button {
+	display: block;
+	width: 200px;
+	margin: 20px auto;
+	padding: 10px 20px;
+	background-color: #395cce;
+	color: white;
+	text-align: center;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 1.2em;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: background-color 0.3s ease;
+}
+
+.restart-button:hover {
+	background-color: #4772ff;
+}
+
+span.estimated-time-data,
+span.resource-data,
+span.notions-item-data,
+span.questions-count-data,
+span.difficulty-item-data,
+span.score-data,
+span.chrono-data {
+	font-weight: bold;
+}
+
+footer {
+	color: #333;
+	text-align: right; 
+	padding: 2px 20px; 
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	background-color: transparent; 
+}
+
+footer p {
+	padding-right: 25px;
+	margin: 0;
+	font-size: 1em;
+}

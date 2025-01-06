@@ -1,8 +1,9 @@
 package src.metier;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,12 +138,30 @@ public class GenererQuestionnaire
 			}
 
 			Files.write(Paths.get("../"+tempNomQuestionnaire+"/index.html"  ), getIndexHtml().getBytes());
-			Files.write(Paths.get("../"+tempNomQuestionnaire+"/fin.html"    ), getFinHtml().getBytes());
+			Files.write(Paths.get("../"+tempNomQuestionnaire+"/fin.html"    ), getFinHtml  ().getBytes());
 			
-
 			for (Question q : lstQuestions)
 			{
+				Files.createDirectories(Paths.get("../"+tempNomQuestionnaire+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)));
+
+				Path srcDir  = Paths.get( "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+(lstQuestions.indexOf(q)+1)+"/complement" );
+				Path destDir = Paths.get( "../"+tempNomQuestionnaire+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1) );
+
 				Files.write(Paths.get("../"+tempNomQuestionnaire+"/pages/question"+(lstQuestions.indexOf(q)+1)+".html"), getQuestionHtml(q).getBytes());
+				
+				Files.list(srcDir).forEach(sourceFile ->
+				{
+					try
+					{
+						Path destFile = destDir.resolve(sourceFile.getFileName());
+						Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
+						System.out.println( "Fichier copié : " + srcDir + " -> " + destFile );
+					}
+					catch (IOException e)
+					{
+						System.out.println( "Erreur lors de la copie du fichier : " + srcDir + " - " + e.getMessage() );
+					}
+				});
 			}
 
 			Files.write(Paths.get("../" + tempNomQuestionnaire + "/script/data.js"), getDataJs().getBytes());
