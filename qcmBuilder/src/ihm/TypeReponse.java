@@ -13,6 +13,7 @@ public class TypeReponse
 	private String                  position           ;
 	private static int              nbG , nbD          ;
 	public int                      cptG, cptD         ;
+	private String                  cheminImage=""     ;
 
 	public TypeReponse(String contenu, boolean estBonneReponse)
 	{
@@ -24,6 +25,8 @@ public class TypeReponse
 	{
 		this.contenu  = contenu ;
 		this.position = position;
+
+		this.cheminImage = cheminImage;
 
 		if (this.position.equals("Gauche"))
 			this.cptG = ++ TypeReponse.nbG;
@@ -65,6 +68,8 @@ public class TypeReponse
 
 	public TypeReponse getRepGauche       () {return this.repGauche       ;}
 	public TypeReponse getRepDroite       () {return this.repDroite       ;}
+
+	public String 	getCheminImage     () {return this.cheminImage     ;}
 
 	public void ajouterLiaison(TypeReponse t) {this.lstLiaisonRep1.add(t);} 
 

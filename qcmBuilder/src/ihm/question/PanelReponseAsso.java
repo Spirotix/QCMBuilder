@@ -1,12 +1,12 @@
 package src.ihm.question;
 
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import javax.imageio.ImageIO		;
-import java.io.File					;
-import java.io.IOException			;
-import src.ihm.*;
+import java.awt.*				;
+import java.awt.event.*			;
+import java.io.File				;
+import java.io.IOException		;
+import javax.imageio.ImageIO	;
+import javax.swing.*			;
+import src.ihm.*				;
 
 public class PanelReponseAsso extends JPanel implements ActionListener
 {
@@ -32,7 +32,16 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 		this.fileHandlerD = new FileHandler("fichier_reponse_droite"+indice);
 		//Initialisation
 
-		this.corbeille		= new JButton(new ImageIcon("../img/poubelle.PNG")	);
+		ImageIcon icon = null;
+		try {
+			Image image = ImageIO.read(new File("../img/poubelle.PNG"));
+			Image scaledImage = image.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+			icon = new ImageIcon(scaledImage);
+		} catch (IOException ex) {
+			System.out.println("Erreur lors du chargement de l'image : " + ex.getMessage());
+		}
+
+		this.corbeille		= new JButton(icon											);
 		this.importerGauche	= new JButton(new ImageIcon("../img/inserer.PNG" )	);
 		this.importerDroite	= new JButton(new ImageIcon("../img/inserer.PNG" )	);
 		this.contenuGauche 	= new TextFieldPerso ("contenu"						);

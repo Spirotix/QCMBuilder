@@ -418,10 +418,10 @@ public class QCMBuilder
 			for (TypeReponse typeReponse : sLstReponses)
 			{
 				ReponseAssociation reponseG = new ReponseAssociation(typeReponse.getRepGauche().getContenu(), null,
-						true);
+						true, typeReponse.getRepGauche().getCheminImage());
 
 				ReponseAssociation reponseD = new ReponseAssociation(typeReponse.getRepDroite().getContenu(), reponseG,
-						false);
+						false, typeReponse.getRepDroite().getCheminImage());
 
 				reponseG.setReponseAssocie(reponseD);
 

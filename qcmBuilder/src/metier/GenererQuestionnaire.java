@@ -405,6 +405,7 @@ public class GenererQuestionnaire
 
 			for (ReponseAssociation r : lstReponses)
 			{
+				System.out.println(r.getUrlImage());
 				if (r.estAGauche())
 				{
 					if (!r.getUrlImage().equals(""))
