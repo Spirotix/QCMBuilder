@@ -23,7 +23,6 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 
 	public PanelReponseAsso (PanelCreerQuestionAsso panelQc, int indice)
 	{
-		this.panelQ = panelQ;
 		this.indice = indice ;
 
 		this.imageImporterG = new JLabel	  ();
@@ -32,8 +31,6 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 		this.fileHandlerG = new FileHandler("fichier_reponse_gauche"+indice);
 		this.fileHandlerD = new FileHandler("fichier_reponse_droite"+indice);
 		//Initialisation
-		JPanel panelGauche = new JPanel();
-		JPanel panelDroite = new JPanel();
 
 		this.corbeille		= new JButton(new ImageIcon("../img/poubelle.PNG")	);
 		this.importerGauche	= new JButton(new ImageIcon("../img/inserer.PNG" )	);
