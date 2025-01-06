@@ -10,7 +10,8 @@ public class PanelReponse extends JPanel implements ActionListener
 	private PanelCreerQCMRepUnique	panelQ				;
 	private JButton					corbeille			;
 	private JTextField				contenu				;
-	private JCheckBox				validation 			;
+	private JCheckBox 				validationM 		;
+	private JRadioButton 			validationU 		;
 	private String 					type 				;
 	private int 					indice				;
 
@@ -66,25 +67,31 @@ public class PanelReponse extends JPanel implements ActionListener
 
 		if (e.getSource().equals(this.validation))
 		{
-			if (this.type.equals("Unique"))
+			if (this.validationU.isSelected())
 			{
-				if (this.validation.isSelected())
-				{
-					this.panelQ		.toutDecocher(		);
-					this.validation	.setSelected (true	);
-				}
+				this.panelQ     .toutDecocher(    );
+				this.validationU.setSelected (true);
 			}
 		}
 	}
 
 	public void decocher()
 	{
-		this.validation.setSelected(false);
+		if ( this.type.equals("Unique") )
+			this.validationU.setSelected(false);
+		else
+			this.validationM.setSelected(false);
 	}
 
 
-	public boolean  getEstBonneReponse ( )	{return this.validation.isSelected();}
-	
+	public boolean  getEstBonneReponse ()
+	{
+		if ( this.type.equals("Unique") )
+			return this.validationU.isSelected();
+		else
+			return this.validationM.isSelected();
+	}
+
 
 	public String getString(){return this.contenu.getText();}
 }

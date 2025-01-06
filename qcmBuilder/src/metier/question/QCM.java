@@ -43,7 +43,6 @@ public class QCM implements Question
 		this.nbPoint     = nbPoint;
 		this.difficulte  = difficulte;
 		this.lstReponses = new ArrayList<>(lstReponses);
-		Collections.shuffle(this.lstReponses);
 		this.explication = explication;
 		this.estQCU      = this.estUnique();
 		this.urlImage    = "";

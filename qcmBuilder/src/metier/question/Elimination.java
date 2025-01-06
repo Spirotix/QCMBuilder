@@ -47,7 +47,6 @@ public class Elimination implements Question
 		this.nbPoint         = nbPoint;
 		this.difficulte      = difficulte;
 		this.lstReponses     = new ArrayList<>(lstReponses);
-		Collections.shuffle(this.lstReponses);
 		this.nbIndice        = nbIndice;
 		this.explication     = explication;
 		this.nbIndiceUtilise = 0;

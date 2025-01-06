@@ -102,13 +102,17 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.btnGroup.add (this.btnAsso			);
 		this.btnGroup.add (this.btnElim			);
 
-		this.btnCreer = new JButton("Creer");
+		this.btnCreer = new JButton("Créer");
 
-		this.btnCreer.setOpaque				(false						);
-		this.btnCreer.setContentAreaFilled	(false						);
-		this.btnCreer.setBorder				(new LineBorder(Color.BLACK));
+		this.btnCreer.setOpaque				(true						);
+		this.btnCreer.setBackground			(new Color(0, 127, 255)	); // Steel blue background
+		this.btnCreer.setForeground			(Color.WHITE				); // White text
+		this.btnCreer.setFont				(new Font("Arial", Font.BOLD, 14));
+		this.btnCreer.setBorder				(null);
+		this.btnCreer.setPreferredSize		(new Dimension(100, 30)		);
 		this.btnCreer.setFocusPainted		(false						);
-		this.btnCreer.setForeground			(Color.BLACK				);
+
+		this.ajouterPassageSouris(btnCreer);
 
 
 		// ActionListener / itemListener
@@ -481,5 +485,23 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.explicationQuestion = explication		;
 
 		return this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, reponses, this.difficulteQuestion);
+	}
+
+	private void ajouterPassageSouris(JButton button)
+	{
+		button.setOpaque(true);
+		button.addMouseListener(new MouseAdapter()
+		{
+			public void mouseEntered(MouseEvent e)
+			{
+				button.setBackground(button.getBackground().darker());
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+				button.setBackground(button.getBackground().brighter());
+			}
+		});
 	}
 }

@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO		;
-import java.awt.image.BufferedImage	;
 import java.io.File					;
 import java.io.IOException			;
 import src.ihm.*;
@@ -20,13 +19,15 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 	private int 					indice										;
 	private JPanel 					panelImageG,panelImageD 					;
 
+	private String 					cheminG, cheminD							;
+
 	public PanelReponseAsso (PanelCreerQuestionAsso panelQc, int indice)
 	{
 		this.panelQ = panelQ;
 		this.indice = indice ;
 
-		this.imageImporterG = new JLabel	  (								);
-		this.imageImporterD = new JLabel	  (								);
+		this.imageImporterG = new JLabel	  ();
+		this.imageImporterD = new JLabel	  ();
 
 		this.fileHandlerG = new FileHandler("fichier_reponse_gauche"+indice);
 		this.fileHandlerD = new FileHandler("fichier_reponse_droite"+indice);
@@ -82,6 +83,7 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 			try 
 			{
 				this.fileChoisiG = fileHandlerG.chooseFile();
+				this.cheminG = this.fileChoisiG.getAbsolutePath();
 				fileHandlerG.handleFile(this.fileChoisiG);
 				this.updateImageG();
 			} 
@@ -96,6 +98,7 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 			try 
 			{
 				this.fileChoisiD = fileHandlerD.chooseFile();
+				this.cheminD = this.fileChoisiD.getAbsolutePath();
 				fileHandlerD.handleFile(this.fileChoisiD);
 				this.updateImageD();
 			} 
@@ -143,6 +146,10 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 		}
 		this.repaint();
 	}
+
+	public String getCheminG(){ return this.cheminG; }
+	
+	public String getCheminD(){ return this.cheminD; }
 
 	public String toString			() {return this.contenuGauche.getText() + " : "+this.contenuDroite.getText();}
 	public String getContenuGauche 	() {return this.contenuGauche.getText()										;}
