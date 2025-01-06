@@ -11,6 +11,7 @@ public class PanelReponse extends JPanel implements ActionListener
 	private JButton					corbeille			;
 	private JTextField				contenu				;
 	private JCheckBox 				validationM 		;
+	private JCheckBox 				validation		;
 	private JRadioButton 			validationU 		;
 	private String 					type 				;
 	private int 					indice				;
