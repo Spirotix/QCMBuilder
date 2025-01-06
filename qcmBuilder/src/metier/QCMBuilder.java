@@ -360,11 +360,9 @@ public class QCMBuilder
 	 *            L'explication de la réponse.
 	 * @return true si la question a été créée et ajoutée, false sinon.
 	 */
-	public boolean creerQuestion(String type, String code_nomRessource, String nomNotion, String text, int timer,
-			double nbPoint, int difficulte, ArrayList<TypeReponse> sLstReponses, String explication)
+	public boolean creerQuestion(String type, String code_nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, ArrayList<TypeReponse> sLstReponses, String explication)
 	{
-		Notion notion = rechercherRessource(code_nomRessource.substring(0, code_nomRessource.indexOf("_")))
-				.rechercherNotion(nomNotion);
+		Notion notion = rechercherRessource(code_nomRessource.substring(0, code_nomRessource.indexOf("_"))).rechercherNotion(nomNotion);
 
 		if (type.equals("Elimination"))
 		{
@@ -378,8 +376,7 @@ public class QCMBuilder
 				else
 					stringVrai = "Faux";
 
-				ReponseElimination reponse = new ReponseElimination(stringVrai, typeReponse.getContenu(),
-						typeReponse.getOrdre(), typeReponse.getCout());
+				ReponseElimination reponse = new ReponseElimination(stringVrai, typeReponse.getContenu(), typeReponse.getOrdre(), typeReponse.getCout());
 
 				if (typeReponse.getOrdre() > nbIndice)
 					nbIndice = typeReponse.getOrdre();
@@ -388,8 +385,7 @@ public class QCMBuilder
 					lstReponses.add(reponse);
 			}
 
-			return notion.ajouterQuestion(
-					new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, explication));
+			return notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstReponses, nbIndice, explication) );
 		}
 		else if (type.equals("QCM"))
 		{
@@ -417,11 +413,9 @@ public class QCMBuilder
 
 			for (TypeReponse typeReponse : sLstReponses)
 			{
-				ReponseAssociation reponseG = new ReponseAssociation(typeReponse.getRepGauche().getContenu(), null,
-						true, typeReponse.getRepGauche().getCheminImage());
+				ReponseAssociation reponseG = new ReponseAssociation(typeReponse.getRepGauche().getContenu(), null, true, typeReponse.getRepGauche().getCheminImage());
 
-				ReponseAssociation reponseD = new ReponseAssociation(typeReponse.getRepDroite().getContenu(), reponseG,
-						false, typeReponse.getRepDroite().getCheminImage());
+				ReponseAssociation reponseD = new ReponseAssociation(typeReponse.getRepDroite().getContenu(), reponseG, false, typeReponse.getRepDroite().getCheminImage());
 
 				reponseG.setReponseAssocie(reponseD);
 
@@ -432,8 +426,7 @@ public class QCMBuilder
 					lstReponses.add(reponseG);
 			}
 
-			return notion.ajouterQuestion(
-					new Association(notion, text, timer, nbPoint, difficulte, lstReponses, explication));
+			return notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstReponses, explication) );
 
 		}
 		else
