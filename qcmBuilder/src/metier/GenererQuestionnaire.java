@@ -287,7 +287,7 @@ public class GenererQuestionnaire
 
 						<!-- Footer -->
 						<footer>
-							<p>&copy; 2024 Groupe 2. Tous droits réservés.</p>
+							<p>&copy; 2024 Groupe 2.</p>
 						</footer>
 
 						<!-- Script -->
@@ -372,16 +372,19 @@ public class GenererQuestionnaire
 				}
 
 			sRet += String.format("""
+						<section class="hint">
+								<p class="cout">Coût : <span class="hint-cost"></span> points</p>
+								<button type="button" class="hint-button">Indice</button>
+								<div class="hint-count">
+									
+									<p>Indice : <span class="hint-current-data">0</span>/<span class="hint-total-data">%d</span></p>
+								</div>
+								<div class="lost-points">
+									<p>Points perdus : <span class="lost-points-data">0</span></p>
+								</div>
+								
 						</section>
-					</article>
 
-					<!-- Bouton indice -->
-					<section class="hint">
-						<button type="button" class="hint-button">Indice</button>
-						<div class="hint-count">
-							<p>Indice : <span class="hint-current-data">0</span>/<span class="hint-total-data">%d</span></p>
-						</div>
-					</section>
 		""", elim.getNbIndice());
 
 
@@ -705,7 +708,7 @@ public class GenererQuestionnaire
 						</section>
 						<!-- Footer -->
 						<footer>
-							<p>&copy; 2024 Groupe 2. Tous droits réservés.</p>
+							<p>&copy; 2024 Groupe 2.</p>
 						</footer>
 						<!-- Script -->
 						<script src="./script/data.js"></script>
@@ -812,7 +815,7 @@ public class GenererQuestionnaire
 						
 							<!-- Footer -->
 							<footer>
-								<p>&copy; 2024 Groupe 2. Tous droits réservés.</p>
+								<p>&copy; 2024 Groupe 2.</p>
 							</footer>
 							
 							<!-- Script -->
