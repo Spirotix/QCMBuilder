@@ -41,9 +41,8 @@ public class Association implements Question
 		this.nbPoint        = nbPoint;
 		this.difficulte     = difficulte;
 		this.lstReponseAsso = new ArrayList<>(lstReponseAsso);
-		Collections.shuffle(this.lstReponseAsso);
 		this.explication    = explication;
-		this.urlImage       = "";
+		this.urlImage    = "";
 	}
 
 	/**
