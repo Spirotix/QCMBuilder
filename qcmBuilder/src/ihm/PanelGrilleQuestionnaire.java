@@ -10,121 +10,121 @@ import src.TypeQuestionnaire;
 
 public class PanelGrilleQuestionnaire extends JPanel implements ActionListener 
 {
-    private Controleur 							ctrl;
-    private ArrayList<JCheckBox> 				lstBox;
-    private int 								nbTF, nbF, nbM, nbD;
-    private ArrayList<ArrayList<JTextField>> 	lstTextField;
-    private JLabel 								nbTFS, nbFS, nbMS, nbDS, nbTotal;
-    private String 								ressource;
+	private Controleur 							ctrl;
+	private ArrayList<JCheckBox> 				lstBox;
+	private int 								nbTF, nbF, nbM, nbD;
+	private ArrayList<ArrayList<JTextField>> 	lstTextField;
+	private JLabel 								nbTFS, nbFS, nbMS, nbDS, nbTotal;
+	private String 								ressource;
 
-    public PanelGrilleQuestionnaire(Controleur ctrl, String ressource) 
+	public PanelGrilleQuestionnaire(Controleur ctrl, String ressource) 
 	{
-        this.ctrl		= ctrl		;
-        this.ressource 	= ressource	;
+		this.ctrl		= ctrl		;
+		this.ressource 	= ressource	;
 
-        this.lstBox 	  = new ArrayList<>();
-        this.lstTextField = new ArrayList<>();
+		this.lstBox 	  = new ArrayList<>();
+		this.lstTextField = new ArrayList<>();
 
-        ArrayList<String> notions = this.ctrl.getChoixNotion(ressource);
+		ArrayList<String> notions = this.ctrl.getChoixNotion(ressource);
 
-        // Disposition principale
-        this.setLayout			(new BoxLayout(this, BoxLayout.Y_AXIS	));
-        this.setPreferredSize	(new Dimension(400, notions.size() * 50	));
-        this.setMaximumSize		(new Dimension(400, notions.size() * 50	));
+		// Disposition principale
+		this.setLayout			(new BoxLayout(this, BoxLayout.Y_AXIS	));
+		this.setPreferredSize	(new Dimension(400, notions.size() * 50	));
+		this.setMaximumSize		(new Dimension(400, notions.size() * 50	));
 
-        // En-tête de la grille
-        JPanel header = new JPanel	(new GridLayout(1, 7	));
-        header.setMaximumSize		(new Dimension(400, 30	));
+		// En-tête de la grille
+		JPanel header = new JPanel	(new GridLayout(1, 7	));
+		header.setMaximumSize		(new Dimension(400, 30	));
 
-        header.add(new JLabel("Notion"	, SwingConstants.CENTER));
+		header.add(new JLabel("Notion"	, SwingConstants.CENTER));
 		header.add(new JLabel(""		, SwingConstants.CENTER));
-        header.add(new JLabel("TF"		, SwingConstants.CENTER));
-        header.add(new JLabel("F"		, SwingConstants.CENTER));
-        header.add(new JLabel("M"		, SwingConstants.CENTER));
-        header.add(new JLabel("D"		, SwingConstants.CENTER));
-       
+		header.add(new JLabel("TF"		, SwingConstants.CENTER));
+		header.add(new JLabel("F"		, SwingConstants.CENTER));
+		header.add(new JLabel("M"		, SwingConstants.CENTER));
+		header.add(new JLabel("D"		, SwingConstants.CENTER));
+		
 
-        this.add(header);
+		this.add(header);
 
-        // Ajout des notions
-        for (String notion : notions) 
+		// Ajout des notions
+		for (String notion : notions) 
 		{
-            JPanel ligneNotion = new JPanel(new GridLayout(1, 6));
+			JPanel ligneNotion = new JPanel(new GridLayout(1, 6));
 
-            ligneNotion.setPreferredSize(new Dimension(400, 30));
-            ligneNotion.setMaximumSize	(new Dimension(400, 30));
+			ligneNotion.setPreferredSize(new Dimension(400, 30));
+			ligneNotion.setMaximumSize	(new Dimension(400, 30));
 
-            ligneNotion.add(new JLabel(notion, SwingConstants.CENTER));
+			ligneNotion.add(new JLabel(notion, SwingConstants.CENTER));
 
-            JCheckBox checkBox = new JCheckBox();
-            checkBox.addActionListener(this);
-            this.lstBox.add(checkBox);
-            ligneNotion.add(checkBox);
+			JCheckBox checkBox = new JCheckBox();
+			checkBox.addActionListener(this);
+			this.lstBox.add(checkBox);
+			ligneNotion.add(checkBox);
 
-            ArrayList<JTextField> rowFields = new ArrayList<>();
-            for (int i = 0; i < 4; i++) 
+			ArrayList<JTextField> rowFields = new ArrayList<>();
+			for (int i = 0; i < 4; i++) 
 			{
-                JTextField textField = new JTextField();
-                textField.setEnabled(false);
-                textField.setPreferredSize(new Dimension(40, 20));
+				JTextField textField = new JTextField();
+				textField.setEnabled(false);
+				textField.setPreferredSize(new Dimension(40, 20));
 				textField.addActionListener(this);
-                rowFields	.add(textField);
-                ligneNotion	.add(textField);
-            }
+				rowFields	.add(textField);
+				ligneNotion	.add(textField);
+			}
 
-            this.add(ligneNotion);
-            this.lstTextField.add(rowFields);
-        }
+			this.add(ligneNotion);
+			this.lstTextField.add(rowFields);
+		}
 
-        // Pied de page
-        JPanel footer = new JPanel(new GridLayout(1, 7));
-        footer.setMaximumSize(new Dimension(400, 30));
+		// Pied de page
+		JPanel footer = new JPanel(new GridLayout(1, 7));
+		footer.setMaximumSize(new Dimension(400, 30));
 
-        this.nbTFS	 = new JLabel("0");
-        this.nbFS 	 = new JLabel("0");
-        this.nbMS	 = new JLabel("0");
-        this.nbDS	 = new JLabel("0");
-        this.nbTotal = new JLabel("Total : ");
+		this.nbTFS	 = new JLabel("0");
+		this.nbFS 	 = new JLabel("0");
+		this.nbMS	 = new JLabel("0");
+		this.nbDS	 = new JLabel("0");
+		this.nbTotal = new JLabel("Total : ");
 
-        footer.add(new JLabel("Nb questions", SwingConstants.CENTER));
+		footer.add(new JLabel("Nb questions", SwingConstants.CENTER));
 
 		footer.add(new JLabel(""));
-        footer.add(this.nbTFS	);
-        footer.add(this.nbFS	);
-        footer.add(this.nbMS	);
-        footer.add(this.nbDS	);
-        footer.add(this.nbTotal	);
+		footer.add(this.nbTFS	);
+		footer.add(this.nbFS	);
+		footer.add(this.nbMS	);
+		footer.add(this.nbDS	);
+		footer.add(this.nbTotal	);
 
-        this.add(footer);
+		this.add(footer);
 
-        // Ajouter un JScrollPane pour le défilement
-        JScrollPane scrollPane = new JScrollPane(this);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setPreferredSize(new Dimension(400, 400));
+		// Ajouter un JScrollPane pour le défilement
+		JScrollPane scrollPane = new JScrollPane(this);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setPreferredSize(new Dimension(400, 400));
 
-    }
+	}
 
-    public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent e) 
 	{
-        for (int i = 0; i < this.lstBox.size(); i++) 
+		for (int i = 0; i < this.lstBox.size(); i++) 
 			if (e.getSource().equals(this.lstBox.get(i))) 
 			{
-                ArrayList<JTextField> rowFields = this.lstTextField.get(i);
-                boolean isChecked = this.lstBox.get(i).isSelected();
+				ArrayList<JTextField> rowFields = this.lstTextField.get(i);
+				boolean isChecked = this.lstBox.get(i).isSelected();
 
-                for (JTextField textField : rowFields) 
+				for (JTextField textField : rowFields) 
 				{
-                    textField.setEnabled(isChecked);
-                    if (!isChecked)
-                        textField.setText("");
-                }
-                break;
-            }
+					textField.setEnabled(isChecked);
+					if (!isChecked)
+						textField.setText("");
+				}
+				break;
+			}
 
 		updateTotals();
-    }
+	}
 
-    private void updateTotals() 
+	private void updateTotals() 
 	{
 		this.nbTF = 0;
 		this.nbF  = 0;
@@ -151,13 +151,13 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 		this.nbTotal.setText("Total : "+String.valueOf(nbTF+nbF+nbM+nbD ));
 	}
 
-    private int parseField(JTextField textField) 
+	private int parseField(JTextField textField) 
 	{
 		try 
 		{
-            String text = textField.getText();
-            return text.isEmpty() ? 0 : Integer.parseInt(text);
-        } 
+			String text = textField.getText();
+			return text.isEmpty() ? 0 : Integer.parseInt(text);
+		} 
 		catch (NumberFormatException e) 
 		{
 			JOptionPane.showMessageDialog(null, "Ne rentrez que des nombres entier", "Attention", JOptionPane.WARNING_MESSAGE);
@@ -165,23 +165,23 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 		}
 	}
 
-    public ArrayList<TypeQuestionnaire> getSelectionner() 
+	public ArrayList<TypeQuestionnaire> getSelectionner() 
 	{
-        ArrayList<TypeQuestionnaire> lstType = new ArrayList<>();
+		ArrayList<TypeQuestionnaire> lstType = new ArrayList<>();
 
-        for (int i = 0; i < this.lstBox.size(); i++) 
+		for (int i = 0; i < this.lstBox.size(); i++) 
 		{
-            if (this.lstBox.get(i).isSelected()) 
+			if (this.lstBox.get(i).isSelected()) 
 			{
-                int temp1 = parseField(this.lstTextField.get(i).get(0));
-                int temp2 = parseField(this.lstTextField.get(i).get(1));
-                int temp3 = parseField(this.lstTextField.get(i).get(2));
-                int temp4 = parseField(this.lstTextField.get(i).get(3));
+				int temp1 = parseField(this.lstTextField.get(i).get(0));
+				int temp2 = parseField(this.lstTextField.get(i).get(1));
+				int temp3 = parseField(this.lstTextField.get(i).get(2));
+				int temp4 = parseField(this.lstTextField.get(i).get(3));
 
-                lstType.add(new TypeQuestionnaire(this.ctrl.getChoixNotion(this.ressource).get(i), temp1, temp2, temp3, temp4));
-            }
-        }
+				lstType.add(new TypeQuestionnaire(this.ctrl.getChoixNotion(this.ressource).get(i), temp1, temp2, temp3, temp4));
+			}
+		}
 
-        return lstType;
-    }
+		return lstType;
+	}
 }
