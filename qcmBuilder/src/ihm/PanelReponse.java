@@ -11,34 +11,34 @@ import src.ihm.question.*			;
 public class PanelReponse extends JPanel implements ActionListener
 {
 	private PanelCreerQCMRepUnique	panelQ				;
-	private JButton					corbeille, importer	;
-	private JLabel 					imageImporter		;
+	private JButton					corbeille 			;
 	private JTextField				contenu				;
 	private JCheckBox 				validationM 		;
-	private JCheckBox 				validation		;
 	private JRadioButton 			validationU 		;
 	private String 					type 				;
-	private FileHandler 			fileHandler			;
-	private File 					fileChoisi 			;
-	private int 					indice				;
-	private JPanel 					panelImage 			;
 
 	public PanelReponse (PanelCreerQCMRepUnique panelQ, String type, int indice)
 	{
 		this.panelQ = panelQ ;
 		this.type 	= type 	 ;
-		this.indice = indice ;
-
-		this.imageImporter 	= new JLabel	  (								);
-		this.fileHandler	= new FileHandler ("fichier_reponse"+this.indice);
 
 		this.setLayout(new GridLayout(1,3));
 
 		//Initialisation
-		this.corbeille 	= new JButton(new ImageIcon("../img/poubelle.PNG"	));
-		this.importer	= new JButton(new ImageIcon("../img/inserer.PNG"	));
+
+		ImageIcon icon = null;
+		try {
+			Image image = ImageIO.read(new File("../img/poubelle.PNG"));
+			Image scaledImage = image.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+			icon = new ImageIcon(scaledImage);
+		} catch (IOException ex) {
+			System.out.println("Erreur lors du chargement de l'image : " + ex.getMessage());
+		}
+
+		this.corbeille 	= new JButton(icon);
 
 		this.contenu 	= new TextFieldPerso ("contenu");
+		this.contenu.setPreferredSize(new Dimension(100, 25));
 		
 		
 		if ( this.type.equals("Unique") )
@@ -51,21 +51,19 @@ public class PanelReponse extends JPanel implements ActionListener
 		panelGauche.add(this.corbeille);
 
 		this.add (panelGauche);
-		this.add (this.contenu	 );
 
-		JPanel panelDroite	 	= new JPanel (new BorderLayout());
-		JPanel panelDroiteHaut 	= new JPanel ();
-		this.panelImage	= new JPanel ();
-		this.panelImage.setPreferredSize(new Dimension(75, 75));
+		JPanel panelCentre = new JPanel ();
+		panelCentre.add(this.contenu);
+		this.add (panelCentre);
+
+		JPanel panelDroite	 	= new JPanel ();
 		
 		if ( this.type.equals("Unique") )
-			panelDroiteHaut.add ( this.validationU );
+			panelDroite.add ( this.validationU );
 		else
-			panelDroiteHaut.add ( this.validationM );
-		panelDroiteHaut.add (this.importer                       );
-		panelDroite	   .add (panelDroiteHaut, BorderLayout.NORTH );
-		this.panelImage.add (this.imageImporter                  );
-		panelDroite	   .add (this.panelImage, BorderLayout.CENTER);
+			panelDroite.add ( this.validationM );
+
+
 
 		this.add(panelDroite);
 
@@ -77,7 +75,6 @@ public class PanelReponse extends JPanel implements ActionListener
 			this.validationU.addActionListener(this);
 		else
 			this.validationM.addActionListener(this);
-		this.importer	.addActionListener(this);
 
 		this.setVisible(true);
 
@@ -90,8 +87,6 @@ public class PanelReponse extends JPanel implements ActionListener
 			this.panelQ.supprimer(this);
 		}
 
-		this.updateImage();
-
 		if (e.getSource().equals(this.validationU))
 		{
 			if (this.validationU.isSelected())
@@ -101,39 +96,6 @@ public class PanelReponse extends JPanel implements ActionListener
 			}
 		}
 
-		if (e.getSource().equals(this.importer)) 
-		{
-			try 
-			{
-				this.fileChoisi = fileHandler.chooseFile();
-				fileHandler.handleFile(this.fileChoisi);
-				this.updateImage();
-			} 
-			catch (IOException ex)
-			{
-				System.out.println("Erreur lors du traitement du fichier : " + ex.getMessage());
-			}
-			this.repaint();
-		}
-	}
-
-	public void updateImage()
-	{
-		if (this.fileChoisi==null)
-			return ;
-		try 
-		{
-			Image image 		 = ImageIO.read(new File("../data/ressources_notions_questions/temp/fichier_reponse"+this.indice+"."+this.fileHandler.getExtension(this.fileChoisi.getName())));
-			Image imageRetaillee = image.getScaledInstance( this.panelImage.getHeight(), this.panelImage.getHeight(), Image.SCALE_AREA_AVERAGING);
-
-			this.imageImporter.setIcon(new ImageIcon(imageRetaillee));
-			System.out.println(this.imageImporter.getIcon());
-		} 
-		catch (IOException ex) 
-		{
-			System.out.println("Erreur lors du traitement du fichier : " + ex.getMessage());
-		}
-		this.repaint();
 	}
 
 	public void decocher()
