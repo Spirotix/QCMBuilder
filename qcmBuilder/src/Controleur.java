@@ -1,6 +1,7 @@
 package src;
 
 import java.util.ArrayList;
+
 import src.ihm.*;
 import src.metier.*;
 import src.metier.question.*;
@@ -80,6 +81,33 @@ public class Controleur
 		return str;
 	}
 
+	public double getNbPointQuestion(String ressource, String notion, String question)
+	{
+		for (Ressource r : this.qcmBuilder.getRessources())
+		{
+			if ((r.getCode() + "_" + r.getNom()).equals(ressource))
+				for (Notion n : r.getNotions())
+					if (n.getNom().equals(notion))
+						for (Question q : n.getQuestions())
+							if (q.getText().equals(question))
+								return q.getNbPoint();
+		}
+		return 12;
+	}
+
+	public int getTempsQuestion(String ressource, String notion, String question)
+	{
+		for (Ressource r : this.qcmBuilder.getRessources())
+		{
+			if ((r.getCode() + "_" + r.getNom()).equals(ressource))
+				for (Notion n : r.getNotions())
+					if (n.getNom().equals(notion))
+						for (Question q : n.getQuestions())
+							if (q.getText().equals(question))
+								return q.getTimer();
+		}
+		return 69;
+	}
 	/**
 	 * Supprime une question donnée associée à une ressource et une notion.
 	 *

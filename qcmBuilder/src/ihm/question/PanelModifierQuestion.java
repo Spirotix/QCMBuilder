@@ -10,21 +10,20 @@ import src.ihm.*					;
 public class PanelModifierQuestion extends JPanel implements ActionListener
 {
 	private Controleur            ctrl                                                                      ;
-	private JTextField            nbPoints, tpsReponses                                                     ;
+	private JTextField            textQuestion, nbPoints, tpsReponses                                       ;
 	private ButtonGroup           btnGroup, btnGroupImg                                                     ;
 	private JButton               btnModifier                                                               ;
 	private JRadioButton          btnTF, btnF, btnM, btnD	                                                ;
-	private JLabel                msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrNot, msgChoixType ;
+	private JLabel                msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrTextNom ;
 	private FrameModifierQuestion fr                                                                        ;
 
 	// Ressources finale
-	private String textQuestion        ;
 	private int    tempsQuestion       ;
 	private double nbPointQuestion     ;
 	private int    difficulteQuestion  ;
 	private String explicationQuestion ;
 
-	public PanelModifierQuestion(Controleur ctrl, FrameModifierQuestion fr) 
+	public PanelModifierQuestion(Controleur ctrl, FrameModifierQuestion fr, String nomQuestion, String notion, String ressource) 
 	{
 		this.ctrl = ctrl;
 		this.fr   = fr  ;
@@ -39,24 +38,29 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		gbc.fill	= GridBagConstraints.HORIZONTAL ;
 
 		// Initialisation
-		this.nbPoints 	 = new TextFieldPerso("ex : 4.5");
-		this.tpsReponses = new TextFieldPerso("ex : 1:30");
+		this.textQuestion = new TextFieldPerso("ex : Quelle est la couleur du cheval blanc d'Henri IV ?");
+		this.nbPoints     = new TextFieldPerso("ex : 4.5");
+		this.tpsReponses  = new TextFieldPerso("ex : 1:30");
+
+		this.textQuestion.setText(nomQuestion);
+
+		System.out.println(notion + " || " + ressource);
+		this.nbPoints.setText(this.ctrl.getNbPointQuestion(ressource, notion, nomQuestion) + "");
+		int temps = this.ctrl.getTempsQuestion(ressource, notion, nomQuestion);
+		int minute = temps/60;
+		int seconde = temps%60;
+		this.tpsReponses.setText(minute + ":" + seconde);
 
 		this.btnGroupImg = new ButtonGroup (                                        );
 		this.btnTF		 = new JRadioButton(new ImageIcon("../img/TF2.PNG"));
 		this.btnF		 = new JRadioButton(new ImageIcon("../img/F2.PNG" ));
 		this.btnM		 = new JRadioButton(new ImageIcon("../img/M2.PNG" ));
 		this.btnD 		 = new JRadioButton(new ImageIcon("../img/D2.PNG" ));
-
 		this.btnTF.setOpaque(false);
 		this.btnF .setOpaque(false);
 		this.btnM .setOpaque(false);
 		this.btnD .setOpaque(false); 
 
-		this.btnTF.setEnabled(false);
-		this.btnF .setEnabled(false);
-		this.btnM .setEnabled(false);
-		this.btnD .setEnabled(false);
 
 		this.btnGroupImg.add(this.btnTF);
 		this.btnGroupImg.add(this.btnF );
@@ -64,12 +68,11 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		this.btnGroupImg.add(this.btnD );
 
 
-		this.msgErrNbPts  = new JLabel("");
-		this.msgErrTpsRep = new JLabel("");
-		this.msgErrRess   = new JLabel("");
-		this.msgErrNiv    = new JLabel("");
-		this.msgErrNot    = new JLabel("");
-		this.msgChoixType = new JLabel("");
+		this.msgErrNbPts   = new JLabel("");
+		this.msgErrTpsRep  = new JLabel("");
+		this.msgErrRess    = new JLabel("");
+		this.msgErrNiv     = new JLabel("");
+		this.msgErrTextNom = new JLabel("");
 
 		this.btnModifier = new JButton("Modifier");
 
@@ -84,36 +87,45 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		this.ajouterPassageSouris(btnModifier);
 
 		// ActionListener / itemListener
-		this.nbPoints		.addActionListener	(this);
-		this.tpsReponses	.addActionListener	(this);
 		this.btnTF			.addActionListener	(this);
 		this.btnF			.addActionListener	(this);
 		this.btnM			.addActionListener	(this);
 		this.btnD			.addActionListener	(this);
-		this.btnModifier.addActionListener	(this);
+		this.btnModifier    .addActionListener	(this);
 
 		// Layout
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		this.add(new JLabel("Nombre de points")	, gbc);
+		this.add(new JLabel("text question")	, gbc);
 		gbc.gridx = 1;
-		this.add(this.nbPoints					, gbc);
+		this.add(this.textQuestion                , gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		this.add(new JLabel("Temps de réponse (m:s)")	, gbc);
+		this.add(new JLabel("Nombre de points")	, gbc);
 		gbc.gridx = 1;
-		this.add(this.tpsReponses				, gbc);
+		this.add(this.nbPoints                    , gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 2;
+		this.add(new JLabel("Temps de réponse (m:s)")	, gbc);
+		gbc.gridx = 1;
+		this.add(this.tpsReponses                  , gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 3;
 		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgErrNbPts, this.msgErrTpsRep), gbc);
+		this.add(createErrorPanel(this.msgErrTextNom), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgErrNbPts), gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 5;
 		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgErrRess, this.msgErrNot), gbc);
+		this.add(createErrorPanel(this.msgErrTpsRep), gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 6;
@@ -122,15 +134,6 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		gbc.gridx = 1;
 		this.add(createDifficultyPanel()		, gbc);
 
-		gbc.gridx = 0;
-		gbc.gridy = 7;
-		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgErrNiv), gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 9;
-		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgChoixType), gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 10;
@@ -167,15 +170,24 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e) 
 	{
-		boolean peutCreer = true;
+		boolean peutModifier = true;
 
 		if (e.getSource().equals(this.btnModifier))
 		{
+			if (this.textQuestion.getText().equals(""))
+			{
+				this.msgErrTextNom.setForeground	(Color.RED									);
+				this.msgErrTextNom.setText		("Vous devez rentrer un texte pour la question");
+				peutModifier = false;
+			} 
+			else 
+				this.msgErrTextNom.setText("");
+
 			if (this.nbPoints.getText().equals("")) 
 			{
 				this.msgErrNbPts.setForeground	(Color.RED									);
 				this.msgErrNbPts.setText		("Vous devez rentrer une nombre de points"	);
-				peutCreer = false;
+				peutModifier = false;
 			} 
 			else 
 			{
@@ -188,14 +200,14 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 				{
 					this.msgErrNbPts.setForeground	(Color.RED												);
 					this.msgErrNbPts.setText		("Vous devez rentrer un nombre à virgule pour le nombre de points");
-					peutCreer = false;
+					peutModifier = false;
 				}
 			}
 			if (this.tpsReponses.getText().equals("")) 
 			{
 				this.msgErrTpsRep.setForeground	(Color.RED								 );
 				this.msgErrTpsRep.setText		("Vous devez rentrer un temps de réponse");
-				peutCreer = false;
+				peutModifier = false;
 			} 
 			else 
 			{
@@ -213,7 +225,7 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 				{
 					this.msgErrTpsRep.setForeground	(Color.RED												  );
 					this.msgErrTpsRep.setText		("Vous devez respecter le format demandé");
-					peutCreer = false;
+					peutModifier = false;
 				}
 			}
 
@@ -221,12 +233,10 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 			{
 				this.msgErrNiv.setForeground(Color.RED									 );
 				this.msgErrNiv.setText		("Vous devez choisir un niveau de difficulté");
-				peutCreer = false;
+				peutModifier = false;
 			} 
 			else 
 				this.msgErrNiv.setText("");
-
-
 		}
 
 		if (this.btnTF.isSelected() )
@@ -292,16 +302,6 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 			case 4 : this.btnD	.setSelected(true);break;
 		}
 
-	}
-
-
-	public boolean modifiQuestion(String explication, String intituleQuestion, ArrayList<TypeReponse> reponses)
-	{
-		this.textQuestion 		 = intituleQuestion	;
-		this.explicationQuestion = explication		;
-
-		return false;
-		//return this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, reponses, this.difficulteQuestion);
 	}
 
 	private void ajouterPassageSouris(JButton button)
