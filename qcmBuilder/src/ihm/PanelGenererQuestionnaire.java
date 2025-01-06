@@ -105,6 +105,17 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 	{
         if (e.getSource().equals(this.generer)) 
 		{
+			if (!this.btnChronoOui.isSelected() && !this.btnChronoOui.isSelected())
+			{
+				JOptionPane.showMessageDialog(null, "choissisez si le questionnaire est chronometré ou non", "Attention", JOptionPane.WARNING_MESSAGE);
+				return ;
+			}
+			if (this.nomQuestionnaire.getText().equals(""))
+			{
+				JOptionPane.showMessageDialog(null, "rentrez un nom pour le questionnaire", "Attention", JOptionPane.WARNING_MESSAGE);
+				return ;
+			}
+
             this.ctrl.genererQuestionnaire
 			(
                 this.choixRessource.getSelectedItem(),
