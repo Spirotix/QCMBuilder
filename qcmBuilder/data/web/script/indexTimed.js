@@ -51,9 +51,11 @@ document.addEventListener("DOMContentLoaded", function ()
 	point      = parseInt(urlParams.get('points'))      || 0;
 	totalPoint = parseInt(urlParams.get('totalPoints')) || 0;
 
-	const hintValue      = correctAnswers[currentQuestion-1][1][usedHint+1][1];
-	const hintCost = document.querySelector('.hint-cost');
-	hintCost.textContent = hintValue;
+	if (document.querySelector('.eliminate-question')) {
+		const hintValue = correctAnswers[currentQuestion-1][1][usedHint+1][1];
+		const hintCost = document.querySelector('.hint-cost');
+		hintCost.textContent = hintValue;
+	}
 
 	// Afficher les scores sur la page de fin
 	if (document.querySelector(".score-data")) 
