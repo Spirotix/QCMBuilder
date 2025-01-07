@@ -36,8 +36,6 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 		this.ressource  = ressource	;
 		this.notion		= notion 	;
 		JPanel temp,temp2, tempBas;
-		System.out.println("test");
-
 		this.lstPanel = new ArrayList<JPanel> ();
 		this.lstLabel = new ArrayList<JLabel> ();
 		this.btnSup   = new ArrayList<JButton>();
@@ -91,10 +89,8 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 
 			if (e.getSource().equals(this.btnModif.get(i)))
 			{
-				FrameModifierQuestion fr	 = new FrameModifierQuestion(this.ctrl, this.ctrl.getQuestions(this.ressource, this.notion).get(i), notion, ressource);
-				PanelModifierQuestion panel  = new PanelModifierQuestion(this.ctrl, fr, this.ctrl.getQuestions(this.ressource, this.notion).get(i), notion, ressource);
-
-				panel.setValeur("10","7,5","Initiation au developpement","TP1","1" );
+				FrameModifierQuestion fr = new FrameModifierQuestion(this.ctrl, this.ctrl.getQuestions(this.ressource, this.notion).get(i), notion, ressource, this);
+				new PanelModifierQuestion(this.ctrl, fr, this.ctrl.getQuestions(this.ressource, this.notion).get(i), notion, ressource, this);
 				return;
 			}
 		}

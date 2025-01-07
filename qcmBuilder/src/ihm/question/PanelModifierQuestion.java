@@ -8,6 +8,7 @@ import src.ihm.*					;
 
 public class PanelModifierQuestion extends JPanel implements ActionListener
 {
+	private PanelAfficherQuestion paq                                                             ;
 	private Controleur            ctrl                                                            ;
 	private JTextField            textIntitule, nbPoints, tpsReponses, textExplication            ;
 	private ButtonGroup           btnGroupImg                                                     ;
@@ -27,11 +28,11 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 	private String textInitiale       ;
 	private String typeQuestion       ;
 
-	public PanelModifierQuestion(Controleur ctrl, FrameModifierQuestion fr, String textInitiale, String notion, String ressource) 
+	public PanelModifierQuestion(Controleur ctrl, FrameModifierQuestion fr, String textInitiale, String notion, String ressource, PanelAfficherQuestion paq) 
 	{
 		this.ctrl = ctrl;
 		this.fr   = fr  ;
-
+		this.paq  = paq ;
 		FileHandler.supprimerFichiersTemp();
 
 		this.setLayout    (new GridBagLayout());
@@ -304,6 +305,7 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 				this.ctrl.modifierQuestion(typeQuestion, ressource.substring(0, ressource.indexOf("_")), notion, textQuestion, explicationQuestion, tempsQuestion, nbPointQuestion, difficulteQuestion, textInitiale);
 
+				this.paq.Update(ressource, notion);
 				this.fr.dispose();
 			}
 
