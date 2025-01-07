@@ -26,6 +26,7 @@ public class FrameCreerQCMRepUnique extends JFrame implements ActionListener
 		else                                 { this.setTitle("Creation d'un QCM"); }
 		this.setSize    ( 500,500  );
 		this.setLocationRelativeTo(null);
+		this.setResizable(false);
 
 		JMenuBar menubMaBarre = new JMenuBar(		  );
 		JMenu 	 menuAcceuil  = new JMenu   ("Accueil");

@@ -7,21 +7,21 @@ import src.Controleur;
 
 public class PanelNotion extends JPanel implements ActionListener
 {
-	private Controleur 			ctrl	 ;
-	private ArrayList<JLabel> 	lstLabel ;
-	private String				ressource;
-	private ArrayList<JButton> 	lstSup	 ;
-	private ArrayList<JPanel>	lstPanel ;
+	private Controleur         ctrl     ;
+	private ArrayList<JLabel>  lstLabel ;
+	private String             ressource;
+	private ArrayList<JButton> lstSup   ;
+	private ArrayList<JPanel>  lstPanel ;
 
 	
 	public PanelNotion (Controleur ctrl)
 	{
-		this.ctrl		= ctrl	 ;
-		this.ressource	= ""	 ;
+		this.ctrl      = ctrl ;
+		this.ressource = ""   ;
 		
-		this.lstLabel 	= new ArrayList<JLabel> ();
-		this.lstSup 	= new ArrayList<JButton>();
-		this.lstPanel 	= new ArrayList<JPanel> ();
+		this.lstLabel = new ArrayList<JLabel> ();
+		this.lstSup   = new ArrayList<JButton>();
+		this.lstPanel = new ArrayList<JPanel> ();
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -30,24 +30,24 @@ public class PanelNotion extends JPanel implements ActionListener
 
 	public void Update(String ressource)
 	{
-		this.ressource  = ressource				  ;
-		this.lstLabel	= new ArrayList<JLabel> ();
-		this.lstSup 	= new ArrayList<JButton>();
-		this.lstPanel 	= new ArrayList<JPanel> ();
+		this.ressource = ressource               ;
+		this.lstLabel  = new ArrayList<JLabel> ();
+		this.lstSup    = new ArrayList<JButton>();
+		this.lstPanel  = new ArrayList<JPanel> ();
 		this.removeAll();
 
 
-		for (int i=0; i<this.ctrl.getChoixNotion(ressource).size(); i++)
+		for (int i = 0 ; i < this.ctrl.getChoixNotion(ressource).size() ; i++)
 		{
-			this.lstLabel.add (new JLabel(this.ctrl.getChoixNotion(ressource).get(i)));
-			this.lstSup	 .add (new JButton("Supprimer")		);
-			this.lstPanel.add (new JPanel()					);
-			this.lstPanel.get (i).add(this.lstLabel	.get(i)	);
-			this.lstPanel.get (i).add(this.lstSup	.get(i)	);
-			this.lstSup	 .get (i).addActionListener(this	);
+			this.lstLabel.add ( new JLabel(this.ctrl.getChoixNotion(ressource).get(i)) );
+			this.lstSup  .add ( new JButton("Supprimer")                          );
+			this.lstPanel.add ( new JPanel()                                           );
+			this.lstPanel.get (i).add(this.lstLabel.get(i));
+			this.lstPanel.get (i).add(this.lstSup  .get(i));
+			this.lstSup  .get (i).addActionListener( this );
 		}
 			
-		for (int i=0; i<this.lstLabel.size(); i++)
+		for (int i = 0 ; i < this.lstLabel.size() ; i++)
 		{
 			this.lstLabel.get(i).addMouseListener(new MouseAdapter() 
 			{
@@ -72,7 +72,7 @@ public class PanelNotion extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
-		for (int i=0; i<this.lstLabel.size(); i++)
+		for (int i = 0 ; i < this.lstLabel.size() ; i++)
 		if (e.getSource().equals(this.lstSup.get(i)))
 		{
 			if (this.ctrl.getQuestions(this.ressource, this.lstLabel.get(i).getText()).size()>0)

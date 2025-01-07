@@ -46,6 +46,15 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 
 		this.add(panelQuestion, BorderLayout.NORTH);
 
+		JPanel panelReponsesContainer = new JPanel(new BorderLayout());
+		panelReponsesContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+		JPanel panelLabels = new JPanel(new GridLayout(1, 3));
+		panelLabels.add(new JLabel("              Supprimé"));
+		panelLabels.add(new JLabel("         Contenu"));
+		panelLabels.add(new JLabel("  Bonne réponse"));
+		panelReponsesContainer.add(panelLabels, BorderLayout.NORTH);
+
 		panelReponses = new JPanel();
 		panelReponses.setLayout(new BoxLayout(panelReponses, BoxLayout.Y_AXIS));
 		panelReponses.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -53,7 +62,9 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 
 		JScrollPane scrollPaneReponses = new JScrollPane(panelReponses);
 		scrollPaneReponses.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		this.add(scrollPaneReponses, BorderLayout.CENTER);
+		panelReponsesContainer.add(scrollPaneReponses, BorderLayout.CENTER);
+
+		this.add(panelReponsesContainer, BorderLayout.CENTER);
 
 		JPanel panelBoutons = new JPanel();
 		panelBoutons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
