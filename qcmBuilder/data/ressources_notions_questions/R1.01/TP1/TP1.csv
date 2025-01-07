@@ -4,3 +4,4 @@ N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION
 3;2;1.5;QCM;F;90;null
 4;4;2.0;QCM;D;90;explication
 5;3;4.5;Association;F;90;null
+6;2;4.0;Elimination;M;85;null

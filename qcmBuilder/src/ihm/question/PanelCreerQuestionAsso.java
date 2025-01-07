@@ -112,7 +112,6 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	// Gérer les actions des boutons
 	public void actionPerformed(ActionEvent e) 
 	{
-		JOptionPane message = new JOptionPane();
 
 		if (e.getSource() == this.ajouterQ) 
 		{
@@ -125,14 +124,14 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 			//Verification de la validité de la question
 			if (this.question.getText().equals(""))
 			{
-				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
 				return ;
 			}
 				
 			for (PanelReponseAsso p : this.reponsesPossibles)
 				if (p.getContenuGauche().equals("") || p.getContenuDroite().equals(""))
 				{
-					message.showMessageDialog(null, "Remplissez tous les champs", "Attention", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Remplissez tous les champs", "Attention", JOptionPane.WARNING_MESSAGE);
 					return ;
 				}
 			// Enregistrer la question et les réponses
@@ -152,7 +151,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 				new FrameMenu(this.ctrl);
 			}
 			else 
-				message.showMessageDialog(null, "Cette Question existe deja ", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Cette Question existe deja ", "Attention", JOptionPane.WARNING_MESSAGE);
 			
 			
 		}

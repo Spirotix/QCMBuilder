@@ -30,14 +30,14 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		this.add(panelHaut, BorderLayout.NORTH);
 
 		this.panelR = new PanelRessource (ctrl, this);
-		this.panelN = new PanelNotion 	 (ctrl, this);
+		this.panelN = new PanelNotion 	 (ctrl);
 
 		JScrollPane scrollPaneR = new JScrollPane (this.panelR);
-		scrollPaneR.setVerticalScrollBarPolicy	(scrollPaneR.VERTICAL_SCROLLBAR_AS_NEEDED);
-		scrollPaneR.setHorizontalScrollBarPolicy(scrollPaneR.HORIZONTAL_SCROLLBAR_NEVER	 );
+		scrollPaneR.setVerticalScrollBarPolicy	(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPaneR.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER	 );
 
 		JScrollPane scrollPaneN = new JScrollPane (this.panelN);
-		scrollPaneN.setVerticalScrollBarPolicy(scrollPaneN.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPaneN.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		panelMilieu.add (scrollPaneR);
 		panelMilieu.add (scrollPaneN);
@@ -75,12 +75,10 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e) 
 	{
-		JOptionPane message = new JOptionPane();
-
 		if (e.getSource().equals(this.btnAjouterN))
 		{
 			if (this.textNomN.getText().equals(""))
-				message.showMessageDialog(null, "Rentrer tous les champs avant de créer une notion", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Rentrer tous les champs avant de créer une notion", "Attention", JOptionPane.WARNING_MESSAGE);
 			else 
 				this.ctrl.ajouterNotion( this.panelN.getRessource(),this.textNomN.getText());
 		}
@@ -88,7 +86,7 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 		if (e.getSource().equals(this.btnAjouterR))
 		{
 			if (this.textNumR.getText().equals("") || this.textNumR.getText().equals(""))
-				message.showMessageDialog(null, "Rentrer tous les champs avant de créer une ressource", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Rentrer tous les champs avant de créer une ressource", "Attention", JOptionPane.WARNING_MESSAGE);
 			else 
 				this.ctrl.ajouterRessource(this.textNumR.getText(), this.textNomR.getText());
 		}
