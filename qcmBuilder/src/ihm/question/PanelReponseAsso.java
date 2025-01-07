@@ -121,10 +121,11 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 			return ;
 		try 
 		{
-			Image image 		 = ImageIO.read(new File("../data/ressources_notions_questions/temp/fichier_reponse_gauche"+this.indice+"."+this.fileHandlerG.getExtension(this.fileChoisiG.getName())));
+			Image image 		 = ImageIO.read(new File("../data/ressources_notions_questions/temp/fichier_reponse_gauche"+this.indice+".jpg"));
 			Image imageRetaillee = image.getScaledInstance( this.panelImageG.getHeight(), this.panelImageG.getHeight(), Image.SCALE_AREA_AVERAGING);
 
 			this.imageImporterG.setIcon(new ImageIcon(imageRetaillee));
+			
 			System.out.println(this.imageImporterG.getIcon());
 		} 
 		catch (IOException ex) 
@@ -140,10 +141,11 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 			return ;
 		try 
 		{
-			Image image 		 = ImageIO.read(new File("../data/ressources_notions_questions/temp/fichier_reponse_droite"+this.indice+"."+this.fileHandlerD.getExtension(this.fileChoisiD.getName())));
+			Image image 		 = ImageIO.read(new File("../data/ressources_notions_questions/temp/fichier_reponse_droite"+this.indice+".jpg"));
 			Image imageRetaillee = image.getScaledInstance( this.panelImageD.getHeight(), this.panelImageD.getHeight(), Image.SCALE_AREA_AVERAGING);
 
 			this.imageImporterD.setIcon(new ImageIcon(imageRetaillee));
+			
 			System.out.println(this.imageImporterD.getIcon());
 		} 
 		catch (IOException ex) 

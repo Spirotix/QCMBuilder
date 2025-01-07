@@ -386,12 +386,29 @@ public class GenererQuestionnaire
 
 			for (ReponseElimination r : lstReponses)
 				{
-					sRet += String.format("""
+					String tempPath = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_reponse"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg";
+					String tempPath2 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_reponse"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg" ;
+					File fileTemp = new File (tempPath2);
+
+					if (fileTemp.exists())
+					{
+						sRet += String.format("""
+								<div class="answer">
+									<input type="radio" name="answer" id="answer%d" value="answer%d">
+									<label for="answer%d">%s</label><img src="%s" alt="%s" width=50 height=50></p>
+								</div>
+		""", lstReponses.indexOf(r)+1, lstReponses.indexOf(r)+1, lstReponses.indexOf(r)+1, r.getText(), tempPath, r.getText());
+					}
+					else
+					{
+						sRet += String.format("""
 							<div class="answer">
 								<input type="radio" name="answer" id="answer%d" value="answer%d">
 								<label for="answer%d">%s</label>
 							</div>
 		""", lstReponses.indexOf(r)+1, lstReponses.indexOf(r)+1, lstReponses.indexOf(r)+1, r.getText());
+					}
+					
 				}
 
 			sRet += String.format("""
@@ -435,16 +452,12 @@ public class GenererQuestionnaire
 				if (r.estAGauche())
 				{
 					String tempPath = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_reponse_gauche"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg";
-					System.out.println("indice : "+(Math.round((double)(lstQuestions.indexOf(q)+1)/2)));
-					System.out.println("test : "+lstReponses.indexOf(r));
 					String tempPath2 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_reponse_gauche"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg" ;
-					System.out.println("chemin : "+tempPath2);
 					File fileTemp = new File (tempPath2);
-					System.out.println("Bon chemin : "+fileTemp.exists());
 					if (fileTemp.exists())
 					{
 						sRet += String.format("""
-								<p class="association-item" data-id="%d"><img src="%s" alt="%s"></p>
+								<p class="association-item" data-id="%d"><img src="%s" alt="%s" width=80 height=80></p>
 		""", lstReponses.indexOf(r), tempPath, r.getText());
 					}
 					else
@@ -467,13 +480,13 @@ public class GenererQuestionnaire
 				{
 					String tempPath = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_reponse_droite"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg";
 					String tempPath2 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_reponse_droite"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg" ;
-					System.out.println("chemin : "+tempPath2);
+					
 					File fileTemp = new File (tempPath2);
-					System.out.println("Bon chemin : "+fileTemp.exists());
+					
 					if (fileTemp.exists())
 					{
 						sRet += String.format("""
-								<p class="association-item" data-id="%d"><img src="%s" alt="%s"></p>
+								<p class="association-item" data-id="%d"><img src="%s" alt="%s" width=80 height=80></p>
 		""", lstReponses.indexOf(r), tempPath, r.getText());
 					}
 					else
