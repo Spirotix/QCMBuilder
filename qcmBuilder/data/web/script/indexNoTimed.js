@@ -34,9 +34,11 @@ document.addEventListener("DOMContentLoaded", function ()
 	totalPoint        = parseFloat(urlParams.get('totalPoints'      )) || 0;
 	nbQuestionRepondu = parseFloat(urlParams.get('nbQuestionRepondu')) || 0;
 
-	const hintValue      = correctAnswers[currentQuestion-1][1][usedHint+1][1];
-	const hintCost = document.querySelector('.hint-cost');
-	hintCost.textContent = hintValue;
+	if (document.querySelector('.eliminate-question')) {
+		const hintValue = correctAnswers[currentQuestion-1][1][usedHint+1][1];
+		const hintCost = document.querySelector('.hint-cost');
+		hintCost.textContent = hintValue;
+	}
 
 	if(document.querySelector('.question'))
 	{
@@ -54,7 +56,8 @@ document.addEventListener("DOMContentLoaded", function ()
 		});
 
 		const progressBarPercentage = document.querySelector(".progress-percentage");
-		progressBarPercentage.textContent = (currentQuestion / totalQuestions * 100).toFixed(0) + '%';
+		progressBarPercentage.textContent = currentQuestion / totalQuestions * 100 + '%';
+
 
 		// si on est sur la première question on cache le bouton précédent
 		if(currentQuestion === 1)
@@ -62,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function ()
 			const previousButton = document.querySelector('.previous-button');
 			previousButton.style.display = 'none';
 		}
+
 
 		// si la question a déjà été répondu on cache le bouton valider et on affiche le bouton de feedback 
 		if(answeredQuestions[currentQuestion-1])
@@ -771,6 +775,7 @@ function validateAssociationQuestion(questionPoints)
 	deletLineButton.style.display = 'none';
 }
 
+// Afficher un indice
 function showHint()
 {
 	// Vérifier si il reste des indices à utiliser
