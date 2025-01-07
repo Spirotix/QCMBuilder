@@ -54,7 +54,6 @@ public class Elimination implements Question
 		this.nbIndiceUtilise = 0;
 		this.urlImage        = "";
 
-		this.indice = QCM.getNbQuestion();
 	}
 
 	/**
@@ -320,6 +319,11 @@ public class Elimination implements Question
 	public int getIndice()
 	{
 		return this.indice;
+	}
+
+	public void setIndice(int indice)
+	{
+		this.indice=indice;
 	}
 
 }

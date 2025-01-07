@@ -227,10 +227,10 @@ public class Controleur
 		return qcmBuilder.creerQuestion(type, code_nomRessource, nomNotion, text, timer, nbPoint, difficulte, lstReponse, explication);
 	}
 
-	//public boolean modifierQuestion(String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, ArrayList<TypeReponse> lstReponse, int difficulte)
-	//{
-	//	return qcmBuilder.modifierQuestion(code_nomRessource, nomNotion, text, timer, nbPoint, difficulte, lstReponse, explication);
-	//}
+	public boolean modifierQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, int difficulte)
+	{
+		return qcmBuilder.modifierQuestion(type, code_nomRessource, nomNotion, text, explication, timer, nbPoint, difficulte);
+	}
 
 	/**
 	 * Génère un questionnaire.
