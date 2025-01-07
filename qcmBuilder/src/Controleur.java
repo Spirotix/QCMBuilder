@@ -12,7 +12,6 @@ import src.metier.question.*;
 public class Controleur
 {
 	private QCMBuilder qcmBuilder;
-	private FrameMenu  frameMenu;
 
 	/**
 	 * Constructeur de la classe Controleur.
@@ -21,7 +20,7 @@ public class Controleur
 	public Controleur()
 	{
 		this.qcmBuilder = new QCMBuilder();
-		this.frameMenu  = new FrameMenu(this);
+		new FrameMenu(this);
 	}
 
 	/**

@@ -93,7 +93,6 @@ public class PanelCreerElim extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e) 
 	{
-		JOptionPane message 	= new JOptionPane()	;
 		boolean 	aUnBon		= false 			;
 
 		if (e.getSource() == this.ajouterQ) 
@@ -107,7 +106,7 @@ public class PanelCreerElim extends JPanel implements ActionListener
 
 			if (this.question.getText().equals(""))
 			{
-				message.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Remplissez le champ de question", "Attention", JOptionPane.WARNING_MESSAGE);
 				return ;
 			}
 
@@ -115,7 +114,7 @@ public class PanelCreerElim extends JPanel implements ActionListener
 			{
 				if (p.getString().equals(""))
 				{
-					message.showMessageDialog(null, "Remplissez les champ de réponses", "Attention", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Remplissez les champ de réponses", "Attention", JOptionPane.WARNING_MESSAGE);
 					return ;
 				}
 				if (p.getEstBonneReponse())
@@ -124,7 +123,7 @@ public class PanelCreerElim extends JPanel implements ActionListener
 
 			if (!aUnBon)
 			{
-				message.showMessageDialog(null, "Choissisez au moins une bonne réponse", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Choissisez au moins une bonne réponse", "Attention", JOptionPane.WARNING_MESSAGE);
 				return ;
 			}
 
@@ -139,7 +138,7 @@ public class PanelCreerElim extends JPanel implements ActionListener
 				new FrameMenu(this.ctrl);
 			}
 			else 
-				message.showMessageDialog(null, "Cette Question existe deja ", "Attention", JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Cette Question existe deja ", "Attention", JOptionPane.WARNING_MESSAGE);
 			
 		}
 		

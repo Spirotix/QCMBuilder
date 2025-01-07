@@ -111,4 +111,6 @@ public interface Question
 	 * @param urlImage L'URL de l'image associée à la question.
 	 */
 	void setUrlImage(String urlImage);
+
+	int getIndice ();
 }
