@@ -1,12 +1,12 @@
 package src.ihm;
 
-import java.awt.*					;
-import java.awt.event.*				;
+import java.awt.*				;
+import java.awt.event.*			;
 import java.io.File				;
 import java.io.IOException		;
-import javax.imageio.ImageIO					;
+import javax.imageio.ImageIO	;
 import javax.swing.*			;
-import src.ihm.question.*			;
+import src.ihm.question.*		;
 
 public class PanelReponse extends JPanel implements ActionListener
 {
