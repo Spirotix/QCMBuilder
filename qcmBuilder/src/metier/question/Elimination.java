@@ -25,6 +25,8 @@ public class Elimination implements Question
 	private List<ReponseElimination> lstReponses;
 	private String                   urlImage;
 
+	private int indice;
+
 	/**
 	 * Constructeur de la classe Elimination.
 	 * 
@@ -51,6 +53,8 @@ public class Elimination implements Question
 		this.explication     = explication;
 		this.nbIndiceUtilise = 0;
 		this.urlImage        = "";
+
+		this.indice = QCM.getNbQuestion();
 	}
 
 	/**
@@ -312,4 +316,10 @@ public class Elimination implements Question
 	{
 		return this.urlImage;
 	}
+
+	public int getIndice()
+	{
+		return this.indice;
+	}
+
 }

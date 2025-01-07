@@ -21,6 +21,8 @@ public class Association implements Question
 	private List<ReponseAssociation> lstReponseAsso;
 	private String                   urlImage;
 
+	private int indice;
+
 	/**
 	 * Constructeur de la classe Association.
 	 *
@@ -43,6 +45,8 @@ public class Association implements Question
 		this.lstReponseAsso = new ArrayList<>(lstReponseAsso);
 		this.explication    = explication;
 		this.urlImage    = "";
+
+		this.indice = QCM.getNbQuestion();
 	}
 
 	/**
@@ -256,4 +260,8 @@ public class Association implements Question
 		Collections.shuffle(lstReponseAsso);
 	}
 
+	public int getIndice()
+	{
+		return this.indice;
+	}
 }
