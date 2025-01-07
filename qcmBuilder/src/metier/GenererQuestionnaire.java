@@ -268,7 +268,30 @@ public class GenererQuestionnaire
 					</figure>
 
 						""",css, type, lstQuestions.indexOf(q)+1, q.getNbPoint(), type, id, lstQuestions.indexOf(q)+1, q.getNotions().getNom(), difficulte, q.getTimer(), q.getNbPoint(), q.getTimer(), q.getUrlImage(), q.getUrlImage());
+			
+		String tempPath  = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_question.jpg";
+		String tempPath3 = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_question.pdf";
 
+		String tempPath2 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_question.jpg" ;
+		String tempPath4 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_question.pdf" ;			
+		
+		File   fileTemp  = new File (tempPath2);
+		File   fileTemp2 = new File (tempPath4);
+
+		if (fileTemp.exists() )
+		{
+			sRet  += String.format("""
+						<figure>
+							<img src="%s" alt="%s" class="question-image">
+						</figure>
+			""",tempPath, q.getText());
+		}
+		if (fileTemp2.exists() )
+		{
+			sRet  += String.format("""
+						<<button type="button" class="complementary-file-button" onclick="window.open('%s', '_blank')">Voir le fichier complémentaire</button>
+			""",tempPath3);
+		}
 		return sRet;
 	}
 
