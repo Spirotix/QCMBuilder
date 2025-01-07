@@ -46,7 +46,6 @@ public class Association implements Question
 		this.explication    = explication;
 		this.urlImage    = "";
 
-		this.indice = QCM.getNbQuestion();
 	}
 
 	/**
@@ -263,5 +262,10 @@ public class Association implements Question
 	public int getIndice()
 	{
 		return this.indice;
+	}
+
+	public void setIndice(int indice)
+	{
+		this.indice=indice;
 	}
 }

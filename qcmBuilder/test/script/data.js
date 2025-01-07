@@ -1,6 +1,6 @@
 // ...existing code...
 // Nombre total de questions dans le questionnaire
-const totalQuestions = 1;
+const totalQuestions = 4;
 
 // Index de la question actuelle
 let currentQuestion = 0;
@@ -48,5 +48,17 @@ const correctAnswers = [
 
 
 // Question 1 de type QCM
-	["answer2"]
+	["answer3"],
+
+	// Question 2 de type QCM
+	["answer2"],
+
+	// Question 3 de type QCM
+	["answer2"],
+
+	// Question 4 de type Elimination
+	[["answer1"],[
+		["answer3",5.0],
+		["answer2",1.0]]
+	]
 ];
