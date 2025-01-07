@@ -24,7 +24,6 @@ public class QCM implements Question
 	private int 			 nbReponseVrai;
 	private String           urlImage;
 
-	private static int nbQuestions;
 	private int indice;
 
 	/**
@@ -49,8 +48,6 @@ public class QCM implements Question
 		this.explication = explication;
 		this.estQCU      = this.estUnique();
 		this.urlImage    = "";
-
-		this.indice = ++QCM.nbQuestions;
 
 		this.nbReponseVrai = 0;
 		for (ReponseQCM reponse : lstReponses)
@@ -298,12 +295,13 @@ public class QCM implements Question
 		return this.urlImage;
 	}
 
-	public static int getNbQuestion()
-	{
-		return ++QCM.nbQuestions;
-	}
 	public int getIndice()
 	{
 		return this.indice;
+	}
+
+	public void setIndice(int indice)
+	{
+		this.indice=indice;
 	}
 }

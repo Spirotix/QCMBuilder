@@ -143,6 +143,9 @@ public class GenererQuestionnaire
 			
 			for (Question q : lstQuestions)
 			{
+				q.setIndice(q.getNotions().getQuestions().indexOf(q)+1);
+				System.out.println(q.getText()+" : "+q.getIndice());
+
 				Files.createDirectories(Paths.get("../"+tempNomQuestionnaire+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)));
 
 				Path srcDir  = Paths.get( "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement" );
