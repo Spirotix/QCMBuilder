@@ -9,7 +9,7 @@ public class ReponseAssociation implements Reponse
 	private ReponseAssociation reponseAssocie;
 	private boolean aGauche;
 	private String textReponse;
-	private String urlImage;
+	private String urlImage="";
 
 	/**
 	 * Constructeur de la classe ReponseAssociation.
@@ -24,7 +24,6 @@ public class ReponseAssociation implements Reponse
 
 		this.reponseAssocie = reponseAssocie;
 		this.aGauche = aGauche;
-		this.urlImage = "";
 	}
 
 	public ReponseAssociation(String textReponse, ReponseAssociation reponseAssocie, boolean aGauche, String urlImage)
@@ -33,7 +32,8 @@ public class ReponseAssociation implements Reponse
 
 		this.reponseAssocie = reponseAssocie;
 		this.aGauche = aGauche;
-		this.urlImage = urlImage;
+		if (urlImage != null)
+			this.urlImage = urlImage;
 	}
 
 	/**

@@ -34,6 +34,10 @@ document.addEventListener("DOMContentLoaded", function ()
 	totalPoint        = parseFloat(urlParams.get('totalPoints'      )) || 0;
 	nbQuestionRepondu = parseFloat(urlParams.get('nbQuestionRepondu')) || 0;
 
+	const hintValue      = correctAnswers[currentQuestion-1][1][usedHint+1][1];
+	const hintCost = document.querySelector('.hint-cost');
+	hintCost.textContent = hintValue;
+
 	if(document.querySelector('.question'))
 	{
 		// on fait marché la barre de progression
@@ -50,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function ()
 		});
 
 		const progressBarPercentage = document.querySelector(".progress-percentage");
-		progressBarPercentage.textContent = currentQuestion / totalQuestions * 100 + '%';
+		progressBarPercentage.textContent = (currentQuestion / totalQuestions * 100).toFixed(0) + '%';
 
 		// si on est sur la première question on cache le bouton précédent
 		if(currentQuestion === 1)
@@ -767,7 +771,6 @@ function validateAssociationQuestion(questionPoints)
 	deletLineButton.style.display = 'none';
 }
 
-// Afficher un indice
 function showHint()
 {
 	// Vérifier si il reste des indices à utiliser
@@ -792,16 +795,22 @@ function showHint()
 		hintCurrentData.textContent = usedHint;
 		hintTotalData.textContent = correctAnswers[currentQuestion-1][1].length;
 
+		const hintCost = document.querySelector('.hint-cost');
+		hintCost.textContent = hintValue;
+		
+
 		// Affiche le nombre de point perdus par indices
 		if(usedHint < correctAnswers[currentQuestion-1][1].length)
 		{
-			const hintPointElement = document.querySelector('.hint-point');
+			const hintPointElement = document.querySelector('.lost-points-data');
 			hintPointElement.textContent = '-' + correctAnswers[currentQuestion-1][1][usedHint][1];
 		}
 		else
 		{
-			const hintButton = document.querySelector('.hint-button');
-			hintButton.textContent = 'Total : ' + hintPoint;
+			const hintButton = document.querySelector('.lost-points-data');
+			hintButton.textContent = hintPoint;
+			const hintPointElement = document.querySelector('.cout');
+			hintPointElement.style.display = 'none';
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package src.metier;
 
 import java.io.*;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
@@ -144,7 +145,7 @@ public class GenererQuestionnaire
 			{
 				Files.createDirectories(Paths.get("../"+tempNomQuestionnaire+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)));
 
-				Path srcDir  = Paths.get( "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+(lstQuestions.indexOf(q)+1)+"/complement" );
+				Path srcDir  = Paths.get( "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement" );
 				Path destDir = Paths.get( "../"+tempNomQuestionnaire+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1) );
 
 				Files.write(Paths.get("../"+tempNomQuestionnaire+"/pages/question"+(lstQuestions.indexOf(q)+1)+".html"), getQuestionHtml(q).getBytes());
@@ -430,11 +431,18 @@ public class GenererQuestionnaire
 				System.out.println(r.getUrlImage());
 				if (r.estAGauche())
 				{
-					if (!r.getUrlImage().equals(""))
+					String tempPath = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_reponse_gauche"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg";
+					System.out.println("indice : "+(Math.round((double)(lstQuestions.indexOf(q)+1)/2)));
+					System.out.println("test : "+lstReponses.indexOf(r));
+					String tempPath2 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_reponse_gauche"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg" ;
+					System.out.println("chemin : "+tempPath2);
+					File fileTemp = new File (tempPath2);
+					System.out.println("Bon chemin : "+fileTemp.exists());
+					if (fileTemp.exists())
 					{
 						sRet += String.format("""
 								<p class="association-item" data-id="%d"><img src="%s" alt="%s"></p>
-		""", lstReponses.indexOf(r), r.getUrlImage(), r.getText());
+		""", lstReponses.indexOf(r), tempPath, r.getText());
 					}
 					else
 					{
@@ -454,9 +462,23 @@ public class GenererQuestionnaire
 			{
 				if (!r.estAGauche())
 				{
-					sRet += String.format("""
+					String tempPath = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_reponse_droite"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg";
+					String tempPath2 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_reponse_droite"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg" ;
+					System.out.println("chemin : "+tempPath2);
+					File fileTemp = new File (tempPath2);
+					System.out.println("Bon chemin : "+fileTemp.exists());
+					if (fileTemp.exists())
+					{
+						sRet += String.format("""
+								<p class="association-item" data-id="%d"><img src="%s" alt="%s"></p>
+		""", lstReponses.indexOf(r), tempPath, r.getText());
+					}
+					else
+					{
+						sRet += String.format("""
 								<p class="association-item" data-id="%d">%s</p>
 		""", lstReponses.indexOf(r), r.getText());
+					}
 				}
 			}
 
