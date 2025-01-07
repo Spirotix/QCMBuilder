@@ -146,10 +146,11 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 			return ;
 		try 
 		{
-			Image image 		 = ImageIO.read(new File("../data/ressources_notions_questions/temp/fichier_reponse"+this.indice+"."+this.fileHandler.getExtension(this.fileChoisi.getName())));
+			Image image 		 = ImageIO.read(new File("../data/ressources_notions_questions/temp/fichier_reponse"+this.indice+".jpg"));
 			Image imageRetaillee = image.getScaledInstance( this.panelImage.getHeight(), this.panelImage.getHeight(), Image.SCALE_AREA_AVERAGING);
 
 			this.imageImporter.setIcon(new ImageIcon(imageRetaillee));
+
 			System.out.println(this.imageImporter.getIcon());
 		} 
 		catch (IOException ex) 
