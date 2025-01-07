@@ -43,24 +43,28 @@ public class FrameMenu extends JFrame implements ActionListener
 		this.creerQuestion.setOpaque           (false                      );
 		this.creerQuestion.setContentAreaFilled(false                      );
 		this.creerQuestion.setBorder           (new LineBorder(Color.BLACK));
+		this.creerQuestion.setBackground(Color.WHITE);
 		this.creerQuestion.setFocusPainted     (false                      );
 		this.creerQuestion.setForeground       (Color.BLACK                );
 
 		this.genererQuestionnaire.setOpaque           (false                      );
 		this.genererQuestionnaire.setContentAreaFilled(false                      );
 		this.genererQuestionnaire.setBorder           (new LineBorder(Color.BLACK));
+		this.genererQuestionnaire.setBackground(Color.WHITE);
 		this.genererQuestionnaire.setFocusPainted     (false                      );
 		this.genererQuestionnaire.setForeground       (Color.BLACK                );
 
 		this.creerResNot.setOpaque           (false                      );
 		this.creerResNot.setContentAreaFilled(false                      );
 		this.creerResNot.setBorder           (new LineBorder(Color.BLACK));
+		this.creerResNot.setBackground(Color.WHITE);
 		this.creerResNot.setFocusPainted     (false                      );
 		this.creerResNot.setForeground       (Color.BLACK                );
 
 		this.modifierUneQuestion.setOpaque           (false                      );
 		this.modifierUneQuestion.setContentAreaFilled(false                      );
 		this.modifierUneQuestion.setBorder           (new LineBorder(Color.BLACK));
+		this.modifierUneQuestion.setBackground(Color.WHITE);
 		this.modifierUneQuestion.setFocusPainted     (false                      );
 		this.modifierUneQuestion.setForeground       (Color.BLACK                );
 

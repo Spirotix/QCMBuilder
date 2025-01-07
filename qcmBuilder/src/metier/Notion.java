@@ -8,12 +8,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import src.metier.question.*;
 import src.metier.reponse.*;
-import java.nio.file.*;
 
 /**
  * Classe représentant une notion avec un nom, une ressource et une liste de
@@ -148,7 +148,7 @@ public class Notion
 						String textReponseA = lineTextReponse.substring(0, lineTextReponse.indexOf("::"));
 
 						ReponseAssociation reponseB;
-						String textReponseB = lineTextReponse.substring(lineTextReponse.indexOf("::") + 2);
+						String textReponseB = lineTextReponse.substring(lineTextReponse.indexOf("::"));
 
 						reponseA = new ReponseAssociation(textReponseA, null, true);
 						lstReponse.add(reponseA);

@@ -7,30 +7,30 @@ import src.Controleur;
 
 public class PanelListerQuestion extends JPanel implements  ItemListener 
 {
-	private Controleur 			  ctrl						  ;
-	private Choice				  choixRessource, choixNotion ;
-	private PanelAfficherQuestion paq						  ;
-	private JPanel 			 	  panelMilieu				  ;
+	private Controleur            ctrl                        ;
+	private Choice                choixRessource, choixNotion ;
+	private PanelAfficherQuestion paq                         ;
+	private JPanel                panelMilieu                 ;
 
 	public PanelListerQuestion (Controleur ctrl)
 	{
-		this.ctrl=ctrl;
+		this.ctrl = ctrl;
 
 		this.setLayout (new BorderLayout());
 
-		this.choixRessource =	new Choice();
-		this.choixNotion	=	new Choice();
+		this.choixRessource = new Choice();
+		this.choixNotion    = new Choice();
 
-		this.choixRessource.add			("");
+		this.choixRessource.add ("");
 
 		for (String s : this.ctrl.getChoixRessources())
 			this.choixRessource.add(s);
 		
-		this.choixNotion.add			("								"  	);
-		this.choixNotion.setEnabled		(false	);
+		this.choixNotion.add       ("");
+		this.choixNotion.setEnabled(false);
 
-		this.choixRessource	.addItemListener	(this);
-		this.choixNotion	.addItemListener	(this);
+		this.choixRessource.addItemListener(this);
+		this.choixNotion   .addItemListener(this);
 
 		this.add(new JLabel("Liste des Question"), BorderLayout.NORTH);
 
@@ -44,12 +44,12 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 		this.paq.add(new JPanel());
 
 		panelGauche.add(new JLabel("Choix de la ressource"));
-		temp.add (this.choixRessource);
+		temp       .add(this.choixRessource);
 		panelGauche.add(temp);
 
 		panelGauche.add(new JLabel("Choix de la notion"));
-		temp2.add (this.choixNotion);
-		panelGauche.add (temp2);
+		temp2      .add(this.choixNotion);
+		panelGauche.add(temp2);
 
 		JScrollPane scrollPane=new JScrollPane (this.paq);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -76,9 +76,9 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 	{
 		if (e.getSource().equals(this.choixRessource) && !this.choixRessource.getSelectedItem().equals(" ")) 
 		{
-			this.choixNotion.setEnabled	(true);
-			this.choixNotion.removeAll	(	 );
-			this.choixNotion.add		(" " );
+			this.choixNotion.setEnabled(true);
+			this.choixNotion.removeAll ();
+			this.choixNotion.add       (" ");
 
 			for (String s : this.ctrl.getChoixNotion(this.choixRessource.getSelectedItem()))
 				this.choixNotion.add(s);

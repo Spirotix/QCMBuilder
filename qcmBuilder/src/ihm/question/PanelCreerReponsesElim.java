@@ -1,12 +1,12 @@
 package src.ihm.question;
 
-import javax.imageio.ImageIO		;
-import java.io.File					;
-import java.io.IOException			;
-import src.ihm.*					;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.*		;
+import java.awt.event.*					;
+import java.io.File			;
+import java.io.IOException					;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import src.ihm.*;
 
 public class PanelCreerReponsesElim extends JPanel implements ActionListener
 {
@@ -31,8 +31,18 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 
 		this.setLayout(new GridLayout(1,4));
 
+
+		ImageIcon icon = null;
+		try {
+			Image image = ImageIO.read(new File("../img/poubelle.PNG"));
+			Image scaledImage = image.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+			icon = new ImageIcon(scaledImage);
+		} catch (IOException ex) {
+			System.out.println("Erreur lors du chargement de l'image : " + ex.getMessage());
+		}
+
 		//Initialisation
-		this.corbeille 	= new JButton(new ImageIcon("../img/poubelle.PNG")	);
+		this.corbeille 	= new JButton(icon											);
 		this.importer	= new JButton(new ImageIcon("../img/inserer.PNG")	);
 		this.contenu 	= new TextFieldPerso ("contenu"						);
 		this.ordre 		= new TextFieldPerso ("ordre d'élimination"			);

@@ -51,6 +51,10 @@ document.addEventListener("DOMContentLoaded", function ()
 	point      = parseInt(urlParams.get('points'))      || 0;
 	totalPoint = parseInt(urlParams.get('totalPoints')) || 0;
 
+	const hintValue      = correctAnswers[currentQuestion-1][1][usedHint+1][1];
+	const hintCost = document.querySelector('.hint-cost');
+	hintCost.textContent = hintValue;
+
 	// Afficher les scores sur la page de fin
 	if (document.querySelector(".score-data")) 
 	{
@@ -618,40 +622,46 @@ function validateAssociationQuestion(questionPoints)
 }
 
 // Afficher un indice
-function showHint() 
+function showHint()
 {
-	// Vérifier si l'indice a déjà été utilisé
-	if(usedHint < correctAnswers[currentQuestion-1][1].length) 
+	// Vérifier si il reste des indices à utiliser
+	if(usedHint < correctAnswers[currentQuestion-1][1].length)
 	{
-		// Récupérer l'indice et sa valeur
 		const hint           = correctAnswers[currentQuestion-1][1][usedHint][0];
 		const hintValue      = correctAnswers[currentQuestion-1][1][usedHint][1];
 		const hintElement    = document.querySelector(`#${hint}`);
+
+		// Désactiver l'indice mis en place par l'enseignant
 		hintElement.disabled = true;
 		hintElement.nextElementSibling.style.textDecoration = 'line-through';
 		usedHint++;
 
-		// Ajouter les points de l'indice aux points accumulés
+		// Prendre en compte les indices utilisés
 		hintPoint -= hintValue;
 
-		// Mise en forme de l'indice
 		const hintCurrentData = document.querySelector('.hint-current-data');
-		const hintTotalData   = document.querySelector('.hint-total-data');
+		const hintTotalData   = document.querySelector('.hint-total-data'  );
 
-		// Afficher le nombre d'indices utilisés et le nombre total d'indices
+		// Mettre à jour les indices utilisés
 		hintCurrentData.textContent = usedHint;
-		hintTotalData.textContent   = correctAnswers[currentQuestion-1][1].length;
+		hintTotalData.textContent = correctAnswers[currentQuestion-1][1].length;
+
+		const hintCost = document.querySelector('.hint-cost');
+		hintCost.textContent = hintValue;
+		
 
 		// Affiche le nombre de point perdus par indices
 		if(usedHint < correctAnswers[currentQuestion-1][1].length)
 		{
-			const hintPointElement = document.querySelector('.hint-point');
+			const hintPointElement = document.querySelector('.lost-points-data');
 			hintPointElement.textContent = '-' + correctAnswers[currentQuestion-1][1][usedHint][1];
 		}
 		else
 		{
-			const hintButton = document.querySelector('.hint-button');
-			hintButton.textContent = 'Total : ' + hintPoint;
+			const hintButton = document.querySelector('.lost-points-data');
+			hintButton.textContent = hintPoint;
+			const hintPointElement = document.querySelector('.cout');
+			hintPointElement.style.display = 'none';
 		}
 	}
 }

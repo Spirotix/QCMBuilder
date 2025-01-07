@@ -87,10 +87,12 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 				return;
 			}
 
+
+
 			if (e.getSource().equals(this.btnModif.get(i)))
 			{
-				FrameModifierQuestion fr	 = new FrameModifierQuestion(this.ctrl		);
-				PanelModifierQuestion panel  = new PanelModifierQuestion(this.ctrl, fr	); 
+				FrameModifierQuestion fr	 = new FrameModifierQuestion(this.ctrl, this.ctrl.getQuestions(this.ressource, this.notion).get(i), notion, ressource);
+				PanelModifierQuestion panel  = new PanelModifierQuestion(this.ctrl, fr, this.ctrl.getQuestions(this.ressource, this.notion).get(i), notion, ressource);
 
 				panel.setValeur("10","7,5","Initiation au developpement","TP1","1" );
 				return;

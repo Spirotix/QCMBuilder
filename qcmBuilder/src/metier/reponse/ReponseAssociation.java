@@ -27,6 +27,15 @@ public class ReponseAssociation implements Reponse
 		this.urlImage = "";
 	}
 
+	public ReponseAssociation(String textReponse, ReponseAssociation reponseAssocie, boolean aGauche, String urlImage)
+	{
+		this.textReponse = textReponse;
+
+		this.reponseAssocie = reponseAssocie;
+		this.aGauche = aGauche;
+		this.urlImage = urlImage;
+	}
+
 	/**
 	 * Retourne la réponse associée.
 	 *
