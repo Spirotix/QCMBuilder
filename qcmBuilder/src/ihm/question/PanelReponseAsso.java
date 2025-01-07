@@ -21,9 +21,10 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 
 	private String 					cheminG, cheminD							;
 
-	public PanelReponseAsso (PanelCreerQuestionAsso panelQc, int indice)
+	public PanelReponseAsso (PanelCreerQuestionAsso panelQ, int indice)
 	{
 		this.indice = indice ;
+		this.panelQ = panelQ;
 
 		this.imageImporterG = new JLabel	  ();
 		this.imageImporterD = new JLabel	  ();

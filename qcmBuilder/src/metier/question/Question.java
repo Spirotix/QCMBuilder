@@ -112,7 +112,7 @@ public interface Question
 	 */
 	void setUrlImage(String urlImage);
 
-	void setIndice(int indice);
+	void setIndice( int indice);
 
 	int getIndice ();
 }
