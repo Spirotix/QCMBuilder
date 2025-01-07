@@ -129,6 +129,8 @@ body {
 
 .hint-count, .lost-points, .cout {
 	font-size: 1.2em;
+	margin-right: 10px;
+
 }
 
 .nav {

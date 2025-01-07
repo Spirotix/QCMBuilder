@@ -148,7 +148,7 @@ public class Notion
 						String textReponseA = lineTextReponse.substring(0, lineTextReponse.indexOf("::"));
 
 						ReponseAssociation reponseB;
-						String textReponseB = lineTextReponse.substring(lineTextReponse.indexOf("::"));
+						String textReponseB = lineTextReponse.substring(lineTextReponse.indexOf("::")+1);
 
 						reponseA = new ReponseAssociation(textReponseA, null, true);
 						lstReponse.add(reponseA);
