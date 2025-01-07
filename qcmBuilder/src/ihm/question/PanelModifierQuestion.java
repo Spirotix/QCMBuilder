@@ -9,19 +9,19 @@ import src.ihm.*					;
 
 public class PanelModifierQuestion extends JPanel implements ActionListener
 {
-	private Controleur            ctrl                                                                      ;
-	private JTextField            textQuestion, nbPoints, tpsReponses                                       ;
-	private ButtonGroup           btnGroup, btnGroupImg                                                     ;
-	private JButton               btnModifier                                                               ;
-	private JRadioButton          btnTF, btnF, btnM, btnD	                                                ;
-	private JLabel                msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrTextNom ;
-	private FrameModifierQuestion fr                                                                        ;
+	private Controleur            ctrl                                                           ;
+	private JTextField            textQuestion, nbPoints, tpsReponses                            ;
+	private ButtonGroup           btnGroup, btnGroupImg                                          ;
+	private JButton               btnModifier                                                    ;
+	private JRadioButton          btnTF, btnF, btnM, btnD	                                     ;
+	private JLabel                msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrTextNom;
+	private FrameModifierQuestion fr                                                             ;
 
 	// Ressources finale
-	private int    tempsQuestion       ;
-	private double nbPointQuestion     ;
-	private int    difficulteQuestion  ;
-	private String explicationQuestion ;
+	private int    tempsQuestion      ;
+	private double nbPointQuestion    ;
+	private int    difficulteQuestion ;
+	private String explicationQuestion;
 
 	public PanelModifierQuestion(Controleur ctrl, FrameModifierQuestion fr, String nomQuestion, String notion, String ressource) 
 	{
@@ -30,12 +30,12 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 		FileHandler.supprimerFichiersTemp();
 
-		this.setLayout		(new GridBagLayout());
-		this.setBackground	(Color.LIGHT_GRAY	);
+		this.setLayout    (new GridBagLayout());
+		this.setBackground(Color.LIGHT_GRAY);
 
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.insets 	= new Insets(5, 5, 5, 5) ;
-		gbc.fill	= GridBagConstraints.HORIZONTAL ;
+		gbc.insets = new Insets(5, 5, 5, 5) ;
+		gbc.fill   = GridBagConstraints.HORIZONTAL ;
 
 		// Initialisation
 		this.textQuestion = new TextFieldPerso("ex : Quelle est la couleur du cheval blanc d'Henri IV ?");
@@ -46,16 +46,16 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 		System.out.println(notion + " || " + ressource);
 		this.nbPoints.setText(this.ctrl.getNbPointQuestion(ressource, notion, nomQuestion) + "");
-		int temps = this.ctrl.getTempsQuestion(ressource, notion, nomQuestion);
-		int minute = temps/60;
-		int seconde = temps%60;
+		int temps   = this.ctrl.getTempsQuestion(ressource, notion, nomQuestion);
+		int minute  = temps / 60;
+		int seconde = temps % 60;
 		this.tpsReponses.setText(minute + ":" + seconde);
 
-		this.btnGroupImg = new ButtonGroup (                                        );
-		this.btnTF		 = new JRadioButton(new ImageIcon("../img/TF2.PNG"));
-		this.btnF		 = new JRadioButton(new ImageIcon("../img/F2.PNG" ));
-		this.btnM		 = new JRadioButton(new ImageIcon("../img/M2.PNG" ));
-		this.btnD 		 = new JRadioButton(new ImageIcon("../img/D2.PNG" ));
+		this.btnGroupImg = new ButtonGroup ();
+		this.btnTF       = new JRadioButton(new ImageIcon("../img/TF2.PNG"));
+		this.btnF        = new JRadioButton(new ImageIcon("../img/F2.PNG" ));
+		this.btnM        = new JRadioButton(new ImageIcon("../img/M2.PNG" ));
+		this.btnD        = new JRadioButton(new ImageIcon("../img/D2.PNG" ));
 		this.btnTF.setOpaque(false);
 		this.btnF .setOpaque(false);
 		this.btnM .setOpaque(false);
@@ -76,41 +76,41 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 		this.btnModifier = new JButton("Modifier");
 
-		this.btnModifier.setOpaque				(true						);
-		this.btnModifier.setBackground			(new Color(0, 127, 255)	); // Steel blue background
-		this.btnModifier.setForeground			(Color.WHITE				); // White text
-		this.btnModifier.setFont				(new Font("Arial", Font.BOLD, 14));
-		this.btnModifier.setBorder				(null);
-		this.btnModifier.setPreferredSize		(new Dimension(100, 30)		);
-		this.btnModifier.setFocusPainted		(false						);
+		this.btnModifier.setOpaque       (true);
+		this.btnModifier.setBackground   (new Color(0, 127, 255)); // Steel blue background
+		this.btnModifier.setForeground   (Color.WHITE); // White text
+		this.btnModifier.setFont         (new Font("Arial", Font.BOLD, 14));
+		this.btnModifier.setBorder       (null);
+		this.btnModifier.setPreferredSize(new Dimension(100, 30));
+		this.btnModifier.setFocusPainted (false);
 
 		this.ajouterPassageSouris(btnModifier);
 
 		// ActionListener / itemListener
-		this.btnTF			.addActionListener	(this);
-		this.btnF			.addActionListener	(this);
-		this.btnM			.addActionListener	(this);
-		this.btnD			.addActionListener	(this);
-		this.btnModifier    .addActionListener	(this);
+		this.btnTF      .addActionListener(this);
+		this.btnF       .addActionListener(this);
+		this.btnM       .addActionListener(this);
+		this.btnD       .addActionListener(this);
+		this.btnModifier.addActionListener(this);
 
 		// Layout
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		this.add(new JLabel("text question")	, gbc);
+		this.add(new JLabel("text question"), gbc);
 		gbc.gridx = 1;
-		this.add(this.textQuestion                , gbc);
+		this.add(this.textQuestion, gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 1;
-		this.add(new JLabel("Nombre de points")	, gbc);
+		this.add(new JLabel("Nombre de points"), gbc);
 		gbc.gridx = 1;
-		this.add(this.nbPoints                    , gbc);
+		this.add(this.nbPoints, gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 2;
-		this.add(new JLabel("Temps de réponse (m:s)")	, gbc);
+		this.add(new JLabel("Temps de réponse (m:s)"), gbc);
 		gbc.gridx = 1;
-		this.add(this.tpsReponses                  , gbc);
+		this.add(this.tpsReponses, gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 3;
@@ -130,23 +130,23 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		gbc.gridx = 0;
 		gbc.gridy = 6;
 		gbc.gridwidth = 1;
-		this.add(new JLabel("Niveau")			, gbc);
+		this.add(new JLabel("Niveau"), gbc);
 		gbc.gridx = 1;
-		this.add(createDifficultyPanel()		, gbc);
+		this.add(createDifficultyPanel(), gbc);
 
 
 		gbc.gridx = 0;
 		gbc.gridy = 10;
 		gbc.gridwidth = 2;
-		this.add(this.btnModifier		, gbc);
+		this.add(this.btnModifier, gbc);
 
 		this.setVisible(true);
 	}
 
 	private JPanel createErrorPanel(JLabel... labels) 
 	{
-		JPanel panel = new JPanel	(new FlowLayout(FlowLayout.LEFT));
-		panel.setBackground			(Color.LIGHT_GRAY				);
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel.setBackground      (Color.LIGHT_GRAY);
 
 		for (JLabel label : labels) 
 			panel.add(label);
@@ -156,8 +156,8 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 	private JPanel createDifficultyPanel() 
 	{
-		JPanel panel = new JPanel	(new FlowLayout(FlowLayout.LEFT));
-		panel.setBackground			(Color.LIGHT_GRAY				);
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panel.setBackground      (Color.LIGHT_GRAY);
 
 		panel.add (this.btnTF);
 		panel.add (this.btnF );
@@ -176,8 +176,8 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		{
 			if (this.textQuestion.getText().equals(""))
 			{
-				this.msgErrTextNom.setForeground	(Color.RED									);
-				this.msgErrTextNom.setText		("Vous devez rentrer un texte pour la question");
+				this.msgErrTextNom.setForeground(Color.RED);
+				this.msgErrTextNom.setText      ("Vous devez rentrer un texte pour la question");
 				peutModifier = false;
 			} 
 			else 
@@ -185,8 +185,8 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 			if (this.nbPoints.getText().equals("")) 
 			{
-				this.msgErrNbPts.setForeground	(Color.RED									);
-				this.msgErrNbPts.setText		("Vous devez rentrer une nombre de points"	);
+				this.msgErrNbPts.setForeground(Color.RED);
+				this.msgErrNbPts.setText      ("Vous devez rentrer une nombre de points"	);
 				peutModifier = false;
 			} 
 			else 
@@ -198,15 +198,15 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 				} 
 				catch (Exception ex) 
 				{
-					this.msgErrNbPts.setForeground	(Color.RED												);
-					this.msgErrNbPts.setText		("Vous devez rentrer un nombre à virgule pour le nombre de points");
+					this.msgErrNbPts.setForeground(Color.RED);
+					this.msgErrNbPts.setText      ("Vous devez rentrer un nombre à virgule pour le nombre de points");
 					peutModifier = false;
 				}
 			}
 			if (this.tpsReponses.getText().equals("")) 
 			{
-				this.msgErrTpsRep.setForeground	(Color.RED								 );
-				this.msgErrTpsRep.setText		("Vous devez rentrer un temps de réponse");
+				this.msgErrTpsRep.setForeground(Color.RED);
+				this.msgErrTpsRep.setText      ("Vous devez rentrer un temps de réponse");
 				peutModifier = false;
 			} 
 			else 
@@ -218,21 +218,21 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 					minute  = Integer.parseInt(this.tpsReponses.getText().substring (0,this.tpsReponses.getText().indexOf(':')));
 					seconde = Integer.parseInt(this.tpsReponses.getText().substring (  this.tpsReponses.getText().indexOf(':')+1));
 
-					this.tempsQuestion = minute*60 + seconde;
+					this.tempsQuestion = minute * 60 + seconde;
 					this.msgErrTpsRep.setText("");
 				} 
 				catch (Exception ex) 
 				{
-					this.msgErrTpsRep.setForeground	(Color.RED												  );
-					this.msgErrTpsRep.setText		("Vous devez respecter le format demandé");
+					this.msgErrTpsRep.setForeground(Color.RED);
+					this.msgErrTpsRep.setText      ("Vous devez respecter le format demandé");
 					peutModifier = false;
 				}
 			}
 
 			if (!(this.btnTF.isSelected() || this.btnF.isSelected() || this.btnM.isSelected() || this.btnD.isSelected())) 
 			{
-				this.msgErrNiv.setForeground(Color.RED									 );
-				this.msgErrNiv.setText		("Vous devez choisir un niveau de difficulté");
+				this.msgErrNiv.setForeground(Color.RED);
+				this.msgErrNiv.setText      ("Vous devez choisir un niveau de difficulté");
 				peutModifier = false;
 			} 
 			else 

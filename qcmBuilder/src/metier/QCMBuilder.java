@@ -256,7 +256,7 @@ public class QCMBuilder
 	 * Recherche une ressource par son code ou son nom.
 	 * 
 	 * @param code_nom
-	 *            Le code ou le nom de la ressource à rechercher.
+	 *            Le code puis "_" et le nom de la ressource à rechercher.
 	 * @return La ressource trouvée, ou null si elle n'existe pas.
 	 */
 	public Ressource rechercherRessource(String code_nom)
@@ -362,7 +362,8 @@ public class QCMBuilder
 	 */
 	public boolean creerQuestion(String type, String code_nomRessource, String nomNotion, String text, int timer, double nbPoint, int difficulte, ArrayList<TypeReponse> sLstReponses, String explication)
 	{
-		Notion notion = rechercherRessource(code_nomRessource.substring(0, code_nomRessource.indexOf("_"))).rechercherNotion(nomNotion);
+		//Notion notion = rechercherRessource(code_nomRessource.substring(0, code_nomRessource.indexOf("_"))).rechercherNotion(nomNotion);
+		Notion notion = rechercherRessource(code_nomRessource).rechercherNotion(nomNotion);
 
 		if (type.equals("Elimination"))
 		{
@@ -436,6 +437,48 @@ public class QCMBuilder
 		}
 	}
 
+	public boolean modifierQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, int difficulte)
+	{
+		Notion notion = rechercherRessource(code_nomRessource).rechercherNotion(nomNotion);
+
+		Question question = notion.rechercherQuestion(text);
+
+		if (type.equals("Elimination"))
+		{
+			Elimination              quest   = (Elimination) question;
+			List<ReponseElimination> lstElim = quest.getLstReponses();
+
+			if ( notion.supprimerQuestion( question ) && notion.ajouterQuestion( new Elimination(notion, text, timer, nbPoint, difficulte, lstElim, difficulte, explication) ) )
+				return true;
+
+			return false;
+		}
+		else if (type.equals("QCM"))
+		{
+			QCM              quest  = (QCM) question;
+			List<ReponseQCM> lstQCM = quest.getLstReponses();
+
+			if ( notion.supprimerQuestion( question ) && notion.ajouterQuestion( new QCM(notion, text, timer, nbPoint, difficulte, lstQCM, explication) ) )
+				return true;
+
+			return false;
+		}
+		else if (type.equals("Association"))
+		{
+			Association              quest   = (Association) question;
+			List<ReponseAssociation> lstAsso = quest.getLstReponses();
+
+			if ( notion.supprimerQuestion( question ) && notion.ajouterQuestion( new Association(notion, text, timer, nbPoint, difficulte, lstAsso, explication) ) )
+				return true;
+
+			return false;
+		}
+		else
+		{
+			System.out.println("Le type de la question est invalide, ou n'est pas pris en charge.");
+			return false;
+		}
+	}
 
 	public boolean genererQuestionnaire(String nomRessource, boolean chrono, List<TypeQuestionnaire> lstTypeQuestionnaire, String nomQuestionnaire)
 	{
