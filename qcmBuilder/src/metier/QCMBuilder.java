@@ -437,11 +437,11 @@ public class QCMBuilder
 		}
 	}
 
-	public boolean modifierQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, int difficulte)
+	public boolean modifierQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, int difficulte, String textInitial)
 	{
 		Notion notion = rechercherRessource(code_nomRessource).rechercherNotion(nomNotion);
 
-		Question question = notion.rechercherQuestion(text);
+		Question question = notion.rechercherQuestion(textInitial);
 
 		if (type.equals("Elimination"))
 		{

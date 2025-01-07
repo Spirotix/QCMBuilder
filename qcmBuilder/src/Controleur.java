@@ -227,9 +227,9 @@ public class Controleur
 		return qcmBuilder.creerQuestion(type, code_nomRessource, nomNotion, text, timer, nbPoint, difficulte, lstReponse, explication);
 	}
 
-	public boolean modifierQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, int difficulte)
+	public boolean modifierQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, int difficulte, String textInitial)
 	{
-		return qcmBuilder.modifierQuestion(type, code_nomRessource, nomNotion, text, explication, timer, nbPoint, difficulte);
+		return qcmBuilder.modifierQuestion(type, code_nomRessource, nomNotion, text, explication, timer, nbPoint, difficulte, textInitial);
 	}
 
 	/**

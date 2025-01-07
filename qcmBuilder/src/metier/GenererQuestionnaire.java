@@ -386,8 +386,8 @@ public class GenererQuestionnaire
 
 			for (ReponseElimination r : lstReponses)
 				{
-					String tempPath = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_reponse"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg";
-					String tempPath2 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_reponse"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg" ;
+					String tempPath = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_reponse"+(lstReponses.indexOf(r)+1)+".jpg";
+					String tempPath2 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_reponse"+(lstReponses.indexOf(r)+1)+".jpg" ;
 					File fileTemp = new File (tempPath2);
 
 					if (fileTemp.exists())
