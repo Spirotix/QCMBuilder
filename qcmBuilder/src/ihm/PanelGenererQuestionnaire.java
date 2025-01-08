@@ -116,18 +116,14 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 				return ;
 			}
 
-			JFileChooser chooser = new JFileChooser();
-			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-			if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
-				this.ctrl.genererQuestionnaire
-				(
-					this.choixRessource  .getSelectedItem(),
-					this.btnChronoOui    .isSelected(),
-					this.grille          .getSelectionner(),
-					this.nomQuestionnaire.getText(),
-					chooser.getSelectedFile().getAbsolutePath()
-				);
+			this.ctrl.genererQuestionnaire
+			(
+				this.choixRessource  .getSelectedItem(),
+				this.btnChronoOui    .isSelected(),
+				this.grille          .getSelectionner(),
+				this.nomQuestionnaire.getText(),
+			);
 
 			
 		}

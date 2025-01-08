@@ -27,7 +27,6 @@ public class GenererQuestionnaire
 	private String nomRepertoire;
 	private List<TypeQuestionnaire> lstTypeQuestionnaire;
 	private List<Question> lstQuestions;
-	private String chemin;
 
 	public GenererQuestionnaire (String nomRessource, boolean chrono, String nomQuestionnaire, List<TypeQuestionnaire> lstTypeQuestionnaires, List<Question> lstQuestions, String chemin)
 	{
@@ -37,7 +36,7 @@ public class GenererQuestionnaire
 		this.nomRepertoire = nomQuestionnaire;
 		this.lstTypeQuestionnaire = lstTypeQuestionnaires;
 		this.lstQuestions = lstQuestions;
-		this.chemin = chemin;
+
 
 		try {
 			String tempNomQuestionnaire = nomQuestionnaire;
