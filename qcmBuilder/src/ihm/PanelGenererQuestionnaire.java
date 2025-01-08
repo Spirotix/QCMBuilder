@@ -122,7 +122,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 				this.choixRessource  .getSelectedItem(),
 				this.btnChronoOui    .isSelected(),
 				this.grille          .getSelectionner(),
-				this.nomQuestionnaire.getText(),
+				this.nomQuestionnaire.getText()
 			);
 
 			
