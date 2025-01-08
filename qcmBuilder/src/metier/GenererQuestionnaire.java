@@ -673,9 +673,9 @@ public class GenererQuestionnaire
 											\t["answer%d",%3.1f] """, lstReponses.indexOf(re)+1, re.getNbPointPerdu());
 									if (lstIndices.indexOf(re) != lstIndices.size() - 1)
 										sRet += ",\n\t";
-									else
-										sRet += "]\n\t";
+	
 								}
+								sRet += "]\n\t";
 							}
 						}
 						if (lstQuestions.indexOf(q) != lstQuestions.size() - 1)
