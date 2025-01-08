@@ -27,7 +27,7 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.setTitle   				("Creation de question"	);
-		this.setSize    				( 730,500  				);
+		this.setSize    				( 750,550  				);
 		this.setLocationRelativeTo		(null					);
 		this.setDefaultCloseOperation	(JFrame.EXIT_ON_CLOSE	);
 		this.setResizable				(false					);
@@ -92,6 +92,7 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 			try 
 			{
 				File selectedFile = fileHandler.chooseFile();
+				this.panelQ.setLabelFichier(selectedFile.getName());
 				fileHandler.handleFile(selectedFile);
 			} 
 			catch (IOException ex) 
