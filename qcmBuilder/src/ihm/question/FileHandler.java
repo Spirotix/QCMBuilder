@@ -1,11 +1,11 @@
 package src.ihm.question;
 
-import javax.swing.*;
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.nio.file.*;
 import java.io.IOException;
+import java.nio.file.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /**
  * La classe FileHandler gère les opérations de sélection et de traitement des fichiers.

@@ -480,7 +480,7 @@ public class QCMBuilder
 		}
 	}
 
-	public boolean genererQuestionnaire(String nomRessource, boolean chrono, List<TypeQuestionnaire> lstTypeQuestionnaire, String nomQuestionnaire)
+	public boolean genererQuestionnaire(String nomRessource, boolean chrono, List<TypeQuestionnaire> lstTypeQuestionnaire, String nomQuestionnaire, String chemin)
 	{
 		Ressource ressource = this.rechercherRessource(nomRessource);
 		if (ressource == null)
@@ -592,8 +592,8 @@ public class QCMBuilder
 			System.out.println(q.toString());
 		}*/
 
-		new GenererQuestionnaire(nomRessource, chrono, nomQuestionnaire, lstTypeQuestionnaire, lstQuestions);
-		return false;
+		new GenererQuestionnaire(nomRessource, chrono, nomQuestionnaire, lstTypeQuestionnaire, lstQuestions, chemin);
+		return true;
 	}
 
 	/**

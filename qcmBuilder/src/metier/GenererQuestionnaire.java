@@ -1,10 +1,9 @@
 package src.metier;
 
 import java.io.*;
-import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,50 +20,6 @@ import src.metier.reponse.ReponseQCM;
 
 public class GenererQuestionnaire 
 {
-	public static void main(String[] args)
-	{
-		List<TypeQuestionnaire> lstTypeQuestionnaires = List.of(
-			new TypeQuestionnaire("Notion 1", 0, 1, 0, 1),
-			new TypeQuestionnaire("Notion 2", 1, 0, 0, 0),
-			new TypeQuestionnaire("Notion 3", 0, 0, 1, 0)
-		);
-
-		Ressource r = new Ressource("R1.01", "Apagnan");
-		Notion n1 = new Notion("Notion 1", r);
-		Notion n2 = new Notion("Notion 2", r);
-		Notion n3 = new Notion("Notion 3", r);
-
-		ReponseAssociation ra1 = new ReponseAssociation("GaucheA",null, true );
-		ReponseAssociation ra2 = new ReponseAssociation("GaucheB",null,  true);
-		ReponseAssociation ra3 = new ReponseAssociation("GaucheC",null, true);
-		ReponseAssociation ra4 = new ReponseAssociation("DroiteA",ra1, false);
-		ReponseAssociation ra5 = new ReponseAssociation("DroiteB",ra2, false);
-		ReponseAssociation ra6 = new ReponseAssociation("DroiteC",ra3, false);
-
-		ra1.setReponseAssocie(ra3);
-		ra2.setReponseAssocie(ra4);
-		ra3.setReponseAssocie(ra5);
-
-		List<ReponseAssociation> lstReponseAsso = List.of(
-			ra1, ra2, ra3, ra4, ra5, ra6
-		);
-
-		List<ReponseElimination> lstReponseEliminations = List.of(
-			new ReponseElimination("Vrai","La bonne"        ,0,   0),
-			new ReponseElimination("Faux","Pas ça"          ,0,   0),
-			new ReponseElimination("Faux","non plus"        ,2,   6),
-			new ReponseElimination("Faux","il me semble pas",1,   7)
-		);
-
-
-		List<Question> lstQuestions = List.of(
-			new Association(n1, "Question 1", 50, 5, 2, lstReponseAsso, "Eh oui, c'est ça la réponse !"),
-			new Elimination(n2, "Question 2", 50, 5, 1, lstReponseEliminations, 2, "Eh oui, c'est ça la réponse !"),
-			new QCM        (n3, "Question 3", 50, 5, 3, List.of(new ReponseQCM("Bonne réponse 1", "Vrai"), new ReponseQCM("Bonne réponse 2", "Vrai"), new ReponseQCM("Pas bonne réponse 3", "Faux")), "Eh oui, c'est ça la réponse !"), 
-			new QCM        (n1, "Question 4", 50, 5, 4, List.of(new ReponseQCM("Bonne réponse", "Vrai"), new ReponseQCM("poulet", "Faux")), "Eh oui, c'est ça la réponse !")
-		);
-		new GenererQuestionnaire("R1.01_Apagnan", true,"ouioui",lstTypeQuestionnaires, lstQuestions);
-	}
 
 	private String nomRessource;
 	private String script;
@@ -72,8 +27,9 @@ public class GenererQuestionnaire
 	private String nomRepertoire;
 	private List<TypeQuestionnaire> lstTypeQuestionnaire;
 	private List<Question> lstQuestions;
+	private String chemin;
 
-	public GenererQuestionnaire (String nomRessource, boolean chrono, String nomQuestionnaire, List<TypeQuestionnaire> lstTypeQuestionnaires, List<Question> lstQuestions)
+	public GenererQuestionnaire (String nomRessource, boolean chrono, String nomQuestionnaire, List<TypeQuestionnaire> lstTypeQuestionnaires, List<Question> lstQuestions, String chemin)
 	{
 		this.nomRessource = nomRessource;
 		this.script = "";
@@ -81,77 +37,80 @@ public class GenererQuestionnaire
 		this.nomRepertoire = nomQuestionnaire;
 		this.lstTypeQuestionnaire = lstTypeQuestionnaires;
 		this.lstQuestions = lstQuestions;
+		this.chemin = chemin;
 
 		try {
 			String tempNomQuestionnaire = nomQuestionnaire;
-			boolean exist = Files.exists(Paths.get("../" + tempNomQuestionnaire));
+			boolean exist = Files.exists(Paths.get(chemin + "/" + tempNomQuestionnaire));
 			int i=1;
 			while(exist)
 			{
 				tempNomQuestionnaire = nomQuestionnaire;
 				tempNomQuestionnaire += "("+ i++ +")";
-				exist = Files.exists(Paths.get("../" + tempNomQuestionnaire));
+				exist = Files.exists(Paths.get(chemin + "/" + tempNomQuestionnaire));
 			}
+
+			chemin += "/" + tempNomQuestionnaire;
 			
 
-			Files.createDirectories(Paths.get("../"+tempNomQuestionnaire                       ));
-			Files.createDirectories(Paths.get("../"+tempNomQuestionnaire+"/css"                   ));
-			Files.createDirectories(Paths.get("../"+tempNomQuestionnaire+"/fichier_complementaire"));
-			Files.createDirectories(Paths.get("../"+tempNomQuestionnaire+"/pages"                 ));
-			Files.createDirectories(Paths.get("../"+tempNomQuestionnaire+"/script"                ));
+			Files.createDirectories(Paths.get(chemin                       ));
+			Files.createDirectories(Paths.get(chemin+"/css"                   ));
+			Files.createDirectories(Paths.get(chemin+"/fichier_complementaire"));
+			Files.createDirectories(Paths.get(chemin+"/pages"                 ));
+			Files.createDirectories(Paths.get(chemin+"/script"                ));
 
 			Files.copy(Paths.get("../data/web/css/index.css"       ),
-					   Paths.get("../"+tempNomQuestionnaire+"/css/index.css"  ),
+					   Paths.get(chemin+"/css/index.css"  ),
 					   StandardCopyOption.REPLACE_EXISTING);
 
 			Files.copy(Paths.get("../data/web/css/qcm_multiple.css"        ),
-					   Paths.get("../"+tempNomQuestionnaire+"/css/qcm_multiple.css"   ),
+					   Paths.get(chemin+"/css/qcm_multiple.css"   ),
 					   StandardCopyOption.REPLACE_EXISTING);
 
 			Files.copy(Paths.get("../data/web/css/qcm_unique.css"     ),
-					   Paths.get("../"+tempNomQuestionnaire+"/css/qcm_unique.css"),
+					   Paths.get(chemin+"/css/qcm_unique.css"),
 					   StandardCopyOption.REPLACE_EXISTING);
 
 			Files.copy(Paths.get("../data/web/css/question_association.css"     ),
-					   Paths.get("../"+tempNomQuestionnaire+"/css/question_association.css"),
+					   Paths.get(chemin+"/css/question_association.css"),
 					   StandardCopyOption.REPLACE_EXISTING);
 
 			Files.copy(Paths.get("../data/web/css/question_elimination.css"         ),
-					   Paths.get("../"+tempNomQuestionnaire+"/css/question_elimination.css"),
+					   Paths.get(chemin+"/css/question_elimination.css"),
 					   StandardCopyOption.REPLACE_EXISTING);
 
 			Files.copy(Paths.get("../data/web/script/popup.js"       ),
-					   Paths.get("../"+tempNomQuestionnaire+"/script/popup.js"  ),
+					   Paths.get(chemin+"/script/popup.js"  ),
 					   StandardCopyOption.REPLACE_EXISTING);
 
 			if (chrono) {
 				this.script      = "<script src=\"../script/indexTimed.js\"></script>";
 				this.scriptIndex = "<script src=\"./script/indexTimed.js\"></script>";
 				Files.copy(Paths.get("../data/web/script/indexTimed.js"       ),
-						   Paths.get("../"+tempNomQuestionnaire+"/script/indexTimed.js"  ),
+						   Paths.get(chemin+"/script/indexTimed.js"  ),
 						   StandardCopyOption.REPLACE_EXISTING);
 			} else {
 				this.script = "<script src=\"../script/indexNoTimed.js\"></script>";
 				this.scriptIndex = "<script src=\"./script/indexNoTimed.js\"></script>";
 				Files.copy(Paths.get("../data/web/script/indexNoTimed.js"       ),
-						   Paths.get("../"+tempNomQuestionnaire+"/script/indexNoTimed.js"  ),
+						   Paths.get(chemin+"/script/indexNoTimed.js"  ),
 						   StandardCopyOption.REPLACE_EXISTING);
 			}
 
-			Files.write(Paths.get("../"+tempNomQuestionnaire+"/index.html"  ), getIndexHtml().getBytes());
-			Files.write(Paths.get("../"+tempNomQuestionnaire+"/fin.html"    ), getFinHtml  ().getBytes());
+			Files.write(Paths.get(chemin+"/index.html"  ), getIndexHtml().getBytes());
+			Files.write(Paths.get(chemin+"/fin.html"    ), getFinHtml  ().getBytes());
 			
 			for (Question q : lstQuestions)
 			{
 				q.setIndice(q.getNotions().getQuestions().indexOf(q)+1);
 				System.out.println(q.getText()+" : "+q.getIndice());
 
-				Files.createDirectories(Paths.get("../"+tempNomQuestionnaire+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)));
+				Files.createDirectories(Paths.get(chemin+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)));
 
 				Path srcDir  = Paths.get( "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement" );
-				Path destDir = Paths.get( "../"+tempNomQuestionnaire+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1) );
+				Path destDir = Paths.get( chemin+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1) );
 
-				Files.write(Paths.get("../"+tempNomQuestionnaire+"/pages/question"+(lstQuestions.indexOf(q)+1)+".html"), getQuestionHtml(q).getBytes());
+				Files.write(Paths.get(chemin+"/pages/question"+(lstQuestions.indexOf(q)+1)+".html"), getQuestionHtml(q).getBytes());
 				
 				Files.list(srcDir).forEach(sourceFile ->
 				{
@@ -168,7 +127,7 @@ public class GenererQuestionnaire
 				});
 			}
 
-			Files.write(Paths.get("../" + tempNomQuestionnaire + "/script/data.js"), getDataJs().getBytes());
+			Files.write(Paths.get(chemin + "/script/data.js"), getDataJs().getBytes());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
