@@ -35,7 +35,11 @@ document.addEventListener("DOMContentLoaded", function ()
 	nbQuestionRepondu = parseFloat(urlParams.get('nbQuestionRepondu')) || 0;
 
 	if (document.querySelector('.eliminate-question')) {
-		const hintValue = correctAnswers[currentQuestion-1][1][usedHint+1][1];
+		hintValue = 0;
+		if (usedHint < correctAnswers[currentQuestion-1][1].length)
+		{
+			hintValue = correctAnswers[currentQuestion-1][1][usedHint+1][1];
+		}
 		const hintCost = document.querySelector('.hint-cost');
 		hintCost.textContent = hintValue;
 	}
