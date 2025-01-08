@@ -18,6 +18,8 @@ public class FrameCreerElimination extends JFrame implements ActionListener
 	{
 		this.panelQ=panelQ;
 		this.ctrl=ctrl;
+		this.setTitle   ("Creation d'une question à élimination");
+		this.setSize    ( 500,500  );
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 
@@ -39,8 +41,7 @@ public class FrameCreerElimination extends JFrame implements ActionListener
 		this.retourMenu	.addActionListener(this);
 		this.retour 	.addActionListener(this);
 		
-		this.setTitle   ("Creation d'une question à élimination");
-		this.setSize    ( 500,500  );
+		
 
 		this.panel=new PanelCreerElim(this.panelQ, this, this.ctrl);
 

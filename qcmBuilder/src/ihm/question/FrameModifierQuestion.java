@@ -38,17 +38,16 @@ public class FrameModifierQuestion extends JFrame implements ActionListener
 		titrePanel.setBackground(Color.lightGray);
 		this.add(titrePanel, BorderLayout.NORTH);
 
-		JMenuBar menubMaBarre = new JMenuBar();
+		JMenuBar menu = new JMenuBar();
 		JMenu menuImport = new JMenu("Importer");
 
 		this.importerImage = new JMenuItem("Importer image");
 
 		menuImport.add(this.importerImage);
+		menu.add(menuImport);
+		this.importerImage.addActionListener(this);
 
-		menubMaBarre.add(menuImport);
-
-		this.setJMenuBar(menubMaBarre);
-
+		this.setJMenuBar(menu);
 
 		this.panelM = new PanelModifierQuestion(this.ctrl, this, nomQuestion, notion, ressource, paq);
 
@@ -67,6 +66,8 @@ public class FrameModifierQuestion extends JFrame implements ActionListener
 			{
 				File selectedFile = fileHandler.chooseFile();
 				fileHandler.handleFile(selectedFile);
+				this.panelM.afficherImage();
+				this.panelM.repaint();
 			} catch (IOException ex)
 			{
 				System.out.println("Erreur lors du traitement du fichier : " + ex.getMessage());
