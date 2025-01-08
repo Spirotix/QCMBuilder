@@ -271,12 +271,19 @@ public class GenererQuestionnaire
 			
 		String tempPath  = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_question.jpg";
 		String tempPath3 = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_question.pdf";
+		String tempPath5 = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_question.mp3";
+		String tempPath7 = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_question.mp4";
 
 		String tempPath2 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_question.jpg" ;
-		String tempPath4 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_question.pdf" ;			
+		String tempPath4 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_question.pdf" ;	
+		String tempPath6 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_question.mp3" ;
+		String tempPath8 = "../data/ressources_notions_questions/"+q.getNotions().getRessource().getCode()+"/"+q.getNotions().getNom()+"/question_"+q.getIndice()+"/complement/fichier_question.mp4" ;			
+			
 		
 		File   fileTemp  = new File (tempPath2);
 		File   fileTemp2 = new File (tempPath4);
+		File   fileTemp3 = new File (tempPath6);
+		File   fileTemp4 = new File (tempPath8);
 
 		if (fileTemp.exists() )
 		{
@@ -291,6 +298,21 @@ public class GenererQuestionnaire
 			sRet  += String.format("""
 						<<button type="button" class="complementary-file-button" onclick="window.open('%s', '_blank')">Voir le fichier complémentaire</button>
 			""",tempPath3);
+		}
+		if (fileTemp3.exists() )
+		{
+			sRet  += String.format("""
+						<audio controls>
+							<source src="%s" type="audio/mpeg">
+						Your browser does not support this audio format.
+			 			</audio>
+			""",tempPath5);
+		}
+		if (fileTemp4.exists() )
+		{
+			sRet  += String.format("""
+						<<button type="button" class="complementary-file-button" onclick="window.open('%s', '_blank')">Voir le fichier complémentaire</button>
+			""",tempPath7);
 		}
 		return sRet;
 	}
