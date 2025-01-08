@@ -228,6 +228,8 @@ public class FileHandler
 	 */
 	private String renommerFichier(String extension) 
 	{
+		if (extension.equals("png") ||extension.equals("jpeg")||extension.equals("bmp")||extension.equals("gif"))
+			extension = "jpg";
 		return this.nomFichier + "." + extension;
 	}
 }
