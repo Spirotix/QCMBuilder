@@ -15,7 +15,7 @@ public class FrameModifierQuestion extends JFrame implements ActionListener
 	private Controleur ctrl;
 	private PanelModifierQuestion panelM;
 
-	private JMenuItem importerImage;
+	private JMenuItem importerFichier;
 	private FileHandler fileHandler;
 
 	public FrameModifierQuestion(Controleur ctrl, String nomQuestion, String notion, String ressource, PanelAfficherQuestion paq)
@@ -41,11 +41,11 @@ public class FrameModifierQuestion extends JFrame implements ActionListener
 		JMenuBar menu = new JMenuBar();
 		JMenu menuImport = new JMenu("Importer");
 
-		this.importerImage = new JMenuItem("Importer image");
+		this.importerFichier = new JMenuItem("Importer image");
 
-		menuImport.add(this.importerImage);
+		menuImport.add(this.importerFichier);
 		menu.add(menuImport);
-		this.importerImage.addActionListener(this);
+		this.importerFichier.addActionListener(this);
 
 		this.setJMenuBar(menu);
 
@@ -60,14 +60,13 @@ public class FrameModifierQuestion extends JFrame implements ActionListener
 	public void actionPerformed(ActionEvent e)
 	{
 
-		if (e.getSource().equals(this.importerImage))
+		if (e.getSource().equals(this.importerFichier))
 		{
 			try
 			{
 				File selectedFile = fileHandler.chooseFile();
 				fileHandler.handleFile(selectedFile);
-				this.panelM.afficherImage();
-				this.panelM.repaint();
+				this.panelM.update();
 			} catch (IOException ex)
 			{
 				System.out.println("Erreur lors du traitement du fichier : " + ex.getMessage());

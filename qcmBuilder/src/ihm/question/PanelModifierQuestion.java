@@ -2,6 +2,7 @@ package src.ihm.question;
 
 import java.awt.*					;
 import java.awt.event.*				;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -80,9 +81,6 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		this.setLayout    (new GridBagLayout());
 		this.setBackground(Color.LIGHT_GRAY);
 
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.insets = new Insets(2, 2, 2, 2) ;
-		gbc.fill   = GridBagConstraints.HORIZONTAL ;
 
 		// Initialisation
 		this.ressource       = ressource;
@@ -165,69 +163,9 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		// Layout
 
 
-		this.afficherImage();
+		this.afficherFichier();
 
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		this.add(new JLabel("text question"), gbc);
-		gbc.gridx = 1;
-		this.add(this.textIntitule, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 2;
-		this.add(new JLabel("Nombre de points"), gbc);
-		gbc.gridx = 1;
-		this.add(this.nbPoints, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		this.add(new JLabel("Temps de réponse (m:s)"), gbc);
-		gbc.gridx = 1;
-		this.add(this.tpsReponses, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 4;
-		this.add(new JLabel("Explication"), gbc);
-		gbc.gridx = 1;
-		this.add(this.textExplication, gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 5;
-		gbc.gridwidth = 1;
-		this.add(new JLabel("Niveau"), gbc);
-		gbc.gridx = 1;
-		this.add(createDifficultyPanel(), gbc);
-
-
-		gbc.gridx = 0;
-		gbc.gridy = 6;
-		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgErrTextQue), gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 7;
-		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgErrNbPts), gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 8;
-		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgErrTpsRep), gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 9;
-		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgErrExpl), gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 10;
-		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgErrNiv), gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 11;
-		gbc.gridwidth = 2;
-		this.add(this.btnModifier, gbc);
+		this.ajouterElement();
 
 		this.setVisible(true);
 	}
@@ -351,7 +289,7 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 				this.ctrl.modifierQuestion(typeQuestion, ressource.substring(0, ressource.indexOf("_")), notion, textQuestion, explicationQuestion, tempsQuestion, nbPointQuestion, difficulteQuestion, textInitiale);
 
-				this.paq.Update(ressource, notion);
+				this.paq.update(ressource, notion);
 				this.fr.dispose();
 			}
 
@@ -422,60 +360,193 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 	}
 
-	public void afficherImage()
+	private void afficherFichier()
 	{
 		Path tempDir = Paths.get("../data/ressources_notions_questions/temp");
-		try
-		{
-			Path imagePath = tempDir.resolve("fichier_question.png");
-			if (Files.exists(imagePath)) 
+		String fichierQuestionBase = "fichier_question";
+		
+		String[] extensions = { ".jpg", ".pdf", ".mp4", ".mp3" };
+
+		try {
+
+			Path cheminFichierQuestion = null;
+
+			for (String ext : extensions)
+			{
+				Path testChemin = tempDir.resolve(fichierQuestionBase + ext);
+				if (Files.exists(testChemin))
+				{
+					cheminFichierQuestion = testChemin;
+					break;
+				}
+			}
+
+			if (Files.exists(cheminFichierQuestion))
 			{
 				try
 				{
-					ImageIcon icone = new ImageIcon(imagePath.toString());
-					Image image = icone.getImage();
+					String fileName = cheminFichierQuestion.getFileName().toString();
+					String lowerCaseFileName = fileName.toLowerCase();
+					boolean isImage = lowerCaseFileName.endsWith(".png");
 
-					int largeur = icone.getIconWidth();
-					int hauteur = icone.getIconHeight();
-
-					int tailleMax = 150;
-
-					int nouvelleLargeur, nouvelleLongueur;
-					if (largeur > hauteur)
+					if (isImage)
 					{
-						nouvelleLargeur = tailleMax;
-						nouvelleLongueur = (int) ((double) hauteur / largeur * tailleMax);
+						// Gestion des images
+						ImageIcon icone = new ImageIcon(cheminFichierQuestion.toString());
+						Image image = icone.getImage();
+
+						int largeur = icone.getIconWidth();
+						int hauteur = icone.getIconHeight();
+
+						int tailleMax = 150;
+
+						int nouvelleLargeur, nouvelleLongueur;
+						if (largeur > hauteur)
+						{
+							nouvelleLargeur = tailleMax;
+							nouvelleLongueur = (int) ((double) hauteur / largeur * tailleMax);
+						}
+						else
+						{
+							nouvelleLongueur = tailleMax;
+							nouvelleLargeur = (int) ((double) largeur / hauteur * tailleMax);
+						}
+
+						// Redimensionnez l'image
+						Image imageModifie = image.getScaledInstance(nouvelleLargeur, nouvelleLongueur, Image.SCALE_SMOOTH);
+						ImageIcon iconeModifie = new ImageIcon(imageModifie);
+
+						JLabel imageLabel = new JLabel(iconeModifie);
+
+						GridBagConstraints gbcImage = new GridBagConstraints();
+						gbcImage.gridx = 0;
+						gbcImage.gridy = 0; 
+						gbcImage.gridwidth = 2;
+						gbcImage.insets = new Insets(0, 0, 0, 0); // Marges
+						this.add(imageLabel, gbcImage);
+
 					}
 					else
 					{
-						nouvelleLongueur = tailleMax;
-						nouvelleLargeur = (int) ((double) largeur / hauteur * tailleMax);
+						final Path cheminFichierQuestionFinal = cheminFichierQuestion;
+						// Gestion des fichiers non-images
+						JButton downloadButton = new JButton("Télécharger le fichier");
+
+						// Action pour télécharger le fichier
+						downloadButton.addActionListener(e ->
+						{
+							try
+							{
+								JFileChooser fileChooser = new JFileChooser();
+								fileChooser.setSelectedFile(new File(fileName)); // Nom par défaut
+								int userSelection = fileChooser.showSaveDialog(null);
+
+								if (userSelection == JFileChooser.APPROVE_OPTION) 
+								{
+									File saveFile = fileChooser.getSelectedFile();
+									Files.copy(cheminFichierQuestionFinal, saveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+									JOptionPane.showMessageDialog(null, "Fichier téléchargé avec succès !");
+								}
+							}
+							catch (IOException ex)
+							{
+								JOptionPane.showMessageDialog(null, "Erreur lors du téléchargement : " + ex.getMessage());
+							}
+						});
+
+						// Ajoutez le bouton au panneau principal
+						GridBagConstraints gbcButton = new GridBagConstraints();
+						gbcButton.gridx = 0;
+						gbcButton.gridy = 0; 
+						gbcButton.gridwidth = 2;
+						gbcButton.insets = new Insets(10, 10, 10, 10); // Marges
+						this.add(downloadButton, gbcButton);
 					}
-
-					// Redimensionnez l'image
-					Image imageModifie = image.getScaledInstance(nouvelleLargeur, nouvelleLongueur, Image.SCALE_SMOOTH);
-					ImageIcon iconeModifie = new ImageIcon(imageModifie);
-
-					JLabel imageLabel = new JLabel(iconeModifie);
-
-					GridBagConstraints gbcImage = new GridBagConstraints();
-					gbcImage.gridx = 0;
-					gbcImage.gridy = 0; 
-					gbcImage.gridwidth = 2;
-					gbcImage.insets = new Insets(0, 0, 0, 0); // Marges
-					this.add(imageLabel, gbcImage);
-
-				} catch (Exception e)
-				{
-					System.err.println("Erreur lors de l'affichage de l'image : " + e.getMessage());
+				} catch (Exception e) {
+					System.err.println("Erreur lors de l'affichage ou de la gestion du fichier : " + e.getMessage());
 				}
 			}
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.err.println("Erreur lors de l'accès au répertoire temp : " + e.getMessage());
 		}
 
+	}
+
+	private void ajouterElement()
+	{
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(2, 2, 2, 2);
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		this.add(new JLabel("text question"), gbc);
+		gbc.gridx = 1;
+		this.add(this.textIntitule, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		this.add(new JLabel("Nombre de points"), gbc);
+		gbc.gridx = 1;
+		this.add(this.nbPoints, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+		this.add(new JLabel("Temps de réponse (m:s)"), gbc);
+		gbc.gridx = 1;
+		this.add(this.tpsReponses, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		this.add(new JLabel("Explication"), gbc);
+		gbc.gridx = 1;
+		this.add(this.textExplication, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 5;
+		gbc.gridwidth = 1;
+		this.add(new JLabel("Niveau"), gbc);
+		gbc.gridx = 1;
+		this.add(createDifficultyPanel(), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 6;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgErrTextQue), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgErrNbPts), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgErrTpsRep), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 9;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgErrExpl), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 10;
+		gbc.gridwidth = 2;
+		this.add(createErrorPanel(this.msgErrNiv), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 11;
+		gbc.gridwidth = 2;
+		this.add(this.btnModifier, gbc);
+	}
+
+	public void update()
+	{
+		this.removeAll();
+		this.afficherFichier();
+		this.ajouterElement();
+		this.revalidate();
+		this.repaint();
 	}
 	private void ajouterPassageSouris(JButton button)
 	{
