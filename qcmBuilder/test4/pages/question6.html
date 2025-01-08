@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../css/question_association.css">
+		<title>Question Association</title>
+	</head>
+	<!-- Ici value correpond au numéro de la question -->
+	<!-- Ici point correpond au nombre de point de la question -->
+	<body value="6" point="2,000" >
+		<!-- Précise que c'est une question de type Association -->
+		<main class="container question association-question">
+			<!-- Informations de la question-->
+			<section class="informations">
+				<p class="question-number">Question numéro : <span class="question-number-data">6</span></p>
+				<p class="notion"         >Notion :          <span class="notion-data"         >TP1</span></p>
+				<p class="difficulty"     >Difficulté :      <span class="difficulty-data"     >Moyenne</span></p>
+				<p class="estimated-time" >Temps estimé :    <span class="estimated-time-data" >65sec</span></p>
+				<p class="points"         >Points :          <span class="points"              >2,000</span></p>
+			</section>
+
+			<!-- Barre de progression des questions -->
+			<section class="progress-bar">
+				<div class="progress-bar-fill">
+					<p class="progress-percentage"></p>
+				</div>
+			</section>
+
+			<!-- Compteur de temps -->
+			<section class="countdown">
+				<p class="countdown-title">Temps restant :</p>
+				<p class="countdown-data">65</p>
+			</section>
+
+			<figure>
+				<img src="" alt="" class="question-image">
+			</figure>
+
+			<figure>
+				<img src="../fichier_complementaire/images_questions_6/fichier_question.jpg" alt="QEF" class="question-image">
+			</figure>
+			<!-- Question et réponses -->
+			<section class="question">
+				<p class="question-text">QEF</p>
+				<div class="association-container">
+					<article class="association-column left-column">
+						<p class="association-item" data-id="0"><img src="../fichier_complementaire/images_questions_6/fichier_reponse_gauche1.jpg" alt="f" width=80 height=80></p>
+						<p class="association-item" data-id="1"><img src="../fichier_complementaire/images_questions_6/fichier_reponse_gauche1.jpg" alt="xth" width=80 height=80></p>
+					</article>
+					<article class="association-column right-column">
+						<p class="association-item" data-id="2">xth</p>
+						<p class="association-item" data-id="3">wthx</p>
+					</article>
+				</div>
+			</section>
+
+			<!-- Navigation entre les questions -->
+			<nav class="nav">
+				<button type="button" class="nav-button previous-button">Précédent</button>
+				<button type="button" class="nav-button validate-button">Valider</button>
+				<button type="button" class="nav-button feedback-button">Feedback</button><button type="button" class="nav-button delete-line-button">Supprimer les lignes</button>
+				<button type="button" class="nav-button next-button">Suivant</button>
+			</nav>
+		</main>
+
+		<!-- Ligne d'association -->
+		<div class="line-container"></div>
+
+		<!-- PopUp pour le feedback -->
+		<section class="popup">
+			<div class="popup-content">
+				<button type="button" class="close-button">Fermer</button>
+				<p class="feedback-title">Réponse</p>
+
+				<p class="feedback-text">null</p>
+				<p class="feedback-point"></p>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer>
+			<p>&copy; 2024 Groupe 2.</p>
+		</footer>
+
+		<!-- Script -->
+		<script src="../script/popup.js"></script>
+		<script src="../script/data.js"></script>
+		<script src="../script/indexTimed.js"></script>
+	</body>
+</html>

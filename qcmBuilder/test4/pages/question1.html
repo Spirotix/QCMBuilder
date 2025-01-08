@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="../css/question_elimination.css">
+		<title>Question Elimination</title>
+	</head>
+	<!-- Ici value correpond au numéro de la question -->
+	<!-- Ici point correpond au nombre de point de la question -->
+	<body value="1" point="2,000" >
+		<!-- Précise que c'est une question de type Elimination -->
+		<main class="container question eliminate-question">
+			<!-- Informations de la question-->
+			<section class="informations">
+				<p class="question-number">Question numéro : <span class="question-number-data">1</span></p>
+				<p class="notion"         >Notion :          <span class="notion-data"         >TP1</span></p>
+				<p class="difficulty"     >Difficulté :      <span class="difficulty-data"     >Très Facile</span></p>
+				<p class="estimated-time" >Temps estimé :    <span class="estimated-time-data" >90sec</span></p>
+				<p class="points"         >Points :          <span class="points"              >2,000</span></p>
+			</section>
+
+			<!-- Barre de progression des questions -->
+			<section class="progress-bar">
+				<div class="progress-bar-fill">
+					<p class="progress-percentage"></p>
+				</div>
+			</section>
+
+			<!-- Compteur de temps -->
+			<section class="countdown">
+				<p class="countdown-title">Temps restant :</p>
+				<p class="countdown-data">90</p>
+			</section>
+
+			<figure>
+				<img src="" alt="" class="question-image">
+			</figure>
+
+			<<button type="button" class="complementary-file-button" onclick="window.open('../fichier_complementaire/images_questions_1/fichier_question.mp4', '_blank')">Voir le fichier complémentaire</button>
+			<!-- Question et réponses -->
+			<article class="question">
+				<p class="question-text">dzad</p>
+				<section class="answers">
+					<div class="answer">
+						<input type="radio" name="answer" id="answer1" value="answer1">
+						<label for="answer1">azd</label>
+					</div>
+					<div class="answer">
+						<input type="radio" name="answer" id="answer2" value="answer2">
+						<label for="answer2">azd</label>
+					</div>
+				<section class="hint">
+						<p class="cout">Coût : <span class="hint-cost"></span> points</p>
+						<button type="button" class="hint-button">Indice</button>
+						<div class="hint-count">
+
+							<p>Indice : <span class="hint-current-data">0</span>/<span class="hint-total-data">2</span></p>
+						</div>
+						<div class="lost-points">
+							<p>Points perdus : <span class="lost-points-data">0</span></p>
+						</div>
+
+				</section>
+
+
+			<!-- Navigation entre les questions -->
+			<nav class="nav">
+				<button type="button" class="nav-button previous-button">Précédent</button>
+				<button type="button" class="nav-button validate-button">Valider</button>
+				<button type="button" class="nav-button feedback-button">Feedback</button>				<button type="button" class="nav-button next-button">Suivant</button>
+			</nav>
+		</main>
+
+		<!-- Ligne d'association -->
+		<div class="line-container"></div>
+
+		<!-- PopUp pour le feedback -->
+		<section class="popup">
+			<div class="popup-content">
+				<button type="button" class="close-button">Fermer</button>
+				<p class="feedback-title">Réponse</p>
+
+				<p class="feedback-text">null</p>
+				<p class="feedback-point"></p>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer>
+			<p>&copy; 2024 Groupe 2.</p>
+		</footer>
+
+		<!-- Script -->
+		<script src="../script/popup.js"></script>
+		<script src="../script/data.js"></script>
+		<script src="../script/indexTimed.js"></script>
+	</body>
+</html>
