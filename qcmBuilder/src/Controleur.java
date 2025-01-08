@@ -275,6 +275,20 @@ public class Controleur
 		return qcmBuilder.creerQuestion(type, code_nomRessource, nomNotion, text, timer, nbPoint, difficulte, lstReponse, explication);
 	}
 
+	/**
+	 * Modifie une question existante
+	 * 
+	 * @param type Le type de la question.
+	 * @param code_nomRessource Le code et le nom de la ressource.
+	 * @param nomNotion Le nom de la notion.
+	 * @param text Le nouveau texte de la question.
+	 * @param explication L'explication de la question.
+	 * @param timer Le temps limite pour répondre à la question.
+	 * @param nbPoint Le nombre de points attribués à la question.
+	 * @param difficulte La difficulté de la question.
+	 * @param textInitial Le texte de la question de base.
+	 * @return true si la question a été modifiée avec succès, false sinon.
+	 */
 	public boolean modifierQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, int difficulte, String textInitial)
 	{
 		return qcmBuilder.modifierQuestion(type, code_nomRessource, nomNotion, text, explication, timer, nbPoint, difficulte, textInitial);
