@@ -2,6 +2,12 @@ package src.ihm.question;
 
 import java.awt.*					;
 import java.awt.event.*				;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import javax.swing.*				;
 import src.Controleur				;
 import src.ihm.*					;
@@ -34,12 +40,48 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		this.fr   = fr  ;
 		this.paq  = paq ;
 		FileHandler.supprimerFichiersTemp();
+		String codeRessource = ressource.substring(0,ressource.indexOf("_"));
+		int numeroQuestion = this.ctrl.getNumeroQuestion(textInitiale, ressource, notion);
 
+		try
+		{
+			Path sourceDir = Paths.get( "../data/ressources_notions_questions/" + codeRessource + "/" + notion + "/question_" + numeroQuestion +"/complement" );
+			Path destDir   = Paths.get( "../data/ressources_notions_questions/temp" );
+
+			System.out.println( "sourceDir : " + sourceDir 
+							  + "\ndestDir : " + destDir );
+
+			if (!Files.exists(sourceDir) || !Files.isDirectory(sourceDir)) 
+				throw new IllegalArgumentException("Le répertoire source n'existe pas ou n'est pas un répertoire.");
+
+			if (!Files.exists(destDir) || !Files.isDirectory(destDir))
+				throw new IllegalArgumentException("Le répertoire dest n'existe pas ou n'est pas un répertoire.");
+
+			Files.list(sourceDir).forEach(sourceFile ->
+			{
+				try
+				{
+					Path destFile = destDir.resolve(sourceFile.getFileName());
+					Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
+					System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
+				}
+				catch (IOException e)
+				{
+					System.out.println( "Erreur lors de la copie du fichier : " + sourceFile + " - " + e.getMessage() );
+				}
+			});
+		}
+		catch (IOException e)
+		{
+			System.out.println( "Erreur lors de la copie des fichiers : " + e.getMessage() );
+		}
+
+		// Layout
 		this.setLayout    (new GridBagLayout());
 		this.setBackground(Color.LIGHT_GRAY);
 
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.insets = new Insets(5, 5, 5, 5) ;
+		gbc.insets = new Insets(2, 2, 2, 2) ;
 		gbc.fill   = GridBagConstraints.HORIZONTAL ;
 
 		// Initialisation
@@ -121,32 +163,36 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		this.btnModifier.addActionListener(this);
 
 		// Layout
+
+
+		this.afficherImage();
+
 		gbc.gridx = 0;
-		gbc.gridy = 0;
+		gbc.gridy = 1;
 		this.add(new JLabel("text question"), gbc);
 		gbc.gridx = 1;
 		this.add(this.textIntitule, gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 1;
+		gbc.gridy = 2;
 		this.add(new JLabel("Nombre de points"), gbc);
 		gbc.gridx = 1;
 		this.add(this.nbPoints, gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		this.add(new JLabel("Temps de réponse (m:s)"), gbc);
 		gbc.gridx = 1;
 		this.add(this.tpsReponses, gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		this.add(new JLabel("Explication"), gbc);
 		gbc.gridx = 1;
 		this.add(this.textExplication, gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		gbc.gridwidth = 1;
 		this.add(new JLabel("Niveau"), gbc);
 		gbc.gridx = 1;
@@ -154,32 +200,32 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 
 		gbc.gridx = 0;
-		gbc.gridy = 5;
+		gbc.gridy = 6;
 		gbc.gridwidth = 2;
 		this.add(createErrorPanel(this.msgErrTextQue), gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 6;
+		gbc.gridy = 7;
 		gbc.gridwidth = 2;
 		this.add(createErrorPanel(this.msgErrNbPts), gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 7;
+		gbc.gridy = 8;
 		gbc.gridwidth = 2;
 		this.add(createErrorPanel(this.msgErrTpsRep), gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 8;
+		gbc.gridy = 9;
 		gbc.gridwidth = 2;
 		this.add(createErrorPanel(this.msgErrExpl), gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 9;
+		gbc.gridy = 10;
 		gbc.gridwidth = 2;
 		this.add(createErrorPanel(this.msgErrNiv), gbc);
 
 		gbc.gridx = 0;
-		gbc.gridy = 10;
+		gbc.gridy = 11;
 		gbc.gridwidth = 2;
 		this.add(this.btnModifier, gbc);
 
@@ -319,34 +365,34 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		if (this.btnTF.isSelected())
 		{
 			this.btnTF.setIcon(new ImageIcon("../img/TF1.PNG"));
-			this.btnF.setIcon(new ImageIcon("../img/F2.PNG"));
-			this.btnM.setIcon(new ImageIcon("../img/M2.PNG"));
-			this.btnD.setIcon(new ImageIcon("../img/D2.PNG"));
+			this.btnF .setIcon(new ImageIcon("../img/F2.PNG" ));
+			this.btnM .setIcon(new ImageIcon("../img/M2.PNG" ));
+			this.btnD .setIcon(new ImageIcon("../img/D2.PNG" ));
 			this.msgErrNiv.setText("");
 		}
 
 		else if (this.btnF.isSelected())
 		{
 			this.btnTF.setIcon(new ImageIcon("../img/TF2.PNG"));
-			this.btnF.setIcon(new ImageIcon("../img/F1.PNG"));
-			this.btnM.setIcon(new ImageIcon("../img/M2.PNG"));
-			this.btnD.setIcon(new ImageIcon("../img/D2.PNG"));
+			this.btnF .setIcon(new ImageIcon("../img/F1.PNG"));
+			this.btnM .setIcon(new ImageIcon("../img/M2.PNG"));
+			this.btnD .setIcon(new ImageIcon("../img/D2.PNG"));
 			this.msgErrNiv.setText("");
 		}
 		else if (this.btnM.isSelected())
 		{
 			this.btnTF.setIcon(new ImageIcon("../img/TF2.PNG"));
-			this.btnF.setIcon(new ImageIcon("../img/F2.PNG"));
-			this.btnM.setIcon(new ImageIcon("../img/M1.PNG"));
-			this.btnD.setIcon(new ImageIcon("../img/D2.PNG"));
+			this.btnF .setIcon(new ImageIcon("../img/F2.PNG"));
+			this.btnM .setIcon(new ImageIcon("../img/M1.PNG"));
+			this.btnD .setIcon(new ImageIcon("../img/D2.PNG"));
 			this.msgErrNiv.setText("");
 		}
 		else if (this.btnD.isSelected())
 		{
 			this.btnTF.setIcon(new ImageIcon("../img/TF2.PNG"));
-			this.btnF.setIcon(new ImageIcon("../img/F2.PNG"));
-			this.btnM.setIcon(new ImageIcon("../img/M2.PNG"));
-			this.btnD.setIcon(new ImageIcon("../img/D1.PNG"));
+			this.btnF .setIcon(new ImageIcon("../img/F2.PNG"));
+			this.btnM .setIcon(new ImageIcon("../img/M2.PNG"));
+			this.btnD .setIcon(new ImageIcon("../img/D1.PNG"));
 			this.msgErrNiv.setText("");
 		}
 
@@ -376,6 +422,61 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 
 	}
 
+	public void afficherImage()
+	{
+		Path tempDir = Paths.get("../data/ressources_notions_questions/temp");
+		try
+		{
+			Path imagePath = tempDir.resolve("fichier_question.png");
+			if (Files.exists(imagePath)) 
+			{
+				try
+				{
+					ImageIcon icone = new ImageIcon(imagePath.toString());
+					Image image = icone.getImage();
+
+					int largeur = icone.getIconWidth();
+					int hauteur = icone.getIconHeight();
+
+					int tailleMax = 150;
+
+					int nouvelleLargeur, nouvelleLongueur;
+					if (largeur > hauteur)
+					{
+						nouvelleLargeur = tailleMax;
+						nouvelleLongueur = (int) ((double) hauteur / largeur * tailleMax);
+					}
+					else
+					{
+						nouvelleLongueur = tailleMax;
+						nouvelleLargeur = (int) ((double) largeur / hauteur * tailleMax);
+					}
+
+					// Redimensionnez l'image
+					Image imageModifie = image.getScaledInstance(nouvelleLargeur, nouvelleLongueur, Image.SCALE_SMOOTH);
+					ImageIcon iconeModifie = new ImageIcon(imageModifie);
+
+					JLabel imageLabel = new JLabel(iconeModifie);
+
+					GridBagConstraints gbcImage = new GridBagConstraints();
+					gbcImage.gridx = 0;
+					gbcImage.gridy = 0; 
+					gbcImage.gridwidth = 2;
+					gbcImage.insets = new Insets(0, 0, 0, 0); // Marges
+					this.add(imageLabel, gbcImage);
+
+				} catch (Exception e)
+				{
+					System.err.println("Erreur lors de l'affichage de l'image : " + e.getMessage());
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("Erreur lors de l'accès au répertoire temp : " + e.getMessage());
+		}
+
+	}
 	private void ajouterPassageSouris(JButton button)
 	{
 		button.setOpaque(true);

@@ -291,6 +291,23 @@ public class Notion
 	}
 
 	/**
+	 * Récupère le numéro de la question selon le texte de la question.
+	 * @param question
+	 * @return
+	 */
+	public int getNumeroQuestion(String question)
+	{
+		for (int i = 0; i < lstQuestions.size(); i++)
+		{
+			if (lstQuestions.get(i).getText().equals(question))
+			{
+				return i+1;
+			}
+		}
+		return -1;
+	}
+
+	/**
 	 * Ajoute une question à la liste des questions de la notion.
 	 * 
 	 * @param question

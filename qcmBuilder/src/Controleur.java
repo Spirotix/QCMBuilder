@@ -173,7 +173,6 @@ public class Controleur
 						for (Question q : n.getQuestions())
 							if (q.getText().equals(nomQuestion))
 							{
-								System.out.println("SupprimerC");
 								n.supprimerQuestion(q);
 							}
 		}
@@ -294,6 +293,10 @@ public class Controleur
 		return qcmBuilder.modifierQuestion(type, code_nomRessource, nomNotion, text, explication, timer, nbPoint, difficulte, textInitial);
 	}
 
+	public int getNumeroQuestion(String question, String ressource, String notion)
+	{
+		return qcmBuilder.getNumeroQuestion(question, ressource, notion);
+	}
 	/**
 	 * Génère un questionnaire.
 	 *
