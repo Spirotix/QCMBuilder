@@ -16,6 +16,7 @@ public class FrameListerQuestion extends JFrame implements ActionListener
 	{
 		this.ctrl=ctrl;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(750,350);
 		this.setLocationRelativeTo(null);
 
 

@@ -25,6 +25,8 @@ public class FrameExplication extends JFrame implements ActionListener
 		
 		this.setTitle   ("Creation d'une explications");
 		this.setSize    ( 500,500  );
+		this.setLocationRelativeTo   (null                );
+		
 
 		this.composant	= new JPanel	(			);
 		this.texts 		= new JTextArea (this.panelQCM.getTextExplication(),20,30);
