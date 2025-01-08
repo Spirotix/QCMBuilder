@@ -50,7 +50,7 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener {
 		panelReponsesContainer.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JPanel panelLabels = new JPanel(new GridLayout(1, 3));
-		panelLabels.add(new JLabel("              Supprimé"));
+		panelLabels.add(new JLabel("              Supprimer"));
 		panelLabels.add(new JLabel("         Contenu"));
 		panelLabels.add(new JLabel("  Bonne réponse"));
 		panelReponsesContainer.add(panelLabels, BorderLayout.NORTH);
