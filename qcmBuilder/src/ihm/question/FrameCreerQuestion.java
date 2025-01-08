@@ -49,7 +49,7 @@ public class FrameCreerQuestion extends JFrame implements ActionListener
 
 		this.retourMenu 	= new JMenuItem("Retour à l'accueil"		 );
 		this.retour			= new JMenuItem("Retour à la page précédente");
-		this.importerImage	= new JMenuItem("Importer image"			 );
+		this.importerImage	= new JMenuItem("Importer un fichier"		 );
 
 		menuAcceuil.add(this.retourMenu		);
 		menuRetour .add(this.retour			);

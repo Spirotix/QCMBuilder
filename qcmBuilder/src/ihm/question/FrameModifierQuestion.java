@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import src.Controleur;
+import src.ihm.PanelAfficherQuestion;
 
 public class FrameModifierQuestion extends JFrame implements ActionListener
 {
@@ -17,7 +18,7 @@ public class FrameModifierQuestion extends JFrame implements ActionListener
 	private JMenuItem importerImage;
 	private FileHandler fileHandler;
 
-	public FrameModifierQuestion(Controleur ctrl, String nomQuestion, String notion, String ressource)
+	public FrameModifierQuestion(Controleur ctrl, String nomQuestion, String notion, String ressource, PanelAfficherQuestion paq)
 	{
 		this.ctrl = ctrl;
 		this.fileHandler = new FileHandler("fichier_question");
@@ -49,7 +50,7 @@ public class FrameModifierQuestion extends JFrame implements ActionListener
 		this.setJMenuBar(menubMaBarre);
 
 
-		this.panelM = new PanelModifierQuestion(this.ctrl, this, nomQuestion, notion, ressource);
+		this.panelM = new PanelModifierQuestion(this.ctrl, this, nomQuestion, notion, ressource, paq);
 
 		this.add(this.panelM);
 

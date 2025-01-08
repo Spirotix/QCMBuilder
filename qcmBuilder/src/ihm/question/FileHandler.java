@@ -80,6 +80,9 @@ public class FileHandler
 			case "pdf":
 				gererPDF(file, extension); break;
 
+			case "mp4": 
+				gerervideo(file, extension); break;
+
 			default:
 				System.out.println("Type de fichier non supporté.");
 		}
@@ -127,6 +130,26 @@ public class FileHandler
 		File outputFile = new File(targetDirectory, renommerFichier(extension));
 		if (!file.renameTo(outputFile))
 			System.out.println("Erreur lors de la copie du fichier audio.");
+		else 
+			System.out.println("Fichier audio enregistré avec succès dans : " + outputFile.getAbsolutePath());
+	}
+
+	/**
+	 * Gère les fichiers video.
+	 * 
+	 * @param file Le fichier video à traiter.
+	 * @param extension L'extension du fichier video.
+	 * @throws IOException Si une erreur d'entrée/sortie se produit.
+	 */
+	private void gerervideo(File file, String extension) throws IOException 
+	{
+		File targetDirectory = new File("../data/ressources_notions_questions/temp");
+		if (!targetDirectory.exists()) 
+			 targetDirectory.mkdirs();
+
+		File outputFile = new File(targetDirectory, renommerFichier(extension));
+		if (!file.renameTo(outputFile))
+			System.out.println("Erreur lors de la copie du fichier video.");
 		else 
 			System.out.println("Fichier audio enregistré avec succès dans : " + outputFile.getAbsolutePath());
 	}

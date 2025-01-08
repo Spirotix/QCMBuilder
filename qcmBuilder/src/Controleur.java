@@ -92,7 +92,7 @@ public class Controleur
 							if (q.getText().equals(question))
 								return q.getNbPoint();
 		}
-		return 12;
+		return 0;
 	}
 
 	public int getTempsQuestion(String ressource, String notion, String question)
@@ -106,7 +106,54 @@ public class Controleur
 							if (q.getText().equals(question))
 								return q.getTimer();
 		}
+		return 0;
+	}
+
+	public String getExplicationQuestion(String ressource, String notion, String question)
+	{
+		for (Ressource r : this.qcmBuilder.getRessources())
+		{
+			if ((r.getCode() + "_" + r.getNom()).equals(ressource))
+				for (Notion n : r.getNotions())
+					if (n.getNom().equals(notion))
+						for (Question q : n.getQuestions())
+							if (q.getText().equals(question))
+								return q.getExplication();
+		}
+		return "null";
+	}
+
+	public int getDifficulteQuestion(String ressource, String notion, String question)
+	{
+		for (Ressource r : this.qcmBuilder.getRessources())
+		{
+			if ((r.getCode() + "_" + r.getNom()).equals(ressource))
+				for (Notion n : r.getNotions())
+					if (n.getNom().equals(notion))
+						for (Question q : n.getQuestions())
+							if (q.getText().equals(question))
+								return q.getDifficulte();
+		}
 		return 69;
+	}
+
+	public String getTypeQuestion(String ressource, String notion, String question)
+	{
+		for (Ressource r : this.qcmBuilder.getRessources())
+		{
+			if ((r.getCode() + "_" + r.getNom()).equals(ressource))
+				for (Notion n : r.getNotions())
+					if (n.getNom().equals(notion))
+						for (Question q : n.getQuestions())
+							if (q.getText().equals(question))
+								if (q instanceof QCM)
+									return "QCM";
+								else if (q instanceof Association)
+									return "Association";
+								else if (q instanceof Elimination)
+									return "Elimination";
+		}
+		return "null";
 	}
 	/**
 	 * Supprime une question donnée associée à une ressource et une notion.
@@ -115,6 +162,7 @@ public class Controleur
 	 * @param ressource Le nom de la ressource.
 	 * @param notion Le nom de la notion.
 	 */
+
 	public void supprimerQuestion(String nomQuestion, String ressource, String notion)
 	{
 		for (Ressource r : this.qcmBuilder.getRessources())
@@ -227,6 +275,20 @@ public class Controleur
 		return qcmBuilder.creerQuestion(type, code_nomRessource, nomNotion, text, timer, nbPoint, difficulte, lstReponse, explication);
 	}
 
+	/**
+	 * Modifie une question existante
+	 * 
+	 * @param type Le type de la question.
+	 * @param code_nomRessource Le code et le nom de la ressource.
+	 * @param nomNotion Le nom de la notion.
+	 * @param text Le nouveau texte de la question.
+	 * @param explication L'explication de la question.
+	 * @param timer Le temps limite pour répondre à la question.
+	 * @param nbPoint Le nombre de points attribués à la question.
+	 * @param difficulte La difficulté de la question.
+	 * @param textInitial Le texte de la question de base.
+	 * @return true si la question a été modifiée avec succès, false sinon.
+	 */
 	public boolean modifierQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, int difficulte, String textInitial)
 	{
 		return qcmBuilder.modifierQuestion(type, code_nomRessource, nomNotion, text, explication, timer, nbPoint, difficulte, textInitial);
