@@ -31,7 +31,7 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 		this.setVisible(true);
 	}
 
-	public void Update(String ressource,String notion)
+	public void update(String ressource,String notion)
 	{
 		this.ressource  = ressource	;
 		this.notion		= notion 	;
@@ -81,7 +81,7 @@ public class PanelAfficherQuestion extends JPanel implements ActionListener
 			if (e.getSource().equals(this.btnSup.get(i)))
 			{	
 				this.ctrl.supprimerQuestion(this.lstLabel.get(i).getText(), this.ressource, this.notion);
-				this.Update(this.ressource, this.notion);
+				this.update(this.ressource, this.notion);
 				return;
 			}
 

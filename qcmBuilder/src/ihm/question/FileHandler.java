@@ -17,6 +17,7 @@ public class FileHandler
 	 */
 	private JFileChooser fileChooser;
 	
+	private static final String dest = "../data/ressources_notions_questions/temp";
 	/**
 	 * Nom du fichier.
 	 */
@@ -62,6 +63,8 @@ public class FileHandler
 	{
 		if (file == null) return;
 
+		supprimerFichiersAvecNom();
+
 		String extension = getExtension(file.getName());
 		if (extension == null) 
 		{
@@ -88,6 +91,45 @@ public class FileHandler
 		}
 	}
 
+
+	private void supprimerFichiersAvecNom() 
+	{
+		File directory = new File(dest);
+		if (!directory.exists() || !directory.isDirectory()) 
+		{
+			System.out.println("Répertoire cible introuvable : " + dest);
+			return;
+		}
+
+		File[] fichiers = directory.listFiles();
+		if (fichiers == null) return;
+
+		System.out.println("nbFichier " + fichiers.length);
+		for (File fichier : fichiers) 
+		{
+			String nomFichierSansExtension = getBase(fichier.getName());
+			if (nomFichierSansExtension.equals(this.nomFichier))
+			{
+				boolean deleted = fichier.delete();
+				if (deleted)
+				{
+					System.out.println("Fichier existant supprimé : " + fichier.getName());
+				}
+				else
+				{
+					System.out.println("Échec de la suppression du fichier : " + fichier.getName());
+				}
+			}
+		}
+	}
+
+	private String getBase(String nom) 
+	{
+		int indexPoint = nom.lastIndexOf('.');
+
+		return nom.substring(0, indexPoint);
+
+	}
 	/**
 	 * Gère les fichiers image.
 	 * 
@@ -104,7 +146,7 @@ public class FileHandler
 			return;
 		}
 
-		File targetDirectory = new File("../data/ressources_notions_questions/temp");
+		File targetDirectory = new File(dest);
 		if (!targetDirectory.exists()) 
 			targetDirectory.mkdirs();
 
@@ -123,7 +165,7 @@ public class FileHandler
 	 */
 	private void gererAudio(File file, String extension) throws IOException 
 	{
-		File targetDirectory = new File("../data/ressources_notions_questions/temp");
+		File targetDirectory = new File(dest);
 		if (!targetDirectory.exists()) 
 			 targetDirectory.mkdirs();
 
@@ -143,7 +185,7 @@ public class FileHandler
 	 */
 	private void gerervideo(File file, String extension) throws IOException 
 	{
-		File targetDirectory = new File("../data/ressources_notions_questions/temp");
+		File targetDirectory = new File(dest);
 		if (!targetDirectory.exists()) 
 			 targetDirectory.mkdirs();
 
@@ -163,7 +205,7 @@ public class FileHandler
 	 */
 	private void gererPDF(File file, String extension) throws IOException 
 	{
-		File targetDirectory = new File("../data/ressources_notions_questions/temp");
+		File targetDirectory = new File(dest);
 		if (!targetDirectory.exists()) 
 			 targetDirectory.mkdirs();
 
@@ -194,7 +236,7 @@ public class FileHandler
 	 */
 	public static void supprimerFichiersTemp()
 	{
-		Path dir = Paths.get("../data/ressources_notions_questions/temp");
+		Path dir = Paths.get(dest);
 
 		try 
 		{
@@ -228,6 +270,8 @@ public class FileHandler
 	 */
 	private String renommerFichier(String extension) 
 	{
+		if (extension.equals("png") ||extension.equals("jpeg")||extension.equals("bmp")||extension.equals("gif"))
+			extension = "jpg";
 		return this.nomFichier + "." + extension;
 	}
 }

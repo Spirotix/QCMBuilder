@@ -9,3 +9,4 @@ N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION
 8;3;2.0;Elimination;F;90;null
 9;2;2.0;QCM;D;90;null
 10;2;2.0;Elimination;TF;90;null
+11;2;2.0;Elimination;D;90;null

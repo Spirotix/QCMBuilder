@@ -437,6 +437,14 @@ public class QCMBuilder
 		}
 	}
 
+	public int getNumeroQuestion(String question, String ressource, String notion)
+	{
+		Notion n = rechercherRessource(ressource).rechercherNotion(notion);
+		return n.getNumeroQuestion(question);
+	}
+	{
+		
+	}
 	public boolean modifierQuestion(String type, String code_nomRessource, String nomNotion, String text, String explication, int timer, double nbPoint, int difficulte, String textInitial)
 	{
 		Notion notion = rechercherRessource(code_nomRessource).rechercherNotion(nomNotion);
@@ -532,8 +540,7 @@ public class QCMBuilder
 					int nbD = ressource.rechercherNotion(tq.getNotion()).rechercherNbQuestionDifficulte(4);
 					if (tq.getNbD() > nbD)
 					{
-						System.out
-								.println("Il n'y a pas assez de questions difficile pour la notion " + tq.getNotion());
+						System.out.println("Il n'y a pas assez de questions difficile pour la notion " + tq.getNotion());
 						return false;
 					}
 					break;
@@ -587,10 +594,6 @@ public class QCMBuilder
 				}
 			}
 		}
-		/*for (Question q : lstQuestions)
-		{
-			System.out.println(q.toString());
-		}*/
 
 		new GenererQuestionnaire(nomRessource, chrono, nomQuestionnaire, lstTypeQuestionnaire, lstQuestions, chemin);
 		return true;

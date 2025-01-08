@@ -18,6 +18,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 	private JRadioButton 		btnTF, btnF, btnM, btnD														;
 	private JLabel 				msgErrNbPts, msgErrTpsRep, msgErrRess, msgErrNiv, msgErrNot, msgChoixType	;
 	private FrameCreerQuestion 	fr																			;
+	private JLabel 				nomFichier                                                                  ;
 
 	// Ressources finale
 	private String 	typeQuestion		;
@@ -56,6 +57,8 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.choixNotion = new Choice	(		);
 		this.choixNotion.add			(" "  	);
 		this.choixNotion.setEnabled		(false	);
+
+		this.nomFichier = new JLabel("");
 
 		this.btnGroupImg = new ButtonGroup (							   );
 		this.btnTF		 = new JRadioButton(new ImageIcon("../img/TF2.PNG"));
@@ -130,6 +133,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.btnCreer		.addActionListener	(this);
 
 		// Layout
+
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		this.add(new JLabel("Nombre de points")	, gbc);
@@ -191,6 +195,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 		gbc.gridx = 0;
 		gbc.gridy = 10;
+		this.add(this.nomFichier, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 11;
 		gbc.gridwidth = 2;
 		this.add(this.btnCreer					, gbc);
 
@@ -502,5 +510,10 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 				button.setBackground(button.getBackground().brighter());
 			}
 		});
+	}
+
+	public void setLabelFichier(String str)
+	{
+		this.nomFichier.setText(str);
 	}
 }

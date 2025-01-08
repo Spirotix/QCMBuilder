@@ -86,7 +86,7 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 
 		if (e.getSource().equals(this.choixNotion) && !this.choixNotion.getSelectedItem().equals(" ")) 
 		{
-			this.paq.Update(this.choixRessource.getSelectedItem(), this.choixNotion.getSelectedItem());
+			this.paq.update(this.choixRessource.getSelectedItem(), this.choixNotion.getSelectedItem());
 			this.repaint();
 			this.majIHM ();
 		}
