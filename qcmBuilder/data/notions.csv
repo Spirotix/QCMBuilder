@@ -18,10 +18,22 @@ R1.03;TP3
 R1.03;TD1
 R1.03;TD2
 R1.03;TD3
-R1.01;TPD1
 R1.11;TD1
 R1.11;TD2
 Rtest;notion1
 Rtest;notion2
 Rtest;notion3
 Rtest;notion4
+R1.05;Les fonctions
+R1.05;Jointures
+R1.01;Les Types de bases
+R1.01;Les Classes
+R1.01;Structure itérative
+R1.01;Les Piles et les Files
+R1.01;UML
+R1.01;Les interfaces
+R1.01;L'héritage
+R1.01;Tris de base
+R1.01;Les tableaux
+R1.01;Structure de base
+R1.01;Sous-Algorithmes
