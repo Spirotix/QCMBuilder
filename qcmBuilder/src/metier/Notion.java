@@ -138,6 +138,7 @@ public class Notion
 					default -> {
 						scTextQuestion.close();
 						scInformations.close();
+						scExplication.close();
 						throw new IllegalArgumentException( "Le niveau doit appartenir aux options suivantes : 'TF','F','M','D'");
 					}
 				}
