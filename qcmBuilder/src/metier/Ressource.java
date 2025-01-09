@@ -57,7 +57,7 @@ public class Ressource
 					{
 						try ( PrintWriter writerData = new PrintWriter( new FileWriter(fileInformations) ) )
 						{
-							writerData.println("N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS;EXPLICATION");
+							writerData.println("N_QUESTION;NOMBRE_REPONSES;POINT;TYPE;NIVEAU;TEMPS");
 						}
 						catch (IOException e) { e.printStackTrace(); }
 

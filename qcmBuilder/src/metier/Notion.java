@@ -68,6 +68,7 @@ public class Notion
 			{
 				File dossierComplement = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/complement");
 				File fileTextQuestion  = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_question.rtf");
+				File fileExplication   = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/explication.rtf");
 
 				if (!fileTextQuestion.getPath().contains("question_0"))
 				{
@@ -94,11 +95,13 @@ public class Notion
 				}
 
 				Scanner scTextQuestion = new Scanner(fileTextQuestion);
+				Scanner scExplication  = new Scanner(fileExplication );
 
 				if (!scTextQuestion.hasNextLine() || !scInformations.hasNextLine())
 				{
 					scInformations.close();
 					scTextQuestion.close();
+					scExplication .close();
 					return new ArrayList<>();
 				}
 
@@ -118,7 +121,12 @@ public class Notion
 				String type        =                    informations[3];
 				String sNiveau     =                    informations[4];
 				int    temps       = Integer.parseInt  (informations[5]);
-				String explication =                    informations[6];
+
+				String explication = scExplication.nextLine();
+				while (scExplication.hasNextLine())
+				{
+					explication += scExplication.nextLine();
+				}
 
 				int niveau;
 				switch (sNiveau)
@@ -220,9 +228,11 @@ public class Notion
 				{
 					scTextQuestion.close();
 					scInformations.close();
+					scExplication .close();
 					throw new IllegalArgumentException( "Le type doit appartenir aux options suivantes : 'Association','Elimination','QCM'");
 				}
 				scTextQuestion.close();
+				scExplication .close();
 			}
 			scInformations.close();
 		}
@@ -347,10 +357,12 @@ public class Notion
 				File dossierComplement = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/complement");
 				dossierComplement.mkdirs();
 
-				File fileData = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
+				File fileData        = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/" + this.nom + ".csv");
+				File fileExplication = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (this.lstQuestions.size() + 1) + "/explication.rtf");
 
 				try ( PrintWriter writerTextQuestion = new PrintWriter(new FileWriter(fileTextQuestion, false));
-				      PrintWriter writerData         = new PrintWriter(new FileWriter(fileData        ,  true)))
+				      PrintWriter writerData         = new PrintWriter(new FileWriter(fileData        ,  true));
+				      PrintWriter writerExplication  = new PrintWriter(new FileWriter(fileExplication ,  true)))
 				{
 					writerTextQuestion.println(question.getText());
 
@@ -504,9 +516,10 @@ public class Notion
 							question.getNbPoint()               + ";" +
 							question.getClass().getSimpleName() + ";" +
 							question.getStringDifficulte()      + ";" +
-							question.getTimer()                 + ";" +
-							question.getExplication()
+							question.getTimer()
 					);
+
+					writerExplication.println( question.getExplication() );
 				}
 			} catch (IOException e)
 			{
