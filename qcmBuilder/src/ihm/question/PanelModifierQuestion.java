@@ -365,7 +365,7 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		Path tempDir = Paths.get("../data/ressources_notions_questions/temp");
 		String fichierQuestionBase = "fichier_question";
 		
-		String[] extensions = { ".jpg", ".pdf", ".mp4", ".mp3" };
+		String[] extensions = { ".jpg", "png", ".pdf", ".mp4", ".mp3" };
 
 		try {
 
@@ -387,7 +387,7 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 				{
 					String fileName = cheminFichierQuestion.getFileName().toString();
 					String lowerCaseFileName = fileName.toLowerCase();
-					boolean isImage = lowerCaseFileName.endsWith(".png");
+					boolean isImage = lowerCaseFileName.endsWith(".jpg");
 
 					if (isImage)
 					{
@@ -467,7 +467,7 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 				}
 			}
 		} catch (Exception e) {
-			System.err.println("Erreur lors de l'accès au répertoire temp : " + e.getMessage());
+			System.err.println("Aucun fichier trouvé : " + e.getMessage());
 		}
 
 	}

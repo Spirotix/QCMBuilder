@@ -1,7 +1,6 @@
 package src;
 
 import java.util.ArrayList;
-
 import src.ihm.*;
 import src.metier.*;
 import src.metier.question.*;

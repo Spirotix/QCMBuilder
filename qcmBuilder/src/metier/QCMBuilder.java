@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
+
 import src.TypeQuestionnaire;
 import src.ihm.*;
 import src.metier.question.*;
@@ -547,6 +550,7 @@ public class QCMBuilder
 				}
 			}
 		}
+
 		List<Question> lstQuestions = new ArrayList<>();
 		List<Question> lstQuestionsNotion = new ArrayList<>();
 		for (TypeQuestionnaire tq : lstTypeQuestionnaire)
@@ -595,8 +599,20 @@ public class QCMBuilder
 			}
 		}
 
-		new GenererQuestionnaire(nomRessource, chrono, nomQuestionnaire, lstTypeQuestionnaire, lstQuestions);
-		return false;
+		JFileChooser chooser = new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+		if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+		{
+			String chemin = chooser.getSelectedFile().getAbsolutePath();
+			new GenererQuestionnaire(nomRessource, chrono, nomQuestionnaire, lstTypeQuestionnaire, lstQuestions, chemin);
+			return true;
+		}
+		else
+		{
+			System.out.println("Aucun répertoire sélectionné.");
+			return false;
+		}
 	}
 
 	/**

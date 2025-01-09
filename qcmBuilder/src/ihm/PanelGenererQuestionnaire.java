@@ -116,6 +116,7 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 				return ;
 			}
 
+
 			this.ctrl.genererQuestionnaire
 			(
 				this.choixRessource  .getSelectedItem(),
@@ -123,6 +124,8 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 				this.grille          .getSelectionner(),
 				this.nomQuestionnaire.getText()
 			);
+
+			
 		}
 	}
 
