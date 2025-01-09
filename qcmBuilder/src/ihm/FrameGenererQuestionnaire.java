@@ -40,7 +40,7 @@ public class FrameGenererQuestionnaire extends JFrame implements ActionListener
 		this.setTitle   ("Creation d'un questionnaire"	);
 		this.setSize    ( 500,600  						);
 
-		this.panelQ=new PanelGenererQuestionnaire(this.ctrl);
+		this.panelQ = new PanelGenererQuestionnaire(this.ctrl, this);
 
 		this.add (this.panelQ);
 

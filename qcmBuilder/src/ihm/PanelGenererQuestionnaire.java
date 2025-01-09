@@ -7,19 +7,21 @@ import src.Controleur;
 
 public class PanelGenererQuestionnaire extends JPanel implements ActionListener, ItemListener 
 {
-	private Controleur               ctrl                       ;
-	private Choice                   choixRessource             ;
-	private ButtonGroup              grpOuiNon                  ;
-	private JRadioButton             btnChronoOui, btnChronoNon ;
-	private JPanel                   ligne1, fin                ;
-	private PanelGrilleQuestionnaire grille                     ;
-	private JButton                  generer                    ;
-	private TextFieldPerso           nomQuestionnaire           ;
-	private JScrollPane              scrollPane                 ;
+	private Controleur                ctrl                       ;
+	private Choice                    choixRessource             ;
+	private ButtonGroup               grpOuiNon                  ;
+	private JRadioButton              btnChronoOui, btnChronoNon ;
+	private JPanel                    ligne1, fin                ;
+	private PanelGrilleQuestionnaire  grille                     ;
+	private JButton                   generer                    ;
+	private TextFieldPerso            nomQuestionnaire           ;
+	private JScrollPane               scrollPane                 ;
+	private FrameGenererQuestionnaire fr                         ;
 
-	public PanelGenererQuestionnaire(Controleur ctrl) 
+	public PanelGenererQuestionnaire(Controleur ctrl, FrameGenererQuestionnaire fr) 
 	{
 		this.ctrl = ctrl;
+		this.fr = fr;
 		this.setLayout(new BorderLayout()); 
 
 		/*
@@ -117,13 +119,19 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 			}
 
 
-			this.ctrl.genererQuestionnaire
+			if( this.ctrl.genererQuestionnaire
 			(
 				this.choixRessource  .getSelectedItem(),
 				this.btnChronoOui    .isSelected(),
 				this.grille          .getSelectionner(),
 				this.nomQuestionnaire.getText()
-			);
+			))
+			{
+				JOptionPane.showMessageDialog(null, "Le questionnaire à bien été généré", "Validation", JOptionPane.INFORMATION_MESSAGE);
+				new FrameMenu(this.ctrl);
+				this.fr.dispose();
+			}
+				
 
 			
 		}
