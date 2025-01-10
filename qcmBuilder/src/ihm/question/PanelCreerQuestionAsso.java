@@ -22,7 +22,7 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 	private int 						indiceReponse 				;
 	
 
-	public PanelCreerQuestionAsso(PanelCreerQuestion panelQ, FrameCreerAssociation fr, Controleur ctrl) 
+	public PanelCreerQuestionAsso(PanelCreerQuestion panelQ, FrameCreerAssociation fr, Controleur ctrl, String ressource, String notion) 
 	{
 		this.panelQ = panelQ;
 		this.fr 	= fr 	;
@@ -38,7 +38,14 @@ public class PanelCreerQuestionAsso extends JPanel implements ActionListener
 
 		// Créer et configurer le panneau de la question
 		JPanel panelQuestion = 	 new JPanel(new BorderLayout());
-		panelQuestion.add		(new JLabel("Question : "), BorderLayout.NORTH);
+
+		JPanel panelHaut = new JPanel (new GridLayout(3,1));
+		
+		panelHaut.add(new JLabel("Ressource : "+ressource));
+		panelHaut.add(new JLabel("Notion : "+notion		 ));
+		panelHaut.add(new JLabel("Question : "			 ));
+
+		panelQuestion.add(panelHaut, BorderLayout.NORTH);
 
 		this.question = new JTextArea(5, 30);
 		this.question.setLineWrap		(true);

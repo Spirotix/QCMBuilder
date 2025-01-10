@@ -17,10 +17,10 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 	private String                  txtExplication               ;
 	private FrameCreerQCMRepUnique  fr                           ;
 	private Controleur              ctrl                         ;
-	private String                  type                         ;
+	private String                  type 						 ;
 	private int                     indiceReponse                ;
 
-	public PanelCreerQCMRepUnique(PanelCreerQuestion panelQ, FrameCreerQCMRepUnique fr, Controleur ctrl, String type) 
+	public PanelCreerQCMRepUnique(PanelCreerQuestion panelQ, FrameCreerQCMRepUnique fr, Controleur ctrl, String type, String ressource, String notion) 
 	{
 		this.panelQ 		= panelQ;
 		this.ctrl			= ctrl	;
@@ -36,7 +36,14 @@ public class PanelCreerQCMRepUnique extends JPanel implements ActionListener
 
 		JPanel panelQuestion = new JPanel(new BorderLayout());
 		panelQuestion.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		panelQuestion.add(new JLabel("Question : "), BorderLayout.NORTH);
+
+		JPanel panelHaut = new JPanel (new GridLayout(3,1));
+		
+		panelHaut.add(new JLabel("Ressource : "+ressource));
+		panelHaut.add(new JLabel("Notion : "+notion		 ));
+		panelHaut.add(new JLabel("Question : "			 ));
+
+		panelQuestion.add(panelHaut, BorderLayout.NORTH);
 
 		this.question = new JTextArea(5, 30);
 		this.question.setLineWrap(true);

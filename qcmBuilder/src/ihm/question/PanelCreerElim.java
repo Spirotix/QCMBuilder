@@ -20,7 +20,7 @@ public class PanelCreerElim extends JPanel implements ActionListener
 	private Controleur							ctrl 						;
 	private int 								indiceReponse 				;
 
-	public PanelCreerElim(PanelCreerQuestion panelQ, FrameCreerElimination fr, Controleur ctrl) 
+	public PanelCreerElim(PanelCreerQuestion panelQ, FrameCreerElimination fr, Controleur ctrl, String ressource, String notion) 
 	{
 		this.panelQ 		= panelQ;
 		this.ctrl			= ctrl	;
@@ -34,7 +34,14 @@ public class PanelCreerElim extends JPanel implements ActionListener
 		this.setLayout(new BorderLayout());
 
 		JPanel panelQuestion = new JPanel(new BorderLayout());
-		panelQuestion.add(new JLabel("Question : "), BorderLayout.NORTH);
+		
+		JPanel panelHaut = new JPanel (new GridLayout(3,1));
+		
+		panelHaut.add(new JLabel("Ressource : "+ressource));
+		panelHaut.add(new JLabel("Notion : "+notion		 ));
+		panelHaut.add(new JLabel("Question : "			 ));
+
+		panelQuestion.add(panelHaut, BorderLayout.NORTH);
 
 		this.question = new JTextArea(5, 30);
 		this.question.setLineWrap(true);

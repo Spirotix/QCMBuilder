@@ -26,7 +26,7 @@ public class PanelListerQuestion extends JPanel implements  ItemListener
 		for (String s : this.ctrl.getChoixRessources())
 			this.choixRessource.add(s);
 		
-		this.choixNotion.add       ("");
+		this.choixNotion.add       ("								");
 		this.choixNotion.setEnabled(false);
 
 		this.choixRessource.addItemListener(this);

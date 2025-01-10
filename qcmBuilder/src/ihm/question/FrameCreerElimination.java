@@ -14,7 +14,7 @@ public class FrameCreerElimination extends JFrame implements ActionListener
 	private JMenuItem 				retourMenu	;
 	private JMenuItem 				retour		;
 
-	public FrameCreerElimination (PanelCreerQuestion panelQ, Controleur ctrl)
+	public FrameCreerElimination (PanelCreerQuestion panelQ, Controleur ctrl, String ressource, String notion)
 	{
 		this.panelQ=panelQ;
 		this.ctrl=ctrl;
@@ -43,7 +43,7 @@ public class FrameCreerElimination extends JFrame implements ActionListener
 		
 		
 
-		this.panel=new PanelCreerElim(this.panelQ, this, this.ctrl);
+		this.panel=new PanelCreerElim(this.panelQ, this, this.ctrl, ressource, notion);
 
 		this.add (this.panel);
 

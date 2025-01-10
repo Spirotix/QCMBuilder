@@ -25,6 +25,10 @@ IF EXIST "arg.list" IF EXIST "compile.list" (
 	REM		EXIT /B 1
 	REM	)
 
+		REM Création du dossier temporaire
+		cd data/ressources_notions_questions
+		mkdir temp
+		cd ../..
 		REM Execution de la classe principale
 		echo Execution de src/Controleur...
 		cd class
