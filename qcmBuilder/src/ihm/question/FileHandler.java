@@ -110,7 +110,7 @@ public class FileHandler
 			String nomFichierSansExtension = getBase(fichier.getName());
 			if (nomFichierSansExtension.equals(this.nomFichier))
 			{
-				boolean deleted = fichier.delete();
+				fichier.delete();
 			}
 		}
 	}
