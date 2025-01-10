@@ -33,15 +33,19 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 		this.setMaximumSize		(new Dimension(400, notions.size() * 50	));
 
 		// En-tête de la grille
-		JPanel header = new JPanel	(new GridLayout(1, 7	));
+		JPanel header		 = new JPanel	(new GridLayout(1, 2	));
+		JPanel headerDroite  = new JPanel	(new GridLayout(1, 6	));
 		header.setMaximumSize		(new Dimension(400, 30	));
 
 		header.add(new JLabel("Notion"	, SwingConstants.CENTER));
-		header.add(new JLabel(""		, SwingConstants.CENTER));
-		header.add(new JLabel("TF"		, SwingConstants.CENTER));
-		header.add(new JLabel("F"		, SwingConstants.CENTER));
-		header.add(new JLabel("M"		, SwingConstants.CENTER));
-		header.add(new JLabel("D"		, SwingConstants.CENTER));
+
+		headerDroite.add(new JLabel(""		, SwingConstants.CENTER));
+		headerDroite.add(new JLabel("TF"	, SwingConstants.CENTER));
+		headerDroite.add(new JLabel("F"		, SwingConstants.CENTER));
+		headerDroite.add(new JLabel("M"		, SwingConstants.CENTER));
+		headerDroite.add(new JLabel("D"		, SwingConstants.CENTER));
+
+		header.add(headerDroite);
 		
 
 		this.add(header);
@@ -49,19 +53,25 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 		// Ajout des notions
 		for (String notion : notions) 
 		{
-			JPanel ligneNotion = new JPanel(new GridLayout(1, 6));
+			JPanel ligneNotion 		 = new JPanel (new GridLayout(1,2 ));
+			JPanel ligneNotionDroite = new JPanel (new GridLayout(1, 5));
 
-			ligneNotion.setPreferredSize(new Dimension(400, 30));
-			ligneNotion.setMaximumSize	(new Dimension(400, 30));
+			ligneNotion.setPreferredSize (new Dimension(400, 30));
+			ligneNotion.setMaximumSize	 (new Dimension(400, 30));
 
-			ligneNotion.add(new JLabel(notion, SwingConstants.CENTER));
+			JPanel labelTemp = new JPanel(new FlowLayout(FlowLayout.LEFT)); 
+
+			labelTemp.add(new JLabel(notion), FlowLayout.LEFT);
+			labelTemp.setPreferredSize(new Dimension (notion.length(),notion.length()));
+
+			ligneNotion.add(labelTemp);
 
 			JCheckBox checkBox = new JCheckBox();
 			checkBox.addActionListener(this);
 			this.lstBox.add(checkBox);
-			ligneNotion.add(checkBox);
+			ligneNotionDroite.add(checkBox);
 
-			ArrayList<JTextField> rowFields = new ArrayList<>();
+			ArrayList<JTextField> rowFields = new ArrayList<>(); 
 			for (int i = 0; i < 4; i++) 
 			{
 				JTextField textField = new JTextField();
@@ -69,15 +79,17 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 				textField.setPreferredSize(new Dimension(40, 20));
 				textField.addActionListener(this);
 				rowFields	.add(textField);
-				ligneNotion	.add(textField);
+				ligneNotionDroite.add(textField);
 			}
 
+			ligneNotion.add(ligneNotionDroite);
 			this.add(ligneNotion);
 			this.lstTextField.add(rowFields);
 		}
 
 		// Pied de page
-		JPanel footer = new JPanel(new GridLayout(1, 7));
+		JPanel footer 		= new JPanel(new GridLayout(1, 2));
+		JPanel footerDroite = new JPanel(new GridLayout(1, 5));
 		footer.setMaximumSize(new Dimension(400, 30));
 
 		this.nbTFS	 = new JLabel("0");
@@ -88,14 +100,16 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 
 		footer.add(new JLabel("Nb questions", SwingConstants.CENTER));
 
-		footer.add(new JLabel(""));
-		footer.add(this.nbTFS	);
-		footer.add(this.nbFS	);
-		footer.add(this.nbMS	);
-		footer.add(this.nbDS	);
-		footer.add(this.nbTotal	);
+		footerDroite.add(new JLabel(""));
+		footerDroite.add(this.nbTFS	);
+		footerDroite.add(this.nbFS	);
+		footerDroite.add(this.nbMS	);
+		footerDroite.add(this.nbDS	);
 
+		footer.add(footerDroite);
 		this.add(footer);
+
+		this.add(this.nbTotal);
 
 		// Ajouter un JScrollPane pour le défilement
 		JScrollPane scrollPane = new JScrollPane(this);
