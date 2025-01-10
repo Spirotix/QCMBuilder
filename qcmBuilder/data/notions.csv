@@ -1,4 +1,23 @@
 CODE_RESSOURCE;NOTION
+<<<<<<< HEAD
+=======
+R1.02;TP1
+R1.02;TP2
+R1.02;TP3
+R1.02;TP4
+R1.02;TP5
+R1.02;TP6
+R1.02;TP7
+R1.02;TP8
+R1.03;TP1
+R1.03;TP2
+R1.03;TP3
+R1.03;TD1
+R1.03;TD2
+R1.03;TD3
+R1.11;TD1
+R1.11;TD2
+>>>>>>> 8150cbaa007b651c61a984bc001e1243f2bae34a
 R1.05;Les fonctions
 R1.05;Jointures
 R1.01;Les Types de bases
@@ -7,8 +26,12 @@ R1.01;Structure itérative
 R1.01;Les Piles et les Files
 R1.01;UML
 R1.01;Les interfaces
-R1.01;L'héritage
 R1.01;Tris de base
 R1.01;Les tableaux
 R1.01;Structure de base
 R1.01;Sous-Algorithmes
+R1.05;MCD/MLD
+R2.01;Héritage
+R2.01;Paquetages
+R2.01;Interfaces
+R2.01;Création de classe
