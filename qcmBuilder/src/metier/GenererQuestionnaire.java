@@ -398,7 +398,7 @@ public class GenererQuestionnaire
 						sRet += String.format("""
 								<div class="answer">
 									<input type="radio" name="answer" id="answer%d" value="answer%d">
-									<label for="answer%d">%s</label><img src="%s" alt="%s" width=50 height=50></p>
+									<label for="answer%d">%s</label><img src="%s" alt="%s" width=50 height=50>
 								</div>
 		""", lstReponses.indexOf(r)+1, lstReponses.indexOf(r)+1, lstReponses.indexOf(r)+1, r.getText(), tempPath, r.getText());
 					}

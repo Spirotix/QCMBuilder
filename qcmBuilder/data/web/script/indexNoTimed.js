@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function ()
 		hintValue = 0;
 		if (usedHint < correctAnswers[currentQuestion-1][1].length)
 		{
-			hintValue = correctAnswers[currentQuestion-1][1][usedHint+1][1];
+			hintValue = correctAnswers[currentQuestion-1][1][usedHint][1];
 		}
 		const hintCost = document.querySelector('.hint-cost');
 		hintCost.textContent = hintValue;
@@ -785,14 +785,14 @@ function showHint()
 	// Vérifier si il reste des indices à utiliser
 	if(usedHint < correctAnswers[currentQuestion-1][1].length)
 	{
-		const hint           = correctAnswers[currentQuestion-1][1][usedHint][0];
-		const hintValue      = correctAnswers[currentQuestion-1][1][usedHint][1];
+		hint           = correctAnswers[currentQuestion-1][1][usedHint][0];
+		hintValue      = correctAnswers[currentQuestion-1][1][usedHint][1];
 		const hintElement    = document.querySelector(`#${hint}`);
 
 		// Désactiver l'indice mis en place par l'enseignant
 		hintElement.disabled = true;
 		hintElement.nextElementSibling.style.textDecoration = 'line-through';
-		usedHint++;
+		
 
 		// Prendre en compte les indices utilisés
 		hintPoint -= hintValue;
@@ -804,20 +804,25 @@ function showHint()
 		hintCurrentData.textContent = usedHint;
 		hintTotalData.textContent = correctAnswers[currentQuestion-1][1].length;
 
-		const hintCost = document.querySelector('.hint-cost');
-		hintCost.textContent = hintValue;
+
+		
+		
+		const hintLostPointElement = document.querySelector('.lost-points-data');
+		hintLostPointElement.textContent = hintPoint;
+		
+
+		usedHint++;
 		
 
 		// Affiche le nombre de point perdus par indices
 		if(usedHint < correctAnswers[currentQuestion-1][1].length)
 		{
-			const hintPointElement = document.querySelector('.lost-points-data');
-			hintPointElement.textContent = '-' + correctAnswers[currentQuestion-1][1][usedHint][1];
+			hintValue      = correctAnswers[currentQuestion-1][1][usedHint][1];
+			const hintCost = document.querySelector('.hint-cost');
+			hintCost.textContent = hintValue;
 		}
 		else
 		{
-			const hintButton = document.querySelector('.lost-points-data');
-			hintButton.textContent = hintPoint;
 			const hintPointElement = document.querySelector('.cout');
 			hintPointElement.style.display = 'none';
 		}
