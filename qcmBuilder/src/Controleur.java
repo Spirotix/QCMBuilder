@@ -80,6 +80,15 @@ public class Controleur
 		return str;
 	}
 
+	/**
+	 * Récupère le nombre de points attribués à une question donnée associée à une ressource et une notion.
+	 * 
+	 * @param ressource Le nom de la ressource.
+	 * @param notion Le nom de la notion.
+	 * @param question Le texte de la question.
+	 * 
+	 * @return Le nombre de points attribués à la question.
+	 */
 	public double getNbPointQuestion(String ressource, String notion, String question)
 	{
 		for (Ressource r : this.qcmBuilder.getRessources())
@@ -91,9 +100,18 @@ public class Controleur
 							if (q.getText().equals(question))
 								return q.getNbPoint();
 		}
-		return 0;
+		return -1;
 	}
 
+	/**
+	 * Récupère le temps imparti pour répondre à une question donnée associée à une ressource et une notion.
+	 * 
+	 * @param ressource Le nom de la ressource.
+	 * @param notion Le nom de la notion.
+	 * @param question Le texte de la question.
+	 * 
+	 * @return Le temps imparti pour répondre à la question.
+	 */
 	public int getTempsQuestion(String ressource, String notion, String question)
 	{
 		for (Ressource r : this.qcmBuilder.getRessources())
@@ -105,9 +123,18 @@ public class Controleur
 							if (q.getText().equals(question))
 								return q.getTimer();
 		}
-		return 0;
+		return -1;
 	}
 
+	/**
+	 * Récupère l'explication associée à une question donnée associée à une ressource et une notion.
+	 * 
+	 * @param ressource Le nom de la ressource.
+	 * @param notion Le nom de la notion.
+	 * @param question Le texte de la question.
+	 * 
+	 * @return L'explication associée à la question.
+	 */
 	public String getExplicationQuestion(String ressource, String notion, String question)
 	{
 		for (Ressource r : this.qcmBuilder.getRessources())
@@ -122,6 +149,15 @@ public class Controleur
 		return "null";
 	}
 
+	/**
+	 * Récupère la difficulté associée à une question donnée associée à une ressource et une notion.
+	 * 
+	 * @param ressource Le nom de la ressource.
+	 * @param notion Le nom de la notion.
+	 * @param question Le texte de la question.
+	 * 
+	 * @return La difficulté associée à la question.
+	 */
 	public int getDifficulteQuestion(String ressource, String notion, String question)
 	{
 		for (Ressource r : this.qcmBuilder.getRessources())
@@ -133,9 +169,18 @@ public class Controleur
 							if (q.getText().equals(question))
 								return q.getDifficulte();
 		}
-		return 69;
+		return -1;
 	}
 
+	/**
+	 * Récupère le type associé à une question donnée associée à une ressource et une notion.
+	 * 
+	 * @param ressource Le nom de la ressource.
+	 * @param notion Le nom de la notion.
+	 * @param question Le texte de la question.
+	 * 
+	 * @return Le type associé à la question.
+	 */
 	public String getTypeQuestion(String ressource, String notion, String question)
 	{
 		for (Ressource r : this.qcmBuilder.getRessources())
@@ -292,6 +337,15 @@ public class Controleur
 		return qcmBuilder.modifierQuestion(type, code_nomRessource, nomNotion, text, explication, timer, nbPoint, difficulte, textInitial);
 	}
 
+	/**
+	 * Récupère le numéro d'une question donnée associée à une ressource et une notion.
+	 * 
+	 * @param question Le texte de la question.
+	 * @param ressource Le nom de la ressource.
+	 * @param notion Le nom de la notion.
+	 * 
+	 * @return Le numéro de la question.
+	 */
 	public int getNumeroQuestion(String question, String ressource, String notion)
 	{
 		return qcmBuilder.getNumeroQuestion(question, ressource, notion);

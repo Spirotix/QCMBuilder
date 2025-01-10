@@ -564,6 +564,15 @@ public class Notion
 		return true;
 	}
 
+	/**
+	 * Supprime une question de la liste des questions de la notion.
+	 * 
+	 * @param valeur La valeur de la question à supprimer.
+	 * @param fichier Le fichier contenant les informations des questions.
+	 * @param repertoireQuestion Le répertoire contenant les questions.
+	 * 
+	 * @return true si la question a été supprimée avec succès, false sinon.
+	 */
 	public static void supprimerLigneEtRepertoire(int valeur, File fichier, File repertoireQuestion)
 	{
 		// Supprimer le répertoire
@@ -633,6 +642,11 @@ public class Notion
 			System.out.println("Impossible de supprimer le fichier original.");*/
 	}
 
+	/**
+	 * Supprime un répertoire et son contenu de manière récursive.
+	 * 
+	 * @param dossier Le répertoire à supprimer.
+	 */
 	private static void supprimerRepertoireRecursif(File dossier)
 	{
 		if (dossier.exists())
@@ -686,6 +700,12 @@ public class Notion
 		return null;
 	}
 
+	/**
+	 * Recherche le nombre de question d'une difficulté donnée.
+	 * 
+	 * @param difficulte La difficulté des questions à rechercher.
+	 * @return Le nombre de questions trouvées.
+	 */
 	public int rechercherNbQuestionDifficulte(int difficulte)
 	{
 		int nb = 0;
@@ -697,6 +717,12 @@ public class Notion
 		return nb;
 	}
 
+	/**
+	 * Recherche les questions d'une difficulté donnée.
+	 * 
+	 * @param difficulte La difficulté des questions à rechercher.
+	 * @return La liste des questions trouvées.
+	 */
 	public List<Question> rechercherQuestionsDifficulte(int difficulte)
 	{
 		List<Question> lst = new ArrayList<>();

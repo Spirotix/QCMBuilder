@@ -254,6 +254,10 @@ public class Association implements Question
 		this.urlImage = urlImage;
 	}
 
+	/**
+	 * Permet de mélanger les réponses d'une question.
+	 *
+	 */
 	public void melanger()
 	{
 		Collections.shuffle(lstReponseAsso);

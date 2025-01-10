@@ -491,6 +491,16 @@ public class QCMBuilder
 		}
 	}
 
+	/**
+	 * Génère le questionnaire à partir d'une liste de types de questions.
+	 * 
+	 * @param nomRessource Le nom de la ressource.
+	 * @param chrono       Indique si le questionnaire est chronométré.
+	 * @param lstTypeQuestionnaire La liste des types de questions à inclure.
+	 * @param nomQuestionnaire Le nom du questionnaire.
+	 * 
+	 * @return true si le questionnaire a été généré, false sinon.
+	 */
 	public boolean genererQuestionnaire(String nomRessource, boolean chrono, List<TypeQuestionnaire> lstTypeQuestionnaire, String nomQuestionnaire)
 	{
 		Ressource ressource = this.rechercherRessource(nomRessource);
@@ -618,8 +628,7 @@ public class QCMBuilder
 	/**
 	 * Point d'entrée principal de l'application.
 	 * 
-	 * @param args
-	 *            Les arguments de la ligne de commande.
+	 * @param args Les arguments de la ligne de commande.
 	 */
 	public static void main(String[] args)
 	{
