@@ -69,15 +69,16 @@ QCMBuilder est une application permettant aux enseignants de l'IUT du Havre de c
 
 1. Lancez l'application Java en utilisant le run.sh ou run.bat
 2. utiliser les boutons de l'ihm pour sois créer/modifier des questions, créer des notions/ressource ou générer le questionnaire
-   ![menu d'accueil](https://github.com/user-attachments/assets/501c2bdb-43dc-4cbc-9193-d46f1ab6b815)
-3. Choisissez les options souhaitez pour créer votre question
-   ![Création question](https://github.com/user-attachments/assets/947fb6e1-e06b-449a-b986-8cc711f9021b)
-4. selon le type de question la fenêtre sera différente :
+   
+   ![menu](https://github.com/user-attachments/assets/f160d5f0-5f4c-4739-b31e-8a0718523323)
+4. Choisissez les options souhaitez pour créer votre question
+   ![Crée question](https://github.com/user-attachments/assets/b300f040-b55e-475c-86dc-196e333cfe7a)
+5. selon le type de question la fenêtre sera différente :
 
-   ![image](https://github.com/user-attachments/assets/198fe3f7-1827-4eaa-bea1-412723851969)![image](https://github.com/user-attachments/assets/efcf7554-aa39-4749-98c6-8f2c5509c15e)![image](https://github.com/user-attachments/assets/10a6b41b-e683-46a1-8091-e66a9752a137)
+![QCU](https://github.com/user-attachments/assets/42241c81-5eb1-422f-a997-2cd080a50113)![QCM](https://github.com/user-attachments/assets/cea77947-7e82-4917-bd5e-8fba2784db34)![Asso](https://github.com/user-attachments/assets/e298fc80-abbb-4da3-ad10-22f60e009b45)![Elim](https://github.com/user-attachments/assets/18f1b304-b592-45a9-b847-e1b43aea8e8c)
 
 6. Générez une évaluation en sélectionnant les notions et niveaux souhaités.
-  ![image](https://github.com/user-attachments/assets/43bb378b-0232-4451-92e0-050180a32cab)
+![Généré questionnaire](https://github.com/user-attachments/assets/a18cb860-076c-4b2b-98e0-1a87bb80148d)
 7. Partagez les fichiers HTML générés avec les étudiants.
 
 ### Pour les étudiants
