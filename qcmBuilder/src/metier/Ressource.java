@@ -61,7 +61,7 @@ public class Ressource
 						}
 						catch (IOException e) { e.printStackTrace(); }
 
-						System.out.println("FICHIER " + nomNotion + ".csv CREE");
+						//System.out.println("FICHIER " + nomNotion + ".csv CREE");
 					}
 
 					Notion notion = new Notion(nomNotion, this);
@@ -106,14 +106,14 @@ public class Ressource
 					String line = scanner.nextLine();
 					if ( line.equals( this.getCode() + notion.getNom() ) )
 					{
-						System.out.println("La ligne existe déjà");
+						//System.out.println("La ligne existe déjà");
 						scanner.close();
 						writer .close();
 						return false;
 					}
 
-					System.out.println("Ligne : " + line);
-					System.out.println("Ajout : " + this.getCode() + ";" + notion.getNom() + "\n");
+					//System.out.println("Ligne : " + line);
+					//System.out.println("Ajout : " + this.getCode() + ";" + notion.getNom() + "\n");
 				}
 
 				File fileRep = new File( "../data/ressources_notions_questions/" + this.getCode() + "/" + notion.getNom() );
@@ -178,7 +178,7 @@ public class Ressource
 			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
 			while ((ligne = br.readLine()) != null)
 			{
-				System.out.println(ligne);
+				//System.out.println(ligne);
 				String[] parts = ligne.split(";");
 				if (parts.length > 1)
 				{
@@ -186,7 +186,7 @@ public class Ressource
 					String nomNotion     = parts[1];
 					if ( codeRessource.equals( notion.getRessource().getCode() ) && nomNotion.equals( notion.getNom() ) && ! ligneSupprimee )
 					{
-						System.out.println("Ligne supprimée : " + ligne);
+						//System.out.println("Ligne supprimée : " + ligne);
 						ligneSupprimee = true;
 						continue; // Ne pas écrire cette ligne
 					}
@@ -204,12 +204,12 @@ public class Ressource
 	
 		// Remplacer le fichier original par le fichier temporaire
 		if (fichier.delete())
-			if (!fichierTemp.renameTo(fichier))
-				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			fichierTemp.renameTo(fichier);
+			/*	System.out.println("Erreur lors du renommage du fichier temporaire.");
 			else
 				System.out.println("Fichier mis à jour avec succès.");
 		else
-			System.out.println("Impossible de supprimer le fichier original.");
+			System.out.println("Impossible de supprimer le fichier original.");*/
 
 			// Supprimer le répertoire
 		supprimerRepertoireRecursif(repertoireNotion);
@@ -226,10 +226,10 @@ public class Ressource
 					for (File fichier : fichiers)
 						supprimerRepertoireRecursif(fichier);
 			}
-			if (dossier.delete())
-				System.out.println("Supprimé : " + dossier.getAbsolutePath());
+			dossier.delete();
+			/*	System.out.println("Supprimé : " + dossier.getAbsolutePath());
 			else
-				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());
+				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());*/
 		}
 	}
 
@@ -281,8 +281,8 @@ public class Ressource
 					if ( codeRessource.equals( notion.getRessource().getCode() ) && nomNotion.equals( notion.getNom() ) && ! ligneModifiee )
 					{
 						bw.write( codeRessource + ";" + nouveauNom );
-						System.out.println("Ligne modifiee : " + ligne + "\n" +
-						                   "                 " + codeRessource + ";" + nouveauNom);
+						/*System.out.println("Ligne modifiee : " + ligne + "\n" +
+						                   "                 " + codeRessource + ";" + nouveauNom);*/
 						ligneModifiee = true;
 					}
 				}
@@ -299,12 +299,12 @@ public class Ressource
 
 		// Remplacer le fichier original par le fichier temporaire
 		if (fichier.delete())
-			if (!fichierTemp.renameTo(fichier))
-				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			fichierTemp.renameTo(fichier);
+				/*System.out.println("Erreur lors du renommage du fichier temporaire.");
 			else
 				System.out.println("Fichier mis à jour avec succès.");
 		else
-			System.out.println("Impossible de supprimer le fichier original.");
+			System.out.println("Impossible de supprimer le fichier original.");*/
 
 		notion.setNom(nouveauNom);
 

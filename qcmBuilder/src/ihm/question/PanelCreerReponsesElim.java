@@ -151,7 +151,7 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 
 			this.imageImporter.setIcon(new ImageIcon(imageRetaillee));
 
-			System.out.println(this.imageImporter.getIcon());
+			//System.out.println(this.imageImporter.getIcon());
 		} 
 		catch (IOException ex) 
 		{

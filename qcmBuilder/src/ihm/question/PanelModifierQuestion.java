@@ -49,8 +49,8 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 			Path sourceDir = Paths.get( "../data/ressources_notions_questions/" + codeRessource + "/" + notion + "/question_" + numeroQuestion +"/complement" );
 			Path destDir   = Paths.get( "../data/ressources_notions_questions/temp" );
 
-			System.out.println( "sourceDir : " + sourceDir 
-							  + "\ndestDir : " + destDir );
+			/*.println( "sourceDir : " + sourceDir 
+							  + "\ndestDir : " + destDir );*/
 
 			if (!Files.exists(sourceDir) || !Files.isDirectory(sourceDir)) 
 				throw new IllegalArgumentException("Le répertoire source n'existe pas ou n'est pas un répertoire.");
@@ -64,7 +64,7 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 				{
 					Path destFile = destDir.resolve(sourceFile.getFileName());
 					Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
-					System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
+					//System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
 				}
 				catch (IOException e)
 				{

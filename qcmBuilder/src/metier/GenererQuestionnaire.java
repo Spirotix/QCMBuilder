@@ -102,7 +102,7 @@ public class GenererQuestionnaire
 			for (Question q : lstQuestions)
 			{
 				q.setIndice(q.getNotions().getQuestions().indexOf(q)+1);
-				System.out.println(q.getText()+" : "+q.getIndice());
+				//System.out.println(q.getText()+" : "+q.getIndice());
 
 				Files.createDirectories(Paths.get(chemin+"/fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)));
 
@@ -117,7 +117,7 @@ public class GenererQuestionnaire
 					{
 						Path destFile = destDir.resolve(sourceFile.getFileName());
 						Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
-						System.out.println( "Fichier copié : " + srcDir + " -> " + destFile );
+						//System.out.println( "Fichier copié : " + srcDir + " -> " + destFile );
 					}
 					catch (IOException e)
 					{
@@ -451,7 +451,7 @@ public class GenererQuestionnaire
 
 			for (ReponseAssociation r : lstReponses)
 			{
-				System.out.println(r.getUrlImage());
+				//System.out.println(r.getUrlImage());
 				if (r.estAGauche())
 				{
 					String tempPath = "../fichier_complementaire/images_questions_"+(lstQuestions.indexOf(q)+1)+"/fichier_reponse_gauche"+(Math.round((double)(lstReponses.indexOf(r)+1)/2))+".jpg";
@@ -606,7 +606,7 @@ public class GenererQuestionnaire
 						sRet += "\t[";
 						for (ReponseElimination r : lstReponses)
 						{
-							System.out.println(r.estVrai());
+							//System.out.println(r.estVrai());
 							if (r.estVrai())
 							{
 								sRet += String.format("""

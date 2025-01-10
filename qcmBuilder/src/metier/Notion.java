@@ -86,7 +86,7 @@ public class Notion
 						{
 							e.printStackTrace();
 						}
-						System.out.println("\tFICHIER text_question CREE");
+						//System.out.println("\tFICHIER text_question CREE");
 					}
 				}
 				else
@@ -331,7 +331,7 @@ public class Notion
 		{
 			if (q.getText().equals(question.getText()))
 			{
-				System.out.println("Cette question existe déjà, veuillez changer la question.");
+				//System.out.println("Cette question existe déjà, veuillez changer la question.");
 				return false;
 			}
 		}
@@ -400,7 +400,7 @@ public class Notion
 								{
 									Path destFile = destDir.resolve(sourceFile.getFileName());
 									Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
-									System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
+									//System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
 								}
 								catch (IOException e)
 								{
@@ -446,7 +446,7 @@ public class Notion
 								{
 									Path destFile = destDir.resolve(sourceFile.getFileName());
 									Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
-									System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
+									//System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
 								}
 								catch (IOException e)
 								{
@@ -496,7 +496,7 @@ public class Notion
 								{
 									Path destFile = destDir.resolve(sourceFile.getFileName());
 									Files.copy(sourceFile, destFile, StandardCopyOption.REPLACE_EXISTING);
-									System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
+									//System.out.println( "Fichier copié : " + sourceFile + " -> " + destFile );
 								}
 								catch (IOException e)
 								{
@@ -593,13 +593,12 @@ public class Notion
 						// Renommer le répertoire si besoin
 						if (oldDir.exists() && !oldDir.equals(newDir))
 						{
-							if (newDir.exists())
-								System.out.println("Erreur : le répertoire cible existe déjà : " + newDir.getPath());
-							else
-								if (oldDir.renameTo(newDir))
-									System.out.println("Renommé : " + oldDir.getPath() + " en " + newDir.getPath());
+							if (!newDir.exists())
+								//System.out.println("Erreur : le répertoire cible existe déjà : " + newDir.getPath());
+								oldDir.renameTo(newDir);
+									/*System.out.println("Renommé : " + oldDir.getPath() + " en " + newDir.getPath());
 								else
-									System.out.println("Erreur lors du renommage de : " + oldDir.getPath());
+									System.out.println("Erreur lors du renommage de : " + oldDir.getPath());*/
 						}
 
 						bw.write((numeroQuestion - 1) + ligne.substring(ligne.indexOf(";")));
@@ -608,7 +607,7 @@ public class Notion
 					}
 					else if (numeroQuestion == valeur)
 					{
-						System.out.println("Ligne supprimée : " + ligne);
+						//System.out.println("Ligne supprimée : " + ligne);
 						ligneSupprimee = true;
 						continue; // Directement nouvelle itération du while, sans faire le reste
 					}
@@ -626,12 +625,12 @@ public class Notion
 	
 		// Remplacer le fichier original par le fichier temporaire
 		if (fichier.delete())
-			if (!fichierTemp.renameTo(fichier))
-				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			fichierTemp.renameTo(fichier);
+				/*System.out.println("Erreur lors du renommage du fichier temporaire.");
 			else
 				System.out.println("Fichier mis à jour avec succès.");
 		else
-			System.out.println("Impossible de supprimer le fichier original.");
+			System.out.println("Impossible de supprimer le fichier original.");*/
 	}
 
 	private static void supprimerRepertoireRecursif(File dossier)
@@ -645,10 +644,8 @@ public class Notion
 					for (File fichier : fichiers)
 						supprimerRepertoireRecursif(fichier);
 			}
-			if (dossier.delete())
-				System.out.println("Supprimé : " + dossier.getAbsolutePath());
-			else
-				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());
+			dossier.delete();
+			
 		}
 	}
 

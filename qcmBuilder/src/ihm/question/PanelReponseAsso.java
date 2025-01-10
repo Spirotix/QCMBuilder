@@ -127,7 +127,7 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 
 			this.imageImporterG.setIcon(new ImageIcon(imageRetaillee));
 			
-			System.out.println(this.imageImporterG.getIcon());
+			//System.out.println(this.imageImporterG.getIcon());
 		} 
 		catch (IOException ex) 
 		{
@@ -147,7 +147,7 @@ public class PanelReponseAsso extends JPanel implements ActionListener
 
 			this.imageImporterD.setIcon(new ImageIcon(imageRetaillee));
 			
-			System.out.println(this.imageImporterD.getIcon());
+			//System.out.println(this.imageImporterD.getIcon());
 		} 
 		catch (IOException ex) 
 		{

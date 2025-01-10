@@ -49,15 +49,6 @@ public class PanelNotion extends JPanel implements ActionListener
 			
 		for (int i = 0 ; i < this.lstLabel.size() ; i++)
 		{
-			this.lstLabel.get(i).addMouseListener(new MouseAdapter() 
-			{
-				@Override
-				public void mouseClicked(MouseEvent e) 
-				{
-					//JOptionPane.showMessageDialog(frame, "Label cliqué !");
-					System.out.println(e);
-				}
-			});
 			this.add(this.lstPanel.get(i));
 		}
 

@@ -58,8 +58,8 @@ public class QCMBuilder
 			{
 				String lineRessource = scannerRessource.nextLine();
 
-				System.out.println();
-				System.out.println(lineRessource);
+				/*System.out.println();
+				System.out.println(lineRessource);*/
 
 				String codeRessource = lineRessource.substring(0, lineRessource.indexOf(";"));
 				String nomRessource = lineRessource.substring(lineRessource.indexOf(";") + 1);
@@ -121,14 +121,14 @@ public class QCMBuilder
 					String line = scanner.nextLine();
 					if ( line.equals( ressource.getCode() + ";" + ressource.getNom() ) )
 					{
-						System.out.println("La ligne existe déjà");
+						//System.out.println("La ligne existe déjà");
 						scanner.close();
 						writer .close();
 						return false;
 					}
 
-					System.out.println("Ligne : " + line);
-					System.out.println("Ajout : " + ressource.getCode() + ";" + ressource.getNom() + "\n");
+					/*System.out.println("Ligne : " + line);
+					System.out.println("Ajout : " + ressource.getCode() + ";" + ressource.getNom() + "\n");*/
 				}
 
 				File fileRep = new File( "../data/ressources_notions_questions/" + ressource.getCode() );
@@ -208,7 +208,7 @@ public class QCMBuilder
 					String nomRessource  = parts[1];
 					if ( codeRessource.equals( ressource.getCode() ) && nomRessource.equals( ressource.getNom() ) && ! ligneSupprimee )
 					{
-						System.out.println("Ligne supprimée : " + ligne);
+						//System.out.println("Ligne supprimée : " + ligne);
 						ligneSupprimee = true;
 						continue; // Ne pas écrire cette ligne
 					}
@@ -226,12 +226,12 @@ public class QCMBuilder
 
 		// Remplacer le fichier original par le fichier temporaire
 		if (fichier.delete())
-			if (!fichierTemp.renameTo(fichier))
-				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			fichierTemp.renameTo(fichier);
+				/*System.out.println("Erreur lors du renommage du fichier temporaire.");
 			else
 				System.out.println("Fichier mis à jour avec succès.");
 		else
-			System.out.println("Impossible de supprimer le fichier original.");
+			System.out.println("Impossible de supprimer le fichier original.");*/
 
 			// Supprimer le répertoire
 			supprimerRepertoireRecursif(repertoireRessource);
@@ -248,10 +248,10 @@ public class QCMBuilder
 					for (File fichier : fichiers)
 						supprimerRepertoireRecursif(fichier);
 			}
-			if (dossier.delete())
-				System.out.println("Supprimé : " + dossier.getAbsolutePath());
+			dossier.delete();
+				/*System.out.println("Supprimé : " + dossier.getAbsolutePath());
 			else
-				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());
+				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());*/
 		}
 	}
 
@@ -310,8 +310,8 @@ public class QCMBuilder
 					if ( codeRessource.equals( ressource.getCode() ) && nomRessource.equals( ressource.getNom() ) && ! ligneModifiee )
 					{
 						bw.write( codeRessource + ";" + nouveauNom );
-						System.out.println("Ligne modifiee : " + ligne + "\n" +
-						                   "                 " + codeRessource + ";" + nouveauNom);
+						/*System.out.println("Ligne modifiee : " + ligne + "\n" +
+						                   "                 " + codeRessource + ";" + nouveauNom);*/
 						ligneModifiee = true;
 					}
 				}
@@ -328,12 +328,12 @@ public class QCMBuilder
 
 		// Remplacer le fichier original par le fichier temporaire
 		if (fichier.delete())
-			if (!fichierTemp.renameTo(fichier))
-				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			fichierTemp.renameTo(fichier);
+			/*	System.out.println("Erreur lors du renommage du fichier temporaire.");
 			else
 				System.out.println("Fichier mis à jour avec succès.");
 		else
-			System.out.println("Impossible de supprimer le fichier original.");
+			System.out.println("Impossible de supprimer le fichier original.");*/
 
 		ressource.setNom(nouveauNom);
 
@@ -435,7 +435,7 @@ public class QCMBuilder
 		}
 		else
 		{
-			System.out.println("Le type de la question crée est invalide, ou n'est pas pris en charge.");
+			//System.out.println("Le type de la question crée est invalide, ou n'est pas pris en charge.");
 			return false;
 		}
 	}
@@ -486,7 +486,7 @@ public class QCMBuilder
 		}
 		else
 		{
-			System.out.println("Le type de la question est invalide, ou n'est pas pris en charge.");
+			//System.out.println("Le type de la question est invalide, ou n'est pas pris en charge.");
 			return false;
 		}
 	}
@@ -496,7 +496,7 @@ public class QCMBuilder
 		Ressource ressource = this.rechercherRessource(nomRessource);
 		if (ressource == null)
 		{
-			System.out.println("La ressource " + nomRessource + " n'existe pas.");
+			//System.out.println("La ressource " + nomRessource + " n'existe pas.");
 			return false;
 		}
 
@@ -504,7 +504,7 @@ public class QCMBuilder
 		{
 			if (!(ressource.rechercherNotion(tq.getNotion()) != null))
 			{
-				System.out.println("La notion " + tq.getNotion() + " n'existe pas dans la ressource " + nomRessource);
+				//System.out.println("La notion " + tq.getNotion() + " n'existe pas dans la ressource " + nomRessource);
 				return false;
 			}
 		}
@@ -518,8 +518,8 @@ public class QCMBuilder
 					int nbTf = ressource.rechercherNotion(tq.getNotion()).rechercherNbQuestionDifficulte(1);
 					if (tq.getNbTf() > nbTf)
 					{
-						System.out.println(
-								"Il n'y a pas assez de questions très facile pour la notion " + tq.getNotion());
+						//System.out.println(
+						//		"Il n'y a pas assez de questions très facile pour la notion " + tq.getNotion());
 						return false;
 					}
 					break;
@@ -527,7 +527,7 @@ public class QCMBuilder
 					int nbF = ressource.rechercherNotion(tq.getNotion()).rechercherNbQuestionDifficulte(2);
 					if (tq.getNbF() > nbF)
 					{
-						System.out.println("Il n'y a pas assez de questions facile pour la notion " + tq.getNotion());
+						//System.out.println("Il n'y a pas assez de questions facile pour la notion " + tq.getNotion());
 						return false;
 					}
 					break;
@@ -535,7 +535,7 @@ public class QCMBuilder
 					int nbM = ressource.rechercherNotion(tq.getNotion()).rechercherNbQuestionDifficulte(3);
 					if (tq.getNbM() > nbM)
 					{
-						System.out.println("Il n'y a pas assez de questions moyenne pour la notion " + tq.getNotion());
+						//System.out.println("Il n'y a pas assez de questions moyenne pour la notion " + tq.getNotion());
 						return false;
 					}
 					break;
@@ -543,7 +543,7 @@ public class QCMBuilder
 					int nbD = ressource.rechercherNotion(tq.getNotion()).rechercherNbQuestionDifficulte(4);
 					if (tq.getNbD() > nbD)
 					{
-						System.out.println("Il n'y a pas assez de questions difficile pour la notion " + tq.getNotion());
+						//System.out.println("Il n'y a pas assez de questions difficile pour la notion " + tq.getNotion());
 						return false;
 					}
 					break;
@@ -610,7 +610,7 @@ public class QCMBuilder
 		}
 		else
 		{
-			System.out.println("Aucun répertoire sélectionné.");
+			//System.out.println("Aucun répertoire sélectionné.");
 			return false;
 		}
 	}
