@@ -122,10 +122,15 @@ public class Notion
 				String sNiveau     =                    informations[4];
 				int    temps       = Integer.parseInt  (informations[5]);
 
-				String explication = scExplication.nextLine();
+				String explication = "Aucune explication.";
+
 				if ( scExplication.hasNextLine() )
+				{
+					explication = "";
+
 					while (scExplication.hasNextLine())
-						explication += scExplication.nextLine();
+						explication += scExplication.nextLine() + "\n";
+				}
 
 				int niveau;
 				switch (sNiveau)
@@ -209,12 +214,13 @@ public class Notion
 
 					for (int numReponse = 1; numReponse <= nbReponses; numReponse++)
 					{
-						Scanner scReponse = new Scanner(new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf"));
+						File fileReponse = new File("../data/ressources_notions_questions/" + this.ressource.getCode() + "/" + this.nom + "/question_" + (lstQuestions.size() + 1) + "/text_reponse_" + numReponse + ".rtf");
+						Scanner scReponse = new Scanner(fileReponse);
 
 						String lineTextReponse = scReponse.nextLine();
 
 						lstReponse.add(new ReponseQCM(
-						                              lineTextReponse.substring(lineTextReponse.indexOf("} ") + 2, lineTextReponse.indexOf("|")),
+						                              lineTextReponse.substring(lineTextReponse.indexOf("} ") + 1, lineTextReponse.indexOf("|")),
 						                              lineTextReponse.substring(lineTextReponse.indexOf( "|") + 1                                  )
 						                             )
 						              );
