@@ -23,6 +23,9 @@ if [[ -f "arg.list" && -f "compile.list" ]]; then
 
 		# Exécution de la classe principale
 		echo "Exécution de src/Controleur..."
+		cd data/ressources_notions_questions
+		mkdir temp
+		cd ../..
 		cd class
 		java src/Controleur
 	else
