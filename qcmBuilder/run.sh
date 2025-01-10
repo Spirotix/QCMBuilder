@@ -21,11 +21,12 @@ if [[ -f "arg.list" && -f "compile.list" ]]; then
 	#		exit 1
 	#	fi
 
-		# Exécution de la classe principale
-		echo "Exécution de src/Controleur..."
+		# Création du dossier temporaire
 		cd data/ressources_notions_questions
 		mkdir temp
 		cd ../..
+		# Exécution de la classe principale
+		echo "Exécution de src/Controleur..."
 		cd class
 		java src/Controleur
 	else
