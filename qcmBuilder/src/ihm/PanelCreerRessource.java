@@ -77,10 +77,17 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 	{
 		if (e.getSource().equals(this.btnAjouterN))
 		{
+			if (this.panelR.getSelecionner() == null)
+			{
+				JOptionPane.showMessageDialog(null, "Veuillez selectionner une Ressource", "Attention", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+
 			if (this.textNomN.getText().equals(""))
 				JOptionPane.showMessageDialog(null, "Rentrer tous les champs avant de créer une notion", "Attention", JOptionPane.WARNING_MESSAGE);
 			else 
-				this.ctrl.ajouterNotion( this.panelN.getRessource(),this.textNomN.getText());
+				if (!this.ctrl.ajouterNotion( this.panelN.getRessource(),this.textNomN.getText()))
+					JOptionPane.showMessageDialog(null, "la notion existe deja", "Attention", JOptionPane.WARNING_MESSAGE);
 		}
 
 		if (e.getSource().equals(this.btnAjouterR))
@@ -88,7 +95,8 @@ public class PanelCreerRessource extends JPanel implements ActionListener
 			if (this.textNumR.getText().equals("") || this.textNumR.getText().equals(""))
 				JOptionPane.showMessageDialog(null, "Rentrer tous les champs avant de créer une ressource", "Attention", JOptionPane.WARNING_MESSAGE);
 			else 
-				this.ctrl.ajouterRessource(this.textNumR.getText(), this.textNomR.getText());
+				if (!this.ctrl.ajouterRessource(this.textNumR.getText(), this.textNomR.getText()))
+					JOptionPane.showMessageDialog(null, "le code de la ressource exite deja", "Attention", JOptionPane.WARNING_MESSAGE);	
 		}
 		this.panelR.Update();
 		this.panelN.Update(panelN.getRessource());

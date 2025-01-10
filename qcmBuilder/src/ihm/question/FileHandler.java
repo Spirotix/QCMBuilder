@@ -49,7 +49,7 @@ public class FileHandler
 		if (response == JFileChooser.APPROVE_OPTION) 
 			return this.fileChooser.getSelectedFile();
 
-		System.out.println("Aucun fichier sélectionné.");
+		//System.out.println("Aucun fichier sélectionné.");
 		return null;
 	}
 
@@ -68,7 +68,7 @@ public class FileHandler
 		String extension = getExtension(file.getName());
 		if (extension == null) 
 		{
-			System.out.println("Type de fichier inconnu.");
+			//System.out.println("Type de fichier inconnu.");
 			return;
 		}
 
@@ -97,28 +97,20 @@ public class FileHandler
 		File directory = new File(dest);
 		if (!directory.exists() || !directory.isDirectory()) 
 		{
-			System.out.println("Répertoire cible introuvable : " + dest);
+			//System.out.println("Répertoire cible introuvable : " + dest);
 			return;
 		}
 
 		File[] fichiers = directory.listFiles();
 		if (fichiers == null) return;
 
-		System.out.println("nbFichier " + fichiers.length);
+		//System.out.println("nbFichier " + fichiers.length);
 		for (File fichier : fichiers) 
 		{
 			String nomFichierSansExtension = getBase(fichier.getName());
 			if (nomFichierSansExtension.equals(this.nomFichier))
 			{
-				boolean deleted = fichier.delete();
-				if (deleted)
-				{
-					System.out.println("Fichier existant supprimé : " + fichier.getName());
-				}
-				else
-				{
-					System.out.println("Échec de la suppression du fichier : " + fichier.getName());
-				}
+				fichier.delete();
 			}
 		}
 	}
@@ -142,7 +134,7 @@ public class FileHandler
 		BufferedImage image = ImageIO.read(file);
 		if (image == null) 
 		{
-			System.out.println("Le fichier sélectionné n'est pas une image valide.");
+			//System.out.println("Le fichier sélectionné n'est pas une image valide.");
 			return;
 		}
 
@@ -153,7 +145,7 @@ public class FileHandler
 		File outputFile = new File(targetDirectory, renommerFichier(extension));
 		ImageIO.write(image, extension, outputFile);
 
-		System.out.println("Image enregistrée avec succès dans : " + outputFile.getAbsolutePath());
+		//System.out.println("Image enregistrée avec succès dans : " + outputFile.getAbsolutePath());
 	}
 
 	/**
@@ -170,10 +162,10 @@ public class FileHandler
 			 targetDirectory.mkdirs();
 
 		File outputFile = new File(targetDirectory, renommerFichier(extension));
-		if (!file.renameTo(outputFile))
-			System.out.println("Erreur lors de la copie du fichier audio.");
+		file.renameTo(outputFile);
+			/*System.out.println("Erreur lors de la copie du fichier audio.");
 		else 
-			System.out.println("Fichier audio enregistré avec succès dans : " + outputFile.getAbsolutePath());
+			System.out.println("Fichier audio enregistré avec succès dans : " + outputFile.getAbsolutePath());*/
 	}
 
 	/**
@@ -190,10 +182,10 @@ public class FileHandler
 			 targetDirectory.mkdirs();
 
 		File outputFile = new File(targetDirectory, renommerFichier(extension));
-		if (!file.renameTo(outputFile))
-			System.out.println("Erreur lors de la copie du fichier video.");
+		file.renameTo(outputFile);
+		/*	System.out.println("Erreur lors de la copie du fichier video.");
 		else 
-			System.out.println("Fichier audio enregistré avec succès dans : " + outputFile.getAbsolutePath());
+			System.out.println("Fichier audio enregistré avec succès dans : " + outputFile.getAbsolutePath());*/
 	}
 
 	/**
@@ -210,10 +202,10 @@ public class FileHandler
 			 targetDirectory.mkdirs();
 
 		File outputFile = new File(targetDirectory, renommerFichier(extension));
-		if (!file.renameTo(outputFile))
-			System.out.println("Erreur lors de la copie du fichier PDF.");
+		file.renameTo(outputFile);
+			/*System.out.println("Erreur lors de la copie du fichier PDF.");
 		else 
-			System.out.println("Fichier PDF enregistré avec succès dans : " + outputFile.getAbsolutePath());
+			System.out.println("Fichier PDF enregistré avec succès dans : " + outputFile.getAbsolutePath());*/
 	}
 
 	/**
@@ -247,7 +239,7 @@ public class FileHandler
 					if (Files.isRegularFile(file)) 
 					{
 						Files.delete(file);
-						System.out.println("Fichier supprimé : " + file);
+						//System.out.println("Fichier supprimé : " + file);
 					}
 				} 
 				catch (IOException e) 

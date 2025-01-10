@@ -22,12 +22,23 @@ public class Ressource
 	private String       nom;
 	private List<Notion> lstNotions;
 
+	/**
+	 * Constructeur de la classe Ressource.
+	 * 
+	 * @param code Le code de la ressource.
+	 * @param nom  Le nom de la ressource.
+	 */
 	public Ressource(String code, String nom)
 	{
 		this.code       = code;
 		this.nom        = nom;
 		this.lstNotions = lireNotions();
 	}
+
+	/**
+	 * Lit les notions associées à la ressource.
+	 * @return La liste des notions associées à la ressource.
+	 */
 
 	private List<Notion> lireNotions()
 	{
@@ -61,7 +72,7 @@ public class Ressource
 						}
 						catch (IOException e) { e.printStackTrace(); }
 
-						System.out.println("FICHIER " + nomNotion + ".csv CREE");
+						//System.out.println("FICHIER " + nomNotion + ".csv CREE");
 					}
 
 					Notion notion = new Notion(nomNotion, this);
@@ -75,16 +86,40 @@ public class Ressource
 		return notions;
 	}
 
+	/**
+	 * Retourne le code de la ressource.
+	 * @return Le code de la ressource.
+	 */
 	public String       getCode()    { return this.code;       }
+
+	/**
+	 * Retourne le nom de la ressource.
+	 * @return Le nom de la ressource.
+	 */
 	public String       getNom()     { return this.nom;        }
+
+	/**
+	 * Retourne la liste des notions associées à la ressource.
+	 * @return La liste des notions associées à la ressource.
+	 */
 	public List<Notion> getNotions() { return this.lstNotions; }
 
+	/**
+	 * Modifie le nom de la ressource.
+	 * @param nom Le nouveau nom de la ressource.
+	 * @return true si le nom a été modifié, false sinon.
+	 */
 	public boolean setNom(String nom)
 	{ 
 		this.nom = nom;
 		return true;
 	}
 
+	/**
+	 * Ajoute une notion à la ressource.
+	 * @param notion La notion à ajouter.
+	 * @return true si la notion a été ajoutée, false sinon.
+	 */
 	public boolean ajouterNotion(Notion notion)
 	{
 		for ( Notion n : lstNotions )
@@ -106,14 +141,14 @@ public class Ressource
 					String line = scanner.nextLine();
 					if ( line.equals( this.getCode() + notion.getNom() ) )
 					{
-						System.out.println("La ligne existe déjà");
+						//System.out.println("La ligne existe déjà");
 						scanner.close();
 						writer .close();
 						return false;
 					}
 
-					System.out.println("Ligne : " + line);
-					System.out.println("Ajout : " + this.getCode() + ";" + notion.getNom() + "\n");
+					//System.out.println("Ligne : " + line);
+					//System.out.println("Ajout : " + this.getCode() + ";" + notion.getNom() + "\n");
 				}
 
 				File fileRep = new File( "../data/ressources_notions_questions/" + this.getCode() + "/" + notion.getNom() );
@@ -139,6 +174,11 @@ public class Ressource
 		}
 	}
 
+	/**
+	 * Supprime une notion de la ressource.
+	 * @param notion La notion à supprimer.
+	 * @return true si la notion a été supprimée, false sinon.
+	 */
 	public boolean supprimerNotion(Notion notion)
 	{
 		if (notion == null)
@@ -165,6 +205,13 @@ public class Ressource
 		return true;
 	}
 
+	/**
+	 * Supprime une ligne dans un fichier CSV et un répertoire.
+	 * 
+	 * @param notion La notion à supprimer.
+	 * @param fichier Le fichier CSV.
+	 * @param repertoireNotion Le répertoire de la notion.
+	 */
 	public static void supprimerLigneEtRepertoire(Notion notion, File fichier, File repertoireNotion)
 	{
 		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
@@ -178,7 +225,7 @@ public class Ressource
 			// Parcourir le fichier et écrire toutes les lignes sauf celle à supprimer
 			while ((ligne = br.readLine()) != null)
 			{
-				System.out.println(ligne);
+				//System.out.println(ligne);
 				String[] parts = ligne.split(";");
 				if (parts.length > 1)
 				{
@@ -186,7 +233,7 @@ public class Ressource
 					String nomNotion     = parts[1];
 					if ( codeRessource.equals( notion.getRessource().getCode() ) && nomNotion.equals( notion.getNom() ) && ! ligneSupprimee )
 					{
-						System.out.println("Ligne supprimée : " + ligne);
+						//System.out.println("Ligne supprimée : " + ligne);
 						ligneSupprimee = true;
 						continue; // Ne pas écrire cette ligne
 					}
@@ -204,17 +251,22 @@ public class Ressource
 	
 		// Remplacer le fichier original par le fichier temporaire
 		if (fichier.delete())
-			if (!fichierTemp.renameTo(fichier))
-				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			fichierTemp.renameTo(fichier);
+			/*	System.out.println("Erreur lors du renommage du fichier temporaire.");
 			else
 				System.out.println("Fichier mis à jour avec succès.");
 		else
-			System.out.println("Impossible de supprimer le fichier original.");
+			System.out.println("Impossible de supprimer le fichier original.");*/
 
 			// Supprimer le répertoire
 		supprimerRepertoireRecursif(repertoireNotion);
 	}
 
+	/**
+	 * Supprime un répertoire et son contenu récursivement.
+	 * 
+	 * @param dossier Le répertoire à supprimer.
+	 */
 	private static void supprimerRepertoireRecursif(File dossier)
 	{
 		if (dossier.exists())
@@ -226,13 +278,19 @@ public class Ressource
 					for (File fichier : fichiers)
 						supprimerRepertoireRecursif(fichier);
 			}
-			if (dossier.delete())
-				System.out.println("Supprimé : " + dossier.getAbsolutePath());
+			dossier.delete();
+			/*	System.out.println("Supprimé : " + dossier.getAbsolutePath());
 			else
-				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());
+				System.out.println("Impossible de supprimer : " + dossier.getAbsolutePath());*/
 		}
 	}
 
+	/**
+	 * Recherche une notion par son nom.
+	 * 
+	 * @param nom Le nom de la notion à rechercher.
+	 * @return La notion trouvée, ou null si aucune notion n'a été trouvée.
+	 */
 	public Notion rechercherNotion(String nom)
 	{
 		Notion notionTrouvee = null;
@@ -281,8 +339,8 @@ public class Ressource
 					if ( codeRessource.equals( notion.getRessource().getCode() ) && nomNotion.equals( notion.getNom() ) && ! ligneModifiee )
 					{
 						bw.write( codeRessource + ";" + nouveauNom );
-						System.out.println("Ligne modifiee : " + ligne + "\n" +
-						                   "                 " + codeRessource + ";" + nouveauNom);
+						/*System.out.println("Ligne modifiee : " + ligne + "\n" +
+						                   "                 " + codeRessource + ";" + nouveauNom);*/
 						ligneModifiee = true;
 					}
 				}
@@ -299,12 +357,12 @@ public class Ressource
 
 		// Remplacer le fichier original par le fichier temporaire
 		if (fichier.delete())
-			if (!fichierTemp.renameTo(fichier))
-				System.out.println("Erreur lors du renommage du fichier temporaire.");
+			fichierTemp.renameTo(fichier);
+				/*System.out.println("Erreur lors du renommage du fichier temporaire.");
 			else
 				System.out.println("Fichier mis à jour avec succès.");
 		else
-			System.out.println("Impossible de supprimer le fichier original.");
+			System.out.println("Impossible de supprimer le fichier original.");*/
 
 		notion.setNom(nouveauNom);
 

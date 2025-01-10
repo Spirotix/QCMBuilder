@@ -99,7 +99,7 @@ public class FrameExplication extends JFrame implements ActionListener
 	{
 		if (e.getSource().equals(this.valider))
 		{
-			System.out.println(this.texts.getText());
+			//System.out.println(this.texts.getText());
 			if (this.panelQCM!=null)
 				this.panelQCM .setTxtExplication(this.texts.getText());
 			if (this.panelAsso!=null)

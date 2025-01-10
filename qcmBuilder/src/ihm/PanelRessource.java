@@ -8,16 +8,18 @@ import src.Controleur;
 
 public class PanelRessource extends JPanel implements ActionListener
 {
-	private Controleur 			ctrl	 ;
-	private PanelCreerRessource panelC	 ;
-	private ArrayList<JLabel> 	lstLabel ;
-	private ArrayList<JButton> 	lstSup	 ;
-	private ArrayList<JPanel>	lstPanel ;
+	private Controleur 			ctrl		  ;
+	private PanelCreerRessource panelC		  ;
+	private ArrayList<JLabel> 	lstLabel	  ;
+	private ArrayList<JButton> 	lstSup		  ;
+	private ArrayList<JPanel>	lstPanel	  ;
+	private JLabel 				estSelecionner;
 
 	public PanelRessource (Controleur ctrl, PanelCreerRessource panelC)
 	{
-		this.ctrl=ctrl		;
-		this.panelC=panelC	;
+		this.ctrl=ctrl			  ;
+		this.panelC=panelC		  ;
+		this.estSelecionner = null;
 
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -50,6 +52,7 @@ public class PanelRessource extends JPanel implements ActionListener
 				{
 					//JOptionPane.showMessageDialog(frame, "Label cliqué !");
 					panelC.getPanelNotion().Update(temp.getText());
+					estSelecionner = temp ;
 					Update();
 				}
 			});
@@ -107,6 +110,7 @@ public class PanelRessource extends JPanel implements ActionListener
 				{
 					// JOptionPane.showMessageDialog(frame, "Label cliqué !");
 					panelC.getPanelNotion().Update(temp.getText());
+					estSelecionner = temp ;
 					Update();
 				}
 			});
@@ -159,4 +163,6 @@ public class PanelRessource extends JPanel implements ActionListener
 			}
 		});
 	}
+
+	public JLabel getSelecionner() {return this.estSelecionner;}
 }
