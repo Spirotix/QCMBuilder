@@ -282,9 +282,23 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 
 					minute  = Integer.parseInt(this.tpsReponses.getText().substring (0,this.tpsReponses.getText().indexOf(':')));
 					seconde = Integer.parseInt(this.tpsReponses.getText().substring (  this.tpsReponses.getText().indexOf(':')+1));
-
-					this.tempsQuestion = minute*60 + seconde;
-					this.msgErrTpsRep.setText("");
+					if (seconde>60 ||  seconde<5)
+					{
+						this.msgErrTpsRep.setForeground	(Color.RED								 );
+						this.msgErrTpsRep.setText	("Le nombre de secondes doit être compris entre 5 et 60 secondes");
+						peutCreer = false;
+					}
+					else if (minute<0)
+					{
+						this.msgErrTpsRep.setForeground	(Color.RED								 );
+						this.msgErrTpsRep.setText	("Le nombre de minutes doit être supérieure à 0");
+						peutCreer = false;
+					}
+					else
+					{
+						this.tempsQuestion = minute*60 + seconde;
+						this.msgErrTpsRep.setText("");
+					}			
 				} 
 				catch (Exception ex) 
 				{
