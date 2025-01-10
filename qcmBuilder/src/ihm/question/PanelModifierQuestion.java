@@ -21,7 +21,7 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 	private ButtonGroup           btnGroupImg                                                     ;
 	private JButton               btnModifier                                                     ;
 	private JRadioButton          btnTF, btnF, btnM, btnD	                                      ;
-	private JLabel                msgErrNbPts, msgErrTpsRep, msgErrNiv, msgErrTextQue, msgErrExpl ;
+	private JLabel                msgErrNbPts, msgErrTpsRep, msgErrNiv, msgErrTextQue ;
 	private FrameModifierQuestion fr                                                              ;
 
 	// Ressources finale
@@ -137,7 +137,6 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		this.msgErrTpsRep  = new JLabel("");
 		this.msgErrNiv     = new JLabel("");
 		this.msgErrTextQue = new JLabel("");
-		this.msgErrExpl    = new JLabel("");
 
 		this.btnModifier = new JButton("Modifier");
 
@@ -257,17 +256,6 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 					this.msgErrTpsRep.setText      ("Temps question : Vous devez respecter le format demandé");
 					peutModifier = false;
 				}
-			}
-			if (this.textExplication.getText().equals("")) 
-			{
-				this.msgErrExpl.setForeground(Color.RED);
-				this.msgErrExpl.setText      ("Explication question : Vous devez rentrer une explication");
-				peutModifier = false;
-			} 
-			else
-			{
-				this.explicationQuestion = this.textExplication.getText();
-				this.msgErrExpl.setText("");
 			}
 
 			if (!(this.btnTF.isSelected() || this.btnF.isSelected() || this.btnM.isSelected() || this.btnD.isSelected())) 
@@ -523,11 +511,6 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 		gbc.gridy = 8;
 		gbc.gridwidth = 2;
 		this.add(createErrorPanel(this.msgErrTpsRep), gbc);
-
-		gbc.gridx = 0;
-		gbc.gridy = 9;
-		gbc.gridwidth = 2;
-		this.add(createErrorPanel(this.msgErrExpl), gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy = 10;
