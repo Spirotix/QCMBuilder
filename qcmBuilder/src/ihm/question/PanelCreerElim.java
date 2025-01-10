@@ -124,9 +124,17 @@ public class PanelCreerElim extends JPanel implements ActionListener
 					JOptionPane.showMessageDialog(null, "Remplissez les champ de réponses", "Attention", JOptionPane.WARNING_MESSAGE);
 					return ;
 				}
+
+				if (p.getCout() <= 0 && !p.getEstBonneReponse() && p.getOrdre() != 0)
+				{
+					JOptionPane.showMessageDialog(null, "Le nombre de point perdu doit doit être supérieur à 0", "Attention", JOptionPane.WARNING_MESSAGE);
+					return ;
+				}
 				if (p.getEstBonneReponse())
 					aUnBon = true;
+				
 			}
+
 
 			if (!aUnBon)
 			{
@@ -137,7 +145,11 @@ public class PanelCreerElim extends JPanel implements ActionListener
 			ArrayList<TypeReponse> reponses = new ArrayList<TypeReponse>();
 
 			for (PanelCreerReponsesElim p : this.reponsesPossibles)
-				reponses.add(new TypeReponse(p.getString(),p.getOrdre(), p.getCout(),p.getEstBonneReponse() ));
+			{
+				reponses.add(new TypeReponse(p.getString(), p.getOrdre(), p.getCout(), p.getEstBonneReponse()));
+			}
+
+				
 
 			if (this.panelQ.creerQuestion(this.txtExplication, this.question.getText(), reponses))
 			{

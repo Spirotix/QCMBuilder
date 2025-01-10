@@ -30,8 +30,8 @@ public class FrameCreerElimination extends JFrame implements ActionListener
 		this.retourMenu = new JMenuItem("Retour à l'accueil"		 );
 		this.retour		= new JMenuItem("Retour à la page précédente");
 
-		menuAcceuil.add(this.retourMenu	);
-		menuRetour .add(this.retour		);
+		menuAcceuil.add(this.retourMenu);
+		menuRetour .add(this.retour    );
 
 		menubMaBarre.add(menuAcceuil);
 		menubMaBarre.add(menuRetour );

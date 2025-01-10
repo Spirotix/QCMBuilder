@@ -114,7 +114,7 @@ public class PanelCreerReponsesElim extends JPanel implements ActionListener
 			if (this.validation.isSelected())
 			{
 				this.panelQ		.toutDecocher(		);
-				this.validation	.setSelected (true	);
+				this.validation	.setSelected (true);
 				this.cout .setEnabled(false);
 				this.ordre.setEnabled(false);
 			}

@@ -505,7 +505,7 @@ public class PanelCreerQuestion extends JPanel implements ActionListener, ItemLi
 		this.textQuestion 		 = intituleQuestion	;
 		this.explicationQuestion = explication		;
 
-		if ( this.explicationQuestion.equals(""))
+		if ( this.explicationQuestion == null || this.explicationQuestion.equals(""))
 			this.explicationQuestion = "Pas d'explication";
 			
 		return this.ctrl.creerQuestion(this.typeQuestion, this.ressourceQuestion, this.notionQuestion, this.textQuestion, this.explicationQuestion, this.tempsQuestion, this.nbPointQuestion, reponses, this.difficulteQuestion);
