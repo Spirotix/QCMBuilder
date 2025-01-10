@@ -14,7 +14,7 @@ public class FrameCreerAssociation extends JFrame implements ActionListener
 	private JMenuItem 				retourMenu	;
 	private JMenuItem 				retour		;
 
-	public FrameCreerAssociation (PanelCreerQuestion panelQ, Controleur ctrl)
+	public FrameCreerAssociation (PanelCreerQuestion panelQ, Controleur ctrl, String ressource, String notion)
 	{
 		this.panelQ=panelQ;
 		this.ctrl=ctrl;
@@ -43,7 +43,7 @@ public class FrameCreerAssociation extends JFrame implements ActionListener
 		this.setTitle   ("Creation d'une Question par association");
 		this.setSize    ( 750,500  );
 
-		this.panel=new PanelCreerQuestionAsso(this.panelQ, this, this.ctrl);
+		this.panel=new PanelCreerQuestionAsso(this.panelQ, this, this.ctrl, ressource, notion);
 
 		this.add (this.panel);
 
