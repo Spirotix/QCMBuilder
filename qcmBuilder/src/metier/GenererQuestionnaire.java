@@ -28,6 +28,16 @@ public class GenererQuestionnaire
 	private List<TypeQuestionnaire> lstTypeQuestionnaire;
 	private List<Question> lstQuestions;
 
+	/**
+	 * Constructeur de la classe GenererQuestionnaire.
+	 * 
+	 * @param nomRessource Le nom de la ressource.
+	 * @param chrono       Un booléen indiquant si le questionnaire est chronométré.
+	 * @param nomQuestionnaire Le nom du questionnaire.
+	 * @param lstTypeQuestionnaires La liste des types de questionnaires.
+	 * @param lstQuestions La liste des questions.
+	 * @param chemin Le chemin du répertoire où sera généré le questionnaire.
+	 */
 	public GenererQuestionnaire (String nomRessource, boolean chrono, String nomQuestionnaire, List<TypeQuestionnaire> lstTypeQuestionnaires, List<Question> lstQuestions, String chemin)
 	{
 		this.nomRessource = nomRessource;
@@ -133,6 +143,12 @@ public class GenererQuestionnaire
 		}
 	}
 
+	/**
+	 * Retourne le début du code HTML de la question
+	 * 
+	 * @param q La question
+	 * @return
+	 */
 	private String getQuestionHeader(Question q)
 	{
 		String difficulte = "";
@@ -275,6 +291,11 @@ public class GenererQuestionnaire
 		return sRet;
 	}
 
+	/**
+	 * Retourne le code HTML de la fin de la question
+	 * @param q La question
+	 * @return
+	 */
 	private String getQuestionFooter(Question q)
 	{
 		String sRet = """
@@ -327,6 +348,11 @@ public class GenererQuestionnaire
 		return sRet;
 	}
 
+	/**
+	 * Retourne le code HTML de la question
+	 * @param q La question
+	 * @return
+	 */
 	private String getQuestionHtml(Question q)
 	{
 		String sRet = getQuestionHeader(q);

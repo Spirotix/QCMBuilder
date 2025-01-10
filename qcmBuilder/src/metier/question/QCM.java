@@ -246,6 +246,10 @@ public class QCM implements Question
 		return nbReponseVrai;
 	}
 
+	/**
+	 * Permet de mélanger les réponses d'une question.
+	 *
+	 */
 	public void melanger()
 	{
 		Collections.shuffle(lstReponses);

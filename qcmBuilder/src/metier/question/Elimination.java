@@ -280,6 +280,10 @@ public class Elimination implements Question
 		return niveau;
 	}
 
+	/**
+	 * Permet de mélanger les réponses d'une question.
+	 *
+	 */
 	public void melanger()
 	{
 		Collections.shuffle(lstReponses);

@@ -22,12 +22,23 @@ public class Ressource
 	private String       nom;
 	private List<Notion> lstNotions;
 
+	/**
+	 * Constructeur de la classe Ressource.
+	 * 
+	 * @param code Le code de la ressource.
+	 * @param nom  Le nom de la ressource.
+	 */
 	public Ressource(String code, String nom)
 	{
 		this.code       = code;
 		this.nom        = nom;
 		this.lstNotions = lireNotions();
 	}
+
+	/**
+	 * Lit les notions associées à la ressource.
+	 * @return La liste des notions associées à la ressource.
+	 */
 
 	private List<Notion> lireNotions()
 	{
@@ -75,16 +86,40 @@ public class Ressource
 		return notions;
 	}
 
+	/**
+	 * Retourne le code de la ressource.
+	 * @return Le code de la ressource.
+	 */
 	public String       getCode()    { return this.code;       }
+
+	/**
+	 * Retourne le nom de la ressource.
+	 * @return Le nom de la ressource.
+	 */
 	public String       getNom()     { return this.nom;        }
+
+	/**
+	 * Retourne la liste des notions associées à la ressource.
+	 * @return La liste des notions associées à la ressource.
+	 */
 	public List<Notion> getNotions() { return this.lstNotions; }
 
+	/**
+	 * Modifie le nom de la ressource.
+	 * @param nom Le nouveau nom de la ressource.
+	 * @return true si le nom a été modifié, false sinon.
+	 */
 	public boolean setNom(String nom)
 	{ 
 		this.nom = nom;
 		return true;
 	}
 
+	/**
+	 * Ajoute une notion à la ressource.
+	 * @param notion La notion à ajouter.
+	 * @return true si la notion a été ajoutée, false sinon.
+	 */
 	public boolean ajouterNotion(Notion notion)
 	{
 		for ( Notion n : lstNotions )
@@ -139,6 +174,11 @@ public class Ressource
 		}
 	}
 
+	/**
+	 * Supprime une notion de la ressource.
+	 * @param notion La notion à supprimer.
+	 * @return true si la notion a été supprimée, false sinon.
+	 */
 	public boolean supprimerNotion(Notion notion)
 	{
 		if (notion == null)
@@ -165,6 +205,13 @@ public class Ressource
 		return true;
 	}
 
+	/**
+	 * Supprime une ligne dans un fichier CSV et un répertoire.
+	 * 
+	 * @param notion La notion à supprimer.
+	 * @param fichier Le fichier CSV.
+	 * @param repertoireNotion Le répertoire de la notion.
+	 */
 	public static void supprimerLigneEtRepertoire(Notion notion, File fichier, File repertoireNotion)
 	{
 		File fichierTemp = new File(fichier.getParent(), "fichier_temp.csv");
@@ -215,6 +262,11 @@ public class Ressource
 		supprimerRepertoireRecursif(repertoireNotion);
 	}
 
+	/**
+	 * Supprime un répertoire et son contenu récursivement.
+	 * 
+	 * @param dossier Le répertoire à supprimer.
+	 */
 	private static void supprimerRepertoireRecursif(File dossier)
 	{
 		if (dossier.exists())
@@ -233,6 +285,12 @@ public class Ressource
 		}
 	}
 
+	/**
+	 * Recherche une notion par son nom.
+	 * 
+	 * @param nom Le nom de la notion à rechercher.
+	 * @return La notion trouvée, ou null si aucune notion n'a été trouvée.
+	 */
 	public Notion rechercherNotion(String nom)
 	{
 		Notion notionTrouvee = null;
