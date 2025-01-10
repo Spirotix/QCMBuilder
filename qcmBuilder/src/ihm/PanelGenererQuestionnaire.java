@@ -131,6 +131,8 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 				new FrameMenu(this.ctrl);
 				this.fr.dispose();
 			}
+			else 
+				JOptionPane.showMessageDialog(null, "Pas assez de questions pour générer un questionnaire", "Erreur", JOptionPane.ERROR_MESSAGE);
 				
 
 			
@@ -141,4 +143,5 @@ public class PanelGenererQuestionnaire extends JPanel implements ActionListener,
 	{
 		this.reConstruireIHM();
 	}
+
 }

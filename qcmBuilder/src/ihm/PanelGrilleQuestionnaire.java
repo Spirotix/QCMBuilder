@@ -139,10 +139,6 @@ public class PanelGrilleQuestionnaire extends JPanel implements ActionListener
 			this.nbD  += parseField(rowFields.get(3));
 		}
 
-		System.out.println(this.nbTF);
-		System.out.println(this.nbF);
-		System.out.println(this.nbM);
-		System.out.println(this.nbD);
 
 		this.nbTFS.setText(String.valueOf(nbTF));
 		this.nbFS .setText(String.valueOf(nbF ));
