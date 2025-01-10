@@ -123,10 +123,9 @@ public class Notion
 				int    temps       = Integer.parseInt  (informations[5]);
 
 				String explication = scExplication.nextLine();
-				while (scExplication.hasNextLine())
-				{
-					explication += scExplication.nextLine();
-				}
+				if ( scExplication.hasNextLine() )
+					while (scExplication.hasNextLine())
+						explication += scExplication.nextLine();
 
 				int niveau;
 				switch (sNiveau)
