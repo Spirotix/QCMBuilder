@@ -267,7 +267,11 @@ public class PanelModifierQuestion extends JPanel implements ActionListener
 			else 
 				this.msgErrNiv.setText("");
 
-			
+			if (this.textExplication.getText().equals("")) 
+				this.explicationQuestion = "Pas d'explication";
+			else 
+				this.explicationQuestion = this.textExplication.getText();
+				
 			if (peutModifier)
 			{
 
